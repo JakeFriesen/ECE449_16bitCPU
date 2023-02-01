@@ -1,18 +1,13 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: University of Victoria ECE 449
+-- Engineer: Jake Friesen
 -- 
--- Create Date: 01/31/2023 03:48:36 PM
--- Design Name: 
--- Module Name: ALU_Testbench - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
+-- Create Date: 01/30/2023 08:28:20 PM
+-- Module Name: ALU - Testbench
+-- Project Name: 16-bit CPU
+-- Target Devices: Basys3 FPGA
+-- Description: Testbench for ALU with simple vector tests
 -- 
--- Dependencies: 
--- 
--- Revision:
 -- Revision 0.01 - File Created
 -- Additional Comments:
 -- 
@@ -53,10 +48,14 @@ architecture tb of ALU_Testbench is
     end record;
     type test_vector_array is array (natural range <>) of test_vector;
     constant test_array : test_vector_array := (
+        (A=>x"aaaa", B=>x"1234",sel=>"000",result=>x"0000",Z=>'0',N=>'0'),   --NOP
         (A=>x"0001", B=>x"0001",sel=>"001",result=>x"0002",Z=>'0',N=>'0'),   --ADD 1 + 1 = 2
         (A=>x"0005", B=>x"0001",sel=>"010",result=>x"0004",Z=>'0',N=>'0'),   --SUB 5 - 1 = 4
         (A=>x"0002", B=>x"0008",sel=>"011",result=>x"0010",Z=>'0',N=>'0'),   --MUL 2 * 8 = 16 (This one has an issue right now)
-        (A=>x"0055", B=>x"00AA",sel=>"100",result=>x"FFFF",Z=>'0',N=>'1')    --NAND 55 NAND AA = FFFF, negative
+        (A=>x"0055", B=>x"00AA",sel=>"100",result=>x"FFFF",Z=>'0',N=>'1'),   --NAND 55 NAND AA = FFFF, negative
+        (A=>x"0002", B=>x"0001",sel=>"101",result=>x"0004",Z=>'0',N=>'0'),   --SHL 2 << 1 = 4
+        (A=>x"0010", B=>x"0003",sel=>"110",result=>x"0002",Z=>'0',N=>'0'),   --SHR 16 >> 3 = 2
+        (A=>x"fffe", B=>x"0000",sel=>"111",result=>x"fffe",Z=>'0',N=>'1')    --TEST N=1, Z=0
     );
     --Test Signals
     signal A, B, result : std_logic_vector(15 downto 0);
@@ -78,7 +77,7 @@ begin
                    Z = test_array(i).Z and
                    N = test_array(i).N)
                    
-           report "test_array" & integer'image(i) & "failed"
+           report "test_array " & integer'image(i) & " failed!" --TOOD: How to cast vectors to strings?
                   severity error;
             
         end loop;

@@ -38,18 +38,17 @@ begin
     --Main ALU Process - Pure Combinational Circuitry, No Clocking
     process(A, B, sel) 
     begin
-        --Multiplication
-        mult <= A * B;
         --Case For ALU sel
         case sel is
-            when "000" => result_int <= A;          --NOP (Used for TEST, or just pass through)
-            when "001" => result_int <= A + B;      --ADD
-            when "010" => result_int <= A - B;      --SUB
-            when "011" => result_int <= mult (15 downto 0);      --MUL      
-            when "100" => result_int <= A NAND B;   --NAND
+            when "000" => result_int <= (others=>'0');                                                      --NOP (TODO: Shouldn't update flags?)
+            when "001" => result_int <= A + B;                                                              --ADD
+            when "010" => result_int <= A - B;                                                              --SUB
+            when "011" => result_int <= A(7 downto 0) * B(7 downto 0);                                      --MUL      
+            when "100" => result_int <= A NAND B;                                                           --NAND
             when "101" => result_int <= std_logic_vector(shift_left(unsigned(A), to_integer(unsigned(B)))); --SHL
-            when "110" => result_int <= std_logic_vector(shift_right(unsigned(A), to_integer(unsigned(B)))); --SHR
-            when others => result_int <= (others => 'X');   --Should never see this
+            when "110" => result_int <= std_logic_vector(shift_right(unsigned(A), to_integer(unsigned(B))));--SHR
+            when "111" => result_int <= A;                                                                  --TEST
+            when others => result_int <= (others => 'X');                                                   --Should never see this
         end case;
     end process;
     
