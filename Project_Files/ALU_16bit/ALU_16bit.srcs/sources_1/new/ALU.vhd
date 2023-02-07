@@ -43,7 +43,7 @@ begin
             when "000" => result_int <= (others=>'0');                                                      --NOP (TODO: Shouldn't update flags?)
             when "001" => result_int <= A + B;                                                              --ADD
             when "010" => result_int <= A - B;                                                              --SUB
-            when "011" => result_int <= A(7 downto 0) * B(7 downto 0);                                      --MUL      
+            when "011" => result_int <= A(7 downto 0) * B(7 downto 0);                                      --MUL (TODO: Overflow, save 32-bit, specific register?)      
             when "100" => result_int <= A NAND B;                                                           --NAND
             when "101" => result_int <= std_logic_vector(shift_left(unsigned(A), to_integer(unsigned(B)))); --SHL
             when "110" => result_int <= std_logic_vector(shift_right(unsigned(A), to_integer(unsigned(B))));--SHR

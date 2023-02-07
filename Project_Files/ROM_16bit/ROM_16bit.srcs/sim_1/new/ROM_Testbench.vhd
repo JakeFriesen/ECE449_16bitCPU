@@ -25,7 +25,7 @@ use ieee.std_logic_textio.all;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx leaf cells in this code.
@@ -75,16 +75,16 @@ UUT: ROM port map(addr=>addr, clk=>clk, rst=>rst, en=>en, data=>data);
         --Set first data
         addr <= test_array(0).addr;
         clk <= '1';
-        wait for 10ns;
+        wait for 1us;
         clk <= '0';
-        wait for 10ns;
+        wait for 1us;
         
         for i in 0 to (test_array'length - 2) loop
             addr <= test_array(i+1).addr;
             clk <= '1';
-            wait for 10ns;
+            wait for 1us;
             clk <= '0';
-            wait for 10ns;
+            wait for 1us;
             
             assert(data = test_array(i).data)
                    
