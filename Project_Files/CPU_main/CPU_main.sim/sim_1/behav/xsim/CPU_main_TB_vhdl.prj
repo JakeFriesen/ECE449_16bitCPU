@@ -1,0 +1,12 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../../ALU_16bit/ALU_16bit.srcs/sources_1/new/ALU.vhd" \
+"../../../../CPU_main.srcs/sources_1/new/CPU_main.vhd" \
+"../../../../../ID_EX_buf/ID_EX_buf.srcs/sources_1/new/ID_EX_buf.vhd" \
+"../../../../../IF_ID_buf/IF_ID_buf.srcs/sources_1/new/IF_ID_buf.vhd" \
+"../../../../../IR/IR.srcs/sources_1/new/IR_16bit.vhd" \
+"../../../../../Register_FIle_16bit/Source/RF8_16.vhd" \
+"../../../../CPU_main.srcs/sim_1/new/CPU_main_TB.vhd" \
+
+# Do not sort compile order
+nosort
