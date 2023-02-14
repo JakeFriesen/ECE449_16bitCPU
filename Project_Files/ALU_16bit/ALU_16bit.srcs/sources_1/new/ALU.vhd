@@ -26,7 +26,6 @@ entity ALU is
            B : in STD_LOGIC_VECTOR (15 downto 0);
            sel : in STD_LOGIC_VECTOR (2 downto 0);
            result : out STD_LOGIC_VECTOR (15 downto 0);
-           clk : in std_logic;
            Z : out STD_LOGIC;
            N : out STD_LOGIC);
 end ALU;
@@ -35,7 +34,7 @@ architecture Behavioral of ALU is
     signal result_int : std_logic_vector (15 downto 0);
 begin
     --Main ALU Process - Clocked, values for A, B, sel, saved on every clock
-    process(clk) 
+    process(A, B, sel) 
     begin
         --Case For ALU sel
         case sel is
