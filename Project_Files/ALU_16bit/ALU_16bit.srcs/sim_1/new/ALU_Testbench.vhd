@@ -37,6 +37,7 @@ architecture tb of ALU_Testbench is
         A, B : in std_logic_vector (15 downto 0);
         sel : in std_logic_vector (2 downto 0);
         result : out std_logic_vector (15 downto 0);
+        clk : in std_logic;
         Z, N : out std_logic
     );
     end component ALU;
@@ -48,7 +49,7 @@ architecture tb of ALU_Testbench is
     end record;
     type test_vector_array is array (natural range <>) of test_vector;
     constant test_array : test_vector_array := (
-        (A=>x"aaaa", B=>x"1234",sel=>"000",result=>x"0000",Z=>'0',N=>'0'),   --NOP
+        (A=>x"aaaa", B=>x"1234",sel=>"000",result=>x"0000",Z=>'1',N=>'0'),   --NOP
         (A=>x"0001", B=>x"0001",sel=>"001",result=>x"0002",Z=>'0',N=>'0'),   --ADD 1 + 1 = 2
         (A=>x"0005", B=>x"0001",sel=>"010",result=>x"0004",Z=>'0',N=>'0'),   --SUB 5 - 1 = 4
         (A=>x"0002", B=>x"0008",sel=>"011",result=>x"0010",Z=>'0',N=>'0'),   --MUL 2 * 8 = 16
@@ -61,9 +62,10 @@ architecture tb of ALU_Testbench is
     signal A, B, result : std_logic_vector(15 downto 0);
     signal sel : std_logic_vector(2 downto 0);
     signal Z, N : std_logic;
+    signal clk : std_logic;
     
 begin
-    UUT : ALU port map(A=>A, B=>B, sel=>sel, result=>result, Z=>Z, N=>N);
+    UUT : ALU port map(A=>A, B=>B, sel=>sel, result=>result, Z=>Z, N=>N, clk=>clk);
     
     process begin
         for i in test_array'range loop
@@ -71,6 +73,9 @@ begin
             B <= test_array(i).B;
             sel <= test_array(i).sel;
             
+            clk <= '0';
+           wait for 30ns;
+           clk <= '1';
            wait for 30ns;
             
            assert(result = test_array(i).result and 

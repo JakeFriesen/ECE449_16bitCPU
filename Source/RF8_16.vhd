@@ -1,4 +1,17 @@
-
+----------------------------------------------------------------------------------
+-- Company: University of Victoria ECE 449
+-- Engineer: Jake Friesen
+-- 
+-- Create Date: 01/30/2023 08:28:20 PM
+-- Module Name: Register File - Behavioral
+-- Project Name: 16-bit CPU
+-- Target Devices: Basys3 FPGA
+-- Description: File adapted from UVic ECE 449 provided files
+-- 
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;

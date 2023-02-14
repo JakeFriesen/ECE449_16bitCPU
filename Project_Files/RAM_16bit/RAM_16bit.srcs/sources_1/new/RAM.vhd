@@ -1,18 +1,12 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: University of Victoria ECE 449
+-- Engineer: Jake Friesen
 -- 
--- Create Date: 02/06/2023 04:47:14 PM
--- Design Name: 
+-- Create Date: 01/30/2023 08:28:20 PM
 -- Module Name: RAM - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
+-- Project Name: 16-bit CPU
+-- Target Devices: Basys3 FPGA
 -- 
--- Dependencies: 
--- 
--- Revision:
 -- Revision 0.01 - File Created
 -- Additional Comments:
 -- 

@@ -6,7 +6,6 @@
 -- Module Name: ALU - Behavioral
 -- Project Name: 16-bit CPU
 -- Target Devices: Basys3 FPGA
--- Description: Purely Combinational ALU design for use in the 16-bit CPU design.
 -- 
 -- Revision 0.01 - File Created
 -- Additional Comments:
@@ -27,16 +26,16 @@ entity ALU is
            B : in STD_LOGIC_VECTOR (15 downto 0);
            sel : in STD_LOGIC_VECTOR (2 downto 0);
            result : out STD_LOGIC_VECTOR (15 downto 0);
+           clk : in std_logic;
            Z : out STD_LOGIC;
            N : out STD_LOGIC);
 end ALU;
 
 architecture Behavioral of ALU is
     signal result_int : std_logic_vector (15 downto 0);
-    signal mult : std_logic_vector (31 downto 0);
 begin
-    --Main ALU Process - Pure Combinational Circuitry, No Clocking
-    process(A, B, sel) 
+    --Main ALU Process - Clocked, values for A, B, sel, saved on every clock
+    process(clk) 
     begin
         --Case For ALU sel
         case sel is
