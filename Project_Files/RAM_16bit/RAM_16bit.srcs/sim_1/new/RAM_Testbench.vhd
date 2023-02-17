@@ -109,11 +109,12 @@ begin
         for i in 0 to (test_array'length - 2) loop
             addra <= test_array(i+1).addra;
             addrb <= test_array(i+1).addrb;
+            wait for 10ns;
             
             clk <= '1';
             wait for 50ns;
             clk <= '0';
-            wait for 50ns;
+            wait for 40ns;
             
             assert(douta = test_array(i).dina)
                    

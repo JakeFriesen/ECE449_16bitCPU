@@ -1,7 +1,0 @@
-Running: xsim.dir/IR_16bit_behav/xsimk.exe -simmode gui -wdb IR_16bit_behav.wdb -simrunnum 0 -socket 59905
-Design successfully loaded
-Design Loading Memory Usage: 6968 KB (Peak: 6968 KB)
-Design Loading CPU Usage: 0 ms
-Simulation completed
-Simulation Memory Usage: 7612 KB (Peak: 7612 KB)
-Simulation CPU Usage: 0 ms
