@@ -33,14 +33,16 @@ end ALU_Testbench;
 architecture tb of ALU_Testbench is
     --ALU Component
     component ALU is 
-        port(
-        A, B : in std_logic_vector (15 downto 0);
-        sel : in std_logic_vector (2 downto 0);
-        result : out std_logic_vector (15 downto 0);
-        clk : in std_logic;
-        Z, N : out std_logic
-    );
+         Port ( A : in STD_LOGIC_VECTOR (15 downto 0);
+            B : in STD_LOGIC_VECTOR (15 downto 0);
+            sel : in STD_LOGIC_VECTOR (2 downto 0);
+            result : out STD_LOGIC_VECTOR (15 downto 0);
+            v_result: out STD_LOGIC_VECTOR (15 downto 0);
+            Z : out STD_LOGIC;
+            N : out STD_LOGIC;
+            V: out STD_LOGIC);
     end component ALU;
+    
     -- Test Vectors
     type test_vector is record
         a, b, result : std_logic_vector (15 downto 0);
@@ -49,23 +51,23 @@ architecture tb of ALU_Testbench is
     end record;
     type test_vector_array is array (natural range <>) of test_vector;
     constant test_array : test_vector_array := (
-        (A=>x"aaaa", B=>x"1234",sel=>"000",result=>x"0000",Z=>'1',N=>'0'),   --NOP
-        (A=>x"0001", B=>x"0001",sel=>"001",result=>x"0002",Z=>'0',N=>'0'),   --ADD 1 + 1 = 2
-        (A=>x"0005", B=>x"0001",sel=>"010",result=>x"0004",Z=>'0',N=>'0'),   --SUB 5 - 1 = 4
-        (A=>x"0002", B=>x"0008",sel=>"011",result=>x"0010",Z=>'0',N=>'0'),   --MUL 2 * 8 = 16
-        (A=>x"0055", B=>x"00AA",sel=>"100",result=>x"FFFF",Z=>'0',N=>'1'),   --NAND 55 NAND AA = FFFF, negative
-        (A=>x"0002", B=>x"0001",sel=>"101",result=>x"0004",Z=>'0',N=>'0'),   --SHL 2 << 1 = 4
-        (A=>x"0010", B=>x"0003",sel=>"110",result=>x"0002",Z=>'0',N=>'0'),   --SHR 16 >> 3 = 2
-        (A=>x"fffe", B=>x"0000",sel=>"111",result=>x"fffe",Z=>'0',N=>'1')    --TEST N=1, Z=0
+        (A=>x"F000", B=>x"0234",sel=>"001",result=>x"0000",Z=>'1',N=>'0'),   --NOP
+        (A=>x"7FFF", B=>x"7FFF",sel=>"001",result=>x"0002",Z=>'0',N=>'0'),   --ADD 1 + 1 = 2
+        (A=>x"7FFF", B=>x"0002",sel=>"011",result=>x"0004",Z=>'0',N=>'0'),   --SUB 5 - 1 = 4
+        (A=>x"0002", B=>x"0500",sel=>"011",result=>x"0010",Z=>'0',N=>'0'),   --MUL 2 * 8 = 16
+        (A=>x"F000", B=>x"00AA",sel=>"010",result=>x"FFFF",Z=>'0',N=>'1'),   --NAND 55 NAND AA = FFFF, negative
+        (A=>x"0001", B=>x"0002",sel=>"010",result=>x"0004",Z=>'0',N=>'0'),   --SHL 2 << 1 = 4
+        (A=>x"0FFF", B=>x"F000",sel=>"010",result=>x"0002",Z=>'0',N=>'0')   --SHR 16 >> 3 = 2   --TEST N=1, Z=0
     );
     --Test Signals
     signal A, B, result : std_logic_vector(15 downto 0);
+    signal v_result: std_logic_vector(15 downto 0);
     signal sel : std_logic_vector(2 downto 0);
-    signal Z, N : std_logic;
+    signal Z, N, V : std_logic;
     signal clk : std_logic;
     
 begin
-    UUT : ALU port map(A=>A, B=>B, sel=>sel, result=>result, Z=>Z, N=>N, clk=>clk);
+    UUT : ALU port map(A=>A, B=>B, sel=>sel, result=>result, v_result=>v_result, Z=>Z, N=>N, V=>V);
     
     process begin
         for i in test_array'range loop
