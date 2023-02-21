@@ -33,7 +33,7 @@ end ALU;
 architecture Behavioral of ALU is
     signal result_int : std_logic_vector (15 downto 0);
 begin
-    --Main ALU Process - Clocked, values for A, B, sel, saved on every clock
+    --Main ALU Process
     process(A, B, sel) 
     begin
         --Case For ALU sel
