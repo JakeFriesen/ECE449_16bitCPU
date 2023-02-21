@@ -29,8 +29,7 @@ entity ALU is
            v_result: out STD_LOGIC_VECTOR (15 downto 0);
            Z : out STD_LOGIC;
            N : out STD_LOGIC;
-           V: out STD_LOGIC;
-           V_EN: out std_logic
+           V: out STD_LOGIC
            );
 end ALU;
 
@@ -39,6 +38,7 @@ architecture Behavioral of ALU is
     signal result_int, V_result_int: std_logic_vector (15 downto 0);
     signal V_int: std_logic;
     signal v_check: std_logic_vector(31 downto 0);
+    signal V_temp: std_logic;
 begin
 
 
@@ -49,7 +49,9 @@ begin
         case sel is
             when "000" => result_int <= (others=>'0');                                                      --NOP (TODO: Shouldn't update flags?)
             when "001" => result_int <= A + B;                                           --ADD             
-            when "010" => result_int <= A - B;                                                --SUB
+                V_temp <= (A(15) XNOR B(15)) AND result_int(15);
+            when "010" => result_int <= A - B;
+                V_temp <= (A(15) NOR B(15)) AND result_int(15);                                                --SUB
             when "011" => mul_result_int <= A * B;  
             when "100" => result_int(15 downto 0) <= A(15 downto 0) NAND B(15 downto 0);                                                           --NAND
             when "101" => result_int <= std_logic_vector(shift_left(unsigned(A), to_integer(unsigned(B)))); --SHL
@@ -59,18 +61,17 @@ begin
         end case;
     end process;
              
---Overflow Flag   
-v_check <= mul_result_int(31 downto 0) AND X"FFFF0000";
+    --Overflow Flag   
+    v_check <= mul_result_int(31 downto 0) AND X"FFFF0000";
 
-with v_check Select
-    V_int <= '0' when X"00000000",
-            '1' when others;
-
-   with sel Select
-        V <= V_int when "011",
-        '0' when "100",
-        (A(15) XNOR B(15)) AND result_int(15) when others;
-
+    with v_check Select
+                        V_int <= '0' when X"00000000",
+                        '1' when others;
+    with sel Select
+                    V <= V_int when "011",
+                    (A(15) XNOR B(15)) AND result_int(15) when "001",
+                    (A(15) XOR B(15)) AND (A(15) XOR result_int(15)) when "010",
+                    '0' when others;
     --Zero Flag
     Z <= '1' when result_int(15 downto 0) = x"0000" else '0';
     --Negative Flag
@@ -85,8 +86,5 @@ with v_check Select
         v_result <= mul_result_int(31 downto 16) when "011",
                     X"0000" when others;  
                     
-      with sel Select 
-        V_EN <= V_int when "011", 
-        '0' when others;
-       
+   
 end Behavioral;

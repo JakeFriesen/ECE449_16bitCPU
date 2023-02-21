@@ -34,7 +34,8 @@ architecture tb of EX_stage_tb is
     
     component EX_stage is
        Port ( 
-            data_sel: std_logic;
+            clk: std_logic;
+            rst: std_logic;
             ALU_OP : in STD_LOGIC_VECTOR (2 downto 0);
             A : in STD_LOGIC_VECTOR (15 downto 0);
             B : in STD_LOGIC_VECTOR (15 downto 0);
@@ -44,52 +45,83 @@ architecture tb of EX_stage_tb is
             Z : out STD_LOGIC;
             N : out STD_LOGIC;
             V : out STD_LOGIC;
-            V_EN: out std_logic
+            V_EN: out std_logic;
+            
+            Z_OUTPUT: out std_logic;
+            N_OUTPUT: out std_logic
             );
     end component;
 
     --Test Signals
     signal A, B, result, data : std_logic_vector(15 downto 0);
     signal ALU_OP : std_logic_vector(2 downto 0);
-    signal Z, N, V, V_EN, data_sel : std_logic;
-
+    signal Z, N, V, V_EN, Z_OUTPUT, N_OUTPUT : std_logic;
+    signal clk, rst: std_logic;
     
 begin
-    UUT : EX_stage port map(data_sel, ALU_OP, A, B, result, data, Z, N, V, V_EN);
+    UUT : EX_stage port map(clk, rst, ALU_OP, A, B, result, data, Z, N, V, V_EN, Z_OUTPUT, N_OUTPUT);
     
     process begin
-        data_sel <= '0';    
+          clk <= '1'; wait for 10 ns;
+          clk <= '0'; wait for 10 ns; 
+    end process;
+    
+    process begin
+        rst <= '0';
         
-          
-        A<=X"2222";
-        B<=X"1111";
-        ALU_OP <= "010";
-      
+       -- wait until (clk = '0' and clk'event);
+        A<=X"0001";
+        B<=X"0001";
+        ALU_OP <= "001";
         
-        wait for 10 ns;
         
-         
-        A <=X"0000";
-        B<=X"1111";
-           ALU_OP <= "010";
+        wait until (clk = '0' and clk'event);
+        A<=X"7FFF";
+        B<=X"0001";
+        ALU_OP <= "001";
+        
+        wait until (clk = '0' and clk'event);
+        A<=X"0002";
+        B<=X"0001";
+        ALU_OP <= "010";       
+        
+        
+        wait until (clk = '0' and clk'event);
+        A<=X"8000";
+        B<=X"0001";
+        ALU_OP <= "010";  
+        
+        wait until (clk = '0' and clk'event);
+        A<=X"0002";
+        B<=X"0404";
+        ALU_OP <= "011"; 
+        
+        wait until (clk = '0' and clk'event);
+        A<=X"000F";
+        B<=X"FFFF";
+        ALU_OP <= "011";   
+        
                 
+        wait until (clk = '0' and clk'event);
+        A<=X"0F0F";
+        B<=X"FFFF";
+        ALU_OP <= "100";
         
-        wait for 10 ns;
+        wait until (clk = '0' and clk'event);
+        A<=X"0000";
+        B<=X"0000";
+        ALU_OP <= "111";
+        
+        wait until (clk = '0' and clk'event);
+        A<=X"8000";
+        B<=X"0000";
+        ALU_OP <= "111";
         
         
-         A<=X"2222";
-               B<=X"1111";
-               ALU_OP <= "010";
-             
-               
-               wait for 10 ns;
+        wait for 30ns;
+        rst <= '1';
         
-        
-        A <=X"2222";
-        B<=X"1111";
-           ALU_OP <= "011";
-                
-
+                                                                                  
         
         wait;
     end process;
