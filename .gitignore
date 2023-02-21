@@ -44,3 +44,6 @@
 !Project_Files/Memory_Stage/Memory_Stage.xpr
 !Project_Files/Memory_Stage/Memory_Stage.srcs/sources_1/new/Memory_Stage.vhd
 !Project_Files/Memory_Stage/Memory_Stage.srcs/sim_1/new/Memory_Stage_Testbench.vhd
+#Write Back Stage
+!Project_Files/Write_Back_Stage/Write_Back_Stage.xpr
+!Project_Files/Write_Back_Stage/Write_Back_Stage.srcs/sources_1/new/Write_Back_Stage.vhd

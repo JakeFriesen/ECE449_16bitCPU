@@ -67,7 +67,7 @@ architecture tb of Memory_Stage_Testbench is
     end component RAM;
     --Signals
     signal wr_en, ram_ena, ram_enb, branch_choice, clk, rst : std_logic;
-    signal douta, doutb, dina, IR, ALU, Overflow_in, Overflow_out, A, B : std_logic_vector(15 downto 0);
+    signal douta, doutb, dina, IR, ALU, Overflow_in, Overflow_out, A, B, IR_out, ALU_out : std_logic_vector(15 downto 0);
     signal addra, addrb : std_logic_vector (5 downto 0); 
     signal V, N, Z : std_logic; 
    -- Test Vectors
@@ -90,7 +90,8 @@ architecture tb of Memory_Stage_Testbench is
     
 begin
     RAM_inst : RAM port map (douta=>douta, doutb=>doutb, addra=>addra, addrb=>addrb, dina=>dina, wr_en=>wr_en, ena=>ram_ena, enb=>ram_enb, clk=>clk, rst=>rst);
-    MEM_Stage : Memory_Stage port map (clk=>clk, rst=>rst, IR_in=>IR, ALU_in=>ALU, V=>V, N=>N, Z=>Z, Overflow_in=>Overflow_in, Overflow_out=>Overflow_out, ram_addrb=>addrb, ram_datab=>doutb,ram_wr=>wr_en, A_in=>A, B_in=>B );
+    MEM_Stage : Memory_Stage port map (clk=>clk, rst=>rst, IR_in=>IR, ALU_in=>ALU, V=>V, N=>N, Z=>Z, Overflow_in=>Overflow_in, Overflow_out=>Overflow_out, 
+                                        ram_addrb=>addrb, ram_datab=>doutb,ram_wr=>wr_en, A_in=>A, B_in=>B, ALU_out=>ALU_out, IR_out=>IR_out );
 
     process begin
         clk <= '0';
