@@ -33,7 +33,7 @@ architecture tb of EX_stage_tb is
     --ALU Component
     
     component EX_stage is
-     Port ( 
+    Port ( 
            clk: in STD_LOGIC;
            rst: in STD_LOGIC;
            I_IR: in std_logic_vector(15 downto 0);
@@ -49,7 +49,8 @@ architecture tb of EX_stage_tb is
            O_V_EN: out STD_LOGIC; 
            O_Z_OUTPUT : out std_logic;
            O_N_OUTPUT: out std_logic;
-           O_OUTPUT: out std_logic_vector(15 downto 0)
+           O_OUTPUT: out std_logic_vector(15 downto 0);
+           O_IR: out std_logic_vector(15 downto 0)
            
            );
     end component;
@@ -60,9 +61,9 @@ architecture tb of EX_stage_tb is
     signal IR : std_logic_vector(15 downto 0);
     signal Z, N, V, V_EN, Z_OUTPUT, N_OUTPUT : std_logic;
     signal clk, rst: std_logic;
-    
+    signal O_IR: std_logic_vector(15 downto 0);
 begin
-    UUT : EX_stage port map(clk, rst, IR, A, B,INPUT, result, Vdata, Z, N, V, V_EN, Z_OUTPUT, N_OUTPUT, OUTPUT);
+    UUT : EX_stage port map(clk, rst, IR, A, B,INPUT, result, Vdata, Z, N, V, V_EN, Z_OUTPUT, N_OUTPUT, OUTPUT, O_IR);
     
     process begin
           clk <= '1'; wait for 10 ns;

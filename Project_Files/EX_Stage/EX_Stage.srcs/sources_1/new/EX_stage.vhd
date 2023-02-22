@@ -35,7 +35,8 @@ entity EX_stage is
            O_V_EN: out STD_LOGIC; 
            O_Z_OUTPUT : out std_logic;
            O_N_OUTPUT: out std_logic;
-           O_OUTPUT: out std_logic_vector(15 downto 0)
+           O_OUTPUT: out std_logic_vector(15 downto 0);
+           O_IR: out std_logic_vector(15 downto 0)
            
            );
          
@@ -152,14 +153,6 @@ begin
                 I_A when others;
 
 
-            
-            
-        
-        
-        
-      
-        
-  
      
      
 end Behavioral;
