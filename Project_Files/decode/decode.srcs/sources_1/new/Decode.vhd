@@ -14,7 +14,6 @@ entity Decode is
     Port ( 
 			  rst : in STD_LOGIC;
 			  clk : in STD_LOGIC;
-			  rst_reg_file : in STD_LOGIC;
 			  instruction : in  STD_LOGIC_VECTOR (15 downto 0);
 			  ra_index : out std_logic_vector(2 downto 0);
 			  npc_in : in  STD_LOGIC_VECTOR (15 downto 0);
@@ -83,7 +82,7 @@ output_en <= '1' when instruction_intrn(15 downto 9) = out_op else '0';
 input_en <= '1' when instruction_intrn(15 downto 9) = in_op else '0';
 	
 --reg file (Inserted 0 for reset for testing)
-reg_file : entity work.register_file port map(rst_reg_file, clk, rd_index1, 
+reg_file : entity work.register_file port map(rst, clk, rd_index1, 
 	rd_index2, rd_data1, rd_data2, wr_index, wr_data, wr_enable);
 	
 	

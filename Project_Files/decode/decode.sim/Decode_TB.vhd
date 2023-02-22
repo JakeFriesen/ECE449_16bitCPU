@@ -48,7 +48,7 @@ ARCHITECTURE behavior OF Decode_TB IS
    signal wr_index : std_logic_vector(2 downto 0) := (others => '0');
    signal wr_data : std_logic_vector(15 downto 0) := (others => '0');
    signal wr_enable : std_logic := '0';
-   signal input_in : std_vector(15 downto 0);
+   signal input_in : std_logic_vector(15 downto 0);
 
  	--Outputs
    signal ra_index : std_logic_vector(2 downto 0);
