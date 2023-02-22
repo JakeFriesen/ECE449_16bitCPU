@@ -40,12 +40,15 @@ entity Write_Back_Stage is
            IN_PORT : in STD_LOGIC_VECTOR (15 downto 0);
            wr_data : out STD_LOGIC_VECTOR (15 downto 0);
            wr_addr : out STD_LOGIC_VECTOR (2 downto 0);
+           wr_en : out std_logic;
+           v_en : out std_logic;
            V_data : out STD_LOGIC_VECTOR (15 downto 0));
 end Write_Back_Stage;
 
 architecture Behavioral of Write_Back_Stage is
     signal ALU, Overflow, IR, input_port, Mem, write_internal : std_logic_vector (15 downto 0);
     signal addr_internal : std_logic_vector (2 downto 0);
+    signal wr_en_internal, v_en_internal : std_logic;
 begin
     --Latch Process
     process(clk)
@@ -69,6 +72,8 @@ begin
             V_data <= Overflow;
             wr_data <= write_internal;
             wr_addr <= addr_internal;
+            wr_en <= wr_en_internal;
+            v_en <= v_en_internal;
         end if;
     end process;
 
@@ -82,7 +87,18 @@ begin
     addr_internal <=
         "111" when IR(15 downto 9) = "0010010" else                         --Load Imm (18) Load into R7
         IR(8 downto 6) when IR(15 downto 9) = "0010010";                    --LOAD, ALU ops (TODO: May need to specify)
-
-
+    v_en_internal <= 
+        '1' when IR(15 downto 0) = "0000011" else   --MUL (3)
+        '0';
+    wr_en_internal <=
+        '1' when IR(15 downto 0) = "0000001" else   --ADD(1)
+        '1' when IR(15 downto 0) = "0000010" else   --SUB(2)
+        '1' when IR(15 downto 0) = "0000011" else   --MUL(3)
+        '1' when IR(15 downto 0) = "0000100" else   --NAND(4)
+        '1' when IR(15 downto 0) = "0000101" else   --SHL(5)
+        '1' when IR(15 downto 0) = "0000110" else   --SHR(6)
+        '1' when IR(15 downto 0) = "0100001" else   --IN(33)
+        '1' when IR(15 downto 0) = "0010000" else   --LOAD(16)
+        '0';
 
 end Behavioral;
