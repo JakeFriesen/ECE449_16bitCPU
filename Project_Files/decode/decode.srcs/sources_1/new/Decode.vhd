@@ -76,9 +76,7 @@ with instruction_intrn(15 downto 9) select
 						"000" when others;	
 						
 with instruction_intrn(15 downto 9) select	
-	rd_index2 <= 	instruction_intrn(5 downto 3) when load | store | mov,
-						"111" when load_imm,
-						instruction_intrn(2 downto 0) when others;
+	rd_index2 <= instruction_intrn(2 downto 0) when others;
 	
 -- Configure input/output
 output_en <= '1' when instruction_intrn(15 downto 9) = out_op else '0';
