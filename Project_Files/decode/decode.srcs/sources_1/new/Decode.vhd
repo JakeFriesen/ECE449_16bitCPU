@@ -30,7 +30,7 @@ entity Decode is
 			  output_en : out std_logic;
 			  input_en : out std_logic;
 			  input_in : in std_logic_vector(15 downto 0);
-			  input_out : out std_logic_vector(15 downto 0);
+			  input_out : out std_logic_vector(15 downto 0));
 end Decode;
 
 architecture Behavioral of Decode is
@@ -95,11 +95,11 @@ reg_file : entity work.register_file port map(rst_reg_file, clk, rd_index1,
 		if rising_edge(clk) then
 			if (rst = '1') then
 				instruction_intrn <= x"0000";
-				pc_out <= x"0000";
+				npc_out <= x"0000";
 				input_out <= x"0000";
-			elsif (frz = '0') then
+			else
 				instruction_intrn <= instruction;
-				pc_out <= pc_in;
+				npc_out <= npc_in;
 				input_out <= input_in;
 			end if;
 		end if;
