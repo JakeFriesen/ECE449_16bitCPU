@@ -22,27 +22,26 @@ entity EX_stage is
     Port ( 
            clk: in STD_LOGIC;
            rst: in STD_LOGIC;
-           ALU_OP : in STD_LOGIC_VECTOR (2 downto 0);
-           A : in STD_LOGIC_VECTOR (15 downto 0);
-           B : in STD_LOGIC_VECTOR (15 downto 0);
-           
+           I_IR: in std_logic_vector(15 downto 0);
+           I_A : in STD_LOGIC_VECTOR (15 downto 0);
+           I_B : in STD_LOGIC_VECTOR (15 downto 0);
+           INPUT: in STD_LOGIC_VECTOR(15 downto 0);
                    
-           result : out STD_LOGIC_VECTOR (15 downto 0);
-           data : out STD_LOGIC_VECTOR (15 downto 0);
-           Z : out STD_LOGIC;
-           N : out STD_LOGIC;
-           V : out STD_LOGIC;
-           V_EN: out STD_LOGIC;
-           
-           Z_OUTPUT : out std_logic;
-           N_OUTPUT: out std_logic
+           O_result : out STD_LOGIC_VECTOR (15 downto 0);
+           O_Vdata : out STD_LOGIC_VECTOR (15 downto 0);
+           O_Z : out STD_LOGIC;
+           O_N : out STD_LOGIC;
+           O_V : out STD_LOGIC;
+           O_V_EN: out STD_LOGIC; 
+           O_Z_OUTPUT : out std_logic;
+           O_N_OUTPUT: out std_logic;
+           O_OUTPUT: out std_logic_vector(15 downto 0)
            
            );
          
 end EX_stage;
 
 architecture Behavioral of EX_stage is
-
 
 --ALU
 component ALU is
@@ -58,75 +57,109 @@ component ALU is
 end component;
     
 -- signal mul_result: STD_LOGIC_VECTOR (31 downto 0);
-signal ALU_B,ALU_A , v_result: STD_LOGIC_VECTOR (15 downto 0);
 
+--signal in_data_sel: std_logic;
+signal ALU_A, ALU_B, OUTPUT: std_logic_vector( 15 downto 0);
+signal ALU_OP: std_logic_vector (2 downto 0);
+signal ALU_result, Vdata, ALU_v_result, result: std_logic_vector(15 downto 0);
+signal z, n, v, v_en: std_logic;
+signal z_output, n_output: std_logic;
+signal data_sel: std_logic;    
+signal B_data, imm_data: std_logic_vector(15 downto 0);
+signal OPCODE: std_logic_vector(6 downto 0);
+signal result_sel,  output_sel: std_logic;
 
-signal in_data_sel: std_logic;
-signal in_A, in_B: std_logic_vector( 15 downto 0);
-signal in_ALU_OP: std_logic_vector (2 downto 0);
-
-signal out_result, out_data, out_v_result: std_logic_vector(15 downto 0);
-signal out_z, out_n, out_v, out_v_en: std_logic;
-
-signal out_z_output, out_n_output: std_logic;
-    
 begin
 
    
-   
-   
-   process (clk)
-   begin
-    if (clk='1' and clk'event) then 
-     if(rst ='1') then
-          in_ALU_OP <= "000";
-      else
-          in_ALU_OP <= ALU_OP;
-          in_A <= A;
-          in_B <= B;
-      end if;
-      end if;
-   end process;
-   
+      ALU_0: ALU port map( ALU_A, ALU_B, ALU_OP, ALU_result, ALU_v_result, Z, N, V);
+       
+       process (clk)
+       begin
+            
+            if (clk='1' and clk'event) then 
+                if(rst ='1') then
+                    ALU_OP <= "000";
+                else
+                    ALU_OP <= I_IR(11 downto 9);
+                    ALU_A <= I_A;          
+                    B_data <= I_B;
+                   OPCODE<= I_IR(15 downto 9);
+                  --Sign extend immediate
+                  if(I_IR(5) = '1') then
+                    imm_data <= "1111111111" & I_IR(5 downto 0);
+                  else
+                      imm_data <= "0000000000" & I_IR(5 downto 0);
+                  end if; 
+                end if;
+            end if;
+            
+            if (clk='0' and clk'event) then
+             
+                O_result <= result;
+                O_Vdata <= Vdata;
+                O_z <= z;
+                O_N <= n;
+                O_V <= v;
+                O_V_en <= v_en;
+                O_Z_OUTPUT <= z_output;
+                O_N_output <= n_output;
+                O_OUTPUT <= OUTPUT;
+            end if;
+       end process;
+       
+        
+                 
+      process(ALU_OP, ALU_result)
+      begin
+          if(ALU_OP = "111") then       
+              Z_OUTPUT <= z;
+              N_OUTPUT <= n;       
+          end if;
+      end process;
+      
+      
 
-    ALU_0: ALU port map( in_A, in_B, in_ALU_OP, out_result, out_v_result, out_Z, out_N, out_V);
-    
-    
-    with in_ALU_OP Select
-                        out_data <= out_v_result when "011",
-                                    in_A when others;
-     
-    process(in_ALU_OP, out_result)
-    begin
-        if(in_ALU_OP = "111") then
         
-        out_Z_OUTPUT <= out_z;
-        out_N_OUTPUT <= out_n;
+        --OUTPUT AND INPUT PORT SELECT
         
-        end if; 
-     
-    end process;
-    
-    
-       with in_ALU_OP Select 
-         out_V_EN <= out_V when "011", 
-         '0' when others;
         
-    
-    process (clk)
-    begin
-     if (clk='0' and clk'event) then 
-           result <= out_result;
-           data <= out_data;
-           z <= out_z;
-           N <= out_n;
-           V <= out_v;
-           V_en <= out_v_en;
-           
-           Z_OUTPUT <= out_z_output;
-           N_output <= out_n_output;
-     end if;
-    end process;
+        with OPCODE Select
+                result <= INPUT when "0010001",
+                        ALU_result when others;
+        
+        with OPCODE Select
+                 OUTPUT <= ALU_A when "0010000",
+                            X"0000" when others;
+        
+        
+        
+        --ALU input B select
+        with ALU_OP Select
+        ALU_B <= imm_data when "110",
+                imm_data when "101",
+                B_data when others;
+        
+        --overflow output select
+        with ALU_OP Select
+        data_sel<= '1' when "011",
+                '0' when others;
+        
+        V_EN <= data_sel AND V;
+        
+        with V_EN Select
+        Vdata <= ALU_v_result when '1',
+                I_A when others;
+
+
+            
+            
+        
+        
+        
+      
+        
+  
      
      
 end Behavioral;
