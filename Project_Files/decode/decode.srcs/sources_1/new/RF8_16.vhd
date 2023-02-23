@@ -4,7 +4,10 @@ use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 
 entity register_file is
-    port(rst : in std_logic; clk: in std_logic;
+    port(
+        --Control signals
+        rst : in std_logic; 
+        clk: in std_logic;
         --read signals
         rd_index1: in std_logic_vector(2 downto 0); 
         rd_index2: in std_logic_vector(2 downto 0); 
@@ -34,6 +37,17 @@ begin
    elsif(wr_enable='1') then
       if (ov_enable='1') then
           reg_file(7) <= ov_data;
+          
+          case wr_index(2 downto 0) is
+              when "000" => reg_file(0) <= wr_data;
+              when "001" => reg_file(1) <= wr_data;
+              when "010" => reg_file(2) <= wr_data;
+              when "011" => reg_file(3) <= wr_data;
+              when "100" => reg_file(4) <= wr_data;
+              when "101" => reg_file(5) <= wr_data;
+              when "110" => reg_file(6) <= wr_data;
+              when others => NULL; 
+          end case;
       else
           case wr_index(2 downto 0) is
               when "000" => reg_file(0) <= wr_data;

@@ -16,13 +16,15 @@ ARCHITECTURE behavior OF Decode_TB IS
     PORT(     rst : in STD_LOGIC;
 			  clk : in STD_LOGIC;
 			  IR : in  STD_LOGIC_VECTOR (15 downto 0);
-			  npc_in : in  STD_LOGIC_VECTOR (15 downto 0);
-			  npc_out : out STD_LOGIC_VECTOR (15 downto 0);
+			  --npc_in : in  STD_LOGIC_VECTOR (15 downto 0);
+			  --npc_out : out STD_LOGIC_VECTOR (15 downto 0);
 			  rd_data1 : out std_logic_vector(15 downto 0); 
 			  rd_data2 : out std_logic_vector(15 downto 0);
 			  wr_index : in std_logic_vector(2 downto 0);
 			  wr_data : in std_logic_vector(15 downto 0);
-			  wr_enable : in std_logic
+			  wr_enable : in std_logic;
+			  ov_data : in std_logic_vector(15 downto 0);
+			  ov_enable : in std_logic
         );
     END COMPONENT;
     
@@ -31,13 +33,15 @@ ARCHITECTURE behavior OF Decode_TB IS
    signal rst : std_logic := '0';
    signal clk : std_logic := '0';
    signal IR : std_logic_vector(15 downto 0) := (others => '0');
-   signal npc_in : std_logic_vector(6 downto 0) := (others => '0');
+   --signal npc_in : std_logic_vector(6 downto 0) := (others => '0');
    signal wr_index : std_logic_vector(2 downto 0) := (others => '0');
    signal wr_data : std_logic_vector(15 downto 0) := (others => '0');
    signal wr_enable : std_logic := '0';
+   signal ov_data : std_logic_vector(15 downto 0) := (others => '0');
+   signal ov_enable : std_logic := '0';
 
  	--Outputs
-   signal npc_out : std_logic_vector(5 downto 0);
+   --signal npc_out : std_logic_vector(5 downto 0);
    signal rd_data1 : std_logic_vector(15 downto 0);
    signal rd_data2 : std_logic_vector(15 downto 0);
    
@@ -63,13 +67,15 @@ BEGIN
           rst => rst,
           clk => clk,
           IR => IR,
-          npc_in => npc_in,
-          npc_out => npc_out,
+          --npc_in => npc_in,
+          --npc_out => npc_out,
           rd_data1 => rd_data1,
           rd_data2 => rd_data2,
           wr_index => wr_index,
           wr_data => wr_data,
-          wr_enable => wr_enable
+          wr_enable => wr_enable,
+          ov_data => ov_data,
+          ov_enable => ov_enable
         );
 
 
@@ -89,7 +95,8 @@ BEGIN
         wr_index <= "000";
         wr_data <= X"0000";
         wr_enable <= '0';
-        npc_in <= "000000";
+        ov_data <= "000000";
+        ov_enable <= '0';
 		IR <= X"0000"; --NOP
 		wait until (clk = '1' and clk'event);
 		

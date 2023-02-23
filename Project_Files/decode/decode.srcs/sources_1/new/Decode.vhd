@@ -1,8 +1,5 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
 use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
@@ -15,14 +12,17 @@ entity Decode is
 			  rst : in STD_LOGIC;
 			  clk : in STD_LOGIC;
 			  IR : in  STD_LOGIC_VECTOR (15 downto 0);
-			  npc_in : in  STD_LOGIC_VECTOR (15 downto 0);
-			  npc_out : out STD_LOGIC_VECTOR (15 downto 0);
+			  --npc_in : in  STD_LOGIC_VECTOR (15 downto 0);
+			  --npc_out : out STD_LOGIC_VECTOR (15 downto 0);
 			  rd_data1 : out std_logic_vector(15 downto 0); 
 			  rd_data2 : out std_logic_vector(15 downto 0);
 			  wr_index : in std_logic_vector(2 downto 0);
 			  wr_data : in std_logic_vector(15 downto 0);
-			  wr_enable : in std_logic);
-			  --output_en : out std_logic;
+			  wr_enable : in std_logic;
+			  --Overflow signals
+			  ov_data : in std_logic_vector(15 downto 0);
+			  ov_enable : in std_logic;
+			  output_en : out std_logic);
 			  --input_en : out std_logic;
 			  --input_in : in std_logic_vector(15 downto 0);
 			  --input_out : out std_logic_vector(15 downto 0)
@@ -41,7 +41,10 @@ component register_file is
         --write signals
         wr_index: in std_logic_vector(2 downto 0); 
         wr_data: in std_logic_vector(15 downto 0); 
-        wr_enable: in std_logic);
+        wr_enable: in std_logic;
+        --overflow signals
+        ov_data: in std_logic_vector(15 downto 0);
+        ov_enable: in std_logic);
 end component register_file;
 
 --Signals
@@ -76,12 +79,12 @@ with IR_intrn(15 downto 9) select
 	rd_index2 <= IR_intrn(2 downto 0) when others;
 	
 -- Configure input/output
---output_en <= '1' when IR_intrn(15 downto 9) = out_op else '0';
+output_en <= '1' when IR_intrn(15 downto 9) = out_op else '0';
 --input_en <= '1' when IR_intrn(15 downto 9) = in_op else '0';
 	
 --reg file (Inserted 0 for reset for testing)
 reg_file : register_file port map(rst, clk, rd_index1, 
-	rd_index2, rd_data1, rd_data2, wr_index, wr_data, wr_enable);
+	rd_index2, rd_data1, rd_data2, wr_index, wr_data, wr_enable, ov_data, ov_enable);
 	
 	
 	--latching		
@@ -90,11 +93,11 @@ reg_file : register_file port map(rst, clk, rd_index1,
 		if rising_edge(clk) then
 			if (rst = '1') then
 				IR_intrn <= x"0000";
-				npc_out <= x"0000";
+				--npc_out <= x"0000";
 				--input_out <= x"0000";
 			else
 				IR_intrn <= IR;
-				npc_out <= npc_in;
+				--npc_out <= npc_in;
 				--input_out <= input_in;
 			end if;
 		end if;
