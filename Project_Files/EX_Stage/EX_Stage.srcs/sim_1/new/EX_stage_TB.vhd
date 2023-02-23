@@ -43,10 +43,10 @@ architecture tb of EX_stage_tb is
                    
            O_result : out STD_LOGIC_VECTOR (15 downto 0);
            O_Vdata : out STD_LOGIC_VECTOR (15 downto 0);
-           O_Z : out STD_LOGIC;
-           O_N : out STD_LOGIC;
-           O_V : out STD_LOGIC;
-           O_V_EN: out STD_LOGIC; 
+        --   O_Z : out STD_LOGIC;
+        --   O_N : out STD_LOGIC;
+        --   O_V : out STD_LOGIC;
+         --  O_V_EN: out STD_LOGIC; 
            O_Z_OUTPUT : out std_logic;
            O_N_OUTPUT: out std_logic;
            O_OUTPUT: out std_logic_vector(15 downto 0);
@@ -56,25 +56,26 @@ architecture tb of EX_stage_tb is
     end component;
 
     --Test Signals
-    signal ALU_OP: std_logic_vector(2 downto 0);
+  --  signal ALU_OP: std_logic_vector(2 downto 0);
     signal A, B, result, Vdata, OUTPUT, INPUT : std_logic_vector(15 downto 0);
     signal IR : std_logic_vector(15 downto 0);
-    signal Z, N, V, V_EN, Z_OUTPUT, N_OUTPUT : std_logic;
+    --signal Z, N, V, V_EN: std_logic;
+    signal Z_OUTPUT, N_OUTPUT : std_logic;
     signal clk, rst: std_logic;
     signal O_IR: std_logic_vector(15 downto 0);
 begin
-    UUT : EX_stage port map(clk, rst, IR, A, B,INPUT, result, Vdata, Z, N, V, V_EN, Z_OUTPUT, N_OUTPUT, OUTPUT, O_IR);
+    UUT : EX_stage port map(clk, rst, IR, A, B,INPUT, result, Vdata, Z_OUTPUT, N_OUTPUT, OUTPUT, O_IR);
     
     process begin
           clk <= '1'; wait for 10 ns;
           clk <= '0'; wait for 10 ns; 
     end process;
-    
+   
     process begin
         rst <= '0';
         A<=X"0001";
         B<=X"0001";
-        ALU_OP <= "001";
+      --  ALU_OP <= "001";
         IR <= "0000001000000000";
         wait until (clk = '1' and clk'event);
         
@@ -82,58 +83,58 @@ begin
         wait until (clk = '0' and clk'event);
         A<=X"7FFF";
         B<= X"0001";
-        ALU_OP <= "001";
-        IR <= "0000" & ALU_OP & '0' & X"00";
+     --   ALU_OP <= "001";
+        IR <= "0000" & "001" & '0' & X"00";
         
         
         wait until (clk = '0' and clk'event);
         A<=X"0002";
         B<=X"0003";
-        ALU_OP <= "010";       
+     --   ALU_OP <= "010";       
         IR <= "0000" & "010" & '0' & X"00";
         
         wait until (clk = '0' and clk'event);
         A<=X"8000";
         B<=X"0001";
-        ALU_OP <= "010";  
+     --   ALU_OP <= "010";  
         IR <= "0000" & "010" & '0' & X"00";
         
         
         wait until (clk = '0' and clk'event);
         A<=X"0002";
         B<=X"0404";
-        ALU_OP <= "011"; 
+     --   ALU_OP <= "011"; 
         IR <= "0000" & "011" & '0' & X"00";
         
         wait until (clk = '0' and clk'event);
         A<=X"000F";
         B<=X"FFFF";
-        ALU_OP <= "011";   
+     --   ALU_OP <= "011";   
         IR <= "0000" & "011"& '0' & X"00";
                 
         wait until (clk = '0' and clk'event);
         A<=X"0F0F";
         B<=X"FFFF";
-        ALU_OP <= "100";
+     --   ALU_OP <= "100";
         IR <= "0000" & "100" & '0' & X"00";
          
          
         wait until (clk = '0' and clk'event);
         A<=X"000F";
         B<=X"FFFF";
-        ALU_OP <= "110";
+     --   ALU_OP <= "110";
         IR <= "0000" & "110" & '0' & X"02";
         
         wait until (clk = '0' and clk'event);
         A<=X"000F";
         B<=X"FFFF";
-        ALU_OP <= "101";
+       -- ALU_OP <= "101";
         IR <= "0000" & "101" & '0' & X"02";
          
         wait until (clk = '0' and clk'event);
         A<=X"0000";
         B<=X"0000";
-        ALU_OP <= "111";
+       -- ALU_OP <= "111";
          IR <= "0000" & "111" & '0' & X"00";
          
          
@@ -141,14 +142,14 @@ begin
         wait until (clk = '0' and clk'event);
         A<=X"0000";
         B<=X"0000";
-        ALU_OP <= "000";
+       -- ALU_OP <= "000";
         INPUT <= X"DEEF";
         IR <= "0010" & "001" & '0' & X"00";
          
         wait until (clk = '0' and clk'event);
         A<=X"FEED";
         B<=X"0000";
-        ALU_OP <= "001";
+       -- ALU_OP <= "001";
         IR <= "0010" & "000" & '0' & X"00";
         
         wait;

@@ -29,10 +29,10 @@ entity EX_stage is
                    
            O_result : out STD_LOGIC_VECTOR (15 downto 0);
            O_Vdata : out STD_LOGIC_VECTOR (15 downto 0);
-           O_Z : out STD_LOGIC;
-           O_N : out STD_LOGIC;
-           O_V : out STD_LOGIC;
-           O_V_EN: out STD_LOGIC; 
+         --  O_Z : out STD_LOGIC;
+          -- O_N : out STD_LOGIC;
+         --  O_V : out STD_LOGIC;
+        --   O_V_EN: out STD_LOGIC; 
            O_Z_OUTPUT : out std_logic;
            O_N_OUTPUT: out std_logic;
            O_OUTPUT: out std_logic_vector(15 downto 0);
@@ -75,6 +75,8 @@ begin
    
       ALU_0: ALU port map( ALU_A, ALU_B, ALU_OP, ALU_result, ALU_v_result, Z, N, V);
        
+       
+       O_IR <= I_IR;
        process (clk)
        begin
             
@@ -98,11 +100,12 @@ begin
             if (clk='0' and clk'event) then
              
                 O_result <= result;
-                O_Vdata <= Vdata;
-                O_z <= z;
-                O_N <= n;
-                O_V <= v;
-                O_V_en <= v_en;
+                O_Vdata <= ALU_V_RESULT;
+               -- O_Vdata <= Vdata;
+               -- O_z <= z;
+              --  O_N <= n;
+              --  O_V <= v;
+             --   O_V_en <= v_en;
                 O_Z_OUTPUT <= z_output;
                 O_N_output <= n_output;
                 O_OUTPUT <= OUTPUT;
@@ -142,15 +145,15 @@ begin
                 B_data when others;
         
         --overflow output select
-        with ALU_OP Select
-        data_sel<= '1' when "011",
-                '0' when others;
+--        with ALU_OP Select
+--        data_sel<= '1' when "011",
+--                '0' when others;
         
-        V_EN <= data_sel AND V;
+       -- V_EN <= data_sel AND V;
         
-        with V_EN Select
-        Vdata <= ALU_v_result when '1',
-                I_A when others;
+--        with V_EN Select
+--        Vdata <= ALU_v_result when '1',
+--                I_A when others;
 
 
      
