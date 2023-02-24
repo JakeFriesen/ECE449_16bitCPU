@@ -54,7 +54,6 @@ component MUX2_1 is
 end component MUX2_1;
 
 --Signals
-signal ra_index_intrn : std_logic_vector(2 downto 0);
 signal rd_index1_intern : STD_LOGIC_VECTOR(2 downto 0);
 signal rd_index2_intern : STD_LOGIC_VECTOR(2 downto 0);
 signal rd_data1_out : STD_LOGIC_VECTOR(15 downto 0);
