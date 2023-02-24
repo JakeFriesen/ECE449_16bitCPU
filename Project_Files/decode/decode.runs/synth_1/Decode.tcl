@@ -89,6 +89,7 @@ OPTRACE "Adding files" START { }
 read_vhdl -library xil_defaultlib {
   C:/Users/Sam/OneDrive/Programming/repos/ECE449_16bitCPU/Project_Files/decode/decode.srcs/sources_1/new/Decode.vhd
   C:/Users/Sam/OneDrive/Programming/repos/ECE449_16bitCPU/Project_Files/decode/decode.srcs/sources_1/new/RF8_16.vhd
+  C:/Users/Sam/OneDrive/Programming/repos/ECE449_16bitCPU/Project_Files/decode/decode.srcs/sources_1/new/MUX2_1.vhd
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being

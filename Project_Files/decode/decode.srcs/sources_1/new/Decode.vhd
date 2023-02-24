@@ -14,19 +14,17 @@ entity Decode is
 			  IR : in  STD_LOGIC_VECTOR (15 downto 0);
 			  --npc_in : in  STD_LOGIC_VECTOR (15 downto 0);
 			  --npc_out : out STD_LOGIC_VECTOR (15 downto 0);
-			  rd_data1 : out std_logic_vector(15 downto 0); 
-			  rd_data2 : out std_logic_vector(15 downto 0);
+			  A : out std_logic_vector(15 downto 0); 
+			  B : out std_logic_vector(15 downto 0);
 			  wr_index : in std_logic_vector(2 downto 0);
 			  wr_data : in std_logic_vector(15 downto 0);
 			  wr_enable : in std_logic;
 			  --Overflow signals
 			  ov_data : in std_logic_vector(15 downto 0);
 			  ov_enable : in std_logic;
-			  output_en : out std_logic);
-			  --input_en : out std_logic;
-			  --input_in : in std_logic_vector(15 downto 0);
-			  --input_out : out std_logic_vector(15 downto 0)
-			  
+			  --Outport
+			  outport : out std_logic_vector(15 downto 0)
+	    );			  
 end Decode;
 
 architecture Behavioral of Decode is
@@ -47,11 +45,23 @@ component register_file is
         ov_enable: in std_logic);
 end component register_file;
 
+component MUX2_1 is
+    Port ( x : in STD_LOGIC_VECTOR (15 downto 0);
+           y : in STD_LOGIC_VECTOR (15 downto 0);
+           s : in STD_LOGIC;
+           z : out STD_LOGIC_VECTOR (15 downto 0));
+end component MUX2_1;
+
 --Signals
 signal ra_index_intrn : std_logic_vector(2 downto 0);
 signal rd_index1 : STD_LOGIC_VECTOR(2 downto 0);
 signal rd_index2 : STD_LOGIC_VECTOR(2 downto 0);
+signal rd_data1_out : STD_LOGIC_VECTOR(15 downto 0);
+signal output_en : STD_LOGIC;
 signal IR_intrn : STD_LOGIC_VECTOR(15 downto 0);
+
+-- Constant X"0000"
+constant zero : std_logic_vector(15 downto 0) := X"0000";
 
 -- Op Codes
 constant nop_op : std_logic_vector(6 downto 0)  := "0000000";
@@ -66,9 +76,6 @@ constant out_op : std_logic_vector(6 downto 0)  := "0100000";
 constant in_op : std_logic_vector(6 downto 0)   := "0100001";
 
 begin
-
---signal assignments--
-	
 --select read index 1 & 2 for regfile	
 with IR_intrn(15 downto 9) select
 	rd_index1 <= 	IR_intrn(5 downto 3) when add_op | sub_op | mul_op | nand_op,
@@ -80,13 +87,16 @@ with IR_intrn(15 downto 9) select
 	
 -- Configure input/output
 output_en <= '1' when IR_intrn(15 downto 9) = out_op else '0';
---input_en <= '1' when IR_intrn(15 downto 9) = in_op else '0';
 	
---reg file (Inserted 0 for reset for testing)
-reg_file : register_file port map(rst, clk, rd_index1, 
-	rd_index2, rd_data1, rd_data2, wr_index, wr_data, wr_enable, ov_data, ov_enable);
-	
-	
+--reg file
+reg_file : register_file port map(rst => rst, clk =>clk, rd_index1 => rd_index1, 
+	       rd_index2 => rd_index2, rd_data1 => rd_data1_out, rd_data2 => B, wr_index => wr_index,
+	       wr_data => wr_data, wr_enable => wr_enable, ov_data => ov_data, ov_enable => ov_enable);
+
+--MUX assignments--
+m1 : MUX2_1 port map(x => rd_data1_out, y => zero, s => output_en, z => A);
+m2 : MUX2_1 port map(x => zero, y => rd_data1_out, s => output_en, z => outport);
+
 	--latching		
 	process(clk)
 	begin
@@ -94,11 +104,9 @@ reg_file : register_file port map(rst, clk, rd_index1,
 			if (rst = '1') then
 				IR_intrn <= x"0000";
 				--npc_out <= x"0000";
-				--input_out <= x"0000";
 			else
 				IR_intrn <= IR;
 				--npc_out <= npc_in;
-				--input_out <= input_in;
 			end if;
 		end if;
 	end process;

@@ -1,6 +1,0 @@
-INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Sam/OneDrive/Programming/repos/ECE449_16bitCPU/Project_Files/decode/decode.srcs/sources_1/new/Decode.vhd" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'Decode'
-INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Sam/OneDrive/Programming/repos/ECE449_16bitCPU/Project_Files/decode/decode.srcs/sources_1/new/RF8_16.vhd" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'register_file'
-INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Sam/OneDrive/Programming/repos/ECE449_16bitCPU/Project_Files/decode/decode.sim/Decode_TB.vhd" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'Decode_TB'

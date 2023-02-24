@@ -2,6 +2,7 @@
 vhdl xil_defaultlib  \
 "../../../../decode.srcs/sources_1/new/Decode.vhd" \
 "../../../../decode.srcs/sources_1/new/RF8_16.vhd" \
+"../../../../decode.srcs/sources_1/new/MUX2_1.vhd" \
 "../../../Decode_TB.vhd" \
 
 # Do not sort compile order
