@@ -25,7 +25,8 @@ port(rst : in std_logic; clk: in std_logic;
     rd_data2: out std_logic_vector(15 downto 0);
     --write signals
     wr_index: in std_logic_vector(2 downto 0); 
-    wr_data: in std_logic_vector(15 downto 0); wr_enable: in std_logic);
+    wr_data: in std_logic_vector(15 downto 0); 
+    wr_enable: in std_logic);
 end register_file;
 
 architecture behavioural of register_file is
