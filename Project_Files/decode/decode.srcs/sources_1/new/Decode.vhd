@@ -16,6 +16,7 @@ entity Decode is
 			  --npc_out : out STD_LOGIC_VECTOR (15 downto 0);
 			  A : out std_logic_vector(15 downto 0); 
 			  B : out std_logic_vector(15 downto 0);
+			  IR_out : out std_logic_vector(15 downto 0);
 			  wr_index : in std_logic_vector(2 downto 0);
 			  wr_data : in std_logic_vector(15 downto 0);
 			  wr_enable : in std_logic;
@@ -54,8 +55,8 @@ end component MUX2_1;
 
 --Signals
 signal ra_index_intrn : std_logic_vector(2 downto 0);
-signal rd_index1 : STD_LOGIC_VECTOR(2 downto 0);
-signal rd_index2 : STD_LOGIC_VECTOR(2 downto 0);
+signal rd_index1_intern : STD_LOGIC_VECTOR(2 downto 0);
+signal rd_index2_intern : STD_LOGIC_VECTOR(2 downto 0);
 signal rd_data1_out : STD_LOGIC_VECTOR(15 downto 0);
 signal output_en : STD_LOGIC;
 signal IR_intrn : STD_LOGIC_VECTOR(15 downto 0);
@@ -78,19 +79,21 @@ constant in_op : std_logic_vector(6 downto 0)   := "0100001";
 begin
 --select read index 1 & 2 for regfile	
 with IR_intrn(15 downto 9) select
-	rd_index1 <= 	IR_intrn(5 downto 3) when add_op | sub_op | mul_op | nand_op,
-						IR_intrn(8 downto 6) when shl_op | shr_op | test_op | out_op,
+	rd_index1_intern <= IR_intrn(5 downto 3) when add_op | sub_op | mul_op,
+						IR_intrn(8 downto 6) when nand_op | shl_op | shr_op | test_op | out_op,
 						"000" when others;	
 						
 with IR_intrn(15 downto 9) select	
-	rd_index2 <= IR_intrn(2 downto 0) when others;
+	rd_index2_intern <= IR_intrn(2 downto 0) when add_op | sub_op | mul_op,
+	                    IR_intrn(5 downto 3) when nand_op,
+	                    "000" when others;
 	
--- Configure input/output
+-- Configure output_en
 output_en <= '1' when IR_intrn(15 downto 9) = out_op else '0';
 	
 --reg file
-reg_file : register_file port map(rst => rst, clk =>clk, rd_index1 => rd_index1, 
-	       rd_index2 => rd_index2, rd_data1 => rd_data1_out, rd_data2 => B, wr_index => wr_index,
+reg_file : register_file port map(rst => rst, clk => clk, rd_index1 => rd_index1_intern, 
+	       rd_index2 => rd_index2_intern, rd_data1 => rd_data1_out, rd_data2 => B, wr_index => wr_index,
 	       wr_data => wr_data, wr_enable => wr_enable, ov_data => ov_data, ov_enable => ov_enable);
 
 --MUX assignments--
@@ -102,10 +105,15 @@ m2 : MUX2_1 port map(x => zero, y => rd_data1_out, s => output_en, z => outport)
 	begin
 		if rising_edge(clk) then
 			if (rst = '1') then
-				IR_intrn <= x"0000";
+				IR_intrn <= zero;
+				IR_out <= zero;
+				A <= zero;
+				B <= zero;
+				outport <= zero;
 				--npc_out <= x"0000";
 			else
-				IR_intrn <= IR;
+			    IR_intrn <= IR;
+				IR_out <= IR;
 				--npc_out <= npc_in;
 			end if;
 		end if;

@@ -8,7 +8,7 @@ USE ieee.std_logic_1164.ALL;
 ENTITY Decode_TB IS
 END Decode_TB;
  
-ARCHITECTURE behavior OF Decode_TB IS 
+ARCHITECTURE Behavioral OF Decode_TB IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
@@ -21,6 +21,7 @@ ARCHITECTURE behavior OF Decode_TB IS
 			  --npc_out : out STD_LOGIC_VECTOR (15 downto 0);
 			  A : out std_logic_vector(15 downto 0); 
 			  B : out std_logic_vector(15 downto 0);
+			  IR_out : out std_logic_vector(15 downto 0);
 			  wr_index : in std_logic_vector(2 downto 0);
 			  wr_data : in std_logic_vector(15 downto 0);
 			  wr_enable : in std_logic;
@@ -33,20 +34,21 @@ ARCHITECTURE behavior OF Decode_TB IS
     END COMPONENT;
     
    --Inputs
-   signal rst : std_logic;
-   signal clk : std_logic;
-   signal IR : std_logic_vector(15 downto 0);
+   signal clk : std_logic := '0';
+   signal rst : std_logic := '0';
+   signal IR : std_logic_vector(15 downto 0) := (others => '0');
    --signal npc_in : std_logic_vector(6 downto 0) := (others => '0');
-   signal wr_index : std_logic_vector(2 downto 0);
-   signal wr_data : std_logic_vector(15 downto 0);
-   signal wr_enable : std_logic;
-   signal ov_data : std_logic_vector(15 downto 0);
-   signal ov_enable : std_logic;
+   signal wr_index : std_logic_vector(2 downto 0) := (others => '0');
+   signal wr_data : std_logic_vector(15 downto 0):= (others => '0');
+   signal wr_enable : std_logic := '0';
+   signal ov_data : std_logic_vector(15 downto 0) := (others => '0');
+   signal ov_enable : std_logic := '0';
 
  	--Outputs
    --signal npc_out : std_logic_vector(5 downto 0);
    signal A : std_logic_vector(15 downto 0);
    signal B : std_logic_vector(15 downto 0);
+   signal IR_out: std_logic_vector(15 downto 0);
    signal outport : std_logic_vector(15 downto 0);
    
    	--Op Code Definitions
@@ -61,8 +63,7 @@ ARCHITECTURE behavior OF Decode_TB IS
 	constant out_op : std_logic_vector(6 downto 0)  := "0100000";
 	constant in_op : std_logic_vector(6 downto 0)   := "0100001";
  
-BEGIN
- 
+begin
 	-- Instantiate the Unit Under Test (UUT)
    uut: Decode PORT MAP (
           rst => rst,
@@ -72,6 +73,7 @@ BEGIN
           --npc_out => npc_out,
           A => A,
           B => B,
+          IR_out => IR_out,
           wr_index => wr_index,
           wr_data => wr_data,
           wr_enable => wr_enable,
@@ -82,16 +84,15 @@ BEGIN
 
 
    -- Clock process
-   clk_process :process
-   begin
-		clk <= '1'; wait for 10 ns;
-        clk <= '0'; wait for 10 ns; 
+   process begin
+		clk <= '1'; 
+		wait for 10 ns;
+        clk <= '0'; 
+        wait for 10 ns; 
    end process;
  
-
    -- Stimulus process
-   stim_proc: process
-   begin		
+   process begin		
       -- insert stimulus here
         rst <= '0';
         wr_index <= "000";
@@ -126,4 +127,4 @@ BEGIN
       wait;
    end process;
 
-END;
+end Behavioral;

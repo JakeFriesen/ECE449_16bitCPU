@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1677274247" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/Decode.dcp">
   <File Type="PA-TCL" Name="Decode.tcl"/>
-  <File Type="RDS-PROPCONSTRS" Name="Decode_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="Decode_reports.tcl"/>
   <File Type="RDS-RDS" Name="Decode.vds"/>
   <File Type="RDS-UTIL" Name="Decode_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="Decode_utilization_synth.pb"/>
   <File Type="RDS-DCP" Name="Decode.dcp"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="Decode_timing_summary_synth.rpt"/>
-  <File Type="VDS-TIMING-PB" Name="Decode_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/Decode.vhd">
