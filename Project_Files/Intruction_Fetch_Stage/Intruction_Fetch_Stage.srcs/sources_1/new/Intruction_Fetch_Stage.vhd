@@ -45,9 +45,9 @@ end Intruction_Fetch_Stage;
 
 architecture Behavioral of Intruction_Fetch_Stage is
     --Signals
-    signal branch, wr_en, ram_ena, ram_enb : std_logic;
-    signal instr_data, douta, doutb, dina : std_logic_vector(15 downto 0);
-    signal addra, addrb, PC_new, next_counter : std_logic_vector (5 downto 0);
+    signal branch : std_logic;
+    signal instr_data : std_logic_vector(15 downto 0);
+    signal PC_new, next_counter : std_logic_vector (5 downto 0);
     signal program_counter : std_logic_vector (5 downto 0) := (others=>'0');
     
 begin

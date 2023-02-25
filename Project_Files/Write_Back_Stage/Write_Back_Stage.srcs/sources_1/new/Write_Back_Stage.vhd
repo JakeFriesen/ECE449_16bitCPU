@@ -46,46 +46,57 @@ entity Write_Back_Stage is
 end Write_Back_Stage;
 
 architecture Behavioral of Write_Back_Stage is
-    signal ALU, Overflow, IR, input_port, Mem, write_internal : std_logic_vector (15 downto 0);
-    signal addr_internal : std_logic_vector (2 downto 0);
-    signal wr_en_internal, v_en_internal : std_logic;
+    signal ALU, Overflow, IR, input_port, Mem : std_logic_vector (15 downto 0);
 begin
     --Latch Process
     process(clk)
     begin
-        if(rst = '1') then
-        --Reset
-            wr_data <= (others=>'0');
-            wr_addr <= (others=>'0');
-            V_data <= (others=>'0');
-        end if;    
+--        if(rst = '1') then
+--        --Reset
+--            wr_data <= (others=>'0');
+--            wr_addr <= (others=>'0');
+--            V_data <= (others=>'0');
+--        end if;    
         if(clk'event and clk = '1') then
-        --Latch Incoming signals
-            ALU <= ALU_in;
-            IR <= IR_in;
-            Overflow <= Overflow_in;
-            input_port <= IN_PORT;
-            Mem <= Mem_in;
+            if(rst = '1') then
+            --Reset
+                ALU <= (others=>'0');
+                IR <= (others=>'0');
+                Overflow <= (others=>'0');
+                input_port <= (others=>'0');
+                Mem <= (others=>'0');
+            else
+            --Latch Incoming signals
+                ALU <= ALU_in;
+                IR <= IR_in;
+                Overflow <= Overflow_in;
+                input_port <= IN_PORT;
+                Mem <= Mem_in;
+            end if;
         end if;
         if(clk'event and clk = '0') then
             --Nothing to Latch
         end if;
     end process;
 
-    write_internal <= 
+    --Output Signals - Combinational, Latched at Register File
+    --TODO: Clean this up, add some constants for the opcodes
+    wr_data <=
         "00000000"&IR(7 downto 0) when (IR(15 downto 8) = "00100100") else  --Load lower (18) (TODO: Need to fix the zeros)
         IR(7 downto 0)&"00000000" when (IR(15 downto 8) = "00100101") else  --Load Upper (18) (TODO: Need to fix the zeros)
         input_port when IR(15 downto 9) = "0100001" else                    --IN (33)
         Mem when IR(15 downto 9) = "0010000" else                           --LOAD (16)
+        (others=>'0') when IR(15 downto 9) = "0000000" else                 --NOP, set all 0
         ALU;-- when IR(15 downto 9) = "" else                               --ALU for the rest (TODO: May need to specify)
         --(others=>'0'); 
-    addr_internal <=
+    wr_addr <=
         "111" when IR(15 downto 9) = "0010010" else                         --Load Imm (18) Load into R7
-        IR(8 downto 6) when IR(15 downto 9) = "0010010";                    --LOAD, ALU ops (TODO: May need to specify)
-    v_en_internal <= 
+        "000" when IR(15 downto 9) = "0000000" else                         --NOP, set all 0
+        IR(8 downto 6);                                                     --LOAD, ALU ops (TODO: May need to specify)
+    v_en <= 
         '1' when IR(15 downto 9) = "0000011" else   --MUL (3)
         '0';
-    wr_en_internal <=
+    wr_en <=
         '1' when IR(15 downto 9) = "0000001" else   --ADD(1)
         '1' when IR(15 downto 9) = "0000010" else   --SUB(2)
         '1' when IR(15 downto 9) = "0000011" else   --MUL(3)
@@ -95,13 +106,8 @@ begin
         '1' when IR(15 downto 9) = "0100001" else   --IN(33)
         '1' when IR(15 downto 9) = "0010000" else   --LOAD(16)
         '0';
-        
-        
-    --Output Signals - Combinational, Latched at Register File
+
     V_data <= Overflow;
-    wr_data <= write_internal;
-    wr_addr <= addr_internal;
-    wr_en <= wr_en_internal;
-    v_en <= v_en_internal;
+
 
 end Behavioral;
