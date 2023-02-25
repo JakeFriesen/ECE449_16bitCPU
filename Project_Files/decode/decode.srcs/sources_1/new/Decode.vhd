@@ -59,6 +59,7 @@ signal rd_index2_intern : STD_LOGIC_VECTOR(2 downto 0);
 signal rd_data1_out : STD_LOGIC_VECTOR(15 downto 0);
 signal output_en : STD_LOGIC;
 signal IR_intrn : STD_LOGIC_VECTOR(15 downto 0);
+signal A_internal, B_internal : std_logic_vector(15 downto 0);
 
 -- Constant X"0000"
 constant zero : std_logic_vector(15 downto 0) := X"0000";
@@ -92,11 +93,11 @@ output_en <= '1' when IR_intrn(15 downto 9) = out_op else '0';
 	
 --reg file
 reg_file : register_file port map(rst => rst, clk => clk, rd_index1 => rd_index1_intern, 
-	       rd_index2 => rd_index2_intern, rd_data1 => rd_data1_out, rd_data2 => B, wr_index => wr_index,
+	       rd_index2 => rd_index2_intern, rd_data1 => rd_data1_out, rd_data2 => B_internal, wr_index => wr_index,
 	       wr_data => wr_data, wr_enable => wr_enable, ov_data => ov_data, ov_enable => ov_enable);
 
 --MUX assignments--
-m1 : MUX2_1 port map(x => rd_data1_out, y => zero, s => output_en, z => A);
+m1 : MUX2_1 port map(x => rd_data1_out, y => zero, s => output_en, z => A_internal);
 m2 : MUX2_1 port map(x => zero, y => rd_data1_out, s => output_en, z => outport);
 
 	--latching		
@@ -105,16 +106,26 @@ m2 : MUX2_1 port map(x => zero, y => rd_data1_out, s => output_en, z => outport)
 		if rising_edge(clk) then
 			if (rst = '1') then
 				IR_intrn <= zero;
-				IR_out <= zero;
-				A <= zero;
-				B <= zero;
-				outport <= zero;
-				--npc_out <= x"0000";
+				--npc <= (others=>'0');
 			else
 			    IR_intrn <= IR;
-				IR_out <= IR;
-				--npc_out <= npc_in;
+				--npc <= npc_in;
 			end if;
+		end if;
+		--Latch Output Signals
+		if falling_edge(clk) then
+		  if(rst = '1') then
+		      A <= (others=>'0');
+		      B <= (others=>'0');
+--		      npc_out <= (others=>'0');
+		      IR_out <= (others=>'0');
+		      outport <= (others=>'0');
+		  else
+		      A <= A_internal;
+		      B <= B_internal;
+		      IR_out <= IR_intrn;
+		      --npc_out <= npc;
+		  end if;		
 		end if;
 	end process;
 
