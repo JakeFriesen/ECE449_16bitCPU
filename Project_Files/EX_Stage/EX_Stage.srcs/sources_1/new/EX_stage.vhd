@@ -25,7 +25,7 @@ entity EX_stage is
            I_IR: in std_logic_vector(15 downto 0);
            I_A : in STD_LOGIC_VECTOR (15 downto 0);
            I_B : in STD_LOGIC_VECTOR (15 downto 0);
-           INPUT: in STD_LOGIC_VECTOR(15 downto 0);
+--           INPUT: in STD_LOGIC_VECTOR(15 downto 0);
                    
            O_result : out STD_LOGIC_VECTOR (15 downto 0);
            O_Vdata : out STD_LOGIC_VECTOR (15 downto 0);
@@ -35,7 +35,7 @@ entity EX_stage is
         --   O_V_EN: out STD_LOGIC; 
            O_Z_OUTPUT : out std_logic;
            O_N_OUTPUT: out std_logic;
-           O_OUTPUT: out std_logic_vector(15 downto 0);
+--           O_OUTPUT: out std_logic_vector(15 downto 0);
            O_IR: out std_logic_vector(15 downto 0)
            
            );
@@ -108,7 +108,7 @@ begin
              --   O_V_en <= v_en;
                 O_Z_OUTPUT <= z_output;
                 O_N_output <= n_output;
-                O_OUTPUT <= OUTPUT;
+--                O_OUTPUT <= OUTPUT;
             end if;
        end process;
        
@@ -128,13 +128,13 @@ begin
         --OUTPUT AND INPUT PORT SELECT
         
         
-        with OPCODE Select
-                result <= INPUT when "0010001",
-                        ALU_result when others;
+--        with OPCODE Select
+--                result <= INPUT when "0010001",
+--                        ALU_result when others;
         
-        with OPCODE Select
-                 OUTPUT <= ALU_A when "0010000",
-                            X"0000" when others;
+--        with OPCODE Select
+--                 OUTPUT <= ALU_A when "0010000",
+--                            X"0000" when others;
         
         
         

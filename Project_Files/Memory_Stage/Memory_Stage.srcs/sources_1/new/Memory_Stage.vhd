@@ -34,7 +34,6 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity Memory_Stage is
     Port ( ALU_in : in STD_LOGIC_VECTOR (15 downto 0);
            IR_in : in STD_LOGIC_VECTOR (15 downto 0);
-           V : in STD_LOGIC;
            N : in STD_LOGIC;
            Z : in STD_LOGIC;
            clk, rst : in STD_LOGIC;
@@ -52,7 +51,7 @@ end Memory_Stage;
 
 architecture Behavioral of Memory_Stage is
     signal IR, ALU, Overflow, ram_output : std_logic_vector (15 downto 0);
-    signal flags : std_logic_vector (2 downto 0);
+    signal flags : std_logic_vector (1 downto 0);
 begin
     --Latch Process
     process(clk)
@@ -66,7 +65,7 @@ begin
         end if;    
         if(clk'event and clk = '1') then
         --Latch Incoming signals
-            flags <= V & N & Z;
+            flags <= N & Z;
             IR <= IR_in;
             ALU <= ALU_in;
             Overflow <= Overflow_in;

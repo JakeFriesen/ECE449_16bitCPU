@@ -56,21 +56,29 @@ begin
     --Latch Process
     process(clk)
     begin
-        if(rst = '1') then
-        --Reset
-             IR <= (others=>'0');
-             NPC <= (others=>'0');   
-        end if;    
+       
         if(clk'event and clk = '1') then
-        --Latch Incoming signals
-            branch <= br_in;
-            PC_new <= PC_in;
+            if(rst = '1') then
+            --Reset
+                 branch <= '0';
+                 PC_new <= (others=>'0');
+            else 
+            --Latch Incoming signals
+                branch <= br_in;
+                PC_new <= PC_in;
+            end if;
         end if;
         if(clk'event and clk = '0') then
-        --Latch Outgoing signals
-            IR <= instr_data;   
-            NPC <= next_counter;   
-            program_counter <= next_counter;          
+            if(rst = '1') then
+                IR <= (others=>'0');
+                NPC <= (others=>'0');
+                program_counter <= (others=>'0');
+            else
+            --Latch Outgoing signals
+                IR <= instr_data;   
+                NPC <= next_counter;   
+                program_counter <= next_counter;
+            end if;          
         end if;
     end process;
     
