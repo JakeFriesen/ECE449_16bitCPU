@@ -60,7 +60,7 @@ end component;
 -- signal mul_result: STD_LOGIC_VECTOR (31 downto 0);
 
 --signal in_data_sel: std_logic;
-signal ALU_A, ALU_B, OUTPUT: std_logic_vector( 15 downto 0);
+signal ALU_A, ALU_B, IR: std_logic_vector( 15 downto 0);
 signal ALU_OP: std_logic_vector (2 downto 0);
 signal ALU_result, Vdata, ALU_v_result, result: std_logic_vector(15 downto 0);
 signal z, n, v, v_en: std_logic;
@@ -76,7 +76,6 @@ begin
       ALU_0: ALU port map( ALU_A, ALU_B, ALU_OP, ALU_result, ALU_v_result, Z, N, V);
        
        
-       O_IR <= I_IR;
        process (clk)
        begin
             
@@ -84,6 +83,7 @@ begin
                 if(rst ='1') then
                     ALU_OP <= "000";
                 else
+                    IR <= I_IR;
                     ALU_OP <= I_IR(11 downto 9);
                     ALU_A <= I_A;          
                     B_data <= I_B;
@@ -109,6 +109,7 @@ begin
                 O_Z_OUTPUT <= z_output;
                 O_N_output <= n_output;
 --                O_OUTPUT <= OUTPUT;
+                O_IR <= IR;
             end if;
        end process;
        
@@ -116,10 +117,13 @@ begin
                  
       process(ALU_OP, ALU_result)
       begin
-          if(ALU_OP = "111") then       
-              Z_OUTPUT <= z;
-              N_OUTPUT <= n;       
-          end if;
+        if(ALU_OP = "111") then       
+          Z_OUTPUT <= z;
+          N_OUTPUT <= n;
+        else
+          Z_OUTPUT <= Z_OUTPUT;
+          N_OUTPUT <= N_OUTPUT;
+        end if;
       end process;
       
       
@@ -128,9 +132,7 @@ begin
         --OUTPUT AND INPUT PORT SELECT
         
         
---        with OPCODE Select
---                result <= INPUT when "0010001",
---                        ALU_result when others;
+        result <= ALU_result;
         
 --        with OPCODE Select
 --                 OUTPUT <= ALU_A when "0010000",
