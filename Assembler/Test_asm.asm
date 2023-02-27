@@ -1,5 +1,8 @@
 ORG	0x0000
 .CODE
+	NOP
+	NOP
+	NOP
 	IN r1   ; 03
 	IN r2	; 05
 	NOP
