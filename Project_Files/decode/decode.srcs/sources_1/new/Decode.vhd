@@ -59,7 +59,7 @@ signal rd_index2_intern : STD_LOGIC_VECTOR(2 downto 0);
 signal rd_data1_out : STD_LOGIC_VECTOR(15 downto 0);
 signal output_en : STD_LOGIC;
 signal IR_intrn : STD_LOGIC_VECTOR(15 downto 0);
-signal A_internal, B_internal, outport_internal : std_logic_vector(15 downto 0) := (others=>'0');
+signal A_internal, B_internal, outport_internal, outport_previous : std_logic_vector(15 downto 0) := (others=>'0');
 
 -- Constant X"0000"
 constant zero : std_logic_vector(15 downto 0) := X"0000";
@@ -102,7 +102,8 @@ m1 : MUX2_1 port map(x => rd_data1_out, y => zero, s => output_en, z => A_intern
 --Output should remain constant after an OUT opcode.
 outport_internal <=
     rd_data1_out when output_en = '1' else
-    outport_internal;
+    --Set to outport previous to fix timing issues
+    outport_previous;
 
 	--latching		
 	process(clk)
@@ -114,6 +115,7 @@ outport_internal <=
 			else
 			    IR_intrn <= IR;
 				--npc <= npc_in;
+                outport_previous <= outport_internal;
 			end if;
 		end if;
 		--Latch Output Signals

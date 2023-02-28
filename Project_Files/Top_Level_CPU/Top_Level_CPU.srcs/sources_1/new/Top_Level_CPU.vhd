@@ -145,7 +145,7 @@ signal WB_ID_wr_addr : std_logic_vector(2 downto 0);
 --RAM signals
 signal ram_addra, ram_addrb : std_logic_vector(5 downto 0);
 signal ram_dataa, ram_datab, ram_dina : std_logic_vector(15 downto 0);
-signal ram_wr_en, ram_ena, ram_enb : std_logic;
+signal ram_wr_en, ram_ena, ram_enb, out_en : std_logic;
 
 begin
 IF_inst : Intruction_Fetch_Stage port map(clk=>clk, rst=>rst, IR=>IF_ID_IR, NPC=>IF_ID_NPC, PC_in=>MEM_IF_br_addr, ram_addr=>ram_addra, ram_data=>ram_dataa, br_in=>MEM_IF_br);
