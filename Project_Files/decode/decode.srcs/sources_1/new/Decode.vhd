@@ -12,8 +12,8 @@ entity Decode is
 			  rst : in STD_LOGIC;
 			  clk : in STD_LOGIC;
 			  IR : in  STD_LOGIC_VECTOR (15 downto 0);
-			  --npc_in : in  STD_LOGIC_VECTOR (15 downto 0);
-			  --npc_out : out STD_LOGIC_VECTOR (15 downto 0);
+			  npc_in : in  STD_LOGIC_VECTOR (5 downto 0);
+			  npc_out : out STD_LOGIC_VECTOR (5 downto 0);
 			  A : out std_logic_vector(15 downto 0); 
 			  B : out std_logic_vector(15 downto 0);
 			  IR_out : out std_logic_vector(15 downto 0);
@@ -59,6 +59,7 @@ signal rd_index2_intern : STD_LOGIC_VECTOR(2 downto 0);
 signal rd_data1_out : STD_LOGIC_VECTOR(15 downto 0);
 signal output_en : STD_LOGIC;
 signal IR_intrn : STD_LOGIC_VECTOR(15 downto 0);
+signal npc : std_logic_vector (5 downto 0);
 signal A_internal, B_internal, outport_internal, outport_previous : std_logic_vector(15 downto 0) := (others=>'0');
 
 -- Constant X"0000"
@@ -111,10 +112,10 @@ outport_internal <=
 		if rising_edge(clk) then
 			if (rst = '1') then
 				IR_intrn <= zero;
-				--npc <= (others=>'0');
+				npc <= (others=>'0');
 			else
 			    IR_intrn <= IR;
-				--npc <= npc_in;
+				npc <= npc_in;
                 outport_previous <= outport_internal;
 			end if;
 		end if;
@@ -123,14 +124,14 @@ outport_internal <=
 		  if(rst = '1') then
 		      A <= (others=>'0');
 		      B <= (others=>'0');
---		      npc_out <= (others=>'0');
+		      npc_out <= (others=>'0');
 		      IR_out <= (others=>'0');
 		      outport <= (others=>'0');
 		  else
 		      A <= A_internal;
 		      B <= B_internal;
 		      IR_out <= IR_intrn;
-		      --npc_out <= npc;
+		      npc_out <= npc;
 		      outport <= outport_internal;
 		  end if;		
 		end if;

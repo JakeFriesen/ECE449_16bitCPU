@@ -25,17 +25,14 @@ entity EX_stage is
            I_IR: in std_logic_vector(15 downto 0);
            I_A : in STD_LOGIC_VECTOR (15 downto 0);
            I_B : in STD_LOGIC_VECTOR (15 downto 0);
+           I_NPC : in STD_LOGIC_VECTOR (5 downto 0);
 --           INPUT: in STD_LOGIC_VECTOR(15 downto 0);
                    
            O_result : out STD_LOGIC_VECTOR (15 downto 0);
            O_Vdata : out STD_LOGIC_VECTOR (15 downto 0);
-         --  O_Z : out STD_LOGIC;
-          -- O_N : out STD_LOGIC;
          --  O_V : out STD_LOGIC;
-        --   O_V_EN: out STD_LOGIC; 
            O_Z_OUTPUT : out std_logic;
            O_N_OUTPUT: out std_logic;
---           O_OUTPUT: out std_logic_vector(15 downto 0);
            O_IR: out std_logic_vector(15 downto 0)
            
            );
@@ -69,6 +66,7 @@ signal data_sel: std_logic;
 signal B_data, imm_data: std_logic_vector(15 downto 0);
 signal OPCODE: std_logic_vector(6 downto 0);
 signal result_sel,  output_sel: std_logic;
+signal NPC : std_logic_vector (5 downto 0);
 
 begin
 
@@ -88,6 +86,7 @@ begin
                     ALU_A <= I_A;          
                     B_data <= I_B;
                    OPCODE<= I_IR(15 downto 9);
+                   NPC <= I_NPC;
                   --Sign extend immediate
                   if(I_IR(5) = '1') then
                     imm_data <= "1111111111" & I_IR(5 downto 0);
