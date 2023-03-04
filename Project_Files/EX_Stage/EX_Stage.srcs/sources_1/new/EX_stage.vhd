@@ -120,12 +120,21 @@ begin
             end if;
             
             if (clk='0' and clk'event) then
-                O_result <= result;
-                O_Vdata <= ALU_V_RESULT;
-            --  O_V <= v;
-                O_Z_OUTPUT <= z_output;
-                O_N_output <= n_output;
-                O_IR <= IR;
+                if(rst = '1') then
+                    O_result <=(others=>'0');
+                    O_Vdata <= (others=>'0');
+                --  O_V <= v;
+                    O_Z_OUTPUT <= '0';
+                    O_N_output <= '0';
+                    O_IR <= IR;
+                else
+                    O_result <= result;
+                    O_Vdata <= ALU_V_RESULT;
+                --  O_V <= v;
+                    O_Z_OUTPUT <= z_output;
+                    O_N_output <= n_output;
+                    O_IR <= IR;
+                end if;
             end if;
        end process;
        

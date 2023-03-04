@@ -93,7 +93,8 @@ with IR_intrn(15 downto 9) select
 output_en <= '1' when IR_intrn(15 downto 9) = out_op else '0';
 	
 --reg file
-reg_file : register_file port map(rst => rst, clk => clk, rd_index1 => rd_index1_intern, 
+--TODO: FIX THE RST HERE, ITS HARDCODED AND SHOULDN"T BE!!!!
+reg_file : register_file port map(rst => '0', clk => clk, rd_index1 => rd_index1_intern, 
 	       rd_index2 => rd_index2_intern, rd_data1 => rd_data1_out, rd_data2 => B_internal, wr_index => wr_index,
 	       wr_data => wr_data, wr_enable => wr_enable, ov_data => ov_data, ov_enable => ov_enable);
 
@@ -126,14 +127,13 @@ outport_internal <=
 		      B <= (others=>'0');
 		      npc_out <= (others=>'0');
 		      IR_out <= (others=>'0');
-		      outport <= (others=>'0');
 		  else
 		      A <= A_internal;
 		      B <= B_internal;
 		      IR_out <= IR_intrn;
 		      npc_out <= npc;
-		      outport <= outport_internal;
-		  end if;		
+		  end if;
+          outport <= outport_internal;		
 		end if;
 	end process;
 

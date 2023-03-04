@@ -40,6 +40,7 @@ entity Memory_Stage is
            branch : out STD_LOGIC;
            branch_addr : out STD_LOGIC_VECTOR (5 downto 0);
            ram_wr : out STD_LOGIC;
+           pipe_flush : out std_logic;
            ram_addrb : out STD_LOGIC_VECTOR (5 downto 0);
            ram_datab : in STD_LOGIC_VECTOR (15 downto 0);
            Mem_out : out STD_LOGIC_VECTOR (15 downto 0);
@@ -52,6 +53,7 @@ end Memory_Stage;
 architecture Behavioral of Memory_Stage is
     signal IR, ALU, Overflow, ram_output : std_logic_vector (15 downto 0);
     signal flags : std_logic_vector (1 downto 0);
+    signal branch_internal : std_logic;
     --Constants
     constant add_op : std_logic_vector(6 downto 0) := "0000001";
     constant sub_op : std_logic_vector(6 downto 0) := "0000010";
@@ -97,7 +99,7 @@ begin
 
     --Branch Choice - Combinational, not latched output
     --This is very redundant, and could always output an address, but this will help to debug branching issues
-    branch <=
+    branch_internal <=
         '1' when IR(15 downto 9) = brr_op else                          --BRR (64)
         '1' when (IR(15 downto 9) = brr_n_op and flags(1) = '1') else   --BRR.N (65)
         '1' when (IR(15 downto 9) = brr_z_op and flags (0) = '1') else  --BRR.Z (66)
@@ -119,6 +121,9 @@ begin
         ALU(5 downto 0) when (IR(15 downto 9) = "1000110") else                     --BR.SUB (70)
         ALU(5 downto 0) when (IR(15 downto 9) = "1000111") else                     --RETURN (71)
         (others => '0');                                                --Keep at 0 any other time
+    
+    pipe_flush <= branch_internal;
+    branch <= branch_internal;
     
     --RAM Access
     ram_wr <= '1' when (IR(15 downto 9) = "0010001") else '0';  --STR (17)

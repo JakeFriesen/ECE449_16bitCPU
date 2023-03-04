@@ -58,15 +58,15 @@ begin
     begin
        
         if(clk'event and clk = '1') then
-            if(rst = '1') then
-            --Reset
-                 branch <= '0';
-                 PC_new <= (others=>'0');
-            else 
+--            if(rst = '1') then
+--            --Reset
+--                 branch <= '0';
+--                 PC_new <= (others=>'0');
+--            else 
             --Latch Incoming signals
                 branch <= br_in;
                 PC_new <= PC_in;
-            end if;
+--            end if;
         end if;
         if(clk'event and clk = '0') then
             if(rst = '1') then
