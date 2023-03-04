@@ -52,6 +52,22 @@ end Memory_Stage;
 architecture Behavioral of Memory_Stage is
     signal IR, ALU, Overflow, ram_output : std_logic_vector (15 downto 0);
     signal flags : std_logic_vector (1 downto 0);
+    --Constants
+    constant add_op : std_logic_vector(6 downto 0) := "0000001";
+    constant sub_op : std_logic_vector(6 downto 0) := "0000010";
+    constant mul_op : std_logic_vector(6 downto 0) := "0000011";
+    constant nand_op : std_logic_vector(6 downto 0) := "0000100";
+    constant shl_op : std_logic_vector(6 downto 0) := "0000101";
+    constant shr_op : std_logic_vector(6 downto 0) := "0000110";
+    constant test_op : std_logic_vector(6 downto 0) := "0000111";
+    constant brr_op : std_logic_vector(6 downto 0) := "1000000";
+    constant brr_n_op : std_logic_vector(6 downto 0) := "1000001";
+    constant brr_z_op : std_logic_vector(6 downto 0) := "1000010";
+    constant br_op : std_logic_vector(6 downto 0) := "1000011";
+    constant br_n_op : std_logic_vector(6 downto 0) := "1000100";
+    constant br_z_op : std_logic_vector(6 downto 0) := "1000101";
+    constant br_sub_op : std_logic_vector(6 downto 0) := "1000110";
+    constant return_op : std_logic_vector(6 downto 0) := "1000111";
 begin
     --Latch Process
     process(clk)
@@ -82,19 +98,19 @@ begin
     --Branch Choice - Combinational, not latched output
     --This is very redundant, and could always output an address, but this will help to debug branching issues
     branch <=
-        '1' when (IR(15 downto 9) = "1000000") else                     --BRR (64)
-        '1' when (IR(15 downto 9) = "1000001" and flags(1) = '1') else  --BRR.N (65)
-        '1' when (IR(15 downto 9) = "1000010" and flags (0) = '1') else --BRR.Z (66)
-        '1' when (IR(15 downto 9) = "1000011") else                     --BR (67)
-        '1' when (IR(15 downto 9) = "1000100" and flags (1) = '1') else --BR.N (68)
-        '1' when (IR(15 downto 9) = "1000101" and flags (0) = '1') else --BR.Z (69)
-        '1' when (IR(15 downto 9) = "1000110") else                     --BR.SUB (70)
-        '1' when (IR(15 downto 9) = "1000111") else                     --RETURN (71)
+        '1' when IR(15 downto 9) = brr_op else                          --BRR (64)
+        '1' when (IR(15 downto 9) = brr_n_op and flags(1) = '1') else   --BRR.N (65)
+        '1' when (IR(15 downto 9) = brr_z_op and flags (0) = '1') else  --BRR.Z (66)
+        '1' when (IR(15 downto 9) = br_op) else                         --BR (67)
+        '1' when (IR(15 downto 9) = br_n_op and flags (1) = '1') else   --BR.N (68)
+        '1' when (IR(15 downto 9) = br_z_op and flags (0) = '1') else   --BR.Z (69)
+        '1' when (IR(15 downto 9) = br_sub_op) else                     --BR.SUB (70)
+        '1' when (IR(15 downto 9) = return_op) else                     --RETURN (71)
         '0';                                                            --Don't branch any other time
     --Branch Address Choice - Combinational, not banched output.
     --This is very redundant, and could always output an address, but this will help to debug branching issues
     branch_addr <=
-        ALU(5 downto 0) when (IR(15 downto 9) = "1000000") else                     --BRR (64)
+        ALU(5 downto 0) when (IR(15 downto 9) = brr_op) else                     --BRR (64)
         ALU(5 downto 0) when (IR(15 downto 9) = "1000001" and flags(1) = '1') else  --BRR.N (65)
         ALU(5 downto 0) when (IR(15 downto 9) = "1000010" and flags (0) = '1') else --BRR.Z (66)
         ALU(5 downto 0) when (IR(15 downto 9) = "1000011") else                     --BR (67)
@@ -109,7 +125,7 @@ begin
     ram_addrb <= A_in(5 downto 0) when (IR(15 downto 9) = "0010001") else --STR Rb (17)
                  B_in(5 downto 0) when (IR(15 downto 9) = "0010000") else --LD Ra (16)
                  (others=>'0');
-    Mem_out <= ram_datab;
+--    Mem_out <= ram_datab;
     
         
 

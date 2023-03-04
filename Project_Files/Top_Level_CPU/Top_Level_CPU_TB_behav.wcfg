@@ -3,20 +3,20 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="Top_Level_CPU_TB_time_synth.wdb" id="1">
+      <db_ref path="Top_Level_CPU_TB_behav.wdb" id="1">
          <top_modules>
             <top_module name="Top_Level_CPU_TB" />
-            <top_module name="glbl" />
+            <top_module name="vcomponents" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="4992224334fs"></ZoomStartTime>
-      <ZoomEndTime time="5010524335fs"></ZoomEndTime>
-      <Cursor1Time time="5002741000fs"></Cursor1Time>
+      <ZoomStartTime time="30100000000fs"></ZoomStartTime>
+      <ZoomEndTime time="58140000001fs"></ZoomEndTime>
+      <Cursor1Time time="37000000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="172"></NameColumnWidth>
+      <NameColumnWidth column_width="160"></NameColumnWidth>
       <ValueColumnWidth column_width="58"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="11" />
@@ -112,9 +112,37 @@
       <obj_property name="label">IF</obj_property>
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/IF_inst/IR" type="array">
+         <obj_property name="ElementShortName">IR[15:0]</obj_property>
+         <obj_property name="ObjectShortName">IR[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/IF_inst/NPC" type="array">
+         <obj_property name="ElementShortName">NPC[5:0]</obj_property>
+         <obj_property name="ObjectShortName">NPC[5:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/IF_inst/PC_in" type="array">
+         <obj_property name="ElementShortName">PC_in[5:0]</obj_property>
+         <obj_property name="ObjectShortName">PC_in[5:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/IF_inst/ram_addr" type="array">
+         <obj_property name="ElementShortName">ram_addr[5:0]</obj_property>
+         <obj_property name="ObjectShortName">ram_addr[5:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/IF_inst/ram_data" type="array">
+         <obj_property name="ElementShortName">ram_data[15:0]</obj_property>
+         <obj_property name="ObjectShortName">ram_data[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/IF_inst/br_in" type="logic">
+         <obj_property name="ElementShortName">br_in</obj_property>
+         <obj_property name="ObjectShortName">br_in</obj_property>
+      </wvobject>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/IF_inst/branch" type="logic">
          <obj_property name="ElementShortName">branch</obj_property>
          <obj_property name="ObjectShortName">branch</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/IF_inst/instr_data" type="array">
+         <obj_property name="ElementShortName">instr_data[15:0]</obj_property>
+         <obj_property name="ObjectShortName">instr_data[15:0]</obj_property>
       </wvobject>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/IF_inst/PC_new" type="array">
          <obj_property name="ElementShortName">PC_new[5:0]</obj_property>
@@ -124,27 +152,23 @@
          <obj_property name="ElementShortName">next_counter[5:0]</obj_property>
          <obj_property name="ObjectShortName">next_counter[5:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/Top_Level_CPU_TB/CPU/IF_inst/D" type="array">
-         <obj_property name="ElementShortName">D[15:0]</obj_property>
-         <obj_property name="ObjectShortName">D[15:0]</obj_property>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/IF_inst/program_counter" type="array">
+         <obj_property name="ElementShortName">program_counter[5:0]</obj_property>
+         <obj_property name="ObjectShortName">program_counter[5:0]</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="group224" type="group">
       <obj_property name="label">ID</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/outport_internal" type="array">
          <obj_property name="ElementShortName">outport_internal[15:0]</obj_property>
          <obj_property name="ObjectShortName">outport_internal[15:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/reg_file/\B_reg[15] " type="array">
-         <obj_property name="ElementShortName">\B_reg[15] [15:0]</obj_property>
-         <obj_property name="ObjectShortName">\B_reg[15] [15:0]</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="group253" type="group">
       <obj_property name="label">EX</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/ALU_OP" type="array">
          <obj_property name="ElementShortName">ALU_OP[2:0]</obj_property>
          <obj_property name="ObjectShortName">ALU_OP[2:0]</obj_property>
@@ -169,18 +193,74 @@
          <obj_property name="ElementShortName">n_output</obj_property>
          <obj_property name="ObjectShortName">n_output</obj_property>
       </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/IR" type="array">
+         <obj_property name="ElementShortName">IR[15:0]</obj_property>
+         <obj_property name="ObjectShortName">IR[15:0]</obj_property>
+      </wvobject>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/B_data" type="array">
          <obj_property name="ElementShortName">B_data[15:0]</obj_property>
          <obj_property name="ObjectShortName">B_data[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/NPC" type="array">
+         <obj_property name="ElementShortName">NPC[5:0]</obj_property>
+         <obj_property name="ObjectShortName">NPC[5:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/ALU_A" type="array">
+         <obj_property name="ElementShortName">ALU_A[15:0]</obj_property>
+         <obj_property name="ObjectShortName">ALU_A[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/ALU_B" type="array">
+         <obj_property name="ElementShortName">ALU_B[15:0]</obj_property>
+         <obj_property name="ObjectShortName">ALU_B[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/ALU_OP" type="array">
+         <obj_property name="ElementShortName">ALU_OP[2:0]</obj_property>
+         <obj_property name="ObjectShortName">ALU_OP[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/ALU_result" type="array">
+         <obj_property name="ElementShortName">ALU_result[15:0]</obj_property>
+         <obj_property name="ObjectShortName">ALU_result[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/Vdata" type="array">
+         <obj_property name="ElementShortName">Vdata[15:0]</obj_property>
+         <obj_property name="ObjectShortName">Vdata[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/ALU_v_result" type="array">
+         <obj_property name="ElementShortName">ALU_v_result[15:0]</obj_property>
+         <obj_property name="ObjectShortName">ALU_v_result[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/displacement" type="array">
+         <obj_property name="ElementShortName">displacement[15:0]</obj_property>
+         <obj_property name="ObjectShortName">displacement[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/result" type="array">
+         <obj_property name="ElementShortName">result[15:0]</obj_property>
+         <obj_property name="ObjectShortName">result[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/z" type="logic">
+         <obj_property name="ElementShortName">z</obj_property>
+         <obj_property name="ObjectShortName">z</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/n" type="logic">
+         <obj_property name="ElementShortName">n</obj_property>
+         <obj_property name="ObjectShortName">n</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="group275" type="group">
       <obj_property name="label">MEM</obj_property>
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/IR" type="array">
+         <obj_property name="ElementShortName">IR[15:0]</obj_property>
+         <obj_property name="ObjectShortName">IR[15:0]</obj_property>
+      </wvobject>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/branch" type="logic">
          <obj_property name="ElementShortName">branch</obj_property>
          <obj_property name="ObjectShortName">branch</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/branch_addr" type="array">
+         <obj_property name="ElementShortName">branch_addr[5:0]</obj_property>
+         <obj_property name="ObjectShortName">branch_addr[5:0]</obj_property>
       </wvobject>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/ALU" type="array">
          <obj_property name="ElementShortName">ALU[15:0]</obj_property>
@@ -194,7 +274,6 @@
    <wvobject fp_name="group177" type="group">
       <obj_property name="label">WB</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/WB_inst/ALU" type="array">
          <obj_property name="ElementShortName">ALU[15:0]</obj_property>
          <obj_property name="ObjectShortName">ALU[15:0]</obj_property>
@@ -210,10 +289,6 @@
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/WB_inst/Mem" type="array">
          <obj_property name="ElementShortName">Mem[15:0]</obj_property>
          <obj_property name="ObjectShortName">Mem[15:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/Top_Level_CPU_TB/CPU/WB_inst/WB_ID_wr_addr" type="array">
-         <obj_property name="ElementShortName">WB_ID_wr_addr[2:0]</obj_property>
-         <obj_property name="ObjectShortName">WB_ID_wr_addr[2:0]</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="group158" type="group">

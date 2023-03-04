@@ -63,10 +63,28 @@ signal ALU_result, Vdata, ALU_v_result, result: std_logic_vector(15 downto 0);
 signal z, n, v, v_en: std_logic;
 signal z_output, n_output: std_logic := '0';
 signal data_sel: std_logic;    
-signal B_data, imm_data: std_logic_vector(15 downto 0);
+signal B_data, A_data, imm_data: std_logic_vector(15 downto 0);
 signal OPCODE: std_logic_vector(6 downto 0);
 signal result_sel,  output_sel: std_logic;
 signal NPC : std_logic_vector (5 downto 0);
+signal displacement : std_logic_vector (15 downto 0);
+
+--Constants
+constant add_op : std_logic_vector(6 downto 0) := "0000001";
+constant sub_op : std_logic_vector(6 downto 0) := "0000010";
+constant mul_op : std_logic_vector(6 downto 0) := "0000011";
+constant nand_op : std_logic_vector(6 downto 0) := "0000100";
+constant shl_op : std_logic_vector(6 downto 0) := "0000101";
+constant shr_op : std_logic_vector(6 downto 0) := "0000110";
+constant test_op : std_logic_vector(6 downto 0) := "0000111";
+constant brr_op : std_logic_vector(6 downto 0) := "1000000";
+constant brr_n_op : std_logic_vector(6 downto 0) := "1000001";
+constant brr_z_op : std_logic_vector(6 downto 0) := "1000010";
+constant br_op : std_logic_vector(6 downto 0) := "1000011";
+constant br_n_op : std_logic_vector(6 downto 0) := "1000100";
+constant br_z_op : std_logic_vector(6 downto 0) := "1000101";
+constant br_sub_op : std_logic_vector(6 downto 0) := "1000110";
+constant return_op : std_logic_vector(6 downto 0) := "1000111";
 
 begin
 
@@ -76,38 +94,37 @@ begin
        
        process (clk)
        begin
-            
+
             if (clk='1' and clk'event) then 
                 if(rst ='1') then
-                    ALU_OP <= "000";
+                    --ALU_OP <= "000";
+                    IR <= (others=>'0');
+                    A_data <= (others=>'0');
+                    B_data <= (others=>'0');
+                    OPCODE <= (others=>'0');
+                    NPC <= (others=>'0');
                 else
                     IR <= I_IR;
-                    ALU_OP <= I_IR(11 downto 9);
-                    ALU_A <= I_A;          
+                    --ALU_OP <= I_IR(11 downto 9);
+                    A_data <= I_A;          
                     B_data <= I_B;
-                   OPCODE<= I_IR(15 downto 9);
-                   NPC <= I_NPC;
-                  --Sign extend immediate
-                  if(I_IR(5) = '1') then
-                    imm_data <= "1111111111" & I_IR(5 downto 0);
-                  else
-                      imm_data <= "0000000000" & I_IR(5 downto 0);
-                  end if; 
+                    OPCODE<= I_IR(15 downto 9);
+                    NPC <= I_NPC;
+                    --Sign extend immediate
+                    if(I_IR(5) = '1') then
+                        imm_data <= "1111111111" & I_IR(5 downto 0);
+                    else
+                        imm_data <= "0000000000" & I_IR(5 downto 0);
+                    end if; 
                 end if;
             end if;
             
             if (clk='0' and clk'event) then
-             
                 O_result <= result;
                 O_Vdata <= ALU_V_RESULT;
-               -- O_Vdata <= Vdata;
-               -- O_z <= z;
-              --  O_N <= n;
-              --  O_V <= v;
-             --   O_V_en <= v_en;
+            --  O_V <= v;
                 O_Z_OUTPUT <= z_output;
                 O_N_output <= n_output;
---                O_OUTPUT <= OUTPUT;
                 O_IR <= IR;
             end if;
        end process;
@@ -124,39 +141,34 @@ begin
           N_OUTPUT <= N_OUTPUT;
         end if;
       end process;
-      
-      
-
-        
-        --OUTPUT AND INPUT PORT SELECT
         
         
         result <= ALU_result;
-        
---        with OPCODE Select
---                 OUTPUT <= ALU_A when "0010000",
---                            X"0000" when others;
-        
+        displacement <= "0000000" & IR(8 downto 0) when IR(8) = '0' else        --Positive
+                        "0000000" & (not IR(8 downto 0) + 1) when IR(8) = '1';  --Negative (signed 2's
         
         
         --ALU input B select
-        with ALU_OP Select
-        ALU_B <= imm_data when "110",
-                imm_data when "101",
-                B_data when others;
+        with OPCODE Select
+        ALU_B <= imm_data when shl_op | shr_op,                             --Shift
+                B_data when add_op | sub_op | mul_op | nand_op | test_op,   --ALU ops
+                displacement when brr_op | brr_n_op | brr_z_op,      --BRR ops
+                (others=>'0') when others;
         
-        --overflow output select
---        with ALU_OP Select
---        data_sel<= '1' when "011",
---                '0' when others;
-        
-       -- V_EN <= data_sel AND V;
-        
---        with V_EN Select
---        Vdata <= ALU_v_result when '1',
---                I_A when others;
+        --ALU input A select
+        with OPCODE select
+        ALU_A <= A_data when add_op | sub_op | mul_op | nand_op | shl_op | shr_op | test_op,    --ALU ops
+                "0000000000" & NPC when brr_op | brr_n_op | brr_z_op,                           --BRR ops
+                (others=>'0') when others;
 
-
+        --ALU mode select, branch is add or subtract
+        ALU_OP <= "001" when (OPCODE = brr_op and IR(8) = '0')  or --Positive, add
+                             (OPCODE = brr_n_op and IR(8) = '0') or 
+                             (OPCODE = brr_z_op and IR(8) = '0')else
+                  "010" when (OPCODE = brr_op and IR(8) = '1')  or  --Neagtive, subtract
+                             (OPCODE = brr_n_op and IR(8) = '1') or 
+                             (OPCODE = brr_z_op and IR(8) = '1')else
+                  IR(11 downto 9);
      
      
 end Behavioral;
