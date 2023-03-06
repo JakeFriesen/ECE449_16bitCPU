@@ -54,7 +54,7 @@ begin
         ADDR_WIDTH_B => 6, -- DECIMAL
         BYTE_WRITE_WIDTH_A => 16, -- DECIMAL
         CLOCKING_MODE => "common_clock", -- String
-        MEMORY_INIT_FILE => "RAM.mem", -- String
+        MEMORY_INIT_FILE => "Format_A.mem", -- String
         MEMORY_INIT_PARAM => "0", -- String
         MEMORY_OPTIMIZATION => "true", -- String
         MEMORY_SIZE => 1024, -- DECIMAL

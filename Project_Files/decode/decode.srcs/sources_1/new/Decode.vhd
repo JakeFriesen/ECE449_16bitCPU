@@ -1,6 +1,8 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
+library work;
+use work.Constant_Package.all;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx primitives in this code.
@@ -65,17 +67,6 @@ signal A_internal, B_internal, outport_internal, outport_previous : std_logic_ve
 -- Constant X"0000"
 constant zero : std_logic_vector(15 downto 0) := X"0000";
 
--- Op Codes
-constant nop_op : std_logic_vector(6 downto 0)  := "0000000";
-constant add_op : std_logic_vector(6 downto 0)  := "0000001";
-constant sub_op : std_logic_vector(6 downto 0)  := "0000010";
-constant mul_op : std_logic_vector(6 downto 0)  := "0000011";
-constant nand_op : std_logic_vector(6 downto 0) := "0000100";
-constant shl_op : std_logic_vector(6 downto 0)  := "0000101";
-constant shr_op : std_logic_vector(6 downto 0)  := "0000110";
-constant test_op : std_logic_vector(6 downto 0) := "0000111";
-constant out_op : std_logic_vector(6 downto 0)  := "0100000";
-constant in_op : std_logic_vector(6 downto 0)   := "0100001";
 
 begin
 --select read index 1 & 2 for regfile	

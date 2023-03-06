@@ -21,6 +21,8 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+library work;
+use work.Constant_Package.all;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -54,22 +56,7 @@ architecture Behavioral of Memory_Stage is
     signal IR, ALU, Overflow, ram_output : std_logic_vector (15 downto 0);
     signal flags : std_logic_vector (1 downto 0);
     signal branch_internal : std_logic;
-    --Constants
-    constant add_op : std_logic_vector(6 downto 0) := "0000001";
-    constant sub_op : std_logic_vector(6 downto 0) := "0000010";
-    constant mul_op : std_logic_vector(6 downto 0) := "0000011";
-    constant nand_op : std_logic_vector(6 downto 0) := "0000100";
-    constant shl_op : std_logic_vector(6 downto 0) := "0000101";
-    constant shr_op : std_logic_vector(6 downto 0) := "0000110";
-    constant test_op : std_logic_vector(6 downto 0) := "0000111";
-    constant brr_op : std_logic_vector(6 downto 0) := "1000000";
-    constant brr_n_op : std_logic_vector(6 downto 0) := "1000001";
-    constant brr_z_op : std_logic_vector(6 downto 0) := "1000010";
-    constant br_op : std_logic_vector(6 downto 0) := "1000011";
-    constant br_n_op : std_logic_vector(6 downto 0) := "1000100";
-    constant br_z_op : std_logic_vector(6 downto 0) := "1000101";
-    constant br_sub_op : std_logic_vector(6 downto 0) := "1000110";
-    constant return_op : std_logic_vector(6 downto 0) := "1000111";
+
 begin
     --Latch Process
     process(clk)
