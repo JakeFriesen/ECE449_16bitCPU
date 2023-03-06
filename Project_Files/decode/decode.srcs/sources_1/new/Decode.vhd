@@ -24,7 +24,9 @@ entity Decode is
 			  ov_data : in std_logic_vector(15 downto 0);
 			  ov_enable : in std_logic;
 			  --Outport
-			  outport : out std_logic_vector(15 downto 0)
+			  outport : out std_logic_vector(15 downto 0);
+			  --WB halt
+			  halt : out std_logic
 	    );			  
 end Decode;
 
@@ -43,8 +45,22 @@ component register_file is
         wr_enable: in std_logic;
         --overflow signals
         ov_data: in std_logic_vector(15 downto 0);
-        ov_enable: in std_logic);
+        ov_enable: in std_logic;
+        --raw signal
+        halt: out std_logic);
 end component register_file;
+
+component RAW is
+    port(
+            rst : in std_logic;
+            clk : in std_logic;
+            wr_en : in std_logic;
+            wr_addr : in std_logic_vector(2 downto 0);
+            rd_data1 : in std_logic_vector(2 downto 0);
+            rd_data2 : in std_logic_vector(2 downto 0);
+            halt : out std_logic
+         );
+end component RAW;
 
 component MUX2_1 is
     Port ( x : in STD_LOGIC_VECTOR (15 downto 0);
@@ -57,7 +73,7 @@ end component MUX2_1;
 signal rd_index1_intern : STD_LOGIC_VECTOR(2 downto 0);
 signal rd_index2_intern : STD_LOGIC_VECTOR(2 downto 0);
 signal rd_data1_out : STD_LOGIC_VECTOR(15 downto 0);
-signal output_en : STD_LOGIC;
+signal output_en, halt_intern : STD_LOGIC;
 signal IR_intrn : STD_LOGIC_VECTOR(15 downto 0);
 signal A_internal, B_internal, outport_internal, outport_previous : std_logic_vector(15 downto 0) := (others=>'0');
 
@@ -87,7 +103,9 @@ with IR_intrn(15 downto 9) select
 	rd_index2_intern <= IR_intrn(2 downto 0) when add_op | sub_op | mul_op,
 	                    IR_intrn(5 downto 3) when nand_op,
 	                    "000" when others;
-	
+	                    
+-- Determine RAW
+raw_handler : RAW port map(rst=>rst, clk=>clk, wr_en=>wr_enable, wr_addr=>wr_index, rd_data1=>rd_index1_intern, rd_data2=>rd_index2_intern, halt=>halt_intern);
 -- Configure output_en
 output_en <= '1' when IR_intrn(15 downto 9) = out_op else '0';
 	
@@ -98,7 +116,7 @@ reg_file : register_file port map(rst => rst, clk => clk, rd_index1 => rd_index1
 
 --MUX assignments--
 m1 : MUX2_1 port map(x => rd_data1_out, y => zero, s => output_en, z => A_internal);
---m2 : MUX2_1 port map(x => zero, y => rd_data1_out, s => output_en, z => outport_internal);
+
 --Output should remain constant after an OUT opcode.
 outport_internal <=
     rd_data1_out when output_en = '1' else
@@ -112,7 +130,7 @@ outport_internal <=
 			if (rst = '1') then
 				IR_intrn <= zero;
 				--npc <= (others=>'0');
-			else
+			elsif (halt_intern = '0') then
 			    IR_intrn <= IR;
 				--npc <= npc_in;
                 outport_previous <= outport_internal;
@@ -126,12 +144,14 @@ outport_internal <=
 --		      npc_out <= (others=>'0');
 		      IR_out <= (others=>'0');
 		      outport <= (others=>'0');
-		  else
+		      halt <= halt_intern;
+		  elsif (halt_intern = '0') then
 		      A <= A_internal;
 		      B <= B_internal;
 		      IR_out <= IR_intrn;
 		      --npc_out <= npc;
 		      outport <= outport_internal;
+		      halt <= halt_intern;
 		  end if;		
 		end if;
 	end process;
