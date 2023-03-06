@@ -63,16 +63,16 @@ process begin
     wait until clk = '0';
     rst <= '0';
     in_port <= x"0003"; --INPUT 3
-    for i in 1 to 7 loop
-        wait until clk = '1';
-        wait until clk = '0';
-    end loop;
-    in_port <= x"0005"; --INPUT 5
-    for i in 1 to 7 loop
-        wait until clk = '1';
-        wait until clk = '0';
-    end loop;
-    in_port <= x"0000"; --INPUT 0
+--    for i in 1 to 7 loop
+--        wait until clk = '1';
+--        wait until clk = '0';
+--    end loop;
+--    in_port <= x"0005"; --INPUT 5
+--    for i in 1 to 7 loop
+--        wait until clk = '1';
+--        wait until clk = '0';
+--    end loop;
+--    in_port <= x"0000"; --INPUT 0
     wait;
 end process;
 

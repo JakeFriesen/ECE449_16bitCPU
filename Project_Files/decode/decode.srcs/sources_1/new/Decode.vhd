@@ -72,7 +72,7 @@ begin
 --select read index 1 & 2 for regfile	
 with IR_intrn(15 downto 9) select
 	rd_index1_intern <= IR_intrn(5 downto 3) when add_op | sub_op | mul_op,
-						IR_intrn(8 downto 6) when nand_op | shl_op | shr_op | test_op | out_op,
+						IR_intrn(8 downto 6) when nand_op | shl_op | shr_op | test_op | out_op | br_op | br_n_op | br_z_op | br_sub_op,
 						"000" when others;	
 						
 with IR_intrn(15 downto 9) select	

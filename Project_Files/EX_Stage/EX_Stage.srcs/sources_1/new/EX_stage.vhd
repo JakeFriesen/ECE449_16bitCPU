@@ -65,7 +65,7 @@ signal B_data, A_data, imm_data: std_logic_vector(15 downto 0);
 signal OPCODE: std_logic_vector(6 downto 0);
 signal result_sel,  output_sel: std_logic;
 signal NPC : std_logic_vector (5 downto 0);
-signal displacement : std_logic_vector (15 downto 0);
+signal disp_l, disp_s : std_logic_vector (15 downto 0);
 
 begin
 
@@ -133,13 +133,9 @@ begin
     
     
     result <= ALU_result;
-    --(displacement can be negative, so its flipped)
-    displacement <= "0000000" & IR(8 downto 0) when IR(8) = '0' else        --Positive
-                    "0000000" & (not IR(8 downto 0) + 1) when IR(8) = '1';  --Negative (signed 2's
-    
     
     --Switch Case for each opcode
-    --ALL outputs need to be defined for each case
+    --Defines ALU_A, ALU_B, ALU_OP
     process(OPCODE) begin
         case OPCODE is 
             when add_op | sub_op | mul_op | nand_op | test_op =>
@@ -153,16 +149,27 @@ begin
                 ALU_A <= A_data;
                 ALU_OP <= IR(11 downto 9);
             when brr_op | brr_n_op | brr_z_op =>
-            --Branching Operations
-                ALU_B <= displacement;
+            --PC Relative Branches
                 ALU_A <= "0000000000" & NPC;
                 --Set op to add or subtract
                 if(IR(8) = '0') then
+                    ALU_B <= "0000000" & IR(8 downto 0);
                     ALU_OP <= "001";
                 else
+                    ALU_B <= "0000000" & (not IR(8 downto 0) + 1);
                     ALU_OP <= "010";
                 end if;
-                ALU_OP <= IR(11 downto 9);
+            when br_op | br_n_op | br_z_op | br_sub_op =>
+            --Register Relative Branches
+                ALU_A <= A_data;
+                --Set op to add or subtract, take 2's comp if imm is negative
+                if(IR(5) = '0') then
+                    ALU_B <= "0000000000" & IR(5 downto 0);
+                    ALU_OP <= "001";
+                else
+                    ALU_B <= "0000000000" & (not IR(5 downto 0) + 1);
+                    ALU_OP <= "010";
+                end if;
             when others =>
             --Any other operations
                 ALU_B <= (others=>'0');
