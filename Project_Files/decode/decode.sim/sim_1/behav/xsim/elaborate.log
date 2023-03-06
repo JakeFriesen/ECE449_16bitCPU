@@ -3,5 +3,18 @@ Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
 Running: D:/Xilinx/Vivado/2022.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot Decode_behav xil_defaultlib.Decode -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
-ERROR: [VRFC 10-666] expression has 3 elements; expected 2 [C:/Users/Sam/OneDrive/Programming/repos/ECE449_16bitCPU/Project_Files/decode/decode.srcs/sources_1/new/RAW.vhd:34]
-ERROR: [XSIM 43-3321] Static elaboration of top level VHDL design unit decode in library work failed.
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling package ieee.std_logic_arith
+Compiling package ieee.std_logic_unsigned
+Compiling architecture behavioral of entity xil_defaultlib.RAW [raw_default]
+Compiling architecture behavioural of entity xil_defaultlib.register_file [register_file_default]
+Compiling architecture behavioral of entity xil_defaultlib.MUX2_1 [mux2_1_default]
+Compiling architecture behavioral of entity xil_defaultlib.decode
+Built simulation snapshot Decode_behav

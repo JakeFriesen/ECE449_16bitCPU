@@ -45,9 +45,8 @@ component register_file is
         wr_enable: in std_logic;
         --overflow signals
         ov_data: in std_logic_vector(15 downto 0);
-        ov_enable: in std_logic;
-        --raw signal
-        halt: out std_logic);
+        ov_enable: in std_logic
+        );
 end component register_file;
 
 component RAW is
