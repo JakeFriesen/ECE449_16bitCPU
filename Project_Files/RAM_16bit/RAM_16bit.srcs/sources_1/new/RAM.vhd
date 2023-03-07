@@ -30,8 +30,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity RAM is
     Port ( douta : out STD_LOGIC_VECTOR (15 downto 0);
            doutb : out STD_LOGIC_VECTOR (15 downto 0);
-           addra : in std_logic_vector (5 downto 0);
-           addrb : in std_logic_vector (5 downto 0);
+           addra : in std_logic_vector (15 downto 0);
+           addrb : in std_logic_vector (15 downto 0);
            dina : in std_logic_vector (15 downto 0);
            wr_en : in std_logic;
            ena : in std_logic;
@@ -50,8 +50,8 @@ begin
     -- Xilinx Parameterized Macro, version 2018.3
     xpm_memory_dpdistram_inst : xpm_memory_dpdistram
     generic map (
-        ADDR_WIDTH_A => 6, -- DECIMAL
-        ADDR_WIDTH_B => 6, -- DECIMAL
+        ADDR_WIDTH_A => 16, -- DECIMAL
+        ADDR_WIDTH_B => 16, -- DECIMAL
         BYTE_WRITE_WIDTH_A => 16, -- DECIMAL
         CLOCKING_MODE => "common_clock", -- String
         MEMORY_INIT_FILE => "RAM.mem", -- String

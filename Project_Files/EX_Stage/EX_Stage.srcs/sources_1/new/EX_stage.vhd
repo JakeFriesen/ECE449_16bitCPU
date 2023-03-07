@@ -27,7 +27,7 @@ entity EX_stage is
            I_IR: in std_logic_vector(15 downto 0);
            I_A : in STD_LOGIC_VECTOR (15 downto 0);
            I_B : in STD_LOGIC_VECTOR (15 downto 0);
-           I_NPC : in STD_LOGIC_VECTOR (5 downto 0);
+           I_NPC : in STD_LOGIC_VECTOR (15 downto 0);
            O_result : out STD_LOGIC_VECTOR (15 downto 0);
            O_Vdata : out STD_LOGIC_VECTOR (15 downto 0);
          --  O_V : out STD_LOGIC;
@@ -64,7 +64,7 @@ signal data_sel: std_logic;
 signal B_data, A_data, imm_data: std_logic_vector(15 downto 0);
 signal OPCODE: std_logic_vector(6 downto 0);
 signal result_sel,  output_sel: std_logic;
-signal NPC : std_logic_vector (5 downto 0);
+signal NPC : std_logic_vector (15 downto 0);
 signal disp_l, disp_s : std_logic_vector (15 downto 0);
 
 begin
@@ -150,7 +150,7 @@ begin
                 ALU_OP <= IR(11 downto 9);
             when brr_op | brr_n_op | brr_z_op =>
             --PC Relative Branches
-                ALU_A <= "0000000000" & NPC;
+                ALU_A <= NPC;
                 --Set op to add or subtract
                 ALU_OP <= "001";
                 --Sign Extend the Immediate value

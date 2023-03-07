@@ -44,11 +44,11 @@ architecture Behavioral of Top_Level_CPU is
 --Component declaration
 component Intruction_Fetch_Stage is
     Port ( IR : out STD_LOGIC_VECTOR (15 downto 0);
-           NPC : out STD_LOGIC_VECTOR (5 downto 0);
+           NPC : out STD_LOGIC_VECTOR (15 downto 0);
            clk : in STD_LOGIC;
            rst : in STD_LOGIC;
-           PC_in : in STD_LOGIC_VECTOR (5 downto 0);
-           ram_addr : out std_logic_vector (5 downto 0);
+           PC_in : in STD_LOGIC_VECTOR (15 downto 0);
+           ram_addr : out std_logic_vector (15 downto 0);
            ram_data : in std_logic_vector (15 downto 0);
            br_in : in STD_LOGIC);
 end component Intruction_Fetch_Stage;
@@ -57,8 +57,8 @@ component Decode is
           rst : in STD_LOGIC;
           clk : in STD_LOGIC;
           IR : in  STD_LOGIC_VECTOR (15 downto 0);
-          npc_in : in  STD_LOGIC_VECTOR (5 downto 0);
-          npc_out : out STD_LOGIC_VECTOR (5 downto 0);
+          npc_in : in  STD_LOGIC_VECTOR (15 downto 0);
+          npc_out : out STD_LOGIC_VECTOR (15 downto 0);
           A : out std_logic_vector(15 downto 0); 
           B : out std_logic_vector(15 downto 0);
           IR_out : out std_logic_vector(15 downto 0);
@@ -78,7 +78,7 @@ component EX_stage is
            I_IR: in std_logic_vector(15 downto 0);
            I_A : in STD_LOGIC_VECTOR (15 downto 0);
            I_B : in STD_LOGIC_VECTOR (15 downto 0);
-          I_NPC : in STD_LOGIC_VECTOR (5 downto 0);
+          I_NPC : in STD_LOGIC_VECTOR (15 downto 0);
 --           INPUT: in STD_LOGIC_VECTOR(15 downto 0);
            O_result : out STD_LOGIC_VECTOR (15 downto 0);
            O_Vdata : out STD_LOGIC_VECTOR (15 downto 0);
@@ -95,10 +95,10 @@ component Memory_Stage is
            Z : in STD_LOGIC;
            clk, rst : in STD_LOGIC;
            branch : out STD_LOGIC;
-           branch_addr : out STD_LOGIC_VECTOR (5 downto 0);
+           branch_addr : out STD_LOGIC_VECTOR (15 downto 0);
            ram_wr : out STD_LOGIC;
            pipe_flush : out std_logic;
-           ram_addrb : out STD_LOGIC_VECTOR (5 downto 0);
+           ram_addrb : out STD_LOGIC_VECTOR (15 downto 0);
            ram_datab : in STD_LOGIC_VECTOR (15 downto 0);
            Mem_out : out STD_LOGIC_VECTOR (15 downto 0);
            ALU_out : out STD_LOGIC_VECTOR (15 downto 0);
@@ -122,8 +122,8 @@ end component Write_Back_Stage;
 component RAM is
     Port ( douta : out STD_LOGIC_VECTOR (15 downto 0);
            doutb : out STD_LOGIC_VECTOR (15 downto 0);
-           addra : in std_logic_vector (5 downto 0);
-           addrb : in std_logic_vector (5 downto 0);
+           addra : in std_logic_vector (15 downto 0);
+           addrb : in std_logic_vector (15 downto 0);
            dina : in std_logic_vector (15 downto 0);
            wr_en : in std_logic;
            ena : in std_logic;
@@ -136,12 +136,12 @@ end component RAM;
 signal clk, rst : std_logic := '0';
 --Intermediate Signals
 signal IF_ID_IR, WB_ID_wr_data, WB_ID_v_data, ID_EX_A, ID_EX_B, ID_EX_IR, EX_MEM_IR, EX_MEM_alu_res, EX_MEM_v_data, MEM_WB_mem_data, MEM_WB_alu, MEM_WB_v_data, MEM_WB_IR, EX_MEM_A, EX_MEM_B : std_logic_vector(15 downto 0);
-signal IF_ID_NPC, WB_IF_PC, ID_EX_NPC, MEM_IF_br_addr : std_logic_vector(5 downto 0);
+signal IF_ID_NPC, WB_IF_PC, ID_EX_NPC, MEM_IF_br_addr : std_logic_vector(15 downto 0);
 signal MEM_IF_br, WB_ID_wr_en, WB_ID_v_en, EX_MEM_N_flag, EX_MEM_Z_flag, MEM_pipe_flush : std_logic;
 signal WB_ID_wr_addr : std_logic_vector(2 downto 0);
 
 --RAM signals
-signal ram_addra, ram_addrb : std_logic_vector(5 downto 0);
+signal ram_addra, ram_addrb : std_logic_vector(15 downto 0);
 signal ram_dataa, ram_datab, ram_dina : std_logic_vector(15 downto 0);
 signal ram_wr_en, ram_ena, ram_enb, out_en : std_logic;
 

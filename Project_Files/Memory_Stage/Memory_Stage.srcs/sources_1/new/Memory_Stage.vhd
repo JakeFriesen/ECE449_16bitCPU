@@ -40,10 +40,10 @@ entity Memory_Stage is
            Z : in STD_LOGIC;
            clk, rst : in STD_LOGIC;
            branch : out STD_LOGIC;
-           branch_addr : out STD_LOGIC_VECTOR (5 downto 0);
+           branch_addr : out STD_LOGIC_VECTOR (15 downto 0);
            ram_wr : out STD_LOGIC;
            pipe_flush : out std_logic;
-           ram_addrb : out STD_LOGIC_VECTOR (5 downto 0);
+           ram_addrb : out STD_LOGIC_VECTOR (15 downto 0);
            ram_datab : in STD_LOGIC_VECTOR (15 downto 0);
            Mem_out : out STD_LOGIC_VECTOR (15 downto 0);
            ALU_out : out STD_LOGIC_VECTOR (15 downto 0);
@@ -99,14 +99,14 @@ begin
     --Branch Address Choice - Combinational, not banched output.
     --This is very redundant, and could always output an address, but this will help to debug branching issues
     branch_addr <=
-        ALU(5 downto 0) when (IR(15 downto 9) = brr_op) else                     --BRR (64)
-        ALU(5 downto 0) when (IR(15 downto 9) = "1000001" and flags(1) = '1') else  --BRR.N (65)
-        ALU(5 downto 0) when (IR(15 downto 9) = "1000010" and flags (0) = '1') else --BRR.Z (66)
-        ALU(5 downto 0) when (IR(15 downto 9) = "1000011") else                     --BR (67)
-        ALU(5 downto 0) when (IR(15 downto 9) = "1000100" and flags (1) = '1') else --BR.N (68)
-        ALU(5 downto 0) when (IR(15 downto 9) = "1000101" and flags (0) = '1') else --BR.Z (69)
-        ALU(5 downto 0) when (IR(15 downto 9) = "1000110") else                     --BR.SUB (70)
-        ALU(5 downto 0) when (IR(15 downto 9) = "1000111") else                     --RETURN (71)
+        ALU(15 downto 0) when (IR(15 downto 9) = brr_op) else                     --BRR (64)
+        ALU(15 downto 0) when (IR(15 downto 9) = "1000001" and flags(1) = '1') else  --BRR.N (65)
+        ALU(15 downto 0) when (IR(15 downto 9) = "1000010" and flags (0) = '1') else --BRR.Z (66)
+        ALU(15 downto 0) when (IR(15 downto 9) = "1000011") else                     --BR (67)
+        ALU(15 downto 0) when (IR(15 downto 9) = "1000100" and flags (1) = '1') else --BR.N (68)
+        ALU(15 downto 0) when (IR(15 downto 9) = "1000101" and flags (0) = '1') else --BR.Z (69)
+        ALU(15 downto 0) when (IR(15 downto 9) = "1000110") else                     --BR.SUB (70)
+        ALU(15 downto 0) when (IR(15 downto 9) = "1000111") else                     --RETURN (71)
         (others => '0');                                                --Keep at 0 any other time
     
     pipe_flush <= branch_internal;
@@ -114,8 +114,8 @@ begin
     
     --RAM Access
     ram_wr <= '1' when (IR(15 downto 9) = "0010001") else '0';  --STR (17)
-    ram_addrb <= A_in(5 downto 0) when (IR(15 downto 9) = "0010001") else --STR Rb (17)
-                 B_in(5 downto 0) when (IR(15 downto 9) = "0010000") else --LD Ra (16)
+    ram_addrb <= A_in(15 downto 0) when (IR(15 downto 9) = "0010001") else --STR Rb (17)
+                 B_in(15 downto 0) when (IR(15 downto 9) = "0010000") else --LD Ra (16)
                  (others=>'0');
 --    Mem_out <= ram_datab;
     

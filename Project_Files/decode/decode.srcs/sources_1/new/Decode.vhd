@@ -14,8 +14,8 @@ entity Decode is
 			  rst : in STD_LOGIC;
 			  clk : in STD_LOGIC;
 			  IR : in  STD_LOGIC_VECTOR (15 downto 0);
-			  npc_in : in  STD_LOGIC_VECTOR (5 downto 0);
-			  npc_out : out STD_LOGIC_VECTOR (5 downto 0);
+			  npc_in : in  STD_LOGIC_VECTOR (15 downto 0);
+			  npc_out : out STD_LOGIC_VECTOR (15 downto 0);
 			  A : out std_logic_vector(15 downto 0); 
 			  B : out std_logic_vector(15 downto 0);
 			  IR_out : out std_logic_vector(15 downto 0);
@@ -61,7 +61,7 @@ signal rd_index2_intern : STD_LOGIC_VECTOR(2 downto 0);
 signal rd_data1_out : STD_LOGIC_VECTOR(15 downto 0);
 signal output_en : STD_LOGIC;
 signal IR_intrn : STD_LOGIC_VECTOR(15 downto 0);
-signal npc : std_logic_vector (5 downto 0);
+signal npc : std_logic_vector (15 downto 0);
 signal A_internal, B_internal, outport_internal, outport_previous : std_logic_vector(15 downto 0) := (others=>'0');
 
 -- Constant X"0000"

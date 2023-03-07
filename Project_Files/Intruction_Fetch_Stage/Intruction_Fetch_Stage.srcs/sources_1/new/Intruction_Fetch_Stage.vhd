@@ -34,11 +34,11 @@ use ieee.std_logic_unsigned.all;
 
 entity Intruction_Fetch_Stage is
     Port ( IR : out STD_LOGIC_VECTOR (15 downto 0);
-           NPC : out STD_LOGIC_VECTOR (5 downto 0);
+           NPC : out STD_LOGIC_VECTOR (15 downto 0);
            clk : in STD_LOGIC;
            rst : in STD_LOGIC;
-           PC_in : in STD_LOGIC_VECTOR (5 downto 0);
-           ram_addr : out std_logic_vector (5 downto 0);
+           PC_in : in STD_LOGIC_VECTOR (15 downto 0);
+           ram_addr : out std_logic_vector (15 downto 0);
            ram_data : in std_logic_vector (15 downto 0);
            br_in : in STD_LOGIC);
 end Intruction_Fetch_Stage;
@@ -47,8 +47,8 @@ architecture Behavioral of Intruction_Fetch_Stage is
     --Signals
     signal branch : std_logic;
     signal instr_data : std_logic_vector(15 downto 0);
-    signal PC_new, next_counter : std_logic_vector (5 downto 0);
-    signal program_counter : std_logic_vector (5 downto 0) := (others=>'0');
+    signal PC_new, next_counter : std_logic_vector (15 downto 0);
+    signal program_counter : std_logic_vector (15 downto 0) := (others=>'0');
     
 begin
 
