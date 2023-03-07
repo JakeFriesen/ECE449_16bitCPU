@@ -135,7 +135,7 @@ begin
     
     --RAM Access
     with IR_in(15 downto 9) Select
-        Mem_wr <=   '1' when "0010001", 
+        Mem_wr <=   '1' when store_op, 
                     '0' when others;  --STR (17)
                     
     with IR_in(15 downto 9) Select

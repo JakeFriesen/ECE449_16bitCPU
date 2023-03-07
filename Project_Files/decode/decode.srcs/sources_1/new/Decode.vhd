@@ -23,6 +23,8 @@ entity Decode is
 			  --Overflow signals
 			  ov_data : in std_logic_vector(15 downto 0);
 			  ov_enable : in std_logic;
+			  loadIMM: in std_logic;
+              load_align: in std_logic;
 			  --Outport
 			  outport : out std_logic_vector(15 downto 0)
 	    );			  
@@ -43,6 +45,8 @@ component register_file is
         wr_enable: in std_logic;
         --overflow signals
         ov_data: in std_logic_vector(15 downto 0);
+        loadIMM: in std_logic;
+        load_align: in std_logic;
         ov_enable: in std_logic);
 end component register_file;
 
@@ -76,9 +80,9 @@ constant test_op : std_logic_vector(6 downto 0) := "0000111";
 constant out_op : std_logic_vector(6 downto 0)  := "0100000";
 constant in_op : std_logic_vector(6 downto 0)   := "0100001";
 constant store_op : std_logic_vector(6 downto 0)   := "0010001";
+constant load_op : std_logic_vector(6 downto 0)   := "0010000";
 constant loadIMM_op : std_logic_vector(6 downto 0)   := "0010010";
 constant mov_op : std_logic_vector(6 downto 0)   := "0010011";
-signal loadIMM: std_logic_vector(15 downto 0);
 
 
 begin
@@ -87,8 +91,8 @@ begin
 
 --select read index 1 & 2 for regfile	
 with IR_intrn(15 downto 9) select
-	rd_index1_intern <= IR_intrn(5 downto 3) when add_op | sub_op | mul_op| mov_op,
-						IR_intrn(8 downto 6) when nand_op | shl_op | shr_op | test_op | out_op | store_op,
+	rd_index1_intern <= IR_intrn(5 downto 3) when add_op | sub_op | mul_op| mov_op | load_op ,
+						IR_intrn(8 downto 6) when nand_op | shl_op | shr_op | test_op | out_op | store_op ,
 						"000" when others;	
 						
 with IR_intrn(15 downto 9) select	
@@ -97,15 +101,15 @@ with IR_intrn(15 downto 9) select
 	                    "000" when others;
 	
 -- Configure output_en
-load_en <= '1' when IR_intrn(15 downto 9) = loadIMM_op  else '0';
-
+--load_en <= '1' when IR_intrn(15 downto 9) = loadIMM_op  else '0';
+load_en <= '0';
 --reg file
 reg_file : register_file port map(rst => rst, clk => clk, rd_index1 => rd_index1_intern, 
 	       rd_index2 => rd_index2_intern, rd_data1 => rd_data1_out, rd_data2 => B_internal, wr_index => wr_index,
-	       wr_data => wr_data, wr_enable => wr_enable, ov_data => ov_data, ov_enable => ov_enable);
+	       wr_data => wr_data, wr_enable => wr_enable, ov_data => ov_data,loadIMM=>loadIMM,load_align => load_align, ov_enable => ov_enable);
 
 --MUX assignments--
-m1 : MUX2_1 port map(x => rd_data1_out, y => loadIMM , s => load_en, z => A_internal);
+m1 : MUX2_1 port map(x => rd_data1_out, y => zero , s => load_en, z => A_internal);
 --m2 : MUX2_1 port map(x => zero, y => rd_data1_out, s => output_en, z => outport_internal);
     
 	--latching		
