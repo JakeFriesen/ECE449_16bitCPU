@@ -132,7 +132,12 @@ begin
     end process;
     
     
-    result <= ALU_result;
+    --Push the next program counter + 1 into the ALU result when branching to subroutine
+    --Put R7 into the ALU result when returning from subroutine
+    with OPCODE select
+    result <= (NPC + 1) when br_sub_op,
+              A_data when return_op,
+              ALU_result when others;
     
     --Switch Case for each opcode
     --Defines ALU_A, ALU_B, ALU_OP

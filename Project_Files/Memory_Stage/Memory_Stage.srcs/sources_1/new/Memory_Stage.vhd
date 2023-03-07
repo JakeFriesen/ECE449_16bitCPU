@@ -70,10 +70,18 @@ begin
         end if;    
         if(clk'event and clk = '1') then
         --Latch Incoming signals
-            flags <= N & Z;
-            IR <= IR_in;
-            ALU <= ALU_in;
-            Overflow <= Overflow_in;
+            if(branch_internal = '1') then
+            --Internal Branch set, clear the incoming buffer
+                flags <= "00";
+                IR <= (others=>'0');
+                ALU <= (others=>'0');
+                Overflow <= (others=>'0');
+            else
+                flags <= N & Z;
+                IR <= IR_in;
+                ALU <= ALU_in;
+                Overflow <= Overflow_in;
+            end if;
         end if;
         if(clk'event and clk = '0') then
         --Latch Outgoing signals
@@ -99,14 +107,14 @@ begin
     --Branch Address Choice - Combinational, not banched output.
     --This is very redundant, and could always output an address, but this will help to debug branching issues
     branch_addr <=
-        ALU(15 downto 0) when (IR(15 downto 9) = brr_op) else                     --BRR (64)
-        ALU(15 downto 0) when (IR(15 downto 9) = "1000001" and flags(1) = '1') else  --BRR.N (65)
-        ALU(15 downto 0) when (IR(15 downto 9) = "1000010" and flags (0) = '1') else --BRR.Z (66)
-        ALU(15 downto 0) when (IR(15 downto 9) = "1000011") else                     --BR (67)
-        ALU(15 downto 0) when (IR(15 downto 9) = "1000100" and flags (1) = '1') else --BR.N (68)
-        ALU(15 downto 0) when (IR(15 downto 9) = "1000101" and flags (0) = '1') else --BR.Z (69)
-        ALU(15 downto 0) when (IR(15 downto 9) = "1000110") else                     --BR.SUB (70)
-        ALU(15 downto 0) when (IR(15 downto 9) = "1000111") else                     --RETURN (71)
+        ALU when (IR(15 downto 9) = brr_op) else                     --BRR (64)
+        ALU when (IR(15 downto 9) = "1000001" and flags(1) = '1') else  --BRR.N (65)
+        ALU when (IR(15 downto 9) = "1000010" and flags (0) = '1') else --BRR.Z (66)
+        ALU when (IR(15 downto 9) = "1000011") else                     --BR (67)
+        ALU when (IR(15 downto 9) = "1000100" and flags (1) = '1') else --BR.N (68)
+        ALU when (IR(15 downto 9) = "1000101" and flags (0) = '1') else --BR.Z (69)
+        ALU when (IR(15 downto 9) = "1000110") else                     --BR.SUB (70)
+        ALU when (IR(15 downto 9) = "1000111") else                     --RETURN (71)
         (others => '0');                                                --Keep at 0 any other time
     
     pipe_flush <= branch_internal;

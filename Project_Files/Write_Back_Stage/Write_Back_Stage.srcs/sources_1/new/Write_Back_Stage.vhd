@@ -91,6 +91,7 @@ begin
         --(others=>'0'); 
     wr_addr <=
         "111" when IR(15 downto 9) = "0010010" else                         --Load Imm (18) Load into R7
+        "111" when IR(15 downto 9) = "1000110" else                         --Branch Sub (R7 <= PC+1)
         "000" when IR(15 downto 9) = "0000000" else                         --NOP, set all 0
         IR(8 downto 6);                                                     --LOAD, ALU ops (TODO: May need to specify)
     v_en <= 
@@ -105,6 +106,7 @@ begin
         '1' when IR(15 downto 9) = "0000110" else   --SHR(6)
         '1' when IR(15 downto 9) = "0100001" else   --IN(33)
         '1' when IR(15 downto 9) = "0010000" else   --LOAD(16)
+        '1' when IR(15 downto 9) = "1000110" else   --BR.SUB(70)
         '0';
 
     V_data <= Overflow;
