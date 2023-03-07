@@ -55,6 +55,7 @@
 !Project_Files/decode/decode.xpr
 !Project_Files/decode/decode.srcs/sources_1/new/RF8_16.vhd
 !Project_Files/decode/decode.srcs/sources_1/new/MUX2_1.vhd
+!Project_Files/decode/decode.srcs/sources_1/new/RAW.vhd
 !Project_Files/decode/decode.srcs/sources_1/new/2_1MUX.vhd
 !Project_Files/decode/decode.srcs/sources_1/new/Decode.vhd
 !Project_Files/decode/decode.sim/Decode_TB.vhd
