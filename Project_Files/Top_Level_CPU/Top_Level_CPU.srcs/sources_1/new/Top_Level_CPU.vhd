@@ -144,6 +144,7 @@ signal IF_ID_IR, WB_ID_wr_data, WB_ID_v_data, ID_EX_A, ID_EX_B, ID_EX_IR, EX_MEM
 signal IF_ID_NPC, WB_IF_PC, ID_EX_NPC, MEM_IF_br_addr : std_logic_vector(5 downto 0);
 signal MEM_IF_br, WB_ID_wr_en, WB_ID_v_en, EX_MEM_N_flag, EX_MEM_Z_flag : std_logic;
 signal WB_ID_wr_addr : std_logic_vector(2 downto 0);
+signal R7_align: std_logic;
 
 --RAM signals
 signal ram_addra, ram_addrb : std_logic_vector(5 downto 0);

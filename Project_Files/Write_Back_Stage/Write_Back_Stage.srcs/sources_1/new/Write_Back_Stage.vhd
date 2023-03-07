@@ -42,7 +42,7 @@ entity Write_Back_Stage is
            wr_addr : out STD_LOGIC_VECTOR (2 downto 0);
            wr_en : out std_logic;
            v_en : out std_logic;
-           V_data : out STD_LOGIC_VECTOR (15 downto 0));
+           V_data : out STD_LOGIC_VECTOR (15 downto 0));   
 end Write_Back_Stage;
 
 architecture Behavioral of Write_Back_Stage is
@@ -85,7 +85,8 @@ begin
         "00000000"&IR(7 downto 0) when (IR(15 downto 8) = "00100100") else  --Load lower (18) (TODO: Need to fix the zeros)
         IR(7 downto 0)&"00000000" when (IR(15 downto 8) = "00100101") else  --Load Upper (18) (TODO: Need to fix the zeros)
         input_port when IR(15 downto 9) = "0100001" else                    --IN (33)
-        Mem when IR(15 downto 9) = "0010000" else                           --LOAD (16)
+        Mem when IR(15 downto 9) = "0010000" else 
+        Mem when IR(15 downto 9) = "0010011" else                           --MOV (16)
         (others=>'0') when IR(15 downto 9) = "0000000" else                 --NOP, set all 0
         ALU;-- when IR(15 downto 9) = "" else                               --ALU for the rest (TODO: May need to specify)
         --(others=>'0'); 
@@ -105,8 +106,11 @@ begin
         '1' when IR(15 downto 9) = "0000110" else   --SHR(6)
         '1' when IR(15 downto 9) = "0100001" else   --IN(33)
         '1' when IR(15 downto 9) = "0010000" else   --LOAD(16)
+        '1' when IR(15 downto 9) = "0010010" else   --LOADIMM(18)
+        '1' when IR(15 downto 9) = "0010011" else   --LOADIMM(19)
         '0';
-
+        
+        
     V_data <= Overflow;
 
 

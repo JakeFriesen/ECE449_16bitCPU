@@ -54,7 +54,22 @@ end Memory_Stage;
 architecture Behavioral of Memory_Stage is
     signal IR, ALU, Overflow : std_logic_vector (15 downto 0);
     signal flags : std_logic_vector (1 downto 0);
-  
+    
+    constant nop_op : std_logic_vector(6 downto 0)  := "0000000";
+    constant add_op : std_logic_vector(6 downto 0)  := "0000001";
+    constant sub_op : std_logic_vector(6 downto 0)  := "0000010";
+    constant mul_op : std_logic_vector(6 downto 0)  := "0000011";
+    constant nand_op : std_logic_vector(6 downto 0) := "0000100";
+    constant shl_op : std_logic_vector(6 downto 0)  := "0000101";
+    constant shr_op : std_logic_vector(6 downto 0)  := "0000110";
+    constant test_op : std_logic_vector(6 downto 0) := "0000111";
+    constant out_op : std_logic_vector(6 downto 0)  := "0100000";
+    constant in_op : std_logic_vector(6 downto 0)   := "0100001";
+    constant load_op :std_logic_vector(6 downto 0)   := "0010000";
+    constant store_op : std_logic_vector(6 downto 0)   := "0010001";
+    constant mov_op : std_logic_vector(6 downto 0)   := "0010011";
+    constant loadIMM_op : std_logic_vector(6 downto 0)   := "0010010";
+    
 begin
     --Latch Process
     process(clk)
@@ -78,7 +93,13 @@ begin
             Overflow_out <= Overflow;
             IR_out <= IR;
             ALU_out <= ALU;
-            Mem_out <= ram_out;     
+            
+            if(IR(15 downto 9) = mov_op) then
+                Mem_out <= A_in;
+            else
+                Mem_out <= ram_out;
+            end if;  
+                
         end if;
     end process;
 
@@ -118,8 +139,7 @@ begin
                     '0' when others;  --STR (17)
                     
     with IR_in(15 downto 9) Select
-         Mem_en <=  '1' when "0010001",
-                     '1' when "0010000", 
+         Mem_en <=  '1' when store_op | load_op,
                      '0' when others;  --STR (17)
     Mem_addr <= A_in(5 downto 0);
     Mem_in <=  B_in;
