@@ -43,6 +43,7 @@ entity Memory_Stage is
            Mem_en: out std_logic;
            Mem_in: out STD_LOGIC_VECTOR (15 downto 0);
            Mem_addr: out std_logic_vector (5 downto 0);
+           Ram_out: in std_logic_vector (15 downto 0);
            Mem_out : out STD_LOGIC_VECTOR (15 downto 0);
            ALU_out : out STD_LOGIC_VECTOR (15 downto 0);
            IR_out : out STD_LOGIC_VECTOR (15 downto 0);
@@ -51,7 +52,7 @@ entity Memory_Stage is
 end Memory_Stage;
 
 architecture Behavioral of Memory_Stage is
-    signal IR, ALU, Overflow, ram_output : std_logic_vector (15 downto 0);
+    signal IR, ALU, Overflow : std_logic_vector (15 downto 0);
     signal flags : std_logic_vector (1 downto 0);
   
 begin
@@ -77,7 +78,7 @@ begin
             Overflow_out <= Overflow;
             IR_out <= IR;
             ALU_out <= ALU;
-            Mem_out <= ram_output;     
+            Mem_out <= ram_out;     
         end if;
     end process;
 
@@ -112,11 +113,11 @@ begin
     
     
     --RAM Access
-    with IR(15 downto 9) Select
+    with IR_in(15 downto 9) Select
         Mem_wr <=   '1' when "0010001", 
                     '0' when others;  --STR (17)
                     
-    with IR(15 downto 9) Select
+    with IR_in(15 downto 9) Select
          Mem_en <=  '1' when "0010001",
                      '1' when "0010000", 
                      '0' when others;  --STR (17)

@@ -104,6 +104,7 @@ component Memory_Stage is
         Mem_en: out std_logic;
         Mem_in: out STD_LOGIC_VECTOR (15 downto 0);
         Mem_addr: out std_logic_vector (5 downto 0);
+        Ram_out: in std_logic_vector (15 downto 0);
         Mem_out : out STD_LOGIC_VECTOR (15 downto 0);
         ALU_out : out STD_LOGIC_VECTOR (15 downto 0);
         IR_out : out STD_LOGIC_VECTOR (15 downto 0);
@@ -151,11 +152,18 @@ signal ram_wr_en, ram_ena, ram_enb, out_en : std_logic;
 
 begin
 IF_inst : Intruction_Fetch_Stage port map(clk=>clk, rst=>rst, IR=>IF_ID_IR, NPC=>IF_ID_NPC, PC_in=>MEM_IF_br_addr, ram_addr=>ram_addrb, ram_data=>ram_datab, br_in=>MEM_IF_br);
+
 ID_inst : Decode port map(clk=>clk, rst=>rst, IR=>IF_ID_IR, wr_index=>WB_ID_wr_addr, wr_data=>WB_ID_wr_data, wr_enable=>WB_ID_wr_en, ov_data=>WB_ID_v_data, ov_enable=>WB_ID_v_en, A=>ID_EX_A, B=>ID_EX_B, IR_out=>ID_EX_IR, outport=>OUT_PORT);
-EX_inst : EX_stage port map(clk=>clk, rst=>rst, I_IR=>ID_EX_IR, I_A=>ID_EX_A, I_B=>ID_EX_B, O_result=>EX_MEM_alu_res, O_vdata=>EX_MEM_v_data, O_Z_OUTPUT=>EX_MEM_Z_flag, O_N_OUTPUT=>EX_MEM_N_flag, O_IR=>EX_MEM_IR);
+
+EX_inst : EX_stage port map(clk=>clk, rst=>rst, I_IR=>ID_EX_IR, I_A=>ID_EX_A, I_B=>ID_EX_B, O_result=>EX_MEM_alu_res, O_vdata=>EX_MEM_v_data, O_Z_OUTPUT=>EX_MEM_Z_flag, O_N_OUTPUT=>EX_MEM_N_flag, O_IR=>EX_MEM_IR, O_A =>EX_MEM_A, O_B =>EX_MEM_B);
+
+
 MEM_inst : Memory_Stage port map(clk=>clk, rst=>rst, ALU_in=>EX_MEM_alu_res, IR_in=>EX_MEM_IR, N=>EX_MEM_N_flag, Z=>EX_MEM_Z_flag, branch=>MEM_IF_br, branch_addr=>MEM_IF_br_addr,  Mem_wr=>ram_wr_en,Mem_addr=>ram_addra, 
-                                 Mem_in=>ram_dina, Mem_en=>ram_ena, Mem_out=>MEM_WB_mem_data, ALU_out=>MEM_WB_alu, IR_out=>MEM_WB_IR, Overflow_in=>EX_MEM_v_data, A_in=>EX_MEM_A, B_in=>EX_MEM_B, Overflow_out=>MEM_WB_v_data);
+                                 ram_out=>ram_dataa, Mem_in=>ram_dina, Mem_en=>ram_ena, Mem_out=>MEM_WB_mem_data, ALU_out=>MEM_WB_alu, IR_out=>MEM_WB_IR, Overflow_in=>EX_MEM_v_data, A_in=>EX_MEM_A, B_in=>EX_MEM_B, Overflow_out=>MEM_WB_v_data);
+
 WB_inst : Write_Back_Stage port map(clk=>clk, rst=>rst, ALU_in=>MEM_WB_alu, Overflow_in=>MEM_WB_v_data, Mem_in=>MEM_WB_mem_data, IR_in=>MEM_WB_IR, IN_PORT=>IN_PORT, wr_data=>WB_ID_wr_data, wr_addr=>WB_ID_wr_addr, wr_en=>WB_ID_wr_en, v_en=>WB_ID_v_en, V_data=>WB_ID_v_data);
+
+
 RAM_inst : RAM port map (douta=>ram_dataa, doutb=>ram_datab, addra=>ram_addra, addrb=>ram_addrb, dina=>ram_dina, wr_en=>ram_wr_en, ena=>ram_ena, enb=>ram_enb, clk=>clk, rst=>rst);
 
 --TODO: Control RAM enable signal somewhere else

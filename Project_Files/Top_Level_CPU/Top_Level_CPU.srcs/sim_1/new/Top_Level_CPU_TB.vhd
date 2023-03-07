@@ -58,12 +58,18 @@ process begin
 end process;
 
 process begin
-    rst <= '1';
-    wait until clk = '1';
-    wait until clk = '0';
     rst <= '0';
-   -- wait for 10 us;
     in_port <= x"0003"; --INPUT 3
+--    rst <= '1';
+for i in 0 to 5 loop
+   wait until clk = '1';
+   wait until clk = '0';
+  end loop;
+
+   in_port <= x"0005";
+--    rst <= '0';
+   -- wait for 10 us;
+   
    --in_port <= x"0005"; --INPUT 5
     --in_port <= x"0000"; --INPUT 0
     wait;
