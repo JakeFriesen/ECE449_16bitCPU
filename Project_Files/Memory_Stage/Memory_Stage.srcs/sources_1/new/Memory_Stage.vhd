@@ -39,9 +39,10 @@ entity Memory_Stage is
            clk, rst : in STD_LOGIC;
            branch : out STD_LOGIC;
            branch_addr : out STD_LOGIC_VECTOR (5 downto 0);
-           ram_wr : out STD_LOGIC;
-           ram_addrb : out STD_LOGIC_VECTOR (5 downto 0);
-           ram_datab : in STD_LOGIC_VECTOR (15 downto 0);
+           Mem_wr: out std_logic;
+           Mem_en: out std_logic;
+           Mem_in: out STD_LOGIC_VECTOR (15 downto 0);
+           Mem_addr: out std_logic_vector (5 downto 0);
            Mem_out : out STD_LOGIC_VECTOR (15 downto 0);
            ALU_out : out STD_LOGIC_VECTOR (15 downto 0);
            IR_out : out STD_LOGIC_VECTOR (15 downto 0);
@@ -52,6 +53,7 @@ end Memory_Stage;
 architecture Behavioral of Memory_Stage is
     signal IR, ALU, Overflow, ram_output : std_logic_vector (15 downto 0);
     signal flags : std_logic_vector (1 downto 0);
+  
 begin
     --Latch Process
     process(clk)
@@ -75,7 +77,7 @@ begin
             Overflow_out <= Overflow;
             IR_out <= IR;
             ALU_out <= ALU;
-            Mem_out <= ram_output;
+            Mem_out <= ram_output;     
         end if;
     end process;
 
@@ -104,12 +106,22 @@ begin
         ALU(5 downto 0) when (IR(15 downto 9) = "1000111") else                     --RETURN (71)
         (others => '0');                                                --Keep at 0 any other time
     
+    
+    
+    
+    
+    
     --RAM Access
-    ram_wr <= '1' when (IR(15 downto 9) = "0010001") else '0';  --STR (17)
-    ram_addrb <= A_in(5 downto 0) when (IR(15 downto 9) = "0010001") else --STR Rb (17)
-                 B_in(5 downto 0) when (IR(15 downto 9) = "0010000") else --LD Ra (16)
-                 (others=>'0');
-    Mem_out <= ram_datab;
+    with IR(15 downto 9) Select
+        Mem_wr <=   '1' when "0010001", 
+                    '0' when others;  --STR (17)
+                    
+    with IR(15 downto 9) Select
+         Mem_en <=  '1' when "0010001",
+                     '1' when "0010000", 
+                     '0' when others;  --STR (17)
+    Mem_addr <= A_in(5 downto 0);
+    Mem_in <=  B_in;
     
         
 

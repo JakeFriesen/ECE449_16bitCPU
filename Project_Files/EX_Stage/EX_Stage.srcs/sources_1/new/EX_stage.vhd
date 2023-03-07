@@ -29,6 +29,8 @@ entity EX_stage is
                    
            O_result : out STD_LOGIC_VECTOR (15 downto 0);
            O_Vdata : out STD_LOGIC_VECTOR (15 downto 0);
+           O_A : out STD_LOGIC_VECTOR (15 downto 0);
+           O_B : out STD_LOGIC_VECTOR (15 downto 0);
          --  O_Z : out STD_LOGIC;
           -- O_N : out STD_LOGIC;
          --  O_V : out STD_LOGIC;
@@ -36,9 +38,7 @@ entity EX_stage is
            O_Z_OUTPUT : out std_logic;
            O_N_OUTPUT: out std_logic;
 --           O_OUTPUT: out std_logic_vector(15 downto 0);
-           O_IR: out std_logic_vector(15 downto 0)
-           
-           );
+           O_IR: out std_logic_vector(15 downto 0));
          
 end EX_stage;
 
@@ -101,6 +101,8 @@ begin
              
                 O_result <= result;
                 O_Vdata <= ALU_V_RESULT;
+                O_A <= I_A;
+                O_B <= I_B;
                -- O_Vdata <= Vdata;
                -- O_z <= z;
               --  O_N <= n;
