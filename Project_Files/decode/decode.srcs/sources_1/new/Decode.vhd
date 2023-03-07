@@ -54,6 +54,8 @@ component RAW is
             rst : in std_logic;
             clk : in std_logic;
             wr_en : in std_logic;
+            IR_wb : in std_logic;
+            ra_index : in std_logic_vector(2 downto 0);
             wr_addr : in std_logic_vector(2 downto 0);
             rd_data1 : in std_logic_vector(2 downto 0);
             rd_data2 : in std_logic_vector(2 downto 0);
@@ -71,8 +73,9 @@ end component MUX2_1;
 --Signals
 signal rd_index1_intern : STD_LOGIC_VECTOR(2 downto 0);
 signal rd_index2_intern : STD_LOGIC_VECTOR(2 downto 0);
+signal ra_index : std_logic_vector(2 downto 0);
 signal rd_data1_out : STD_LOGIC_VECTOR(15 downto 0);
-signal output_en, halt_intern : STD_LOGIC;
+signal output_en, halt_intern, IR_wb : STD_LOGIC;
 signal IR_intrn : STD_LOGIC_VECTOR(15 downto 0);
 signal A_internal, B_internal, outport_internal, outport_previous : std_logic_vector(15 downto 0) := (others=>'0');
 
@@ -92,6 +95,14 @@ constant out_op : std_logic_vector(6 downto 0)  := "0100000";
 constant in_op : std_logic_vector(6 downto 0)   := "0100001";
 
 begin
+
+ra_index <= IR_intrn(8 downto 6);
+    
+with IR_intrn(15 downto 9) select
+	IR_wb <= 
+		'1' when add_op | sub_op | mul_op | nand_op | shl_op | shr_op | in_op,
+		'0' when others;
+
 --select read index 1 & 2 for regfile	
 with IR_intrn(15 downto 9) select
 	rd_index1_intern <= IR_intrn(5 downto 3) when add_op | sub_op | mul_op,
@@ -104,7 +115,7 @@ with IR_intrn(15 downto 9) select
 	                    "000" when others;
 	                    
 -- Determine RAW
-raw_handler : RAW port map(rst=>rst, clk=>clk, wr_en=>wr_enable, wr_addr=>wr_index, rd_data1=>rd_index1_intern, rd_data2=>rd_index2_intern, halt=>halt_intern);
+raw_handler : RAW port map(rst=>rst, clk=>clk, wr_en=>wr_enable, IR_wb=>IR_wb, ra_index=>ra_index, wr_addr=>wr_index, rd_data1=>rd_index1_intern, rd_data2=>rd_index2_intern, halt=>halt_intern);
 -- Configure output_en
 output_en <= '1' when IR_intrn(15 downto 9) = out_op else '0';
 	
