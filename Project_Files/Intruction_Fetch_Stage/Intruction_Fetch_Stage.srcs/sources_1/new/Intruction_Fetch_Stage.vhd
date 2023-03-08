@@ -76,7 +76,7 @@ begin
             else
             --Latch Outgoing signals
                 IR <= instr_data;   
-                NPC <= next_counter;   
+                NPC <= program_counter;   
                 program_counter <= next_counter;
             end if;          
         end if;
@@ -86,7 +86,7 @@ begin
     ram_addr <= program_counter;
     instr_data <= ram_data;
     
-    --TODO: Branch Currently propagates a '0' when the reset happens, FIX THIS!
+    
     --Program Counter Update
     next_counter <= PC_new when branch = '1' else
                     program_counter + 1;

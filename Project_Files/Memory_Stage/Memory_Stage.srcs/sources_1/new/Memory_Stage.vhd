@@ -26,8 +26,8 @@ use work.Constant_Package.all;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
+use IEEE.NUMERIC_STD.ALL;
+use ieee.std_logic_unsigned.all;
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx leaf cells in this code.
 --library UNISIM;
@@ -48,12 +48,13 @@ entity Memory_Stage is
            Mem_out : out STD_LOGIC_VECTOR (15 downto 0);
            ALU_out : out STD_LOGIC_VECTOR (15 downto 0);
            IR_out : out STD_LOGIC_VECTOR (15 downto 0);
+           NPC_in : in STD_LOGIC_VECTOR (15 downto 0);
            Overflow_in, A_in, B_in : in STD_LOGIC_VECTOR (15 downto 0);
            Overflow_out : out STD_LOGIC_VECTOR (15 downto 0));
 end Memory_Stage;
 
 architecture Behavioral of Memory_Stage is
-    signal IR, ALU, Overflow, ram_output : std_logic_vector (15 downto 0);
+    signal IR, ALU, Overflow, ram_output, NPC : std_logic_vector (15 downto 0);
     signal flags : std_logic_vector (1 downto 0);
     signal branch_internal : std_logic;
 
@@ -76,18 +77,24 @@ begin
                 IR <= (others=>'0');
                 ALU <= (others=>'0');
                 Overflow <= (others=>'0');
+                NPC <= (others=>'0');
             else
                 flags <= N & Z;
                 IR <= IR_in;
                 ALU <= ALU_in;
                 Overflow <= Overflow_in;
+                NPC <= NPC_in;
             end if;
         end if;
         if(clk'event and clk = '0') then
         --Latch Outgoing signals
             Overflow_out <= Overflow;
             IR_out <= IR;
-            ALU_out <= ALU;
+            if( IR(15 downto 9) = br_sub_op) then
+                ALU_out <= NPC + 1;
+            else
+                ALU_out <= ALU;
+            end if;
             Mem_out <= ram_output;
         end if;
     end process;

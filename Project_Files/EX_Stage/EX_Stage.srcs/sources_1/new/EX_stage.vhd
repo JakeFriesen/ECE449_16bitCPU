@@ -33,8 +33,8 @@ entity EX_stage is
          --  O_V : out STD_LOGIC;
            O_Z_OUTPUT : out std_logic;
            O_N_OUTPUT: out std_logic;
-           O_IR: out std_logic_vector(15 downto 0)
-           
+           O_IR: out std_logic_vector(15 downto 0);
+           O_NPC : out std_logic_vector (15 downto 0)
            );
          
 end EX_stage;
@@ -107,6 +107,7 @@ begin
                 O_Z_OUTPUT <= '0';
                 O_N_output <= '0';
                 O_IR <= IR;
+                O_NPC <= (others=>'0');
             else
                 O_result <= result;
                 O_Vdata <= ALU_V_RESULT;
@@ -114,6 +115,7 @@ begin
                 O_Z_OUTPUT <= z_output;
                 O_N_output <= n_output;
                 O_IR <= IR;
+                O_NPC <= NPC;
             end if;
         end if;
     end process;
@@ -135,8 +137,7 @@ begin
     --Push the next program counter + 1 into the ALU result when branching to subroutine
     --Put R7 into the ALU result when returning from subroutine
     with OPCODE select
-    result <= (NPC + 1) when br_sub_op,
-              A_data when return_op,
+    result <= A_data when return_op,
               ALU_result when others;
     
     --Switch Case for each opcode
