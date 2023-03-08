@@ -37,6 +37,7 @@ entity Intruction_Fetch_Stage is
            NPC : out STD_LOGIC_VECTOR (5 downto 0);
            clk : in STD_LOGIC;
            rst : in STD_LOGIC;
+           halt : in STD_LOGIC;
            PC_in : in STD_LOGIC_VECTOR (5 downto 0);
            ram_addr : out std_logic_vector (5 downto 0);
            ram_data : in std_logic_vector (15 downto 0);
@@ -52,7 +53,6 @@ architecture Behavioral of Intruction_Fetch_Stage is
     
 begin
 
-    
     --Latch Process
     process(clk)
     begin
@@ -62,7 +62,6 @@ begin
             --Reset
                  branch <= '0';
                  PC_new <= (others=>'0');
-            else 
             --Latch Incoming signals
                 branch <= br_in;
                 PC_new <= PC_in;
@@ -88,6 +87,7 @@ begin
     
     --Program Counter Update
     next_counter <= PC_new when branch = '1' else
+                    program_counter when halt='0' else
                     program_counter + 1;
         
 
