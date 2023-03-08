@@ -98,16 +98,17 @@ begin
    -- Stimulus process
    process begin		
       -- insert stimulus here
-        rst <= '0';
+        rst <= '1';
         wr_index <= "000";
         wr_data <= X"0000";
         wr_enable <= '0';
-        ov_data <= "000000";
+        ov_data <= X"0000";
         ov_enable <= '0';
 		IR <= X"0000"; --NOP
 		wait until (clk = '1' and clk'event);
 		
 		wait until (clk = '0' and clk'event);
+		rst <= '0';
 		wr_enable <= '1';
 		wr_index <= "001";
 		wr_data <= X"0001"; --Write in 1 to R1
@@ -135,7 +136,7 @@ begin
 		wr_enable <= '0';
 		wr_index <= "000";
 		wr_data <= X"0000";
-		IR <= add_op & "001" & "010" & "011"; -- mul r3 r1 r2
+		IR <= add_op & "001" & "010" & "011"; -- add r3 r1 r2
 		
 		wait until (clk = '0' and clk'event);
 		IR <= out_op & "011" & "000000"; --output contents of R3		

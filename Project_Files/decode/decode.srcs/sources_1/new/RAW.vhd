@@ -28,15 +28,6 @@ signal raw_rd2 : std_logic;
 
 begin 
 
-wb_tracker(0) <= IR_wb when wr_addr = "000" else '0';
-wb_tracker(1) <= IR_wb when wr_addr = "001" else '0';
-wb_tracker(2) <= IR_wb when wr_addr = "010" else '0';
-wb_tracker(3) <= IR_wb when wr_addr = "011" else '0';
-wb_tracker(4) <= IR_wb when wr_addr = "100" else '0';
-wb_tracker(5) <= IR_wb when wr_addr = "101" else '0';
-wb_tracker(6) <= IR_wb when wr_addr = "110" else '0';
-wb_tracker(7) <= IR_wb when wr_addr = "111" else '0';
-
 raw_rd1 <= 
 wb_tracker(0) when(rd_data1="000") else
 wb_tracker(1) when(rd_data1="001") else
@@ -69,18 +60,10 @@ begin
 			
 		else
 		    if (wr_en = '1') then
-		         case wr_addr(2 downto 0) is
-		             when "000" => wb_tracker(0) <= '0';
-                     when "001" => wb_tracker(1) <= '0';
-                     when "010" => wb_tracker(2) <= '0';
-                     when "011" => wb_tracker(3) <= '0';
-                     when "100" => wb_tracker(4) <= '0';
-                     when "101" => wb_tracker(5) <= '0';
-                     when "110" => wb_tracker(6) <= '0';
-                     when "111" => wb_tracker(7) <= '0';
-                     when others => NULL; 
-                 end case;
-            end if;
+		        wb_tracker(to_integer(unsigned(wr_addr))) <= '0';
+            elsif (IR_wb = '1') then
+                wb_tracker(to_integer(unsigned(ra_index))) <= '1';
+             end if;
 		end if;
 	end if;
 end process;
