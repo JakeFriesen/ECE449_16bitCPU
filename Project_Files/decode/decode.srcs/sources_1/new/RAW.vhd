@@ -23,30 +23,10 @@ type wb_queue is array (integer range 0 to 7) of std_logic;
 
 signal wb_tracker : wb_queue;
 
-signal raw_rd1 : std_logic;
-signal raw_rd2 : std_logic;
+signal raw1 : std_logic;
+signal raw2 : std_logic;
 
 begin 
-
-raw_rd1 <= 
-wb_tracker(0) when(rd_data1="000") else
-wb_tracker(1) when(rd_data1="001") else
-wb_tracker(2) when(rd_data1="010") else
-wb_tracker(3) when(rd_data1="011") else
-wb_tracker(4) when(rd_data1="100") else
-wb_tracker(5) when(rd_data1="101") else
-wb_tracker(6) when(rd_data1="110") else wb_tracker(7);
-
-raw_rd2 <= 
-wb_tracker(0) when(rd_data2="000") else
-wb_tracker(1) when(rd_data2="001") else
-wb_tracker(2) when(rd_data2="010") else
-wb_tracker(3) when(rd_data2="011") else
-wb_tracker(4) when(rd_data2="100") else
-wb_tracker(5) when(rd_data2="101") else
-wb_tracker(6) when(rd_data2="110") else wb_tracker(7);
-
-halt <= raw_rd1 OR raw_rd2;
     
 process(clk)
 begin
@@ -57,14 +37,18 @@ begin
 				wb_tracker(i) <= '0';
 			end loop;
 			halt <= '0';
-			
 		else
 		    if (wr_en = '1') then
 		        wb_tracker(to_integer(unsigned(wr_addr))) <= '0';
             elsif (IR_wb = '1') then
                 wb_tracker(to_integer(unsigned(ra_index))) <= '1';
-             end if;
+            end if;
 		end if;
 	end if;
 end process;
+
+raw1 <= wb_tracker(to_integer(unsigned(rd_data1)));
+raw2 <= wb_tracker(to_integer(unsigned(rd_data2)));
+halt <= raw1 OR raw2;
+
 end Behavioral;

@@ -136,7 +136,7 @@ begin
 		wr_enable <= '0';
 		wr_index <= "000";
 		wr_data <= X"0000";
-		IR <= add_op & "001" & "010" & "011"; -- add r3 r1 r2
+		IR <= mul_op & "001" & "010" & "011"; -- add r3 r1 r2
 		
 		wait until (clk = '0' and clk'event);
 		IR <= out_op & "011" & "000000"; --output contents of R3		
