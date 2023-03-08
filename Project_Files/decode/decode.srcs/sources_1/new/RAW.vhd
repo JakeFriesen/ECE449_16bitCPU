@@ -36,7 +36,6 @@ begin
 			for i in 0 to 7 loop
 				wb_tracker(i) <= '0';
 			end loop;
-			halt <= '0';
 		else
 		    if (wr_en = '1') then
 		        wb_tracker(to_integer(unsigned(wr_addr))) <= '0';
@@ -49,6 +48,7 @@ end process;
 
 raw1 <= wb_tracker(to_integer(unsigned(rd_data1)));
 raw2 <= wb_tracker(to_integer(unsigned(rd_data2)));
-halt <= raw1 OR raw2;
+
+halt <= '1' when raw1='1' or raw2='1' else '0';
 
 end Behavioral;

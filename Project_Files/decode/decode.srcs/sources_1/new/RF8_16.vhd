@@ -31,7 +31,8 @@ begin
 --write operation 
 process(clk)
 begin
-   if(clk='0' and clk'event) then if(rst='1') then
+   if(clk='1' and clk'event) then 
+   if(rst='1') then
       for i in 0 to 7 loop
          reg_file(i)<= (others => '0'); 
       end loop;

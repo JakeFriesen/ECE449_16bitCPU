@@ -139,10 +139,8 @@ outport_internal <=
 		if rising_edge(clk) then
 			if (rst = '1') then
 				IR_intrn <= zero;
-				--npc <= (others=>'0');
 			elsif (halt_intern = '0') then
 			    IR_intrn <= IR;
-				--npc <= npc_in;
                 outport_previous <= outport_internal;
 			end if;
 		end if;
@@ -151,7 +149,6 @@ outport_internal <=
 		  if(rst = '1') then
 		      A <= (others=>'0');
 		      B <= (others=>'0');
---		      npc_out <= (others=>'0');
 		      IR_out <= (others=>'0');
 		      outport <= (others=>'0');
 		      halt <= halt_intern;
@@ -159,8 +156,9 @@ outport_internal <=
 		      A <= A_internal;
 		      B <= B_internal;
 		      IR_out <= IR_intrn;
-		      --npc_out <= npc;
 		      outport <= outport_internal;
+		      halt <= halt_intern;
+		  elsif (halt_intern = '0') then
 		      halt <= halt_intern;
 		  end if;		
 		end if;

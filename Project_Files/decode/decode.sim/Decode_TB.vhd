@@ -136,10 +136,22 @@ begin
 		wr_enable <= '0';
 		wr_index <= "000";
 		wr_data <= X"0000";
-		IR <= mul_op & "001" & "010" & "011"; -- add r3 r1 r2
+		IR <= mul_op & "011" & "001" & "010"; -- Mul r3 r1 r2
 		
 		wait until (clk = '0' and clk'event);
-		IR <= out_op & "011" & "000000"; --output contents of R3		
+		wr_enable <= '1';
+		wr_index <= "001";
+		wr_data <= X"0003";
+		IR <= mul_op & "011" & "001" & "010"; -- Mul r3 r1 r2
+		
+		wait until (clk = '0' and clk'event);
+		wr_enable <= '0';
+		wr_index <= "000";
+		wr_data <= X"0000"; -- write 3 to R1
+		IR <= X"0000"; --NOP
+		
+		wait until (clk = '0' and clk'event);
+		IR <= out_op & "001" & "000000"; --output contents of R1	
 		
       wait;
    end process;
