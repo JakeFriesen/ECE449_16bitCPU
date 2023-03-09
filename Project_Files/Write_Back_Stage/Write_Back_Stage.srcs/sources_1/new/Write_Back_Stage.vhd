@@ -21,7 +21,8 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
+library work;
+use work.Constant_Package.all;
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
 --use IEEE.NUMERIC_STD.ALL;
@@ -49,23 +50,7 @@ end Write_Back_Stage;
 
 architecture Behavioral of Write_Back_Stage is
     signal ALU, Overflow, IR, input_port, Mem : std_logic_vector (15 downto 0);
-    
-    
-    -- Op Codes
-    constant nop_op : std_logic_vector(6 downto 0)  := "0000000";
-    constant add_op : std_logic_vector(6 downto 0)  := "0000001";
-    constant sub_op : std_logic_vector(6 downto 0)  := "0000010";
-    constant mul_op : std_logic_vector(6 downto 0)  := "0000011";
-    constant nand_op : std_logic_vector(6 downto 0) := "0000100";
-    constant shl_op : std_logic_vector(6 downto 0)  := "0000101";
-    constant shr_op : std_logic_vector(6 downto 0)  := "0000110";
-    constant test_op : std_logic_vector(6 downto 0) := "0000111";
-    constant out_op : std_logic_vector(6 downto 0)  := "0100000";
-    constant in_op : std_logic_vector(6 downto 0)   := "0100001";
-    constant store_op : std_logic_vector(6 downto 0)   := "0010001";
-    constant load_op : std_logic_vector(6 downto 0)   := "0010000";
-    constant loadIMM_op : std_logic_vector(6 downto 0)   := "0010010";
-    constant mov_op : std_logic_vector(6 downto 0)   := "0010011";
+
     
 begin
     --Latch Process

@@ -162,7 +162,7 @@ signal ram_wr_en, ram_ena, ram_enb, out_en : std_logic;
 begin
 IF_inst : Intruction_Fetch_Stage port map(clk=>clk, rst=>rst, IR=>IF_ID_IR, NPC=>IF_ID_NPC, PC_in=>MEM_IF_br_addr, ram_addr=>ram_addrb, ram_data=>ram_datab, br_in=>MEM_IF_br);
 
-ID_inst : Decode port map(clk=>clk, rst=>rst=>MEM_pipe_flush, IR=>IF_ID_IR, wr_index=>WB_ID_wr_addr, wr_data=>WB_ID_wr_data, wr_enable=>WB_ID_wr_en, ov_data=>WB_ID_v_data, ov_enable=>WB_ID_v_en, A=>ID_EX_A, B=>ID_EX_B, 
+ID_inst : Decode port map(clk=>clk, rst=>MEM_pipe_flush, IR=>IF_ID_IR, wr_index=>WB_ID_wr_addr, wr_data=>WB_ID_wr_data, wr_enable=>WB_ID_wr_en, ov_data=>WB_ID_v_data, ov_enable=>WB_ID_v_en, A=>ID_EX_A, B=>ID_EX_B, 
                             IR_out=>ID_EX_IR,loadIMM=>loadIMM, load_align=> load_align, outport=>OUT_PORT, npc_out=>ID_EX_NPC, npc_in=>IF_ID_NPC);
 
 EX_inst : EX_stage port map(clk=>clk, rst=>MEM_pipe_flush, I_IR=>ID_EX_IR, I_A=>ID_EX_A, I_B=>ID_EX_B, O_result=>EX_MEM_alu_res, O_vdata=>EX_MEM_v_data, O_Z_OUTPUT=>EX_MEM_Z_flag, O_N_OUTPUT=>EX_MEM_N_flag, O_IR=>EX_MEM_IR, O_A =>EX_MEM_A, O_B =>EX_MEM_B, I_NPC=>ID_EX_NPC, O_NPC=>EX_MEM_NPC);

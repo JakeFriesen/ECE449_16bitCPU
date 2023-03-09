@@ -146,7 +146,7 @@ begin
     with IR_in(15 downto 9) Select
          Mem_en <=  '1' when store_op | load_op,
                      '0' when others;  --STR (17)
-    Mem_addr <= A_in(5 downto 0);
+    Mem_addr <= A_in(15 downto 0);
     Mem_in <=  B_in;
     
         

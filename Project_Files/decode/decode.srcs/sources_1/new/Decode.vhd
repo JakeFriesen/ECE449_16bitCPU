@@ -64,6 +64,7 @@ signal rd_index1_intern : STD_LOGIC_VECTOR(2 downto 0);
 signal rd_index2_intern : STD_LOGIC_VECTOR(2 downto 0);
 signal rd_data1_out : STD_LOGIC_VECTOR(15 downto 0);
 signal load_en : STD_LOGIC;
+signal output_en : STD_LOGIC;
 signal IR_intrn : STD_LOGIC_VECTOR(15 downto 0);
 signal npc : std_logic_vector (15 downto 0);
 signal A_internal, B_internal, outport_internal, outport_previous : std_logic_vector(15 downto 0) := (others=>'0');
@@ -91,6 +92,10 @@ with IR_intrn(15 downto 9) select
 -- Configure output_en
 --load_en <= '1' when IR_intrn(15 downto 9) = loadIMM_op  else '0';
 load_en <= '0';
+
+-- Configure output_en
+output_en <= '1' when IR_intrn(15 downto 9) = out_op else '0';
+
 --reg file
 --TODO: FIX THE RST HERE, ITS HARDCODED AND SHOULDN"T BE!!!!
 reg_file : register_file port map(rst => '0', clk => clk, rd_index1 => rd_index1_intern, 
@@ -100,7 +105,13 @@ reg_file : register_file port map(rst => '0', clk => clk, rd_index1 => rd_index1
 --MUX assignments--
 m1 : MUX2_1 port map(x => rd_data1_out, y => zero , s => load_en, z => A_internal);
 --m2 : MUX2_1 port map(x => zero, y => rd_data1_out, s => output_en, z => outport_internal);
+--Output should remain constant after an OUT opcode.
+outport_internal <=
+    rd_data1_out when output_en = '1' else
+    --Set to outport previous to fix timing issues
+    outport_previous;
     
+      
 	--latching		
 	process(clk)
 	begin
