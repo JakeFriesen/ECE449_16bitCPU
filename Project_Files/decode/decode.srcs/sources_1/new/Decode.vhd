@@ -25,6 +25,8 @@ entity Decode is
 			  --Overflow signals
 			  ov_data : in std_logic_vector(15 downto 0);
 			  ov_enable : in std_logic;
+			  loadIMM: in std_logic;
+              load_align: in std_logic;
 			  --Outport
 			  outport : out std_logic_vector(15 downto 0)
 	    );			  
@@ -45,6 +47,8 @@ component register_file is
         wr_enable: in std_logic;
         --overflow signals
         ov_data: in std_logic_vector(15 downto 0);
+        loadIMM: in std_logic;
+        load_align: in std_logic;
         ov_enable: in std_logic);
 end component register_file;
 
@@ -59,7 +63,7 @@ end component MUX2_1;
 signal rd_index1_intern : STD_LOGIC_VECTOR(2 downto 0);
 signal rd_index2_intern : STD_LOGIC_VECTOR(2 downto 0);
 signal rd_data1_out : STD_LOGIC_VECTOR(15 downto 0);
-signal output_en : STD_LOGIC;
+signal load_en : STD_LOGIC;
 signal IR_intrn : STD_LOGIC_VECTOR(15 downto 0);
 signal npc : std_logic_vector (15 downto 0);
 signal A_internal, B_internal, outport_internal, outport_previous : std_logic_vector(15 downto 0) := (others=>'0');
@@ -69,36 +73,34 @@ constant zero : std_logic_vector(15 downto 0) := X"0000";
 
 
 begin
+
+--loadIMM <= (IR_intrn(7 downto 0) & "00000000") when IR(8) = '1' else ("00000000" & IR_intrn(7 downto 0));
+
 --select read index 1 & 2 for regfile	
 with IR_intrn(15 downto 9) select
-	rd_index1_intern <= IR_intrn(5 downto 3) when add_op | sub_op | mul_op,
-						IR_intrn(8 downto 6) when nand_op | shl_op | shr_op | test_op | out_op | br_op | br_n_op | br_z_op | br_sub_op,
+	rd_index1_intern <= IR_intrn(5 downto 3) when add_op | sub_op | mul_op | mov_op | load_op,
+						IR_intrn(8 downto 6) when nand_op | shl_op | shr_op | test_op | out_op | br_op | br_n_op | br_z_op | br_sub_op | store_op,
 						"111" when return_op,
 						"000" when others;	
 						
 with IR_intrn(15 downto 9) select	
 	rd_index2_intern <= IR_intrn(2 downto 0) when add_op | sub_op | mul_op,
-	                    IR_intrn(5 downto 3) when nand_op,
+	                    IR_intrn(5 downto 3) when nand_op | store_op,
 	                    "000" when others;
 	
 -- Configure output_en
-output_en <= '1' when IR_intrn(15 downto 9) = out_op else '0';
-	
+--load_en <= '1' when IR_intrn(15 downto 9) = loadIMM_op  else '0';
+load_en <= '0';
 --reg file
 --TODO: FIX THE RST HERE, ITS HARDCODED AND SHOULDN"T BE!!!!
 reg_file : register_file port map(rst => '0', clk => clk, rd_index1 => rd_index1_intern, 
 	       rd_index2 => rd_index2_intern, rd_data1 => rd_data1_out, rd_data2 => B_internal, wr_index => wr_index,
-	       wr_data => wr_data, wr_enable => wr_enable, ov_data => ov_data, ov_enable => ov_enable);
+	       wr_data => wr_data, wr_enable => wr_enable, ov_data => ov_data,loadIMM=>loadIMM,load_align => load_align, ov_enable => ov_enable);
 
 --MUX assignments--
-m1 : MUX2_1 port map(x => rd_data1_out, y => zero, s => output_en, z => A_internal);
+m1 : MUX2_1 port map(x => rd_data1_out, y => zero , s => load_en, z => A_internal);
 --m2 : MUX2_1 port map(x => zero, y => rd_data1_out, s => output_en, z => outport_internal);
---Output should remain constant after an OUT opcode.
-outport_internal <=
-    rd_data1_out when output_en = '1' else
-    --Set to outport previous to fix timing issues
-    outport_previous;
-
+    
 	--latching		
 	process(clk)
 	begin

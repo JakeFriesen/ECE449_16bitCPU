@@ -41,10 +41,15 @@ entity Memory_Stage is
            clk, rst : in STD_LOGIC;
            branch : out STD_LOGIC;
            branch_addr : out STD_LOGIC_VECTOR (15 downto 0);
-           ram_wr : out STD_LOGIC;
+        --    ram_wr : out STD_LOGIC;
            pipe_flush : out std_logic;
-           ram_addrb : out STD_LOGIC_VECTOR (15 downto 0);
-           ram_datab : in STD_LOGIC_VECTOR (15 downto 0);
+        --    ram_addrb : out STD_LOGIC_VECTOR (15 downto 0);
+        --    ram_datab : in STD_LOGIC_VECTOR (15 downto 0);
+           Mem_wr: out std_logic;
+           Mem_en: out std_logic;
+           Mem_in: out STD_LOGIC_VECTOR (15 downto 0);
+           Mem_addr: out std_logic_vector (15 downto 0);
+           Ram_out: in std_logic_vector (15 downto 0);
            Mem_out : out STD_LOGIC_VECTOR (15 downto 0);
            ALU_out : out STD_LOGIC_VECTOR (15 downto 0);
            IR_out : out STD_LOGIC_VECTOR (15 downto 0);
@@ -95,7 +100,13 @@ begin
             else
                 ALU_out <= ALU;
             end if;
-            Mem_out <= ram_output;
+            
+            if(IR(15 downto 9) = mov_op) then
+                Mem_out <= A_in;
+            else
+                Mem_out <= ram_out;
+            end if;  
+                
         end if;
     end process;
 
@@ -126,13 +137,17 @@ begin
     
     pipe_flush <= branch_internal;
     branch <= branch_internal;
-    
+
     --RAM Access
-    ram_wr <= '1' when (IR(15 downto 9) = "0010001") else '0';  --STR (17)
-    ram_addrb <= A_in(15 downto 0) when (IR(15 downto 9) = "0010001") else --STR Rb (17)
-                 B_in(15 downto 0) when (IR(15 downto 9) = "0010000") else --LD Ra (16)
-                 (others=>'0');
---    Mem_out <= ram_datab;
+    with IR_in(15 downto 9) Select
+        Mem_wr <=   '1' when store_op, 
+                    '0' when others;  --STR (17)
+                    
+    with IR_in(15 downto 9) Select
+         Mem_en <=  '1' when store_op | load_op,
+                     '0' when others;  --STR (17)
+    Mem_addr <= A_in(5 downto 0);
+    Mem_in <=  B_in;
     
         
 

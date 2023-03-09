@@ -19,6 +19,8 @@ entity register_file is
         wr_enable: in std_logic;
         --overflow signals
         ov_data: in std_logic_vector(15 downto 0);
+        loadIMM: in std_logic;
+        load_align: in std_logic;
         ov_enable: in std_logic);
 end register_file;
 
@@ -35,21 +37,21 @@ begin
          reg_file(i)<= (others => '0'); 
       end loop;
    elsif(wr_enable='1') then
+      
       if (ov_enable='1') then
           reg_file(7) <= ov_data;
-          
-          case wr_index(2 downto 0) is
-              when "000" => reg_file(0) <= wr_data;
-              when "001" => reg_file(1) <= wr_data;
-              when "010" => reg_file(2) <= wr_data;
-              when "011" => reg_file(3) <= wr_data;
-              when "100" => reg_file(4) <= wr_data;
-              when "101" => reg_file(5) <= wr_data;
-              when "110" => reg_file(6) <= wr_data;
-              when others => NULL; 
-          end case;
-      else
-          case wr_index(2 downto 0) is
+      end if;
+      
+      
+      
+      if(loadIMM = '1') then
+             if(load_align = '1') then
+                reg_file(7)(15 downto 8) <= wr_data(7 downto 0);
+             else
+                reg_file(7)(7 downto 0) <= wr_data(7 downto 0);
+             end if;
+      else   
+        case wr_index(2 downto 0) is
               when "000" => reg_file(0) <= wr_data;
               when "001" => reg_file(1) <= wr_data;
               when "010" => reg_file(2) <= wr_data;
@@ -60,7 +62,7 @@ begin
               when "111" => reg_file(7) <= wr_data;
               when others => NULL; 
           end case;
-      end if;
+       end if;
     end if; 
     end if;
 end process;

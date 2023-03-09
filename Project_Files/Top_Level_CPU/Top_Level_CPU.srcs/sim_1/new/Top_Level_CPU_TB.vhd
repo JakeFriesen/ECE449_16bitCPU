@@ -58,9 +58,6 @@ process begin
 end process;
 
 process begin
-    rst <= '1';
-    wait until clk = '1';
-    wait until clk = '0';
     rst <= '0';
     
     for i in 0 to 3 loop

@@ -319,9 +319,9 @@
          <obj_property name="ElementShortName">ALU_OP[2:0]</obj_property>
          <obj_property name="ObjectShortName">ALU_OP[2:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/ALU_result" type="array">
-         <obj_property name="ElementShortName">ALU_result[15:0]</obj_property>
-         <obj_property name="ObjectShortName">ALU_result[15:0]</obj_property>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/I_A" type="array">
+         <obj_property name="ElementShortName">I_A[15:0]</obj_property>
+         <obj_property name="ObjectShortName">I_A[15:0]</obj_property>
       </wvobject>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/Vdata" type="array">
          <obj_property name="ElementShortName">Vdata[15:0]</obj_property>

@@ -30,6 +30,10 @@ entity EX_stage is
            I_NPC : in STD_LOGIC_VECTOR (15 downto 0);
            O_result : out STD_LOGIC_VECTOR (15 downto 0);
            O_Vdata : out STD_LOGIC_VECTOR (15 downto 0);
+           O_A : out STD_LOGIC_VECTOR (15 downto 0);
+           O_B : out STD_LOGIC_VECTOR (15 downto 0);
+         --  O_Z : out STD_LOGIC;
+          -- O_N : out STD_LOGIC;
          --  O_V : out STD_LOGIC;
            O_Z_OUTPUT : out std_logic;
            O_N_OUTPUT: out std_logic;
@@ -111,7 +115,13 @@ begin
             else
                 O_result <= result;
                 O_Vdata <= ALU_V_RESULT;
-            --  O_V <= v;
+                O_A <= I_A;
+                O_B <= I_B;
+               -- O_Vdata <= Vdata;
+               -- O_z <= z;
+              --  O_N <= n;
+              --  O_V <= v;
+             --   O_V_en <= v_en;
                 O_Z_OUTPUT <= z_output;
                 O_N_output <= n_output;
                 O_IR <= IR;
