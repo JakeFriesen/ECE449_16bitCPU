@@ -35,31 +35,27 @@ begin
 		if(rst = '1') then
 			for i in 0 to 7 loop
 				wb_tracker(i) <= '0';
-			end loop;		
+		    end loop;		
 		end if;
-	end if;
-end process;
-
-raw1 <= wb_tracker(to_integer(unsigned(rd_data1))) when ra_index = rd_data1 else '0';
-raw2 <= wb_tracker(to_integer(unsigned(rd_data2))) when ra_index = rd_data2 else '0';
-
-process(clk)
-begin
-    if(rst = '1') then
-			halt_intern <= '0';
-    elsif(falling_edge(clk)) then
-        if (wr_en = '1') then
+		if (wr_en = '1') then
 		    wb_tracker(to_integer(unsigned(wr_addr))) <= '0';
 		end if;
         if (IR_wb = '1') then
             wb_tracker(to_integer(unsigned(ra_index))) <= '1';
         end if;
-        if (raw1='1' or raw2='1') then
+	elsif(falling_edge(clk)) then
+	    if(rst = '1') then
+	        halt_intern <= '0';
+        elsif (raw1='1' or raw2='1') then
             halt_intern <= '1';
         else
             halt_intern <= '0';
         end if;
-    end if;
+    end if;	
 end process;
+
+raw1 <= wb_tracker(to_integer(unsigned(rd_data1))) when ra_index = rd_data1 else '0';
+raw2 <= wb_tracker(to_integer(unsigned(rd_data2))) when ra_index = rd_data2 else '0';
 halt <= halt_intern;
+
 end Behavioral;

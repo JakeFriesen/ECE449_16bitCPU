@@ -12,14 +12,14 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0.000000 us"></ZoomStartTime>
-      <ZoomEndTime time="37.952795 us"></ZoomEndTime>
-      <Cursor1Time time="1.000000 us"></Cursor1Time>
+      <ZoomEndTime time="27.942719 us"></ZoomEndTime>
+      <Cursor1Time time="12.476269 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="168"></NameColumnWidth>
+      <NameColumnWidth column_width="160"></NameColumnWidth>
       <ValueColumnWidth column_width="58"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="11" />
+   <WVObjectSize size="12" />
    <wvobject fp_name="/Top_Level_CPU_TB/rst" type="logic">
       <obj_property name="ElementShortName">rst</obj_property>
       <obj_property name="ObjectShortName">rst</obj_property>
@@ -184,7 +184,12 @@
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/raw_handler/wb_tracker" type="array">
          <obj_property name="ElementShortName">wb_tracker[0:7]</obj_property>
          <obj_property name="ObjectShortName">wb_tracker[0:7]</obj_property>
+         <obj_property name="isExpanded"></obj_property>
       </wvobject>
+   </wvobject>
+   <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/reg_file/reg_file" type="array">
+      <obj_property name="ElementShortName">reg_file[0:7][15:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_file[0:7][15:0]</obj_property>
    </wvobject>
    <wvobject fp_name="group253" type="group">
       <obj_property name="label">EX</obj_property>
@@ -246,6 +251,7 @@
    <wvobject fp_name="group177" type="group">
       <obj_property name="label">WB</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/WB_inst/ALU" type="array">
          <obj_property name="ElementShortName">ALU[15:0]</obj_property>
          <obj_property name="ObjectShortName">ALU[15:0]</obj_property>
@@ -277,6 +283,10 @@
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/outport_internal" type="array">
          <obj_property name="ElementShortName">outport_internal[15:0]</obj_property>
          <obj_property name="ObjectShortName">outport_internal[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/reg_file/reg_file" type="array">
+         <obj_property name="ElementShortName">reg_file[0:7][15:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[0:7][15:0]</obj_property>
       </wvobject>
    </wvobject>
 </wave_config>

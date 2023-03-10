@@ -34,11 +34,11 @@ entity ALU is
 end ALU;
 
 architecture Behavioral of ALU is
-    signal mul_result_int: std_logic_vector(31 downto 0);
-    signal result_int, V_result_int: std_logic_vector (15 downto 0);
-    signal V_int: std_logic;
-    signal v_check: std_logic_vector(31 downto 0);
-    signal V_temp: std_logic;
+    signal mul_result_int: std_logic_vector(31 downto 0) := (others=>'0');
+    signal result_int, V_result_int: std_logic_vector (15 downto 0) := (others=>'0');
+    signal V_int: std_logic := '0';
+    signal v_check: std_logic_vector(31 downto 0) := (others=>'0');
+    signal V_temp: std_logic := '0';
 begin
     --Main ALU Process
     process(A, B, sel) 

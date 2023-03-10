@@ -139,18 +139,18 @@ end component RAM;
 --clk rst
 signal clk, rst : std_logic := '0';
 --Intermediate Signals
-signal IF_ID_IR, WB_ID_wr_data, WB_ID_v_data, ID_EX_A, ID_EX_B, ID_EX_IR, EX_MEM_IR, EX_MEM_alu_res, EX_MEM_v_data, MEM_WB_mem_data, MEM_WB_alu, MEM_WB_v_data, MEM_WB_IR, EX_MEM_A, EX_MEM_B : std_logic_vector(15 downto 0);
-signal IF_ID_NPC, WB_IF_PC, ID_EX_NPC, MEM_IF_br_addr : std_logic_vector(5 downto 0);
-signal MEM_IF_br, WB_ID_wr_en, WB_ID_v_en, EX_MEM_N_flag, EX_MEM_Z_flag : std_logic;
-signal WB_ID_wr_addr : std_logic_vector(2 downto 0);
+signal IF_ID_IR, WB_ID_wr_data, WB_ID_v_data, ID_EX_A, ID_EX_B, ID_EX_IR, EX_MEM_IR, EX_MEM_alu_res, EX_MEM_v_data, MEM_WB_mem_data, MEM_WB_alu, MEM_WB_v_data, MEM_WB_IR, EX_MEM_A, EX_MEM_B : std_logic_vector(15 downto 0) := (others=>'0');
+signal IF_ID_NPC, WB_IF_PC, ID_EX_NPC, MEM_IF_br_addr : std_logic_vector(5 downto 0) := (others=>'0');
+signal MEM_IF_br, WB_ID_wr_en, WB_ID_v_en, EX_MEM_N_flag, EX_MEM_Z_flag : std_logic := '0';
+signal WB_ID_wr_addr : std_logic_vector(2 downto 0) := (others=>'0');
 
 --RAM signals
-signal ram_addra, ram_addrb : std_logic_vector(5 downto 0);
-signal ram_dataa, ram_datab, ram_dina : std_logic_vector(15 downto 0);
-signal ram_wr_en, ram_ena, ram_enb, out_en : std_logic;
+signal ram_addra, ram_addrb : std_logic_vector(5 downto 0) := (others=>'0');
+signal ram_dataa, ram_datab, ram_dina : std_logic_vector(15 downto 0) := (others=>'0');
+signal ram_wr_en, ram_ena, ram_enb, out_en : std_logic := '0';
 
 -- Halt for RAW
-signal halt_intern : std_logic;
+signal halt_intern : std_logic := '0';
 
 begin
 IF_inst : Intruction_Fetch_Stage port map(clk=>clk, rst=>rst, halt=>halt_intern, IR=>IF_ID_IR, NPC=>IF_ID_NPC, PC_in=>MEM_IF_br_addr, ram_addr=>ram_addra, ram_data=>ram_dataa, br_in=>MEM_IF_br);

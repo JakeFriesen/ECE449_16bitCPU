@@ -51,22 +51,23 @@ CPU : Top_Level_CPU port map(clk_100MHz=>clk, reset_load=>rst, reset_execute=>rs
 
 --Clocking Process
 process begin
-    clk <= '0';
-    wait for 1us;
     clk <= '1';
+    wait for 1us;
+    clk <= '0';
     wait for 1us;
 end process;
 
 process begin
     rst <= '1';
-    wait until clk = '1';
     wait until clk = '0';
     rst <= '0';
-    in_port <= x"0002"; --INPUT 2
-    for i in 1 to 2 loop
+    for i in 0 to 3 loop
         wait until clk = '1';
         wait until clk = '0';
     end loop;
+    in_port <= x"0002"; --INPUT 2
+    wait until clk = '1';
+    wait until clk = '0';
     in_port <= x"0003"; --INPUT 3
     wait until clk = '1';
     wait until clk = '0';

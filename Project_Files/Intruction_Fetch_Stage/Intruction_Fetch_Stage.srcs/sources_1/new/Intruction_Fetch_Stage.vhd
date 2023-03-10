@@ -46,9 +46,9 @@ end Intruction_Fetch_Stage;
 
 architecture Behavioral of Intruction_Fetch_Stage is
     --Signals
-    signal branch : std_logic;
-    signal instr_data : std_logic_vector(15 downto 0);
-    signal PC_new, next_counter : std_logic_vector (5 downto 0);
+    signal branch : std_logic := '0';
+    signal instr_data : std_logic_vector(15 downto 0) := (others=>'0');
+    signal PC_new, next_counter : std_logic_vector (5 downto 0) := (others=>'0');
     signal program_counter : std_logic_vector (5 downto 0) := (others=>'0');
     
 begin
@@ -57,7 +57,7 @@ begin
     process(clk)
     begin
        
-        if(clk'event and clk = '1') then
+        if(rising_edge(clk)) then
             if(rst = '1') then
             --Reset
                  branch <= '0';
@@ -67,7 +67,7 @@ begin
                 PC_new <= PC_in;
             end if;
         end if;
-        if(clk'event and clk = '0') then
+        if(falling_edge(clk)) then
             if(rst = '1') then
                 IR <= (others=>'0');
                 NPC <= (others=>'0');
