@@ -1,0 +1,15 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../../ALU_16bit/ALU_16bit.srcs/sources_1/new/ALU.vhd" \
+"../../../../../decode/decode.srcs/sources_1/new/Decode.vhd" \
+"../../../../../EX_Stage/EX_Stage.srcs/sources_1/new/EX_stage.vhd" \
+"../../../../../Intruction_Fetch_Stage/Intruction_Fetch_Stage.srcs/sources_1/new/Intruction_Fetch_Stage.vhd" \
+"../../../../../decode/decode.srcs/sources_1/new/MUX2_1.vhd" \
+"../../../../../Memory_Stage/Memory_Stage.srcs/sources_1/new/Memory_Stage.vhd" \
+"../../../../../RAM_16bit/RAM_16bit.srcs/sources_1/new/RAM.vhd" \
+"../../../../../decode/decode.srcs/sources_1/new/RF8_16.vhd" \
+"../../../../../Write_Back_Stage/Write_Back_Stage.srcs/sources_1/new/Write_Back_Stage.vhd" \
+"../../../../Top_Level_CPU.srcs/sources_1/new/Top_Level_CPU.vhd" \
+
+# Do not sort compile order
+nosort

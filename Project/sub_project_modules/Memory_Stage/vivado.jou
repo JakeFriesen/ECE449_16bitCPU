@@ -1,0 +1,30 @@
+#-----------------------------------------------------------
+# Vivado v2017.4 (64-bit)
+# SW Build 2086221 on Fri Dec 15 20:55:39 MST 2017
+# IP Build 2085800 on Fri Dec 15 22:25:07 MST 2017
+# Start of session at: Fri Mar  3 14:18:08 2023
+# Process ID: 4360
+# Current directory: F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Memory_Stage
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent24804 F:\GitHub\ECE_449\ECE449_16bitCPU\Project_Files\Memory_Stage\Memory_Stage.xpr
+# Log file: F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Memory_Stage/vivado.log
+# Journal file: F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Memory_Stage\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Memory_Stage/Memory_Stage.xpr
+update_compile_order -fileset sources_1
+launch_simulation
+launch_simulation
+launch_simulation
+launch_simulation
+launch_simulation
+source Memory_Stage_Testbench.tcl
+run 100 ns
+run 100 ns
+run 100 ns
+run 100 ns
+run 100 ns
+run 100 ns
+run 100 ns
+run 100 ns
+run 100 ns
+close_sim
