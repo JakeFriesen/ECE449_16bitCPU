@@ -71,13 +71,9 @@ component MUX2_1 is
 end component MUX2_1;
 
 --Signals
-signal rd_index1_intern : STD_LOGIC_VECTOR(2 downto 0);
-signal rd_index2_intern : STD_LOGIC_VECTOR(2 downto 0);
-signal ra_index : std_logic_vector(2 downto 0);
-signal rd_data1_out : STD_LOGIC_VECTOR(15 downto 0);
-signal output_en, halt_intern, IR_wb : STD_LOGIC;
-signal IR_intrn : STD_LOGIC_VECTOR(15 downto 0);
-signal A_internal, B_internal, outport_internal, outport_previous : std_logic_vector(15 downto 0) := (others=>'0');
+signal ra_index, rd_index1_intern, rd_index2_intern : STD_LOGIC_VECTOR(2 downto 0) := (others=>'0');
+signal output_en, halt_intern, IR_wb : STD_LOGIC := '0';
+signal rd_data1_out, IR_intrn, A_internal, B_internal, outport_internal, outport_previous : std_logic_vector(15 downto 0) := (others=>'0');
 
 -- Constant X"0000"
 constant zero : std_logic_vector(15 downto 0) := X"0000";
@@ -95,8 +91,6 @@ constant out_op : std_logic_vector(6 downto 0)  := "0100000";
 constant in_op : std_logic_vector(6 downto 0)   := "0100001";
 
 begin
-
-halt <= halt_intern;
 
 ra_index <= IR_intrn(8 downto 6);
     
@@ -118,7 +112,7 @@ with IR_intrn(15 downto 9) select
 	                    
 -- Determine RAW
 raw_handler : RAW port map(rst=>rst, clk=>clk, wr_en=>wr_enable, IR_wb=>IR_wb, ra_index=>ra_index,
-              wr_addr=>wr_index, rd_data1=>rd_index1_intern, rd_data2=>rd_index2_intern, halt=>halt_intern);
+              wr_addr=>wr_index, rd_data1=>rd_index1_intern, rd_data2=>rd_index2_intern, halt=>halt);
 -- Configure output_en
 output_en <= '1' when IR_intrn(15 downto 9) = out_op else '0';
 	
@@ -142,7 +136,7 @@ outport_internal <=
 		if rising_edge(clk) then
 			if (rst = '1') then
 				IR_intrn <= zero;
-			elsif (halt_intern = '0') then
+			else
 			    IR_intrn <= IR;
                 outport_previous <= outport_internal;
 			end if;
@@ -154,12 +148,12 @@ outport_internal <=
 		      B <= (others=>'0');
 		      IR_out <= (others=>'0');
 		      outport <= (others=>'0');
-		  elsif (halt_intern = '0') then
+		  else
 		      A <= A_internal;
 		      B <= B_internal;
 		      IR_out <= IR_intrn;
 		      outport <= outport_internal;
-		  end if;		
+		  end if;
 		end if;
 	end process;
 

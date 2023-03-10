@@ -21,28 +21,21 @@ architecture Behavioral of RAW is
 
 type wb_queue is array (integer range 0 to 7) of std_logic;
 
-signal wb_tracker : wb_queue;
+signal wb_tracker : wb_queue := (others=>'0');
 
-signal raw1 : std_logic;
-signal raw2 : std_logic;
+signal raw1 : std_logic := '0';
+signal raw2 : std_logic := '0';
+signal halt_intern : std_logic := '0';
 
 begin 
     
 process(clk)
 begin
 	if(rising_edge(clk)) then
-	
 		if(rst = '1') then
 			for i in 0 to 7 loop
 				wb_tracker(i) <= '0';
-			end loop;
-		else
-		    if (wr_en = '1') then
-		        wb_tracker(to_integer(unsigned(wr_addr))) <= '0';
-		    end if;
-            if (IR_wb = '1') then
-                wb_tracker(to_integer(unsigned(ra_index))) <= '1';
-            end if;
+			end loop;		
 		end if;
 	end if;
 end process;
@@ -52,13 +45,21 @@ raw2 <= wb_tracker(to_integer(unsigned(rd_data2))) when ra_index = rd_data2 else
 
 process(clk)
 begin
-    if(falling_edge(clk)) then
+    if(rst = '1') then
+			halt_intern <= '0';
+    elsif(falling_edge(clk)) then
+        if (wr_en = '1') then
+		    wb_tracker(to_integer(unsigned(wr_addr))) <= '0';
+		end if;
+        if (IR_wb = '1') then
+            wb_tracker(to_integer(unsigned(ra_index))) <= '1';
+        end if;
         if (raw1='1' or raw2='1') then
-            halt <= '1';
+            halt_intern <= '1';
         else
-            halt <= '0';
+            halt_intern <= '0';
         end if;
     end if;
 end process;
-
+halt <= halt_intern;
 end Behavioral;

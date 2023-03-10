@@ -22,7 +22,6 @@ entity EX_stage is
     Port ( 
            clk: in STD_LOGIC;
            rst: in STD_LOGIC;
-           halt: in STD_LOGIC;
            I_IR: in std_logic_vector(15 downto 0);
            I_A : in STD_LOGIC_VECTOR (15 downto 0);
            I_B : in STD_LOGIC_VECTOR (15 downto 0);
@@ -83,7 +82,7 @@ begin
             if (clk='1' and clk'event) then 
                 if(rst ='1') then
                     ALU_OP <= "000";
-                elsif(halt='0') then
+                else
                     IR <= I_IR;
                     ALU_OP <= I_IR(11 downto 9);
                     ALU_A <= I_A;          
