@@ -96,6 +96,8 @@ constant in_op : std_logic_vector(6 downto 0)   := "0100001";
 
 begin
 
+halt <= halt_intern;
+
 ra_index <= IR_intrn(8 downto 6);
     
 with IR_intrn(15 downto 9) select
@@ -115,7 +117,8 @@ with IR_intrn(15 downto 9) select
 	                    "000" when others;
 	                    
 -- Determine RAW
-raw_handler : RAW port map(rst=>rst, clk=>clk, wr_en=>wr_enable, IR_wb=>IR_wb, ra_index=>ra_index, wr_addr=>wr_index, rd_data1=>rd_index1_intern, rd_data2=>rd_index2_intern, halt=>halt_intern);
+raw_handler : RAW port map(rst=>rst, clk=>clk, wr_en=>wr_enable, IR_wb=>IR_wb, ra_index=>ra_index,
+              wr_addr=>wr_index, rd_data1=>rd_index1_intern, rd_data2=>rd_index2_intern, halt=>halt_intern);
 -- Configure output_en
 output_en <= '1' when IR_intrn(15 downto 9) = out_op else '0';
 	
@@ -151,15 +154,11 @@ outport_internal <=
 		      B <= (others=>'0');
 		      IR_out <= (others=>'0');
 		      outport <= (others=>'0');
-		      halt <= halt_intern;
 		  elsif (halt_intern = '0') then
 		      A <= A_internal;
 		      B <= B_internal;
 		      IR_out <= IR_intrn;
 		      outport <= outport_internal;
-		      halt <= halt_intern;
-		  elsif (halt_intern = '0') then
-		      halt <= halt_intern;
 		  end if;		
 		end if;
 	end process;

@@ -128,19 +128,13 @@ begin
         end if;
       end process;
       
-      
-
-        
         --OUTPUT AND INPUT PORT SELECT
-        
         
         result <= ALU_result;
         
 --        with OPCODE Select
 --                 OUTPUT <= ALU_A when "0010000",
 --                            X"0000" when others;
-        
-        
         
         --ALU input B select
         with ALU_OP Select

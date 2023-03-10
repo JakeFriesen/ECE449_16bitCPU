@@ -72,7 +72,7 @@ begin
                 IR <= (others=>'0');
                 NPC <= (others=>'0');
                 program_counter <= (others=>'0');
-            else
+            elsif( halt='0') then
             --Latch Outgoing signals
                 IR <= instr_data;   
                 NPC <= next_counter;   
@@ -87,12 +87,7 @@ begin
     
     --Program Counter Update
     next_counter <= PC_new when branch = '1' else
-                    program_counter when halt='0' else
+                    program_counter when halt='1' else
                     program_counter + 1;
-        
-
-
-
-
 
 end Behavioral;

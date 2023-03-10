@@ -39,16 +39,26 @@ begin
 		else
 		    if (wr_en = '1') then
 		        wb_tracker(to_integer(unsigned(wr_addr))) <= '0';
-            elsif (IR_wb = '1') then
+		    end if;
+            if (IR_wb = '1') then
                 wb_tracker(to_integer(unsigned(ra_index))) <= '1';
             end if;
 		end if;
 	end if;
 end process;
 
-raw1 <= wb_tracker(to_integer(unsigned(rd_data1)));
-raw2 <= wb_tracker(to_integer(unsigned(rd_data2)));
+raw1 <= wb_tracker(to_integer(unsigned(rd_data1))) when ra_index = rd_data1 else '0';
+raw2 <= wb_tracker(to_integer(unsigned(rd_data2))) when ra_index = rd_data2 else '0';
 
-halt <= '1' when raw1='1' or raw2='1' else '0';
+process(clk)
+begin
+    if(falling_edge(clk)) then
+        if (raw1='1' or raw2='1') then
+            halt <= '1';
+        else
+            halt <= '0';
+        end if;
+    end if;
+end process;
 
 end Behavioral;
