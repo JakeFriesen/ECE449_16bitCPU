@@ -13,7 +13,7 @@
    <zoom_setting>
       <ZoomStartTime time="0.000000 us"></ZoomStartTime>
       <ZoomEndTime time="31.000001 us"></ZoomEndTime>
-      <Cursor1Time time="14.000000 us"></Cursor1Time>
+      <Cursor1Time time="15.000000 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="152"></NameColumnWidth>
@@ -132,11 +132,19 @@
          <obj_property name="ElementShortName">ram_data[15:0]</obj_property>
          <obj_property name="ObjectShortName">ram_data[15:0]</obj_property>
       </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/IF_inst/instruction_data" type="array">
+         <obj_property name="ElementShortName">instruction_data[15:0]</obj_property>
+         <obj_property name="ObjectShortName">instruction_data[15:0]</obj_property>
+      </wvobject>
    </wvobject>
    <wvobject fp_name="group224" type="group">
       <obj_property name="label">ID</obj_property>
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/IR" type="array">
+         <obj_property name="ElementShortName">IR[15:0]</obj_property>
+         <obj_property name="ObjectShortName">IR[15:0]</obj_property>
+      </wvobject>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/outport_internal" type="array">
          <obj_property name="ElementShortName">outport_internal[15:0]</obj_property>
          <obj_property name="ObjectShortName">outport_internal[15:0]</obj_property>

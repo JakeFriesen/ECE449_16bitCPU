@@ -43,8 +43,8 @@ component Top_Level_CPU is
            reset_execute : in STD_LOGIC
            );
 end component Top_Level_CPU;
-signal in_port, out_port : std_logic_vector(15 downto 0);
-signal clk, rst : std_logic;
+signal in_port, out_port : std_logic_vector(15 downto 0) := (others=>'0');
+signal clk, rst : std_logic := '0';
 
 begin
 CPU : Top_Level_CPU port map(clk_100MHz=>clk, reset_load=>rst, reset_execute=>rst, IN_PORT=>in_port, OUT_PORT=>out_port);
