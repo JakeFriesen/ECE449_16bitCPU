@@ -31,31 +31,29 @@ begin
     
 process(clk)
 begin
-	if(rising_edge(clk)) then
+    if(rising_edge(clk)) then
 		if(rst = '1') then
 			for i in 0 to 7 loop
 				wb_tracker(i) <= '0';
-		    end loop;		
-		end if;
-		if (wr_en = '1') then
-		    wb_tracker(to_integer(unsigned(wr_addr))) <= '0';
-		end if;
-        if (IR_wb = '1') then
-            wb_tracker(to_integer(unsigned(ra_index))) <= '1';
+		    end loop;
+		    halt_intern <= '0';		
+		else
+            if (IR_wb='1') then
+                wb_tracker(to_integer(unsigned(ra_index))) <= '1';
+            end if;
         end if;
-	elsif(falling_edge(clk)) then
-	    if(rst = '1') then
-	        halt_intern <= '0';
-        elsif (raw1='1' or raw2='1') then
-            halt_intern <= '1';
-        else
-            halt_intern <= '0';
+    elsif(falling_edge(clk)) then
+        if (wr_en='1') then
+                wb_tracker(to_integer(unsigned(wr_addr))) <= '0';
         end if;
-    end if;	
+    end if;  
 end process;
 
 raw1 <= wb_tracker(to_integer(unsigned(rd_data1))) when ra_index = rd_data1 else '0';
 raw2 <= wb_tracker(to_integer(unsigned(rd_data2))) when ra_index = rd_data2 else '0';
-halt <= halt_intern;
+
+halt <= '1' when raw1='1' or raw2='1' else
+        '0' when rst='1' else 
+        '0';
 
 end Behavioral;

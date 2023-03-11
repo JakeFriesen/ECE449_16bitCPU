@@ -148,11 +148,16 @@ outport_internal <=
 		      B <= (others=>'0');
 		      IR_out <= (others=>'0');
 		      outport <= (others=>'0');
-		  else
+		  elsif (halt_intern='0') then
 		      A <= A_internal;
 		      B <= B_internal;
 		      IR_out <= IR_intrn;
 		      outport <= outport_internal;
+		  elsif (halt_intern='1') then
+		      A <= (others=>'0');
+		      B <= (others=>'0');
+		      IR_out <= (others=>'0');
+		      outport <= (others=>'0');
 		  end if;
 		end if;
 	end process;

@@ -42,8 +42,8 @@ entity RAM is
 end RAM;
 
 architecture Behavioral of RAM is
-    signal wea : std_logic_vector (0 downto 0);
-    signal clka, clkb, regcea, regceb, rsta, rstb : std_logic;
+    signal wea : std_logic_vector (0 downto 0) := (others=>'0');
+    signal clka, clkb, regcea, regceb, rsta, rstb : std_logic := '0';
 
 begin
     -- xpm_memory_dpdistram: Dual Port Distributed RAM

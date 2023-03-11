@@ -47,7 +47,6 @@ end Intruction_Fetch_Stage;
 architecture Behavioral of Intruction_Fetch_Stage is
     --Signals
     signal branch : std_logic := '0';
-    signal instr_data : std_logic_vector(15 downto 0) := (others=>'0');
     signal PC_new, next_counter : std_logic_vector (5 downto 0) := (others=>'0');
     signal program_counter : std_logic_vector (5 downto 0) := (others=>'0');
     
@@ -59,34 +58,27 @@ begin
        
         if(rising_edge(clk)) then
             if(rst = '1') then
-            --Reset
-                 branch <= '0';
-                 PC_new <= (others=>'0');
-            --Latch Incoming signals
+                --Reset
+                NPC <= (others=>'0');
+                branch <= '0';
+                PC_new <= (others=>'0');
+            else
+                --Latch Incoming signals
+                program_counter <= next_counter;
                 branch <= br_in;
                 PC_new <= PC_in;
             end if;
         end if;
-        if(falling_edge(clk)) then
-            if(rst = '1') then
-                IR <= (others=>'0');
-                NPC <= (others=>'0');
-                program_counter <= (others=>'0');
-            elsif( halt='0') then
-            --Latch Outgoing signals
-                IR <= instr_data;   
-                NPC <= next_counter;   
-                program_counter <= next_counter;
-            end if;          
-        end if;
     end process;
-    
-    --RAM Access
-    ram_addr <= program_counter;
-    instr_data <= ram_data;
+   
+    -- Ram Access
+    ram_addr <= program_counter when rst='0' else "000000";
+    IR <= ram_data when rst='0' else x"0000";  
     
     --Program Counter Update
+    NPC <= next_counter;
     next_counter <= PC_new when branch = '1' else
+                    "000000" when rst='1' else
                     program_counter when halt='1' else
                     program_counter + 1;
 
