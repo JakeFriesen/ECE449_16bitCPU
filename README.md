@@ -30,6 +30,11 @@
 - [ ] Hardware Testing
     - Get IN_PORT and OUT_PORT connected to lights and keypad
     - Make sure timing is working well
+- [ ] IF will miss the first instruction after reset
+    - This may only be an issue when we aren't using the bootloader, but it's important to keep in mind while testing
+    - Can be bypassed by adding a nop as the first instruction
+    - Has to do with coming out of reset, won't output the signal at the right time before the counter is incremented
+    - Look at negative reset
     
 
 
