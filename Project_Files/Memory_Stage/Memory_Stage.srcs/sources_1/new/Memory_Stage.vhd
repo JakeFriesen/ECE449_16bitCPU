@@ -101,7 +101,7 @@ begin
                 ALU_out <= ALU;
             end if;
             
-            if(IR(15 downto 9) = mov_op) then
+            if(IR(15 downto 9) = mov_op or IR(15 downto 9) = out_op) then
                 Mem_out <= A_in;
             else
                 Mem_out <= ram_out;

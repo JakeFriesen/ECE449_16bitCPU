@@ -26,9 +26,9 @@ entity Decode is
 			  ov_data : in std_logic_vector(15 downto 0);
 			  ov_enable : in std_logic;
 			  loadIMM: in std_logic;
-              load_align: in std_logic;
+              load_align: in std_logic
 			  --Outport
-			  outport : out std_logic_vector(15 downto 0)
+--			  outport : out std_logic_vector(15 downto 0)
 	    );			  
 end Decode;
 
@@ -94,7 +94,7 @@ with IR_intrn(15 downto 9) select
 load_en <= '0';
 
 -- Configure output_en
-output_en <= '1' when IR_intrn(15 downto 9) = out_op else '0';
+--output_en <= '1' when IR_intrn(15 downto 9) = out_op else '0';
 
 --reg file
 --TODO: FIX THE RST HERE, ITS HARDCODED AND SHOULDN"T BE!!!!
@@ -106,10 +106,10 @@ reg_file : register_file port map(rst => '0', clk => clk, rd_index1 => rd_index1
 m1 : MUX2_1 port map(x => rd_data1_out, y => zero , s => load_en, z => A_internal);
 --m2 : MUX2_1 port map(x => zero, y => rd_data1_out, s => output_en, z => outport_internal);
 --Output should remain constant after an OUT opcode.
-outport_internal <=
-    rd_data1_out when output_en = '1' else
-    --Set to outport previous to fix timing issues
-    outport_previous;
+--outport_internal <=
+--    rd_data1_out when output_en = '1' else
+--    --Set to outport previous to fix timing issues
+--    outport_previous;
     
       
 	--latching		
@@ -122,7 +122,7 @@ outport_internal <=
 			else
 			    IR_intrn <= IR;
 				npc <= npc_in;
-                outport_previous <= outport_internal;
+--                outport_previous <= outport_internal;
 			end if;
 		end if;
 		--Latch Output Signals
@@ -138,7 +138,7 @@ outport_internal <=
 		      IR_out <= IR_intrn;
 		      npc_out <= npc;
 		  end if;
-          outport <= outport_internal;		
+--          outport <= outport_internal;		
 		end if;
 	end process;
 
