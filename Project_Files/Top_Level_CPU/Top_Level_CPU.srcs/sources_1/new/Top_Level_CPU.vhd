@@ -32,119 +32,126 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity Top_Level_CPU is
-    Port ( IN_PORT : in STD_LOGIC_VECTOR (15 downto 0);
-           OUT_PORT : out STD_LOGIC_VECTOR (15 downto 0);
-           clk_100MHz : in STD_LOGIC;
-           reset_load : in STD_LOGIC;
-           reset_execute : in STD_LOGIC
-           );
+    Port ( 
+    IN_PORT : in STD_LOGIC_VECTOR (15 downto 0);
+    OUT_PORT : out STD_LOGIC_VECTOR (15 downto 0);
+    clk_100MHz : in STD_LOGIC;
+    reset_load : in STD_LOGIC;
+    reset_execute : in STD_LOGIC
+   );
 end Top_Level_CPU;
 
 architecture Behavioral of Top_Level_CPU is
 --Component declaration
 component Intruction_Fetch_Stage is
-    Port ( IR : out STD_LOGIC_VECTOR (15 downto 0);
-           NPC : out STD_LOGIC_VECTOR (15 downto 0);
-           clk : in STD_LOGIC;
-           rst : in STD_LOGIC;
-           PC_in : in STD_LOGIC_VECTOR (15 downto 0);
-           ram_addr : out std_logic_vector (15 downto 0);
-           ram_data : in std_logic_vector (15 downto 0);
-           br_in : in STD_LOGIC);
+    Port ( 
+    IR : out STD_LOGIC_VECTOR (15 downto 0);
+    NPC : out STD_LOGIC_VECTOR (15 downto 0);
+    clk : in STD_LOGIC;
+    rst : in STD_LOGIC;
+    PC_in : in STD_LOGIC_VECTOR (15 downto 0);
+    ram_addr : out std_logic_vector (15 downto 0);
+    ram_data : in std_logic_vector (15 downto 0);
+    br_in : in STD_LOGIC
+    );
 end component Intruction_Fetch_Stage;
 component Decode is
     Port ( 
-          rst : in STD_LOGIC;
-          clk : in STD_LOGIC;
-          IR : in  STD_LOGIC_VECTOR (15 downto 0);
-          npc_in : in  STD_LOGIC_VECTOR (15 downto 0);
-          npc_out : out STD_LOGIC_VECTOR (15 downto 0);
-          A : out std_logic_vector(15 downto 0); 
-          B : out std_logic_vector(15 downto 0);
-          IR_out : out std_logic_vector(15 downto 0);
-          wr_index : in std_logic_vector(2 downto 0);
-          wr_data : in std_logic_vector(15 downto 0);
-          wr_enable : in std_logic;
-          ov_data : in std_logic_vector(15 downto 0);
-          ov_enable : in std_logic;
-          loadIMM: in std_logic;
-          load_align: in std_logic
---          outport : out std_logic_vector(15 downto 0)
-	    );			  
+    rst : in STD_LOGIC;
+    clk : in STD_LOGIC;
+    IR : in  STD_LOGIC_VECTOR (15 downto 0);
+    npc_in : in  STD_LOGIC_VECTOR (15 downto 0);
+    I_br_clear : in STD_LOGIC;
+    npc_out : out STD_LOGIC_VECTOR (15 downto 0);
+    A : out std_logic_vector(15 downto 0); 
+    B : out std_logic_vector(15 downto 0);
+    IR_out : out std_logic_vector(15 downto 0);
+    wr_index : in std_logic_vector(2 downto 0);
+    wr_data : in std_logic_vector(15 downto 0);
+    wr_enable : in std_logic;
+    ov_data : in std_logic_vector(15 downto 0);
+    ov_enable : in std_logic;
+    loadIMM: in std_logic;
+    load_align: in std_logic
+    );			  
 end component Decode;
 component EX_stage is
-       Port ( 
-       clk: in STD_LOGIC;
-       rst: in STD_LOGIC;
-       I_IR: in std_logic_vector(15 downto 0);
-       I_A : in STD_LOGIC_VECTOR (15 downto 0);
-       I_B : in STD_LOGIC_VECTOR (15 downto 0);
---           INPUT: in STD_LOGIC_VECTOR(15 downto 0);
-       I_NPC : in STD_LOGIC_VECTOR (15 downto 0);        
-       O_result : out STD_LOGIC_VECTOR (15 downto 0);
-       O_Vdata : out STD_LOGIC_VECTOR (15 downto 0);
-       O_A : out STD_LOGIC_VECTOR (15 downto 0);
-       O_B : out STD_LOGIC_VECTOR (15 downto 0);
-     --  O_Z : out STD_LOGIC;
-      -- O_N : out STD_LOGIC;
-     --  O_V : out STD_LOGIC;
-    --   O_V_EN: out STD_LOGIC; 
-       O_Z_OUTPUT : out std_logic;
-       O_N_OUTPUT: out std_logic;
---           O_OUTPUT: out std_logic_vector(15 downto 0);
-       O_IR: out std_logic_vector(15 downto 0);
-       O_NPC : out std_logic_vector(15 downto 0)
-       );
+    Port ( 
+    clk: in STD_LOGIC;
+    rst: in STD_LOGIC;
+    I_IR: in std_logic_vector(15 downto 0);
+    I_A : in STD_LOGIC_VECTOR (15 downto 0);
+    I_B : in STD_LOGIC_VECTOR (15 downto 0);
+    I_NPC : in STD_LOGIC_VECTOR (15 downto 0); 
+    I_branch_clear : in STD_LOGIC;       
+    O_result : out STD_LOGIC_VECTOR (15 downto 0);
+    O_Vdata : out STD_LOGIC_VECTOR (15 downto 0);
+    O_A : out STD_LOGIC_VECTOR (15 downto 0);
+    O_B : out STD_LOGIC_VECTOR (15 downto 0);
+    O_Z_OUTPUT : out std_logic;
+    O_N_OUTPUT: out std_logic;
+    O_IR: out std_logic_vector(15 downto 0);
+    O_NPC : out std_logic_vector(15 downto 0)
+    );
 end component EX_stage;
 component Memory_Stage is
-   Port ( ALU_in : in STD_LOGIC_VECTOR (15 downto 0);
-        IR_in : in STD_LOGIC_VECTOR (15 downto 0);
-        N : in STD_LOGIC;
-        Z : in STD_LOGIC;
-        clk, rst : in STD_LOGIC;
-        branch : out STD_LOGIC;
-        branch_addr : out STD_LOGIC_VECTOR (15 downto 0);
-        pipe_flush : out std_logic;
-        Mem_wr: out std_logic;
-        Mem_en: out std_logic;
-        Mem_in: out STD_LOGIC_VECTOR (15 downto 0);
-        Mem_addr: out std_logic_vector (15 downto 0);
-        Ram_out: in std_logic_vector (15 downto 0);
-        Mem_out : out STD_LOGIC_VECTOR (15 downto 0);
-        ALU_out : out STD_LOGIC_VECTOR (15 downto 0);
-        NPC_in : in STD_LOGIC_VECTOR (15 downto 0);
-        IR_out : out STD_LOGIC_VECTOR (15 downto 0);
-        Overflow_in, A_in, B_in : in STD_LOGIC_VECTOR (15 downto 0);
-        Overflow_out : out STD_LOGIC_VECTOR (15 downto 0));
+   Port ( 
+   ALU_in : in STD_LOGIC_VECTOR (15 downto 0);
+    IR_in : in STD_LOGIC_VECTOR (15 downto 0);
+    N : in STD_LOGIC;
+    Z : in STD_LOGIC;
+    clk : in STD_LOGIC;
+    rst : in STD_LOGIC;
+    branch : out STD_LOGIC;
+    branch_addr : out STD_LOGIC_VECTOR (15 downto 0);
+    pipe_flush : out std_logic;
+    Mem_wr : out std_logic;
+    Mem_en : out std_logic;
+    Mem_in : out STD_LOGIC_VECTOR (15 downto 0);
+    Mem_addr : out std_logic_vector (15 downto 0);
+    Ram_out : in std_logic_vector (15 downto 0);
+    Mem_out : out STD_LOGIC_VECTOR (15 downto 0);
+    ALU_out : out STD_LOGIC_VECTOR (15 downto 0);
+    NPC_in : in STD_LOGIC_VECTOR (15 downto 0);
+    IR_out : out STD_LOGIC_VECTOR (15 downto 0);
+    Overflow_in : in STD_LOGIC_VECTOR (15 downto 0);
+    A_in : in STD_LOGIC_VECTOR (15 downto 0);
+    B_in : in STD_LOGIC_VECTOR (15 downto 0);
+    Overflow_out : out STD_LOGIC_VECTOR (15 downto 0)
+    );
 end component Memory_Stage;
 component Write_Back_Stage is
-    Port ( clk, rst : in std_logic;
-           ALU_in : in STD_LOGIC_VECTOR (15 downto 0);
-           Overflow_in : in STD_LOGIC_VECTOR (15 downto 0);
-           Mem_in : in STD_LOGIC_VECTOR (15 downto 0);
-           IR_in : in STD_LOGIC_VECTOR (15 downto 0);
-           IN_PORT : in STD_LOGIC_VECTOR (15 downto 0);
-           OUT_PORT : out STD_LOGIC_VECTOR (15 downto 0);
-           wr_data : out STD_LOGIC_VECTOR (15 downto 0);
-           wr_addr : out STD_LOGIC_VECTOR (2 downto 0);
-           wr_en : out std_logic;
-           v_en : out std_logic;
-           loadIMM: out std_logic;
-           load_align: out std_logic;
-           V_data : out STD_LOGIC_VECTOR (15 downto 0));
+    Port ( 
+    clk : in std_logic; 
+    rst : in std_logic;
+    ALU_in : in STD_LOGIC_VECTOR (15 downto 0);
+    Overflow_in : in STD_LOGIC_VECTOR (15 downto 0);
+    Mem_in : in STD_LOGIC_VECTOR (15 downto 0);
+    IR_in : in STD_LOGIC_VECTOR (15 downto 0);
+    IN_PORT : in STD_LOGIC_VECTOR (15 downto 0);
+    OUT_PORT : out STD_LOGIC_VECTOR (15 downto 0);
+    wr_data : out STD_LOGIC_VECTOR (15 downto 0);
+    wr_addr : out STD_LOGIC_VECTOR (2 downto 0);
+    wr_en : out std_logic;
+    v_en : out std_logic;
+    loadIMM: out std_logic;
+    load_align: out std_logic;
+    V_data : out STD_LOGIC_VECTOR (15 downto 0)
+    );
 end component Write_Back_Stage;
 component RAM is
-    Port ( douta : out STD_LOGIC_VECTOR (15 downto 0);
-           doutb : out STD_LOGIC_VECTOR (15 downto 0);
-           addra : in std_logic_vector (15 downto 0);
-           addrb : in std_logic_vector (15 downto 0);
-           dina : in std_logic_vector (15 downto 0);
-           wr_en : in std_logic;
-           ena : in std_logic;
-           enb : in std_logic;
-           clk : in std_logic;
-           rst : in std_logic);
-           
+    Port ( 
+    douta : out STD_LOGIC_VECTOR (15 downto 0);
+    doutb : out STD_LOGIC_VECTOR (15 downto 0);
+    addra : in std_logic_vector (15 downto 0);
+    addrb : in std_logic_vector (15 downto 0);
+    dina : in std_logic_vector (15 downto 0);
+    wr_en : in std_logic;
+    ena : in std_logic;
+    enb : in std_logic;
+    clk : in std_logic;
+    rst : in std_logic
+    );           
 end component RAM;
 --clk rst
 signal clk, rst : std_logic := '0';
@@ -173,7 +180,8 @@ IF_inst : Intruction_Fetch_Stage port map(
 );
 ID_inst : Decode port map(
     clk=>clk, 
-    rst=>MEM_pipe_flush, 
+    rst=>rst, 
+    I_br_clear=>MEM_pipe_flush,
     IR=>IF_ID_IR, 
     wr_index=>WB_ID_wr_addr, 
     wr_data=>WB_ID_wr_data, 
@@ -190,10 +198,11 @@ ID_inst : Decode port map(
 );
 EX_inst : EX_stage port map(
     clk=>clk, 
-    rst=>MEM_pipe_flush, 
+    rst=>rst, 
     I_IR=>ID_EX_IR, 
     I_A=>ID_EX_A, 
     I_B=>ID_EX_B, 
+    I_branch_clear => MEM_pipe_flush,
     O_result=>EX_MEM_alu_res, 
     O_vdata=>EX_MEM_v_data, 
     O_Z_OUTPUT=>EX_MEM_Z_flag, 
