@@ -57,8 +57,9 @@ component RAW is
             IR_wb : in std_logic;
             ra_index : in std_logic_vector(2 downto 0);
             wr_addr : in std_logic_vector(2 downto 0);
-            rd_data1 : in std_logic_vector(2 downto 0);
-            rd_data2 : in std_logic_vector(2 downto 0);
+            rd_index1 : in std_logic_vector(2 downto 0);
+            rd_index2 : in std_logic_vector(2 downto 0);
+            rd_enable : in std_logic;
             halt : out std_logic
          );
 end component RAW;
@@ -72,8 +73,8 @@ end component MUX2_1;
 
 --Signals
 signal ra_index, rd_index1_intern, rd_index2_intern : STD_LOGIC_VECTOR(2 downto 0) := (others=>'0');
-signal output_en, halt_intern, IR_wb : STD_LOGIC := '0';
-signal rd_data1_out, IR_intrn, A_internal, B_internal, outport_internal, outport_previous : std_logic_vector(15 downto 0) := (others=>'0');
+signal output_en, halt_intern, IR_wb, rd_enable : STD_LOGIC := '0';
+signal rd_data1_out, IR_intrn, A_internal, B_internal, B_data, outport_internal, outport_previous : std_logic_vector(15 downto 0) := (others=>'0');
 
 -- Constant X"0000"
 constant zero : std_logic_vector(15 downto 0) := X"0000";
@@ -109,10 +110,13 @@ with IR_intrn(15 downto 9) select
 	rd_index2_intern <= IR_intrn(2 downto 0) when add_op | sub_op | mul_op,
 	                    IR_intrn(5 downto 3) when nand_op,
 	                    "000" when others;
+with IR_intrn(15 downto 9) select	
+    rd_enable <= '1' when add_op | sub_op | mul_op | nand_op | shl_op | shr_op | test_op | out_op,
+                 '0' when others;
 	                    
 -- Determine RAW
 raw_handler : RAW port map(rst=>rst, clk=>clk, wr_en=>wr_enable, IR_wb=>IR_wb, ra_index=>ra_index,
-              wr_addr=>wr_index, rd_data1=>rd_index1_intern, rd_data2=>rd_index2_intern, halt=>halt);
+              wr_addr=>wr_index, rd_index1=>rd_index1_intern, rd_index2=>rd_index2_intern, halt=>halt_intern, rd_enable=>rd_enable);
 -- Configure output_en
 output_en <= '1' when IR_intrn(15 downto 9) = out_op else '0';
 	
@@ -123,7 +127,9 @@ reg_file : register_file port map(rst => rst, clk => clk, rd_index1 => rd_index1
 
 --MUX assignments--
 m1 : MUX2_1 port map(x => rd_data1_out, y => zero, s => output_en, z => A_internal);
+--TODO: Forwarding from wr_data to A/B_internal when possible
 
+halt <= halt_intern;
 --Output should remain constant after an OUT opcode.
 outport_internal <=
     rd_data1_out when output_en = '1' else
