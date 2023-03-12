@@ -28,13 +28,11 @@ entity EX_stage is
            I_A : in STD_LOGIC_VECTOR (15 downto 0);
            I_B : in STD_LOGIC_VECTOR (15 downto 0);
            I_NPC : in STD_LOGIC_VECTOR (15 downto 0);
+           I_branch_clear : in STD_LOGIC;
            O_result : out STD_LOGIC_VECTOR (15 downto 0);
            O_Vdata : out STD_LOGIC_VECTOR (15 downto 0);
            O_A : out STD_LOGIC_VECTOR (15 downto 0);
            O_B : out STD_LOGIC_VECTOR (15 downto 0);
-         --  O_Z : out STD_LOGIC;
-          -- O_N : out STD_LOGIC;
-         --  O_V : out STD_LOGIC;
            O_Z_OUTPUT : out std_logic;
            O_N_OUTPUT: out std_logic;
            O_IR: out std_logic_vector(15 downto 0);
@@ -74,14 +72,22 @@ signal disp_l, disp_s : std_logic_vector (15 downto 0);
 begin
 
    --ALU Instance
-    ALU_0: ALU port map( ALU_A, ALU_B, ALU_OP, ALU_result, ALU_v_result, Z, N, V);
+    ALU_0: ALU port map( 
+        A=>ALU_A, 
+        B=>ALU_B, 
+        sel=>ALU_OP, 
+        result=>ALU_result, 
+        v_result=>ALU_v_result, 
+        Z=>Z, 
+        N=>N, 
+        V=>V
+    );
    
     process (clk)
     begin
         --Positive Latch
         if (clk='1' and clk'event) then 
-            if(rst ='1') then
-                --ALU_OP <= "000";
+            if(rst ='1' or I_branch_clear = '1') then
                 IR <= (others=>'0');
                 A_data <= (others=>'0');
                 B_data <= (others=>'0');
@@ -89,7 +95,6 @@ begin
                 NPC <= (others=>'0');
             else
                 IR <= I_IR;
-                --ALU_OP <= I_IR(11 downto 9);
                 A_data <= I_A;          
                 B_data <= I_B;
                 OPCODE<= I_IR(15 downto 9);
@@ -117,11 +122,6 @@ begin
                 O_Vdata <= ALU_V_RESULT;
                 O_A <= I_A;
                 O_B <= I_B;
-               -- O_Vdata <= Vdata;
-               -- O_z <= z;
-              --  O_N <= n;
-              --  O_V <= v;
-             --   O_V_en <= v_en;
                 O_Z_OUTPUT <= z_output;
                 O_N_output <= n_output;
                 O_IR <= IR;
