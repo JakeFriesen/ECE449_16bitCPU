@@ -50,6 +50,7 @@ component Intruction_Fetch_Stage is
     clk : in STD_LOGIC;
     rst : in STD_LOGIC;
     PC_in : in STD_LOGIC_VECTOR (15 downto 0);
+    halt : in STD_LOGIC;
     ram_addr : out std_logic_vector (15 downto 0);
     ram_data : in std_logic_vector (15 downto 0);
     br_in : in STD_LOGIC
@@ -72,7 +73,8 @@ component Decode is
     ov_data : in std_logic_vector(15 downto 0);
     ov_enable : in std_logic;
     loadIMM: in std_logic;
-    load_align: in std_logic
+    load_align: in std_logic;
+    halt : out std_logic
     );			  
 end component Decode;
 component EX_stage is
@@ -166,6 +168,8 @@ signal loadIMM, load_align: std_logic;
 signal ram_addra, ram_addrb : std_logic_vector(15 downto 0);
 signal ram_dataa, ram_datab, ram_dina, Overflow : std_logic_vector(15 downto 0);
 signal ram_wr_en, ram_ena, ram_enb, out_en : std_logic;
+-- Halt for RAW
+signal halt : std_logic := '0';
 
 begin
 IF_inst : Intruction_Fetch_Stage port map(
@@ -176,7 +180,8 @@ IF_inst : Intruction_Fetch_Stage port map(
     PC_in=>MEM_IF_br_addr, 
     ram_addr=>ram_addrb, 
     ram_data=>ram_datab, 
-    br_in=>MEM_IF_br
+    br_in=>MEM_IF_br,
+    halt=>halt
 );
 ID_inst : Decode port map(
     clk=>clk, 
@@ -192,7 +197,8 @@ ID_inst : Decode port map(
     B=>ID_EX_B, 
     IR_out=>ID_EX_IR,
     loadIMM=>loadIMM, 
-    load_align=> load_align, 
+    load_align=> load_align,
+    halt => halt, 
     npc_out=>ID_EX_NPC, 
     npc_in=>IF_ID_NPC
 );

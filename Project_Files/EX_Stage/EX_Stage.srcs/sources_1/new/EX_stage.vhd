@@ -57,17 +57,18 @@ component ALU is
 end component;
 
 --signal in_data_sel: std_logic;
-signal ALU_A, ALU_B, IR: std_logic_vector( 15 downto 0);
-signal ALU_OP: std_logic_vector (2 downto 0);
-signal ALU_result, Vdata, ALU_v_result, result: std_logic_vector(15 downto 0);
-signal z, n, v, v_en: std_logic;
-signal z_output, n_output: std_logic := '0';
-signal data_sel: std_logic;    
-signal B_data, A_data, imm_data: std_logic_vector(15 downto 0);
-signal OPCODE: std_logic_vector(6 downto 0);
-signal result_sel,  output_sel: std_logic;
+signal ALU_A, ALU_B, IR: std_logic_vector( 15 downto 0) := (others=>'0');
+signal ALU_OP: std_logic_vector (2 downto 0) := (others=>'0');
+signal ALU_result, Vdata, ALU_v_result, result: std_logic_vector(15 downto 0) := (others=>'0');
+signal z, n, v, v_en: std_logic := '0';
+signal z_output, n_output: std_logic := '0'; 
+signal A_data: std_logic_vector(15 downto 0);
 signal NPC : std_logic_vector (15 downto 0);
 signal disp_l, disp_s : std_logic_vector (15 downto 0);
+signal data_sel: std_logic := '0';    
+signal B_data, imm_data: std_logic_vector(15 downto 0) := (others=>'0');
+signal OPCODE: std_logic_vector(6 downto 0) := (others=>'0');
+signal result_sel,  output_sel: std_logic := '0';
 
 begin
 

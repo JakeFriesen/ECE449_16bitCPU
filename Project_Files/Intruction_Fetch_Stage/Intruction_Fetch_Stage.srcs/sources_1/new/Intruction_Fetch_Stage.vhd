@@ -38,6 +38,7 @@ entity Intruction_Fetch_Stage is
            clk : in STD_LOGIC;
            rst : in STD_LOGIC;
            PC_in : in STD_LOGIC_VECTOR (15 downto 0);
+           halt : in STD_LOGIC;
            ram_addr : out std_logic_vector (15 downto 0);
            ram_data : in std_logic_vector (15 downto 0);
            br_in : in STD_LOGIC);
@@ -45,55 +46,55 @@ end Intruction_Fetch_Stage;
 
 architecture Behavioral of Intruction_Fetch_Stage is
     --Signals
-    signal branch : std_logic;
-    signal instr_data : std_logic_vector(15 downto 0);
-    signal PC_new, next_counter : std_logic_vector (15 downto 0);
-    signal program_counter : std_logic_vector (15 downto 0) := (others=>'0');
+    signal branch : std_logic := '0';
+    signal instruction_data : std_logic_vector(15 downto 0) := (others=>'0');
+    signal PC_new : std_logic_vector (5 downto 0) := (others=>'0');
+    signal program_counter, next_counter : std_logic_vector (5 downto 0) := (others=>'0');
     
 begin
 
-    
     --Latch Process
     process(clk)
     begin
        
-        if(clk'event and clk = '1') then
-            if(rst = '1') then
-            --Reset
-                 branch <= '0';
-                 PC_new <= (others=>'0');
-            else 
-            --Latch Incoming signals
+        if(rising_edge(clk)) then
+--            if(rst = '1') then
+--                --Reset
+--                NPC <= (others=>'0');
+--                branch <= '0';
+--                PC_new <= (others=>'0');
+--            elsif (halt='0') then
+--                --Latch Incoming signals
                 branch <= br_in;
                 PC_new <= PC_in;
-            end if;
+--            elsif (halt='1') then
+--                program_counter <= program_counter;
+--            elsif (branch='1') then
+--                program_counter <= PC_new;
+--            end if;
         end if;
-        if(clk'event and clk = '0') then
-            if(rst = '1') then
+        if(falling_edge(clk)) then
+            if (rst='1') then
                 IR <= (others=>'0');
                 NPC <= (others=>'0');
                 program_counter <= (others=>'0');
             else
-            --Latch Outgoing signals
-                IR <= instr_data;   
-                NPC <= program_counter;   
                 program_counter <= next_counter;
-            end if;          
+                NPC <= program_counter;
+                IR <= instruction_data;
+            end if;
         end if;
     end process;
-    
+        
     --RAM Access
     ram_addr <= program_counter;
-    instr_data <= ram_data;
+    instruction_data <= instruction_data when halt = '1' else
+                        ram_data;
     
     
     --Program Counter Update
     next_counter <= PC_new when branch = '1' else
+                    program_counter when halt = '1' else
                     program_counter + 1;
-        
-
-
-
-
 
 end Behavioral;

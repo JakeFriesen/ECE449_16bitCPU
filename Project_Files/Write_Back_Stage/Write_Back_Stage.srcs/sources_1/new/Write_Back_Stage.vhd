@@ -50,7 +50,7 @@ entity Write_Back_Stage is
 end Write_Back_Stage;
 
 architecture Behavioral of Write_Back_Stage is
-    signal ALU, Overflow, IR, input_port, Mem, out_port_internal, out_port_previous : std_logic_vector (15 downto 0);
+    signal ALU, Overflow, IR, input_port, Mem, out_port_internal, out_port_previous : std_logic_vector (15 downto 0):= (others=>'0');
 
     
 begin
