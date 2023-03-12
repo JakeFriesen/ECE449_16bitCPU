@@ -48,8 +48,8 @@ architecture Behavioral of Intruction_Fetch_Stage is
     --Signals
     signal branch : std_logic := '0';
     signal instruction_data : std_logic_vector(15 downto 0) := (others=>'0');
-    signal PC_new : std_logic_vector (5 downto 0) := (others=>'0');
-    signal program_counter, next_counter : std_logic_vector (5 downto 0) := (others=>'0');
+    signal PC_new : std_logic_vector (15 downto 0) := (others=>'0');
+    signal program_counter, next_counter : std_logic_vector (15 downto 0) := (others=>'0');
     
 begin
 
@@ -58,30 +58,28 @@ begin
     begin
        
         if(rising_edge(clk)) then
---            if(rst = '1') then
---                --Reset
---                NPC <= (others=>'0');
+            if(rst = '1') then
 --                branch <= '0';
 --                PC_new <= (others=>'0');
---            elsif (halt='0') then
---                --Latch Incoming signals
-                branch <= br_in;
-                PC_new <= PC_in;
---            elsif (halt='1') then
---                program_counter <= program_counter;
---            elsif (branch='1') then
---                program_counter <= PC_new;
---            end if;
+            else
+                --Latch Incoming signals
+--                branch <= br_in;
+--                PC_new <= PC_in;
+            end if;
         end if;
         if(falling_edge(clk)) then
             if (rst='1') then
                 IR <= (others=>'0');
                 NPC <= (others=>'0');
                 program_counter <= (others=>'0');
+                branch <= '0';
+                PC_new <= (others=>'0');
             else
                 program_counter <= next_counter;
                 NPC <= program_counter;
                 IR <= instruction_data;
+                branch <= br_in;
+                PC_new <= PC_in;                
             end if;
         end if;
     end process;

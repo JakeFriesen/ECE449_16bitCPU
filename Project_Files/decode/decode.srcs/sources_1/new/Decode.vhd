@@ -130,11 +130,7 @@ m1 : MUX2_1 port map(x => rd_data1_out, y => zero, s => output_en, z => A_intern
 --TODO: Forwarding from wr_data to A/B_internal when possible
 
 halt <= halt_intern;
---Output should remain constant after an OUT opcode.
-outport_internal <=
-    rd_data1_out when output_en = '1' else
-    --Set to outport previous to fix timing issues
-    outport_previous;
+
 
 	--latching		
 	process(clk)
@@ -146,7 +142,6 @@ outport_internal <=
 			else
 			    IR_intrn <= IR;
 				npc <= npc_in;
-                outport_previous <= outport_internal;
 			end if;
 		end if;
 		--Latch Output Signals
@@ -155,19 +150,16 @@ outport_internal <=
 		      A <= (others=>'0');
 		      B <= (others=>'0');
 		      IR_out <= (others=>'0');
-		      outport <= (others=>'0');
 			  npc_out <= (others=>'0');
 		  elsif (halt_intern='0') then
 		      A <= A_internal;
 		      B <= B_internal;
 		      IR_out <= IR_intrn;
-		      outport <= outport_internal;
 			  npc_out <= npc;
 		  elsif (halt_intern='1') then
 		      A <= (others=>'0');
 		      B <= (others=>'0');
 		      IR_out <= (others=>'0');
-		      outport <= (others=>'0');
 			  npc_out <= npc;
 		  end if;
 		end if;
