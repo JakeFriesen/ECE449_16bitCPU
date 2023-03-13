@@ -4,10 +4,17 @@
 #### Samuel Pacheco, V00883523
 
 ## Things to Do
-- [ ] Format B Instruction
+- [x] Format B Instruction
     - [x] Reset needs to be redone - should be a specific signal to flush buffer contents, not reset everything
     - [x] OUT_PORT needs to be moved (could output before branch decision is made). Would be fine if PC calc is done in decode
-    - [ ] Test with RAW integration
+    - [x] Test with RAW integration
+- [x] Format L Instructions
+    - [x] Load, Store, Ld Imm, mov instructions
+    - [x] Test standalone
+    - [ ] Test Integrated (mostly done)
+- [x] RAW Hazard Checking
+    - [x] Test standalone
+    - [ ] Test Integrated (partially done)
 - [x] Change PC to 16 bit (idk why I thought it was 6 bit)
 - [ ] Get data addressing for ROM/RAM mapped
     - ROM from 0x0000 to 0x400, RAM from 0x400 to 0x800
@@ -22,7 +29,8 @@
     - [ ] Fix uninitialized values, make sure there is always an 'else'
     - [ ] Remove unused internal signals
     - [ ] Rework some stages (MEM) to switch cases
-    - [ ] 
+    - [ ] Merge Matt's cleaned branch (issues with file tracking? git mv?)
+    - [ ] Documentation (header comments, general comments, README description)
 - [ ] Bootloader
     - Reset_load and reset_execute signals
     - ROM integration
@@ -35,6 +43,16 @@
     - Can be bypassed by adding a nop as the first instruction
     - Has to do with coming out of reset, won't output the signal at the right time before the counter is incremented
     - Look at negative reset
-    
+- [ ] Forwarding Signalling
+    - back paths from EX buffer and MEM buffer back into ALU MUX
+    - Should get data from each buffer to combinationally determine if forwarding is possible
+    - Might require coordination with RAW (either RAW moved out to read buffers, or IR queue saved in decode stage)
+- [ ] Stack (Optional)
+    - Should be done after Memory addressing is completed
+    - Need to specify RAM space for stack, SP register
+    - push, pop, load.sp, RTI instructions
+- [ ] Halt Instruction (Optional, low priority)
+    - Would be good to have instead of going into infinite loop 
+
 
 
