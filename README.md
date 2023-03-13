@@ -11,10 +11,10 @@
 - [x] Format L Instructions
     - [x] Load, Store, Ld Imm, mov instructions
     - [x] Test standalone
-    - [/] Test Integrated 
+    - [ ] Test Integrated 
 - [x] RAW Hazard Checking
     - [x] Test standalone
-    - [/] Test Integrated (partially done)
+    - [ ] Test Integrated (partially done)
 - [x] Change PC to 16 bit (idk why I thought it was 6 bit)
 - [ ] Get data addressing for ROM/RAM mapped
     - ROM from 0x0000 to 0x400, RAM from 0x400 to 0x800
