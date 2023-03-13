@@ -11,10 +11,10 @@
 - [x] Format L Instructions
     - [x] Load, Store, Ld Imm, mov instructions
     - [x] Test standalone
-    - [ ] Test Integrated (mostly done)
+    - [/] Test Integrated 
 - [x] RAW Hazard Checking
     - [x] Test standalone
-    - [ ] Test Integrated (partially done)
+    - [/] Test Integrated (partially done)
 - [x] Change PC to 16 bit (idk why I thought it was 6 bit)
 - [ ] Get data addressing for ROM/RAM mapped
     - ROM from 0x0000 to 0x400, RAM from 0x400 to 0x800
@@ -43,8 +43,10 @@
     - Can be bypassed by adding a nop as the first instruction
     - Has to do with coming out of reset, won't output the signal at the right time before the counter is incremented
     - Look at negative reset
-- [ ] Forwarding Signalling
-    - back paths from EX buffer and MEM buffer back into ALU MUX
+- [ ] Branch Prediction Unit
+    - predicts branch taken not taken.
+- [ ] Forwarding Signalling (Matt has Ideas)
+    - back paths from EX buffer and MEM buffer back into ALU MUX and RAM ports
     - Should get data from each buffer to combinationally determine if forwarding is possible
     - Might require coordination with RAW (either RAW moved out to read buffers, or IR queue saved in decode stage)
 - [ ] Stack (Optional)
@@ -52,7 +54,9 @@
     - Need to specify RAM space for stack, SP register
     - push, pop, load.sp, RTI instructions
 - [ ] Halt Instruction (Optional, low priority)
-    - Would be good to have instead of going into infinite loop 
+    - Would be good to have instead of going into infinite loop
+- [ ] Change Multiply (Optional, Only if better alternative)
+    - Prof mentioned he didn't like our current method
 
 
 
