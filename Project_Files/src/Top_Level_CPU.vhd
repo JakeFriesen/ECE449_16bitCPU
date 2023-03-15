@@ -136,6 +136,8 @@ signal IF_ID_NPC, WB_IF_PC, ID_EX_NPC, MEM_IF_br_addr, EX_MEM_NPC : std_logic_ve
 signal MEM_IF_br, WB_ID_wr_en, WB_ID_v_en, EX_MEM_N_flag, EX_MEM_Z_flag, MEM_pipe_flush : std_logic;
 signal WB_ID_wr_addr : std_logic_vector(2 downto 0);
 signal WB_ID_loadimm, WB_ID_load_align: std_logic;
+
+
 --RAM intermediate Signals
 signal ram_addra, ram_addrb : std_logic_vector(15 downto 0);
 signal ram_dataa, ram_datab, ram_dina : std_logic_vector(15 downto 0);
