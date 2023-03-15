@@ -38,7 +38,8 @@ entity EX_stage is
            Z_EX_out : out std_logic;
            N_EX_out: out std_logic;
            IR_EX_out: out std_logic_vector(15 downto 0);
-           NPC_EX_out : out std_logic_vector (15 downto 0)
+           NPC_EX_out : out std_logic_vector (15 downto 0);
+           br_clear_in: in std_logic
            );
          
 end EX_stage;
@@ -90,7 +91,7 @@ begin
     begin
         --Positive Latch
         if (clk='1' and clk'event) then 
-            if(rst ='1' or I_branch_clear = '1') then
+            if(rst ='1' or br_clear_in = '1') then
                 IR <= (others=>'0');
                 A_data <= (others=>'0');
                 B_data <= (others=>'0');

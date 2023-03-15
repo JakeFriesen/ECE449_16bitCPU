@@ -40,11 +40,11 @@ entity Memory_Stage is
            ram_wrdata_A: out STD_LOGIC_VECTOR (15 downto 0);
            ram_addr_A: out std_logic_vector (15 downto 0);
            ram_data_A: in std_logic_vector (15 downto 0);
-           Mem_out : out STD_LOGIC_VECTOR (15 downto 0);
+           memdata_MEM_out : out STD_LOGIC_VECTOR (15 downto 0);
            Result_MEM_out : out STD_LOGIC_VECTOR (15 downto 0);
            IR_MEM_out : out STD_LOGIC_VECTOR (15 downto 0);
-           NPC_in : in STD_LOGIC_VECTOR (15 downto 0);
-           vdata_MEM_in, A_in, B_in : in STD_LOGIC_VECTOR (15 downto 0);
+           NPC_MEM_in : in STD_LOGIC_VECTOR (15 downto 0);
+           vdata_MEM_in, A_MEM_in, B_MEM_in : in STD_LOGIC_VECTOR (15 downto 0);
            vdata_MEM_out : out STD_LOGIC_VECTOR (15 downto 0));
 end Memory_Stage;
 
@@ -62,7 +62,7 @@ begin
             IR_MEM_out <= (others=>'0');
             vdata_MEM_out <= (others=>'0');
             Result_MEM_out <= (others=>'0');
-            Mem_out <= (others=>'0');  
+            memdata_MEM_out <= (others=>'0');  
         end if;    
         if(clk'event and clk = '1') then
         --Latch Incoming signals
@@ -78,7 +78,7 @@ begin
                 IR <= IR_MEM_in;
                 ALU <= Result_MEM_in;
                 Overflow <= vdata_MEM_in;
-                NPC <= NPC_in;
+                NPC <= NPC_MEM_in;
             end if;
         end if;
         if(clk'event and clk = '0') then
@@ -92,9 +92,9 @@ begin
             end if;
             
             if(IR(15 downto 9) = mov_op or IR(15 downto 9) = out_op) then
-                Mem_out <= A_in;
+                memdata_MEM_out <= A_MEM_in;
             else
-                Mem_out <= ram_data_A;
+                memdata_MEM_out <= ram_data_A;
             end if;  
                 
         end if;
@@ -136,8 +136,8 @@ begin
     with IR_MEM_in(15 downto 9) Select
          ram_en_A <=  '1' when store_op | load_op,
                      '0' when others;  --STR (17)
-    ram_addr_A <= A_in(15 downto 0);
-    ram_wrdata_A <=  B_in;
+    ram_addr_A <= A_MEM_in(15 downto 0);
+    ram_wrdata_A <=  B_MEM_in;
     
         
 

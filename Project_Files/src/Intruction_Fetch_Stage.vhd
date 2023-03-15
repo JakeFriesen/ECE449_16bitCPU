@@ -41,7 +41,7 @@ end Intruction_Fetch_Stage;
 architecture Behavioral of Intruction_Fetch_Stage is
     --Signals
     signal branch : std_logic := '0';
-    signal instruction_data : std_logic_vector(15 downto 0) := (others=>'0');
+    signal instr_data : std_logic_vector(15 downto 0) := (others=>'0');
     signal PC_new : std_logic_vector (15 downto 0) := (others=>'0');
     signal program_counter, next_counter : std_logic_vector (15 downto 0) := (others=>'0');
     
@@ -73,9 +73,7 @@ begin
                 IR_IF_out <= instr_data;   
                 NPC_IF_out <= program_counter;   
                 program_counter <= next_counter;
-                NPC <= program_counter;
-                IR <= instruction_data;
-                branch <= br_in;
+                branch <= br_IF_in;
                 PC_new <= PC_in;                
             end if;
         end if;

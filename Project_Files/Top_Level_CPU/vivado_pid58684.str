@@ -1,0 +1,2149 @@
+/*
+
+Xilinx Vivado v2017.4 (64-bit) [Major: 2017, Minor: 4]
+SW Build: 2086221 on Fri Dec 15 20:55:39 MST 2017
+IP Build: 2085800 on Fri Dec 15 22:25:07 MST 2017
+
+Process ID: 58684
+License: Customer
+
+Current time: 	Wed Mar 15 09:29:46 PDT 2023
+Time zone: 	Pacific Standard Time (America/Los_Angeles)
+
+OS: Windows 10
+OS Version: 10.0
+OS Architecture: amd64
+Available processors (cores): 24
+
+Screen size: 2560x1440
+Screen resolution (DPI): 96
+Available screens: 2
+Available disk space: 550 GB
+Default font: family=Dialog,name=Dialog,style=plain,size=12
+
+Java version: 	1.8.0_112 64-bit
+Java home: 	C:/Xilinx/Vivado/2017.4/tps/win64/jre
+JVM executable location: 	C:/Xilinx/Vivado/2017.4/tps/win64/jre/bin/java.exe
+
+User name: 	ebert
+User home directory: C:/Users/ebert
+User working directory: F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU
+User country: 	CA
+User language: 	en
+User locale: 	en_CA
+
+RDI_BASEROOT: C:/Xilinx/Vivado
+HDI_APPROOT: C:/Xilinx/Vivado/2017.4
+RDI_DATADIR: C:/Xilinx/Vivado/2017.4/data
+RDI_BINDIR: C:/Xilinx/Vivado/2017.4/bin
+
+Vivado preferences file location: C:/Users/ebert/AppData/Roaming/Xilinx/Vivado/2017.4/vivado.xml
+Vivado preferences directory: C:/Users/ebert/AppData/Roaming/Xilinx/Vivado/2017.4/
+Vivado layouts directory: C:/Users/ebert/AppData/Roaming/Xilinx/Vivado/2017.4/layouts
+PlanAhead jar file location: 	C:/Xilinx/Vivado/2017.4/lib/classes/planAhead.jar
+Vivado log file location: 	F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/vivado.log
+Vivado journal file location: 	F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/vivado.jou
+Engine tmp dir: 	F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/.Xil/Vivado-58684-DRAGON-S-DEN
+
+GUI allocated memory:	190 MB
+GUI max memory:		3,052 MB
+Engine allocated memory: 621 MB
+
+Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+
+*/
+
+// TclEventType: START_GUI
+// Tcl Message: start_gui 
+// TclEventType: PROJECT_OPEN_DIALOG
+// [GUI Memory]: 59 MB (+59205kb) [00:00:03]
+// [Engine Memory]: 499 MB (+371743kb) [00:00:03]
+// Opening Vivado Project: F:\GitHub\ECE_449\ECE449_16bitCPU\Project_Files\Top_Level_CPU\Top_Level_CPU.xpr. Version: Vivado v2017.4 
+// bs (cj):  Open Project : addNotify
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// TclEventType: MSGMGR_MOVEMSG
+// TclEventType: FILE_SET_NEW
+// Tcl Message: open_project F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.xpr 
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_NEW
+// Tcl Message: open_project F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.xpr 
+// Tcl Message: Scanning sources... Finished scanning sources 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified 
+// TclEventType: PROJECT_NEW
+// [GUI Memory]: 77 MB (+16373kb) [00:00:05]
+// [Engine Memory]: 568 MB (+45914kb) [00:00:05]
+// [GUI Memory]: 93 MB (+11897kb) [00:00:05]
+// [GUI Memory]: 99 MB (+2242kb) [00:00:05]
+// [Engine Memory]: 609 MB (+13735kb) [00:00:05]
+// [GUI Memory]: 109 MB (+5235kb) [00:00:05]
+// Tcl Message: INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2017.4/data/ip'. 
+// Project name: Top_Level_CPU; location: F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU; part: xc7a35tcpg236-1
+// [Engine Memory]: 649 MB (+10084kb) [00:00:06]
+dismissDialog("Open Project"); // bs (cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// HMemoryUtils.trashcanNow. Engine heap size: 654 MB. GUI used memory: 40 MB. Current time: 3/15/23 9:29:47 AM PDT
+// a (cj): Critical Messages: addNotify
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cj)
+// TclEventType: DG_GRAPH_GENERATED
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Top_Level_CPU(Behavioral) (Top_Level_CPU.vhd)]", 1, true); // B (D, cj) - Node
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation]", 9, true); // u (O, cj) - Node
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation]", 9, true); // u (O, cj) - Node
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cj):  Run Simulation : addNotify
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: launch_simulation 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '2' seconds INFO: [USF-XSim-99] Step results log file:'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+// 'd' command handler elapsed time: 3 seconds
+selectButton("RDIResource.ProgressDialog_ERROR_ENCOUNTERED_PLEASE_SEE_TCL_OK", "OK"); // JButton (A, G)
+// a (cj): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cj)
+selectTab((HResource) null, (HResource) null, "Tcl Console", 0); // aF (Q, cj)
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Top_Level_CPU(Behavioral) (Top_Level_CPU.vhd)]", 1); // B (D, cj)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Top_Level_CPU(Behavioral) (Top_Level_CPU.vhd), ID_inst : Decode(Behavioral) (Decode_stage.vhd)]", 3, true); // B (D, cj) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Top_Level_CPU(Behavioral) (Top_Level_CPU.vhd), ID_inst : Decode(Behavioral) (Decode_stage.vhd)]", 3, true, false, false, false, false, true); // B (D, cj) - Double Click - Node
+// [GUI Memory]: 122 MB (+6904kb) [00:00:37]
+// [GUI Memory]: 131 MB (+3122kb) [00:00:43]
+// Elapsed time: 34 seconds
+selectCodeEditor("Decode_stage.vhd", 240, 473); // cd (w, cj)
+selectCodeEditor("Decode_stage.vhd", 229, 268); // cd (w, cj)
+// Elapsed time: 27 seconds
+selectCodeEditor("Decode_stage.vhd", 291, 274); // cd (w, cj)
+selectCodeEditor("Decode_stage.vhd", 255, 288); // cd (w, cj)
+selectCodeEditor("Decode_stage.vhd", 255, 279); // cd (w, cj)
+// Elapsed time: 50 seconds
+selectCodeEditor("Decode_stage.vhd", 263, 366); // cd (w, cj)
+selectCodeEditor("Decode_stage.vhd", 236, 260); // cd (w, cj)
+typeControlKey((HResource) null, "Decode_stage.vhd", 'v'); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectCodeEditor("Decode_stage.vhd", 191, 268); // cd (w, cj)
+selectCodeEditor("Decode_stage.vhd", 214, 281); // cd (w, cj)
+selectCodeEditor("Decode_stage.vhd", 237, 281); // cd (w, cj)
+selectCodeEditor("Decode_stage.vhd", 243, 281); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectCodeEditor("Decode_stage.vhd", 247, 193); // cd (w, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, IP Integrator]", 1); // u (O, cj)
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cj):  Run Simulation : addNotify
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: launch_simulation 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+selectButton("RDIResource.ProgressDialog_ERROR_ENCOUNTERED_PLEASE_SEE_TCL_OK", "OK"); // JButton (A, G)
+// a (cj): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cj)
+// Elapsed time: 37 seconds
+selectCodeEditor("Decode_stage.vhd", 155, 442); // cd (w, cj)
+selectCodeEditor("Decode_stage.vhd", 262, 435); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Synthesis]", 4); // u (O, cj)
+// [GUI Memory]: 138 MB (+814kb) [00:03:37]
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// TclEventType: DG_GRAPH_GENERATED
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cj):  Run Simulation : addNotify
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: launch_simulation 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+selectButton("RDIResource.ProgressDialog_ERROR_ENCOUNTERED_PLEASE_SEE_TCL_OK", "OK"); // JButton (A, G)
+// a (cj): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cj)
+selectCodeEditor("Decode_stage.vhd", 217, 468); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectCodeEditor("Decode_stage.vhd", 228, 418); // cd (w, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// [Engine Memory]: 683 MB (+908kb) [00:04:13]
+// Elapsed time: 22 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Top_Level_CPU(Behavioral) (Top_Level_CPU.vhd)]", 1, true); // B (D, cj) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Top_Level_CPU(Behavioral) (Top_Level_CPU.vhd)]", 1, true); // B (D, cj) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Top_Level_CPU(Behavioral) (Top_Level_CPU.vhd)]", 1, true, false, false, false, false, true); // B (D, cj) - Double Click - Node
+// Elapsed time: 15 seconds
+selectCodeEditor("Top_Level_CPU.vhd", 126, 486); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 134, 488); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 120, 263); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 120, 234); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 125, 215); // cd (w, cj)
+// Find in Files: addNotify
+// Elapsed time: 24 seconds
+selectComboBox("pa.FindAndReplaceAllDialog_FIND_COMBO_BOX", "wr_index", -1); // JComboBox (r, q)
+selectButton(PAResourceEtoH.FindAndReplaceAllDialog_FIND, "Find"); // v (q)
+// bs (cj):  Find in Files : addNotify
+// HMemoryUtils.trashcanNow. Engine heap size: 683 MB. GUI used memory: 51 MB. Current time: 3/15/23 9:34:43 AM PDT
+// 'f' command handler elapsed time: 15 seconds
+selectButton("PAResourceEtoH.FindAndReplaceAllDialog_NO_OCCURRENCES_FOUND_IN_FILES_OK", "OK"); // JButton (A, G)
+// Replace in Files: addNotify
+selectComboBox("pa.FindAndReplaceAllDialog_FIND_COMBO_BOX", "wr_index", -1); // JComboBox (r, q)
+selectComboBox("pa.FindAndReplaceAllDialog_REPLACE_COMBO_BOX", "wr_index_ID_in", -1); // JComboBox (r, q)
+selectButton(PAResourceEtoH.FindAndReplaceAllDialog_FIND, "Find"); // v (q)
+// bs (cj):  Find in Files : addNotify
+// HMemoryUtils.trashcanNow. Engine heap size: 683 MB. GUI used memory: 51 MB. Current time: 3/15/23 9:34:55 AM PDT
+// 'e' command handler elapsed time: 8 seconds
+// HMemoryUtils.trashcanNow. Engine heap size: 683 MB. GUI used memory: 51 MB. Current time: 3/15/23 9:34:55 AM PDT
+dismissDialog("Find in Files"); // bs (cj)
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [1237, 1245]]", 2, false); // W (O, cj)
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [5182, 5190]]", 6, false, true, false, false, false, false); // W (O, cj) - Shift Key
+// Elapsed time: 27 seconds
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [1876, 1884]]", 11, false, true, false, false, false, false); // W (O, cj) - Shift Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [6617, 6625]]", 12, false, true, false, false, false, false); // W (O, cj) - Shift Key
+// Elapsed time: 17 seconds
+selectButton(PAResourceEtoH.FindInFilesView_REPLACE_ALL_OCCURRENCES_IN_ALL_FILES, "Replace All"); // a (N, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 2); // k (j, cj)
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectCodeEditor("Top_Level_CPU.vhd", 168, 382); // cd (w, cj)
+// Replace in Files: addNotify
+// Elapsed time: 13 seconds
+selectComboBox("pa.FindAndReplaceAllDialog_FIND_COMBO_BOX", "wr_index_ID_in", -1); // JComboBox (r, q)
+selectComboBox("pa.FindAndReplaceAllDialog_REPLACE_COMBO_BOX", "wr_index_ID_in", -1); // JComboBox (r, q)
+selectButton(PAResourceEtoH.FindAndReplaceAllDialog_FIND, "Find"); // v (q)
+// bs (cj):  Find in Files : addNotify
+// HMemoryUtils.trashcanNow. Engine heap size: 688 MB. GUI used memory: 52 MB. Current time: 3/15/23 9:36:12 AM PDT
+// 'e' command handler elapsed time: 11 seconds
+// HMemoryUtils.trashcanNow. Engine heap size: 688 MB. GUI used memory: 52 MB. Current time: 3/15/23 9:36:12 AM PDT
+dismissDialog("Find in Files"); // bs (cj)
+selectButton(PAResourceEtoH.FindInFilesView_REPLACE_ALL_OCCURRENCES_IN_ALL_FILES, "Replace All"); // a (N, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 2); // k (j, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectCodeEditor("Top_Level_CPU.vhd", 119, 398); // cd (w, cj)
+// TclEventType: DG_GRAPH_GENERATED
+// Replace in Files: addNotify
+// Elapsed time: 10 seconds
+selectComboBox("pa.FindAndReplaceAllDialog_FIND_COMBO_BOX", "wr_data", -1); // JComboBox (r, q)
+selectComboBox("pa.FindAndReplaceAllDialog_REPLACE_COMBO_BOX", "wr_addr_ID_in", -1); // JComboBox (r, q)
+selectButton(PAResourceEtoH.FindAndReplaceAllDialog_FIND, "Find"); // v (q)
+// k (cj): Text Changed: addNotify
+selectButton(RDIResource.ConfirmSaveTextEditsDialog_YES, "Yes"); // a (k)
+// TclEventType: DG_GRAPH_STALE
+// bs (cj):  Find in Files : addNotify
+// TclEventType: DG_GRAPH_STALE
+dismissDialog("Text Changed"); // k (cj)
+// TclEventType: FILE_SET_CHANGE
+// HMemoryUtils.trashcanNow. Engine heap size: 689 MB. GUI used memory: 53 MB. Current time: 3/15/23 9:36:30 AM PDT
+// 'e' command handler elapsed time: 10 seconds
+// HMemoryUtils.trashcanNow. Engine heap size: 689 MB. GUI used memory: 53 MB. Current time: 3/15/23 9:36:30 AM PDT
+dismissDialog("Find in Files"); // bs (cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [1292, 1299]]", 2, false); // W (O, cj)
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [5491, 5498]]", 6, false, true, false, false, false, false); // W (O, cj) - Shift Key
+// Elapsed time: 11 seconds
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [1936, 1943]]", 24, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [6652, 6659]]", 26, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectButton(PAResourceEtoH.FindInFilesView_REPLACE_ALL_OCCURRENCES_IN_SELECTED, "Replace Selected"); // a (N, cj)
+selectCodeEditor("RF8_16.vhd", 116, 298); // cd (w, cj)
+// Replace in Files: addNotify
+// Elapsed time: 27 seconds
+selectComboBox("pa.FindAndReplaceAllDialog_FIND_COMBO_BOX", "wr_enable", -1); // JComboBox (r, q)
+selectComboBox("pa.FindAndReplaceAllDialog_REPLACE_COMBO_BOX", "wr_data_ID_in", -1); // JComboBox (r, q)
+selectButton(PAResourceEtoH.FindAndReplaceAllDialog_FIND, "Find"); // v (q)
+// k (cj): Text Changed: addNotify
+selectButton(RDIResource.ConfirmSaveTextEditsDialog_YES, "Yes"); // a (k)
+// TclEventType: DG_GRAPH_STALE
+// bs (cj):  Find in Files : addNotify
+// TclEventType: DG_GRAPH_STALE
+dismissDialog("Text Changed"); // k (cj)
+// TclEventType: FILE_SET_CHANGE
+// HMemoryUtils.trashcanNow. Engine heap size: 691 MB. GUI used memory: 55 MB. Current time: 3/15/23 9:37:28 AM PDT
+// 'e' command handler elapsed time: 25 seconds
+// HMemoryUtils.trashcanNow. Engine heap size: 691 MB. GUI used memory: 54 MB. Current time: 3/15/23 9:37:28 AM PDT
+dismissDialog("Find in Files"); // bs (cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [1348, 1357]]", 2, false); // W (O, cj)
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [5283, 5292]]", 6, false, true, false, false, false, false); // W (O, cj) - Shift Key
+// Elapsed time: 31 seconds
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [1997, 2006]]", 11, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [6716, 6725]]", 12, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectButton(PAResourceEtoH.FindInFilesView_REPLACE_ALL_OCCURRENCES_IN_SELECTED, "Replace Selected"); // a (N, cj)
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// am (cj): Save Project: addNotify
+selectButton(PAResourceQtoS.SaveProjectUtils_SAVE, "Save"); // a (am)
+// bs (cj):  Save Constraints : addNotify
+// TclEventType: DG_GRAPH_STALE
+// e (cj):  Run Simulation : addNotify
+dismissDialog("Save Project"); // am (cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: LAUNCH_SIM
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: launch_simulation 
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// Tcl Message: INFO: [Vivado 12-5682] Launching behavioral simulation in 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim' INFO: [SIM-utils-51] Simulation object is 'sim_1' 
+// TclEventType: DG_GRAPH_GENERATED
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+// 'd' command handler elapsed time: 5 seconds
+selectButton("RDIResource.ProgressDialog_ERROR_ENCOUNTERED_PLEASE_SEE_TCL_OK", "OK"); // JButton (A, G)
+// a (cj): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cj)
+selectTab((HResource) null, (HResource) null, "Tcl Console", 0); // aF (Q, cj)
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 160, 149); // dw (ad, cj)
+// Elapsed time: 24 seconds
+selectCodeEditor("Decode_stage.vhd", 113, 485); // cd (w, cj)
+// Elapsed time: 17 seconds
+selectCodeEditor("Decode_stage.vhd", 237, 233); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed time: 21 seconds
+selectCodeEditor("Decode_stage.vhd", 170, 111); // cd (w, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectCodeEditor("Decode_stage.vhd", 194, 248); // cd (w, cj)
+// TclEventType: DG_GRAPH_GENERATED
+typeControlKey((HResource) null, "Decode_stage.vhd", 'c'); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectCodeEditor("Decode_stage.vhd", 259, 347); // cd (w, cj)
+typeControlKey((HResource) null, "Decode_stage.vhd", 'v'); // cd (w, cj)
+selectCodeEditor("Decode_stage.vhd", 202, 352); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectCodeEditor("Decode_stage.vhd", 278, 313); // cd (w, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectCodeEditor("Decode_stage.vhd", 266, 530); // cd (w, cj)
+selectCodeEditor("Decode_stage.vhd", 194, 519); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectCodeEditor("Decode_stage.vhd", 212, 438); // cd (w, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 15 seconds
+selectCodeEditor("Decode_stage.vhd", 107, 464); // cd (w, cj)
+selectCodeEditor("Decode_stage.vhd", 104, 469); // cd (w, cj)
+typeControlKey((HResource) null, "Decode_stage.vhd", 'c'); // cd (w, cj)
+selectCodeEditor("Decode_stage.vhd", 105, 487); // cd (w, cj)
+typeControlKey((HResource) null, "Decode_stage.vhd", 'v'); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, RTL Analysis]", 3); // u (O, cj)
+// TclEventType: DG_GRAPH_GENERATED
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cj):  Run Simulation : addNotify
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: launch_simulation 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+selectButton("RDIResource.ProgressDialog_ERROR_ENCOUNTERED_PLEASE_SEE_TCL_OK", "OK"); // JButton (A, G)
+// a (cj): Critical Messages: addNotify
+// HMemoryUtils.trashcanNow. Engine heap size: 695 MB. GUI used memory: 55 MB. Current time: 3/15/23 9:40:28 AM PDT
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cj)
+selectCodeEditor("Decode_stage.vhd", 250, 384); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Project Manager]", 0); // u (O, cj)
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cj):  Run Simulation : addNotify
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: launch_simulation 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+selectButton("RDIResource.ProgressDialog_ERROR_ENCOUNTERED_PLEASE_SEE_TCL_OK", "OK"); // JButton (A, G)
+// a (cj): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cj)
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 239, 196); // dw (ad, cj)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Top_Level_CPU(Behavioral) (Top_Level_CPU.vhd), EX_inst : EX_stage(Behavioral) (EX_stage.vhd)]", 4, true); // B (D, cj) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Top_Level_CPU(Behavioral) (Top_Level_CPU.vhd), EX_inst : EX_stage(Behavioral) (EX_stage.vhd)]", 4, true, false, false, false, false, true); // B (D, cj) - Double Click - Node
+// Elapsed time: 24 seconds
+selectCodeEditor("EX_stage.vhd", 203, 404); // cd (w, cj)
+selectCodeEditor("EX_stage.vhd", 244, 397); // cd (w, cj)
+selectCodeEditor("EX_stage.vhd", 200, 399); // cd (w, cj)
+selectCodeEditor("EX_stage.vhd", 246, 402); // cd (w, cj)
+// Elapsed time: 13 seconds
+selectCodeEditor("EX_stage.vhd", 247, 551); // cd (w, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Decode_stage.vhd", 1); // k (j, cj)
+selectCodeEditor("Decode_stage.vhd", 195, 467); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 19 seconds
+selectCodeEditor("Decode_stage.vhd", 283, 213); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "EX_stage.vhd", 4); // k (j, cj)
+selectCodeEditor("EX_stage.vhd", 246, 552); // cd (w, cj)
+selectCodeEditor("EX_stage.vhd", 414, 538); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed time: 10 seconds
+selectCodeEditor("EX_stage.vhd", 274, 356); // cd (w, cj)
+selectCodeEditor("EX_stage.vhd", 289, 548); // cd (w, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectCodeEditor("EX_stage.vhd", 308, 351); // cd (w, cj)
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Implementation]", 5); // u (O, cj)
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cj):  Run Simulation : addNotify
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: launch_simulation 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+selectButton("RDIResource.ProgressDialog_ERROR_ENCOUNTERED_PLEASE_SEE_TCL_OK", "OK"); // JButton (A, G)
+// a (cj): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cj)
+// Elapsed time: 13 seconds
+selectCodeEditor("EX_stage.vhd", 115, 491); // cd (w, cj)
+selectCodeEditor("EX_stage.vhd", 118, 502); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, IP Integrator]", 1); // u (O, cj)
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cj):  Run Simulation : addNotify
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: launch_simulation 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+selectButton("RDIResource.ProgressDialog_ERROR_ENCOUNTERED_PLEASE_SEE_TCL_OK", "OK"); // JButton (A, G)
+// a (cj): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cj)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Top_Level_CPU(Behavioral) (Top_Level_CPU.vhd), IF_inst : Intruction_Fetch_Stage(Behavioral) (Intruction_Fetch_Stage.vhd)]", 2, false); // B (D, cj)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Top_Level_CPU(Behavioral) (Top_Level_CPU.vhd), IF_inst : Intruction_Fetch_Stage(Behavioral) (Intruction_Fetch_Stage.vhd)]", 2, false, false, false, false, false, true); // B (D, cj) - Double Click
+selectCodeEditor("Intruction_Fetch_Stage.vhd", 153, 232); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 12 seconds
+selectCodeEditor("Intruction_Fetch_Stage.vhd", 227, 432); // cd (w, cj)
+selectCodeEditor("Intruction_Fetch_Stage.vhd", 230, 430); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// Elapsed time: 15 seconds
+selectCodeEditor("Intruction_Fetch_Stage.vhd", 189, 466); // cd (w, cj)
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 29 seconds
+selectCodeEditor("Intruction_Fetch_Stage.vhd", 257, 413); // cd (w, cj)
+// Elapsed time: 31 seconds
+selectCodeEditor("Intruction_Fetch_Stage.vhd", 149, 245); // cd (w, cj)
+typeControlKey((HResource) null, "Intruction_Fetch_Stage.vhd", 'c'); // cd (w, cj)
+selectCodeEditor("Intruction_Fetch_Stage.vhd", 133, 397); // cd (w, cj)
+selectCodeEditor("Intruction_Fetch_Stage.vhd", 285, 416); // cd (w, cj)
+selectCodeEditor("Intruction_Fetch_Stage.vhd", 248, 421); // cd (w, cj)
+selectCodeEditor("Intruction_Fetch_Stage.vhd", 126, 431); // cd (w, cj)
+selectCodeEditor("Intruction_Fetch_Stage.vhd", 225, 434); // cd (w, cj)
+selectCodeEditor("Intruction_Fetch_Stage.vhd", 135, 518); // cd (w, cj)
+selectCodeEditor("Intruction_Fetch_Stage.vhd", 114, 518); // cd (w, cj)
+selectCodeEditor("Intruction_Fetch_Stage.vhd", 92, 522); // cd (w, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Decode_stage.vhd", 1); // k (j, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Project Summary", 0); // k (j, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Decode_stage.vhd", 1); // k (j, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 2); // k (j, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "EX_stage.vhd", 4); // k (j, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "RF8_16.vhd", 3); // k (j, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 2); // k (j, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Decode_stage.vhd", 1); // k (j, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Project Summary", 0); // k (j, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 2); // k (j, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "EX_stage.vhd", 4); // k (j, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Intruction_Fetch_Stage.vhd", 5); // k (j, cj)
+selectCodeEditor("Intruction_Fetch_Stage.vhd", 216, 416); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed time: 11 seconds
+selectCodeEditor("Intruction_Fetch_Stage.vhd", 308, 288); // cd (w, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectCodeEditor("Intruction_Fetch_Stage.vhd", 148, 376); // cd (w, cj)
+// Elapsed time: 10 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, IP Integrator]", 1); // u (O, cj)
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cj):  Run Simulation : addNotify
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: launch_simulation 
+// TclEventType: LAUNCH_SIM_LOG
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-3] XSim::Elaborate design INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim' 
+// TclEventType: LAUNCH_SIM
+// Tcl Message: Vivado Simulator 2017.4 Copyright 1986-1999, 2001-2016 Xilinx, Inc. All Rights Reserved. Running: C:/Xilinx/Vivado/2017.4/bin/unwrapped/win64.o/xelab.exe -wto d60582c2051d45858523b6c51ed65df2 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip -L xpm --snapshot Top_Level_CPU_TB_behav xil_defaultlib.Top_Level_CPU_TB -log elaborate.log  Using 2 slave threads. Starting static elaboration ERROR: [VRFC 10-2666] formal port halt has no actual or default value [F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/Intruction_Fetch_Stage.vhd:36] ERROR: [XSIM 43-3321] Static elaboration of top level VHDL design unit top_level_cpu_tb in library work failed. 
+// Tcl Message: INFO: [USF-XSim-69] 'elaborate' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/elaborate.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/elaborate.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+// 'd' command handler elapsed time: 3 seconds
+selectButton("RDIResource.ProgressDialog_ERROR_ENCOUNTERED_PLEASE_SEE_TCL_OK", "OK"); // JButton (A, G)
+// a (cj): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cj)
+// HMemoryUtils.trashcanNow. Engine heap size: 715 MB. GUI used memory: 57 MB. Current time: 3/15/23 9:46:23 AM PDT
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 154, 228); // dw (ad, cj)
+// Elapsed time: 19 seconds
+selectCodeEditor("Intruction_Fetch_Stage.vhd", 87, 453); // cd (w, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 2); // k (j, cj)
+// Elapsed time: 37 seconds
+selectCodeEditor("Top_Level_CPU.vhd", 370, 380); // cd (w, cj)
+typeControlKey((HResource) null, "Top_Level_CPU.vhd", 'v'); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 330, 335); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 90, 268); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 14 seconds
+selectCodeEditor("Top_Level_CPU.vhd", 40, 390); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 15, 433); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 27, 429); // cd (w, cj)
+typeControlKey((HResource) null, "Top_Level_CPU.vhd", 'v'); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 295, 468); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 73, 484); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 69, 502); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 150, 517); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 160, 534); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 305, 569); // cd (w, cj)
+// Elapsed time: 10 seconds
+selectCodeEditor("Top_Level_CPU.vhd", 159, 568); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 159, 584); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 249, 504); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 148, 516); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 139, 536); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 207, 552); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 179, 590); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 210, 584); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 160, 601); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 160, 623); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 132, 570); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 180, 554); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 140, 553); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 169, 570); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 217, 586); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 181, 620); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 160, 617); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 196, 505); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 68, 521); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 148, 537); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 141, 556); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 124, 571); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 126, 587); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 249, 572); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 199, 567); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 174, 588); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 173, 606); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 250, 543); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 143, 485); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 149, 503); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 153, 522); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 232, 486); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 65, 504); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 72, 504); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 70, 519); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 218, 535); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 153, 555); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 173, 570); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 275, 605); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 133, 601); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 211, 568); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 153, 587); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 161, 605); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 277, 583); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 160, 584); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 166, 602); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 132, 620); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 182, 569); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 276, 597); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 161, 602); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 197, 619); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 223, 570); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 279, 601); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 12, 588); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 253, 385); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 66, 397); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 72, 399); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 68, 416); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 139, 438); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 192, 450); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 271, 483); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 281, 483); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 276, 501); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 277, 517); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 151, 488); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 149, 488, false, false, false, false, true); // cd (w, cj) - Double Click
+typeControlKey(null, null, 'z');
+selectCodeEditor("Top_Level_CPU.vhd", 124, 500); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 159, 520); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 8, 552); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 137, 552); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 127, 569); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 165, 585); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 176, 569); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 125, 585); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 123, 606); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 127, 621); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 126, 573); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 104, 589); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 195, 619); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 192, 620, false, false, false, false, true); // cd (w, cj) - Double Click
+selectCodeEditor("Top_Level_CPU.vhd", 97, 621); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 95, 620); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 71, 622); // cd (w, cj)
+// Elapsed time: 18 seconds
+selectCodeEditor("Top_Level_CPU.vhd", 133, 569); // cd (w, cj)
+typeControlKey((HResource) null, "Top_Level_CPU.vhd", 'c'); // cd (w, cj)
+typeControlKey((HResource) null, "Top_Level_CPU.vhd", 'v'); // cd (w, cj)
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+typeControlKey((HResource) null, "Top_Level_CPU.vhd", 'v'); // cd (w, cj)
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+selectCodeEditor("Top_Level_CPU.vhd", 133, 569); // cd (w, cj)
+typeControlKey((HResource) null, "Top_Level_CPU.vhd", 'v'); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 81, 481); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 313, 498); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectCodeEditor("Top_Level_CPU.vhd", 138, 600); // cd (w, cj)
+typeControlKey((HResource) null, "Top_Level_CPU.vhd", 'v'); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 180, 331); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 103, 619); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 96, 621); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 142, 367); // cd (w, cj)
+typeControlKey((HResource) null, "Top_Level_CPU.vhd", 'v'); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectCodeEditor("Top_Level_CPU.vhd", 5, 380); // cd (w, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectCodeEditor("Top_Level_CPU.vhd", 72, 389); // cd (w, cj)
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectCodeEditor("Top_Level_CPU.vhd", 187, 144); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 137, 212); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 125, 98); // cd (w, cj)
+typeControlKey((HResource) null, "Top_Level_CPU.vhd", 'v'); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectCodeEditor("Top_Level_CPU.vhd", 113, 109); // cd (w, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Project Manager]", 0); // u (O, cj)
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cj):  Run Simulation : addNotify
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: launch_simulation 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+selectButton("RDIResource.ProgressDialog_ERROR_ENCOUNTERED_PLEASE_SEE_TCL_OK", "OK"); // JButton (A, G)
+// a (cj): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cj)
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 153, 201); // dw (ad, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 125, 346); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Intruction_Fetch_Stage.vhd", 5); // k (j, cj)
+// TclEventType: DG_GRAPH_GENERATED
+selectCodeEditor("Intruction_Fetch_Stage.vhd", 213, 379); // cd (w, cj)
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug]", 6); // u (O, cj)
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cj):  Run Simulation : addNotify
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [Engine Memory]: 718 MB (+842kb) [00:22:59]
+// Tcl Message: launch_simulation 
+// TclEventType: LAUNCH_SIM_LOG
+// Tcl Message: "xvhdl --incr --relax -prj Top_Level_CPU_TB_vhdl.prj" INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/Top_Level_CPU.vhd" into library xil_defaultlib INFO: [VRFC 10-307] analyzing entity Top_Level_CPU 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-3] XSim::Elaborate design INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim' 
+// TclEventType: LAUNCH_SIM
+// Tcl Message: INFO: [USF-XSim-69] 'elaborate' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/elaborate.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/elaborate.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+// 'd' command handler elapsed time: 3 seconds
+selectButton("RDIResource.ProgressDialog_ERROR_ENCOUNTERED_PLEASE_SEE_TCL_OK", "OK"); // JButton (A, G)
+// a (cj): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Decode_stage.vhd", 1); // k (j, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 2); // k (j, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 387, 587); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Project Manager]", 0); // u (O, cj)
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cj):  Run Simulation : addNotify
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: launch_simulation 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+selectButton("RDIResource.ProgressDialog_ERROR_ENCOUNTERED_PLEASE_SEE_TCL_OK", "OK"); // JButton (A, G)
+// a (cj): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cj)
+// Elapsed time: 10 seconds
+selectCodeEditor("Top_Level_CPU.vhd", 143, 590); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Project Manager]", 0); // u (O, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cj):  Run Simulation : addNotify
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: launch_simulation 
+// TclEventType: LAUNCH_SIM_LOG
+// Tcl Message: "xvhdl --incr --relax -prj Top_Level_CPU_TB_vhdl.prj" INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/Top_Level_CPU.vhd" into library xil_defaultlib INFO: [VRFC 10-307] analyzing entity Top_Level_CPU 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-3] XSim::Elaborate design INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim' 
+// TclEventType: LAUNCH_SIM
+// Tcl Message: INFO: [USF-XSim-69] 'elaborate' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/elaborate.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/elaborate.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+// 'd' command handler elapsed time: 4 seconds
+selectButton("RDIResource.ProgressDialog_ERROR_ENCOUNTERED_PLEASE_SEE_TCL_OK", "OK"); // JButton (A, G)
+// a (cj): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cj)
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 329, 194); // dw (ad, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Decode_stage.vhd", 1); // k (j, cj)
+// Elapsed time: 21 seconds
+selectCodeEditor("Decode_stage.vhd", 167, 532); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Implementation]", 5); // u (O, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cj):  Run Simulation : addNotify
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: launch_simulation 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+selectButton("RDIResource.ProgressDialog_ERROR_ENCOUNTERED_PLEASE_SEE_TCL_OK", "OK"); // JButton (A, G)
+// a (cj): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cj)
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Top_Level_CPU(Behavioral) (Top_Level_CPU.vhd), ID_inst : Decode(Behavioral) (Decode_stage.vhd)]", 3); // B (D, cj)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Top_Level_CPU(Behavioral) (Top_Level_CPU.vhd), ID_inst : Decode(Behavioral) (Decode_stage.vhd), reg_file : register_file(behavioural) (RF8_16.vhd)]", 5, false); // B (D, cj)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Top_Level_CPU(Behavioral) (Top_Level_CPU.vhd), ID_inst : Decode(Behavioral) (Decode_stage.vhd), reg_file : register_file(behavioural) (RF8_16.vhd)]", 5, false, false, false, false, false, true); // B (D, cj) - Double Click
+// Elapsed time: 19 seconds
+selectCodeEditor("RF8_16.vhd", 97, 232); // cd (w, cj)
+// Elapsed time: 19 seconds
+selectCodeEditor("RF8_16.vhd", 143, 161); // cd (w, cj)
+selectCodeEditor("RF8_16.vhd", 149, 162); // cd (w, cj)
+selectCodeEditor("RF8_16.vhd", 182, 568); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Decode_stage.vhd", 1); // k (j, cj)
+selectCodeEditor("Decode_stage.vhd", 363, 539); // cd (w, cj)
+selectCodeEditor("Decode_stage.vhd", 735, 521); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectCodeEditor("Decode_stage.vhd", 151, 479); // cd (w, cj)
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 12 seconds
+selectCodeEditor("Decode_stage.vhd", 108, 200); // cd (w, cj)
+selectCodeEditor("Decode_stage.vhd", 118, 196); // cd (w, cj)
+selectCodeEditor("Decode_stage.vhd", 131, 213); // cd (w, cj)
+selectCodeEditor("Decode_stage.vhd", 119, 175); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, IP Integrator]", 1); // u (O, cj)
+// TclEventType: DG_GRAPH_GENERATED
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cj):  Run Simulation : addNotify
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: launch_simulation 
+// TclEventType: LAUNCH_SIM_LOG
+// Tcl Message: "xvhdl --incr --relax -prj Top_Level_CPU_TB_vhdl.prj" INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/Decode_stage.vhd" into library xil_defaultlib INFO: [VRFC 10-307] analyzing entity Decode INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/RF8_16.vhd" into library xil_defaultlib INFO: [VRFC 10-307] analyzing entity register_file 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-3] XSim::Elaborate design INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim' 
+// TclEventType: LAUNCH_SIM
+// Tcl Message: INFO: [USF-XSim-69] 'elaborate' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/elaborate.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/elaborate.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+// 'd' command handler elapsed time: 3 seconds
+selectButton("RDIResource.ProgressDialog_ERROR_ENCOUNTERED_PLEASE_SEE_TCL_OK", "OK"); // JButton (A, G)
+// a (cj): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cj)
+// Elapsed time: 10 seconds
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 242, 231); // dw (ad, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 2); // k (j, cj)
+// Elapsed time: 23 seconds
+selectCodeEditor("Top_Level_CPU.vhd", 138, 321); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 143, 316); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 143, 315); // cd (w, cj)
+typeControlKey((HResource) null, "Top_Level_CPU.vhd", 'v'); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectCodeEditor("Top_Level_CPU.vhd", 179, 414); // cd (w, cj)
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 337 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation]", 2); // u (O, cj)
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cj):  Run Simulation : addNotify
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: launch_simulation 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+selectButton("RDIResource.ProgressDialog_ERROR_ENCOUNTERED_PLEASE_SEE_TCL_OK", "OK"); // JButton (A, G)
+// a (cj): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cj)
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 146, 197); // dw (ad, cj)
+// Elapsed time: 16 seconds
+selectCodeEditor("Top_Level_CPU.vhd", 123, 212); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectCodeEditor("Top_Level_CPU.vhd", 201, 149); // cd (w, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Implementation]", 5); // u (O, cj)
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cj):  Run Simulation : addNotify
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: launch_simulation 
+// TclEventType: LAUNCH_SIM_LOG
+// Tcl Message: "xvhdl --incr --relax -prj Top_Level_CPU_TB_vhdl.prj" INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/Top_Level_CPU.vhd" into library xil_defaultlib INFO: [VRFC 10-307] analyzing entity Top_Level_CPU 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-3] XSim::Elaborate design INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim' 
+// TclEventType: LAUNCH_SIM
+// Tcl Message: INFO: [USF-XSim-69] 'elaborate' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/elaborate.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/elaborate.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+// 'd' command handler elapsed time: 3 seconds
+selectButton("RDIResource.ProgressDialog_ERROR_ENCOUNTERED_PLEASE_SEE_TCL_OK", "OK"); // JButton (A, G)
+// a (cj): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cj)
+// Elapsed time: 10 seconds
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 0, 230); // dw (ad, cj)
+// Elapsed time: 10 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Decode_stage.vhd", 1); // k (j, cj)
+selectCodeEditor("Decode_stage.vhd", 295, 347); // cd (w, cj)
+typeControlKey((HResource) null, "Decode_stage.vhd", 'c'); // cd (w, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Project Summary", 0); // k (j, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Decode_stage.vhd", 1); // k (j, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 2); // k (j, cj)
+// [GUI Memory]: 145 MB (+341kb) [00:33:47]
+selectCodeEditor("Top_Level_CPU.vhd", 197, 213); // cd (w, cj)
+typeControlKey((HResource) null, "Top_Level_CPU.vhd", 'v'); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 50 seconds
+selectCodeEditor("Top_Level_CPU.vhd", 124, 501); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 131, 502); // cd (w, cj)
+// Elapsed time: 40 seconds
+selectCodeEditor("Top_Level_CPU.vhd", 535, 342); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 54, 495); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, IP Integrator]", 1); // u (O, cj)
+// TclEventType: DG_GRAPH_GENERATED
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cj):  Run Simulation : addNotify
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: launch_simulation 
+// TclEventType: LAUNCH_SIM_LOG
+// Tcl Message: "xvhdl --incr --relax -prj Top_Level_CPU_TB_vhdl.prj" INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/Top_Level_CPU.vhd" into library xil_defaultlib INFO: [VRFC 10-307] analyzing entity Top_Level_CPU 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-3] XSim::Elaborate design INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim' 
+// TclEventType: LAUNCH_SIM
+// Tcl Message: INFO: [USF-XSim-69] 'elaborate' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/elaborate.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/elaborate.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+// 'd' command handler elapsed time: 3 seconds
+selectButton("RDIResource.ProgressDialog_ERROR_ENCOUNTERED_PLEASE_SEE_TCL_OK", "OK"); // JButton (A, G)
+// a (cj): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cj)
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 156, 230); // dw (ad, cj)
+// Elapsed time: 10 seconds
+selectCodeEditor("Top_Level_CPU.vhd", 241, 518); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 238, 517); // cd (w, cj)
+// Elapsed time: 43 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "EX_stage.vhd", 4); // k (j, cj)
+selectCodeEditor("EX_stage.vhd", 259, 499); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, IP Integrator]", 1); // u (O, cj)
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cj):  Run Simulation : addNotify
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: launch_simulation 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+// 'd' command handler elapsed time: 5 seconds
+selectButton("RDIResource.ProgressDialog_ERROR_ENCOUNTERED_PLEASE_SEE_TCL_OK", "OK"); // JButton (A, G)
+// a (cj): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cj)
+selectCodeEditor("EX_stage.vhd", 285, 376); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+// [GUI Memory]: 153 MB (+840kb) [00:37:02]
+// TclEventType: DG_ANALYSIS_MSG_RESET
+typeControlKey(null, null, 'z');
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Intruction_Fetch_Stage.vhd", 5); // k (j, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "EX_stage.vhd", 4); // k (j, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 2); // k (j, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: DG_GRAPH_GENERATED
+// HMemoryUtils.trashcanNow. Engine heap size: 739 MB. GUI used memory: 58 MB. Current time: 3/15/23 10:06:48 AM PDT
+selectCodeEditor("Top_Level_CPU.vhd", 216, 247); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 139, 251); // cd (w, cj)
+typeControlKey((HResource) null, "Top_Level_CPU.vhd", 'c'); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 255, 200); // cd (w, cj)
+typeControlKey((HResource) null, "Top_Level_CPU.vhd", 'v'); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectCodeEditor("Top_Level_CPU.vhd", 234, 131); // cd (w, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectCodeEditor("Top_Level_CPU.vhd", 138, 377); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 155, 434); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 192, 298); // cd (w, cj)
+typeControlKey((HResource) null, "Top_Level_CPU.vhd", 'c'); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 153, 537); // cd (w, cj)
+typeControlKey((HResource) null, "Top_Level_CPU.vhd", 'v'); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectCodeEditor("Top_Level_CPU.vhd", 208, 493); // cd (w, cj)
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Implementation]", 5); // u (O, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cj):  Run Simulation : addNotify
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: launch_simulation 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+selectButton("RDIResource.ProgressDialog_ERROR_ENCOUNTERED_PLEASE_SEE_TCL_OK", "OK"); // JButton (A, G)
+// a (cj): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cj)
+selectCodeEditor("Top_Level_CPU.vhd", 41, 366); // cd (w, cj)
+// Elapsed time: 13 seconds
+selectCodeEditor("Top_Level_CPU.vhd", 185, 195); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 295, 215); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 259, 212); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 157, 330); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 402, 455); // cd (w, cj)
+typeControlKey((HResource) null, "Top_Level_CPU.vhd", 'v'); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectCodeEditor("Top_Level_CPU.vhd", 76, 473); // cd (w, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectCodeEditor("Top_Level_CPU.vhd", 154, 466); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectCodeEditor("Top_Level_CPU.vhd", 309, 466); // cd (w, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, RTL Analysis]", 3); // u (O, cj)
+// TclEventType: DG_GRAPH_GENERATED
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cj):  Run Simulation : addNotify
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: launch_simulation 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+// 'd' command handler elapsed time: 4 seconds
+selectButton("RDIResource.ProgressDialog_ERROR_ENCOUNTERED_PLEASE_SEE_TCL_OK", "OK"); // JButton (A, G)
+// a (cj): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cj)
+selectCodeEditor("Top_Level_CPU.vhd", 282, 486); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 235, 399); // cd (w, cj)
+// Elapsed time: 18 seconds
+selectCodeEditor("Top_Level_CPU.vhd", 152, 590); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug]", 6); // u (O, cj)
+// TclEventType: DG_GRAPH_GENERATED
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cj):  Run Simulation : addNotify
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: launch_simulation 
+// TclEventType: LAUNCH_SIM_LOG
+// Tcl Message: "xvhdl --incr --relax -prj Top_Level_CPU_TB_vhdl.prj" INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/EX_stage.vhd" into library xil_defaultlib INFO: [VRFC 10-307] analyzing entity EX_stage INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/Top_Level_CPU.vhd" into library xil_defaultlib INFO: [VRFC 10-307] analyzing entity Top_Level_CPU 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-3] XSim::Elaborate design INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim' 
+// TclEventType: LAUNCH_SIM
+// TclEventType: LOAD_FEATURE
+// Tcl Message: Built simulation snapshot Top_Level_CPU_TB_behav  ****** Webtalk v2017.4 (64-bit)   **** SW Build 2086221 on Fri Dec 15 20:55:39 MST 2017   **** IP Build 2085800 on Fri Dec 15 22:25:07 MST 2017     ** Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.  source F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xsim.dir/Top_Level_CPU_TB_behav/webtalk/xsim_webtalk.tcl -notrace INFO: [Common 17-206] Exiting Webtalk at Wed Mar 15 10:08:46 2023... 
+// Tcl Message: INFO: [USF-XSim-69] 'elaborate' step finished in '4' seconds INFO: [USF-XSim-4] XSim::Simulate design INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim' INFO: [USF-XSim-98] *** Running xsim 
+// Tcl Message:    with args "Top_Level_CPU_TB_behav -key {Behavioral:sim_1:Functional:Top_Level_CPU_TB} -tclbatch {Top_Level_CPU_TB.tcl} -view {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg} -log {simulate.log}" 
+// Tcl Message: INFO: [USF-XSim-8] Loading simulator feature 
+// Tcl Message: Vivado Simulator 2017.4 
+// TclEventType: SIMULATION_CREATE_SIMULATION_OBJECT
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: WAVEFORM_UPDATE_TITLE
+// TclEventType: WAVEFORM_OPEN_WCFG
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: WAVEFORM_OPEN_WCFG
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// Waveform: addNotify
+// Waveform: addNotify
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// [Engine Memory]: 754 MB (+795kb) [00:39:08]
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// TclEventType: SIMULATION_CLEAR_CURRENT_LINE
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: SIMULATION_CLEAR_CURRENT_LINE
+// TclEventType: WAVEFORM_MODEL_EVENT
+// HMemoryUtils.trashcanNow. Engine heap size: 756 MB. GUI used memory: 76 MB. Current time: 3/15/23 10:08:48 AM PDT
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: SIMULATION_UPDATE_LATEST_TIME
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: SIMULATION_UPDATE_LATEST_TIME
+// TclEventType: SIMULATION_CURRENT_SCOPE_CHANGED
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// Tcl Message: Time resolution is 1 ps 
+// Tcl Message: open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg 
+// Tcl Message: source Top_Level_CPU_TB.tcl 
+// Tcl Message: # set curr_wave [current_wave_config] # if { [string length $curr_wave] == 0 } { #   if { [llength [get_objects]] > 0} { #     add_wave / #     set_property needs_save false [current_wave_config] #   } else { #      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console." #   } # } # run 1000ns 
+// Tcl Message: INFO: [USF-XSim-96] XSim completed. Design snapshot 'Top_Level_CPU_TB_behav' loaded. INFO: [USF-XSim-97] XSim simulation ran for 1000ns 
+// Tcl Message: launch_simulation: Time (s): cpu = 00:00:03 ; elapsed = 00:00:06 . Memory (MB): peak = 919.676 ; gain = 19.016 
+// 'd' command handler elapsed time: 6 seconds
+dismissDialog("Run Simulation"); // e (cj)
+selectButton(PAResourceCommand.PACommandNames_SIMULATION_LIVE_RESTART, "simulation_live_restart"); // B (f, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_LIVE_RESTART
+// bs (cj):  Restart : addNotify
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// TclEventType: SIMULATION_CLEAR_CURRENT_LINE
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: SIMULATION_UPDATE_LATEST_TIME
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: SIMULATION_UPDATE_LATEST_TIME
+// TclEventType: SIMULATION_CURRENT_SCOPE_CHANGED
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// TclEventType: SIMULATION_UPDATE_SCOPE_TREE
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: SIMULATION_CURRENT_SCOPE_CHANGED
+// Tcl Message: restart 
+// Tcl Message: INFO: [Simtcl 6-17] Simulation restarted 
+dismissDialog("Restart"); // bs (cj)
+selectButton(PAResourceCommand.PACommandNames_SIMULATION_LIVE_RUN, "simulation_live_run_for_time"); // B (f, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_LIVE_RUN
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// TclEventType: SIMULATION_CLEAR_CURRENT_LINE
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: SIMULATION_UPDATE_LATEST_TIME
+// HMemoryUtils.trashcanNow. Engine heap size: 762 MB. GUI used memory: 65 MB. Current time: 3/15/23 10:08:51 AM PDT
+// TclEventType: SIMULATION_UPDATE_LATEST_TIME
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: SIMULATION_UPDATE_LATEST_TIME
+// TclEventType: SIMULATION_CURRENT_SCOPE_CHANGED
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// Tcl Message: run 120 us 
+selectGraphicalView(RDIResource.RDIViews_WAVEFORM_VIEWER, 162, 202); // n (o, cj)
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+selectGraphicalView(RDIResource.RDIViews_WAVEFORM_VIEWER, 187, 271); // n (o, cj)
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 763 MB. GUI used memory: 65 MB. Current time: 3/15/23 10:08:58 AM PDT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 763 MB. GUI used memory: 65 MB. Current time: 3/15/23 10:08:58 AM PDT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 763 MB. GUI used memory: 65 MB. Current time: 3/15/23 10:08:58 AM PDT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 763 MB. GUI used memory: 65 MB. Current time: 3/15/23 10:08:58 AM PDT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 763 MB. GUI used memory: 65 MB. Current time: 3/15/23 10:08:58 AM PDT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 763 MB. GUI used memory: 65 MB. Current time: 3/15/23 10:08:58 AM PDT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 763 MB. GUI used memory: 66 MB. Current time: 3/15/23 10:08:58 AM PDT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 763 MB. GUI used memory: 65 MB. Current time: 3/15/23 10:08:58 AM PDT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 763 MB. GUI used memory: 65 MB. Current time: 3/15/23 10:08:58 AM PDT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 763 MB. GUI used memory: 65 MB. Current time: 3/15/23 10:08:58 AM PDT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 763 MB. GUI used memory: 65 MB. Current time: 3/15/23 10:08:59 AM PDT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 763 MB. GUI used memory: 65 MB. Current time: 3/15/23 10:08:59 AM PDT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 763 MB. GUI used memory: 65 MB. Current time: 3/15/23 10:08:59 AM PDT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 763 MB. GUI used memory: 65 MB. Current time: 3/15/23 10:08:59 AM PDT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 1); // k (j, cj)
+// Elapsed time: 15 seconds
+selectCodeEditor("Top_Level_CPU.vhd", 102, 404); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 134, 454); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 117, 670); // cd (w, cj)
+// Replace in Files: addNotify
+// Elapsed time: 13 seconds
+selectComboBox("pa.FindAndReplaceAllDialog_FIND_COMBO_BOX", "ov_data", -1); // JComboBox (r, q)
+selectComboBox("pa.FindAndReplaceAllDialog_REPLACE_COMBO_BOX", "wr_enable_ID_in", -1); // JComboBox (r, q)
+selectButton(PAResourceEtoH.FindAndReplaceAllDialog_FIND, "Find"); // v (q)
+// bs (cj):  Find in Files : addNotify
+// HMemoryUtils.trashcanNow. Engine heap size: 763 MB. GUI used memory: 65 MB. Current time: 3/15/23 10:09:41 AM PDT
+// 'e' command handler elapsed time: 8 seconds
+// HMemoryUtils.trashcanNow. Engine heap size: 763 MB. GUI used memory: 65 MB. Current time: 3/15/23 10:09:41 AM PDT
+dismissDialog("Find in Files"); // bs (cj)
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// Elapsed time: 10 seconds
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [1411, 1418]]", 2, false); // W (O, cj)
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [2162, 2169]]", 3, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [5333, 5340]]", 5, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [2059, 2066]]", 10, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [6918, 6925]]", 11, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectButton(PAResourceEtoH.FindInFilesView_REPLACE_ALL_OCCURRENCES_IN_SELECTED, "Replace Selected"); // a (N, cj)
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// c (cj): Save Simulation Sources: addNotify
+selectButton("PAResourceQtoS.SimulationRun_SIMULATION_ALREADY_RUNNING_DO_YOU_Yes", "Yes"); // JButton (A, G)
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (c)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: WAVEFORM_CLOSE_WCFG
+// TclEventType: SIMULATION_CLOSE_SIMULATION
+// e (cj):  Run Simulation : addNotify
+// TclEventType: DG_GRAPH_STALE
+// Tcl Message: close_sim 
+// TclEventType: DG_GRAPH_STALE
+// Tcl Message: INFO: [Simtcl 6-16] Simulation closed 
+// TclEventType: LAUNCH_SIM
+dismissDialog("Save Simulation Sources"); // c (cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// Tcl Message: launch_simulation 
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// Tcl Message: INFO: [Vivado 12-5682] Launching behavioral simulation in 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim' INFO: [SIM-utils-51] Simulation object is 'sim_1' 
+// TclEventType: DG_GRAPH_GENERATED
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-99] Step results log file:'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' 
+// Tcl Message: ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim/xvhdl.log' file for more information. ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation. 
+// Tcl Message: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  
+// HOptionPane Error: 'ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.  (Run Simulation)'
+// 'd' command handler elapsed time: 9 seconds
+selectButton("RDIResource.ProgressDialog_ERROR_ENCOUNTERED_PLEASE_SEE_TCL_OK", "OK"); // JButton (A, G)
+// a (cj): Critical Messages: addNotify
+selectButton(PAResourceAtoD.CmdMsgDialog_OK, "OK"); // f (a)
+dismissDialog("Critical Messages"); // a (cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Decode_stage.vhd", 1); // k (j, cj)
+selectCodeEditor("Decode_stage.vhd", 480, 297); // cd (w, cj)
+selectCodeEditor("Decode_stage.vhd", 573, 266); // cd (w, cj)
+selectCodeEditor("Decode_stage.vhd", 128, 289); // cd (w, cj)
+selectCodeEditor("Decode_stage.vhd", 120, 276); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Implementation]", 5); // u (O, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e (cj):  Run Simulation : addNotify
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: LAUNCH_SIM
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: launch_simulation 
+// TclEventType: LAUNCH_SIM_LOG
+// Tcl Message: "xvhdl --incr --relax -prj Top_Level_CPU_TB_vhdl.prj" INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/Decode_stage.vhd" into library xil_defaultlib INFO: [VRFC 10-307] analyzing entity Decode INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/Top_Level_CPU.vhd" into library xil_defaultlib INFO: [VRFC 10-307] analyzing entity Top_Level_CPU 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-3] XSim::Elaborate design INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim' 
+// TclEventType: LAUNCH_SIM
+// Tcl Message: INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds INFO: [USF-XSim-4] XSim::Simulate design INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim' INFO: [USF-XSim-98] *** Running xsim 
+// Tcl Message:    with args "Top_Level_CPU_TB_behav -key {Behavioral:sim_1:Functional:Top_Level_CPU_TB} -tclbatch {Top_Level_CPU_TB.tcl} -view {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg} -log {simulate.log}" 
+// Tcl Message: INFO: [USF-XSim-8] Loading simulator feature 
+// Tcl Message: Vivado Simulator 2017.4 
+// TclEventType: SIMULATION_CREATE_SIMULATION_OBJECT
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: WAVEFORM_UPDATE_TITLE
+// TclEventType: WAVEFORM_OPEN_WCFG
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: WAVEFORM_OPEN_WCFG
+// Waveform: addNotify
+// Waveform: addNotify
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// TclEventType: SIMULATION_CLEAR_CURRENT_LINE
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 68 MB. Current time: 3/15/23 10:10:47 AM PDT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: SIMULATION_UPDATE_LATEST_TIME
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: SIMULATION_UPDATE_LATEST_TIME
+// TclEventType: SIMULATION_CURRENT_SCOPE_CHANGED
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// Tcl Message: Time resolution is 1 ps 
+// Tcl Message: open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg 
+// Tcl Message: source Top_Level_CPU_TB.tcl 
+// Tcl Message: # set curr_wave [current_wave_config] # if { [string length $curr_wave] == 0 } { #   if { [llength [get_objects]] > 0} { #     add_wave / #     set_property needs_save false [current_wave_config] #   } else { #      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console." #   } # } # run 1000ns 
+// Tcl Message: INFO: [USF-XSim-96] XSim completed. Design snapshot 'Top_Level_CPU_TB_behav' loaded. INFO: [USF-XSim-97] XSim simulation ran for 1000ns 
+// 'd' command handler elapsed time: 4 seconds
+dismissDialog("Run Simulation"); // e (cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 1); // k (j, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 131, 451); // cd (w, cj)
+// Replace in Files: addNotify
+selectComboBox("pa.FindAndReplaceAllDialog_FIND_COMBO_BOX", "ov_enable", -1); // JComboBox (r, q)
+selectComboBox("pa.FindAndReplaceAllDialog_REPLACE_COMBO_BOX", "ov_data_ID_in", -1); // JComboBox (r, q)
+selectButton(PAResourceEtoH.FindAndReplaceAllDialog_FIND, "Find"); // v (q)
+// bs (cj):  Find in Files : addNotify
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 70 MB. Current time: 3/15/23 10:11:04 AM PDT
+// 'e' command handler elapsed time: 6 seconds
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 69 MB. Current time: 3/15/23 10:11:05 AM PDT
+dismissDialog("Find in Files"); // bs (cj)
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [1467, 1476]]", 2, false); // W (O, cj)
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [5396, 5405]]", 4, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [5396, 5405]]", 4, false); // W (O, cj)
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [5409, 5418]]", 5, false); // W (O, cj)
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [1467, 1476]]", 2, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [2120, 2129]]", 10, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [6955, 6964]]", 11, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectButton(PAResourceEtoH.FindInFilesView_REPLACE_ALL_OCCURRENCES_IN_SELECTED, "Replace Selected"); // a (N, cj)
+selectCodeEditor("Decode_stage.vhd", 104, 386); // cd (w, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 1); // k (j, cj)
+// TclEventType: DG_GRAPH_STALE
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Decode_stage.vhd", 0); // k (j, cj)
+// TclEventType: FILE_SET_CHANGE
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 1); // k (j, cj)
+// WARNING: HSwingWorker (Refresh Filesets Swing Worker) is taking too long to process. Increasing delay to 3000 ms.
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectCodeEditor("Top_Level_CPU.vhd", 117, 484); // cd (w, cj)
+// Replace in Files: addNotify
+// Elapsed time: 12 seconds
+selectComboBox("pa.FindAndReplaceAllDialog_FIND_COMBO_BOX", "loadIMM", -1); // JComboBox (r, q)
+selectComboBox("pa.FindAndReplaceAllDialog_REPLACE_COMBO_BOX", "ov_enable_ID_in", -1); // JComboBox (r, q)
+selectButton(PAResourceEtoH.FindAndReplaceAllDialog_FIND, "Find"); // v (q)
+// bs (cj):  Find in Files : addNotify
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 70 MB. Current time: 3/15/23 10:11:43 AM PDT
+// 'e' command handler elapsed time: 9 seconds
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 69 MB. Current time: 3/15/23 10:11:43 AM PDT
+dismissDialog("Find in Files"); // bs (cj)
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [1505, 1512]]", 2, false); // W (O, cj)
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [3582, 3589]]", 4, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [5368, 5375]]", 6, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [2163, 2170]]", 15, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [7056, 7063]]", 17, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectButton(PAResourceEtoH.FindInFilesView_REPLACE_ALL_OCCURRENCES_IN_SELECTED, "Replace Selected"); // a (N, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectCodeEditor("Decode_stage.vhd", 96, 195); // cd (w, cj)
+// TclEventType: DG_GRAPH_GENERATED
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 1); // k (j, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectCodeEditor("Top_Level_CPU.vhd", 139, 536); // cd (w, cj)
+// TclEventType: DG_GRAPH_GENERATED
+// Replace in Files: addNotify
+// Elapsed time: 11 seconds
+selectComboBox("pa.FindAndReplaceAllDialog_FIND_COMBO_BOX", "load_align", -1); // JComboBox (r, q)
+selectComboBox("pa.FindAndReplaceAllDialog_REPLACE_COMBO_BOX", "loadIMM_ID_in", -1); // JComboBox (r, q)
+selectButton(PAResourceEtoH.FindAndReplaceAllDialog_FIND, "Find"); // v (q)
+// bs (cj):  Find in Files : addNotify
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 71 MB. Current time: 3/15/23 10:12:35 AM PDT
+// 'e' command handler elapsed time: 10 seconds
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 71 MB. Current time: 3/15/23 10:12:35 AM PDT
+dismissDialog("Find in Files"); // bs (cj)
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [1549, 1559]]", 2, false); // W (O, cj)
+// Elapsed time: 10 seconds
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [5408, 5418]]", 5, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [2203, 2213]]", 13, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [7094, 7104]]", 15, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectButton(PAResourceEtoH.FindInFilesView_REPLACE_ALL_OCCURRENCES_IN_SELECTED, "Replace Selected"); // a (N, cj)
+selectCodeEditor("Decode_stage.vhd", 122, 432); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation]", 2); // u (O, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+// TclEventType: DG_GRAPH_GENERATED
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// c (cj): Save Simulation Sources: addNotify
+selectButton("PAResourceQtoS.SimulationRun_SIMULATION_ALREADY_RUNNING_DO_YOU_Yes", "Yes"); // JButton (A, G)
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (c)
+// TclEventType: WAVEFORM_CLOSE_WCFG
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: SIMULATION_CLOSE_SIMULATION
+// e (cj):  Run Simulation : addNotify
+// TclEventType: DG_GRAPH_STALE
+// Tcl Message: close_sim 
+// TclEventType: DG_GRAPH_STALE
+// Tcl Message: INFO: [Simtcl 6-16] Simulation closed 
+// TclEventType: LAUNCH_SIM
+dismissDialog("Save Simulation Sources"); // c (cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// Tcl Message: launch_simulation 
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// Tcl Message: INFO: [Vivado 12-5682] Launching behavioral simulation in 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim' INFO: [SIM-utils-51] Simulation object is 'sim_1' 
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: LAUNCH_SIM_LOG
+// Tcl Message: "xvhdl --incr --relax -prj Top_Level_CPU_TB_vhdl.prj" INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/Decode_stage.vhd" into library xil_defaultlib INFO: [VRFC 10-307] analyzing entity Decode INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/Top_Level_CPU.vhd" into library xil_defaultlib INFO: [VRFC 10-307] analyzing entity Top_Level_CPU 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-3] XSim::Elaborate design INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim' 
+// TclEventType: LAUNCH_SIM
+// Tcl Message: INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds INFO: [USF-XSim-4] XSim::Simulate design INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim' INFO: [USF-XSim-98] *** Running xsim 
+// Tcl Message:    with args "Top_Level_CPU_TB_behav -key {Behavioral:sim_1:Functional:Top_Level_CPU_TB} -tclbatch {Top_Level_CPU_TB.tcl} -view {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg} -log {simulate.log}" 
+// Tcl Message: INFO: [USF-XSim-8] Loading simulator feature 
+// Tcl Message: Vivado Simulator 2017.4 
+// TclEventType: SIMULATION_CREATE_SIMULATION_OBJECT
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: WAVEFORM_UPDATE_TITLE
+// TclEventType: WAVEFORM_OPEN_WCFG
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: WAVEFORM_OPEN_WCFG
+// Waveform: addNotify
+// Waveform: addNotify
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// TclEventType: SIMULATION_CLEAR_CURRENT_LINE
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 106 MB. Current time: 3/15/23 10:13:19 AM PDT
+// TclEventType: SIMULATION_CLEAR_CURRENT_LINE
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: SIMULATION_UPDATE_LATEST_TIME
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: SIMULATION_UPDATE_LATEST_TIME
+// TclEventType: SIMULATION_CURRENT_SCOPE_CHANGED
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// Tcl Message: Time resolution is 1 ps 
+// Tcl Message: open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg 
+// Tcl Message: source Top_Level_CPU_TB.tcl 
+// Tcl Message: # set curr_wave [current_wave_config] # if { [string length $curr_wave] == 0 } { #   if { [llength [get_objects]] > 0} { #     add_wave / #     set_property needs_save false [current_wave_config] #   } else { #      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console." #   } # } # run 1000ns 
+// Tcl Message: INFO: [USF-XSim-96] XSim completed. Design snapshot 'Top_Level_CPU_TB_behav' loaded. INFO: [USF-XSim-97] XSim simulation ran for 1000ns 
+// Tcl Message: launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:06 . Memory (MB): peak = 931.383 ; gain = 0.395 
+// 'd' command handler elapsed time: 10 seconds
+dismissDialog("Run Simulation"); // e (cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Decode_stage.vhd", 0); // k (j, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 1); // k (j, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 201, 433); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 136, 447); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 99, 641); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 124, 659); // cd (w, cj)
+// Elapsed time: 10 seconds
+selectCodeEditor("Top_Level_CPU.vhd", 126, 637); // cd (w, cj)
+// Replace in Files: addNotify
+// Elapsed time: 26 seconds
+selectComboBox("pa.FindAndReplaceAllDialog_FIND_COMBO_BOX", "NPC_in", -1); // JComboBox (r, q)
+selectComboBox("pa.FindAndReplaceAllDialog_REPLACE_COMBO_BOX", "load_align_ID_in", -1); // JComboBox (r, q)
+selectButton(PAResourceEtoH.FindAndReplaceAllDialog_FIND, "Find"); // v (q)
+// bs (cj):  Find in Files : addNotify
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 74 MB. Current time: 3/15/23 10:14:09 AM PDT
+// 'e' command handler elapsed time: 9 seconds
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 73 MB. Current time: 3/15/23 10:14:09 AM PDT
+dismissDialog("Find in Files"); // bs (cj)
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+selectButton(PAResourceEtoH.FindInFilesView_REPLACE_ALL_OCCURRENCES_IN_ALL_FILES, "Replace All"); // a (N, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 201, 469); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 19 seconds
+selectCodeEditor("Top_Level_CPU.vhd", 135, 351); // cd (w, cj)
+// Replace in Files: addNotify
+selectComboBox("pa.FindAndReplaceAllDialog_FIND_COMBO_BOX", "wr_data", -1); // JComboBox (r, q)
+selectComboBox("pa.FindAndReplaceAllDialog_REPLACE_COMBO_BOX", "NPC_MEM_in", -1); // JComboBox (r, q)
+selectButton(PAResourceEtoH.FindAndReplaceAllDialog_FIND, "Find"); // v (q)
+// bs (cj):  Find in Files : addNotify
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 73 MB. Current time: 3/15/23 10:14:43 AM PDT
+// 'e' command handler elapsed time: 6 seconds
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 73 MB. Current time: 3/15/23 10:14:43 AM PDT
+dismissDialog("Find in Files"); // bs (cj)
+// Elapsed time: 11 seconds
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [1290, 1297]]", 17, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [1935, 1942]]", 18, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [3123, 3130]]", 19, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [4560, 4567]]", 21, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [8363, 8370]]", 22, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectButton(PAResourceEtoH.FindInFilesView_REPLACE_ALL_OCCURRENCES_IN_SELECTED, "Replace Selected"); // a (N, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 1); // k (j, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation]", 2); // u (O, cj)
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// c (cj): Save Simulation Sources: addNotify
+selectButton("PAResourceQtoS.SimulationRun_SIMULATION_ALREADY_RUNNING_DO_YOU_Yes", "Yes"); // JButton (A, G)
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (c)
+// TclEventType: WAVEFORM_CLOSE_WCFG
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: SIMULATION_CLOSE_SIMULATION
+// e (cj):  Run Simulation : addNotify
+// TclEventType: DG_GRAPH_STALE
+// Tcl Message: close_sim 
+// Tcl Message: INFO: [Simtcl 6-16] Simulation closed 
+// TclEventType: LAUNCH_SIM
+dismissDialog("Save Simulation Sources"); // c (cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// Tcl Message: launch_simulation 
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// Tcl Message: INFO: [Vivado 12-5682] Launching behavioral simulation in 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim' INFO: [SIM-utils-51] Simulation object is 'sim_1' 
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: LAUNCH_SIM_LOG
+// Tcl Message: "xvhdl --incr --relax -prj Top_Level_CPU_TB_vhdl.prj" INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/Memory_Stage.vhd" into library xil_defaultlib INFO: [VRFC 10-307] analyzing entity Memory_Stage INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/Top_Level_CPU.vhd" into library xil_defaultlib INFO: [VRFC 10-307] analyzing entity Top_Level_CPU INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/Write_Back_Stage.vhd" into library xil_defaultlib INFO: [VRFC 10-307] analyzing entity Write_Back_Stage 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-3] XSim::Elaborate design INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim' 
+// TclEventType: LAUNCH_SIM
+// Tcl Message: Built simulation snapshot Top_Level_CPU_TB_behav 
+// Tcl Message: INFO: [USF-XSim-69] 'elaborate' step finished in '1' seconds INFO: [USF-XSim-4] XSim::Simulate design INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim' INFO: [USF-XSim-98] *** Running xsim 
+// Tcl Message:    with args "Top_Level_CPU_TB_behav -key {Behavioral:sim_1:Functional:Top_Level_CPU_TB} -tclbatch {Top_Level_CPU_TB.tcl} -view {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg} -log {simulate.log}" 
+// Tcl Message: INFO: [USF-XSim-8] Loading simulator feature 
+// Tcl Message: Vivado Simulator 2017.4 
+// TclEventType: SIMULATION_CREATE_SIMULATION_OBJECT
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: WAVEFORM_UPDATE_TITLE
+// TclEventType: WAVEFORM_OPEN_WCFG
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: WAVEFORM_OPEN_WCFG
+// Waveform: addNotify
+// Waveform: addNotify
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// TclEventType: SIMULATION_CLEAR_CURRENT_LINE
+// TclEventType: WAVEFORM_MODEL_EVENT
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 78 MB. Current time: 3/15/23 10:15:20 AM PDT
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: SIMULATION_UPDATE_LATEST_TIME
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: SIMULATION_UPDATE_LATEST_TIME
+// TclEventType: SIMULATION_CURRENT_SCOPE_CHANGED
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// Tcl Message: Time resolution is 1 ps 
+// Tcl Message: open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg 
+// Tcl Message: source Top_Level_CPU_TB.tcl 
+// Tcl Message: # set curr_wave [current_wave_config] # if { [string length $curr_wave] == 0 } { #   if { [llength [get_objects]] > 0} { #     add_wave / #     set_property needs_save false [current_wave_config] #   } else { #      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console." #   } # } # run 1000ns 
+// Tcl Message: INFO: [USF-XSim-96] XSim completed. Design snapshot 'Top_Level_CPU_TB_behav' loaded. INFO: [USF-XSim-97] XSim simulation ran for 1000ns 
+// Tcl Message: launch_simulation: Time (s): cpu = 00:00:02 ; elapsed = 00:00:06 . Memory (MB): peak = 935.215 ; gain = 0.000 
+// 'd' command handler elapsed time: 9 seconds
+dismissDialog("Run Simulation"); // e (cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 1); // k (j, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 93, 445); // cd (w, cj)
+// Elapsed time: 12 seconds
+selectCodeEditor("Top_Level_CPU.vhd", 128, 435); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 134, 435); // cd (w, cj)
+// Replace in Files: addNotify
+selectComboBox("pa.FindAndReplaceAllDialog_FIND_COMBO_BOX", "wr_addr", -1); // JComboBox (r, q)
+selectComboBox("pa.FindAndReplaceAllDialog_REPLACE_COMBO_BOX", "wr_data_WB_out", -1); // JComboBox (r, q)
+selectButton(PAResourceEtoH.FindAndReplaceAllDialog_FIND, "Find"); // v (q)
+// bs (cj):  Find in Files : addNotify
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 78 MB. Current time: 3/15/23 10:15:44 AM PDT
+// 'e' command handler elapsed time: 7 seconds
+dismissDialog("Find in Files"); // bs (cj)
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 106 MB. Current time: 3/15/23 10:15:44 AM PDT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [1355, 1362]]", 10, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [1990, 1997]]", 11, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [3747, 3754]]", 12, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [4626, 4633]]", 14, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [8403, 8410]]", 15, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectButton(PAResourceEtoH.FindInFilesView_REPLACE_ALL_OCCURRENCES_IN_SELECTED, "Replace Selected"); // a (N, cj)
+selectCodeEditor("Write_Back_Stage.vhd", 103, 534); // cd (w, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 1); // k (j, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 117, 488); // cd (w, cj)
+// Replace in Files: addNotify
+// Elapsed time: 11 seconds
+selectComboBox("pa.FindAndReplaceAllDialog_FIND_COMBO_BOX", "wr_en", -1); // JComboBox (r, q)
+selectComboBox("pa.FindAndReplaceAllDialog_REPLACE_COMBO_BOX", "wr_addr_WB_out", -1); // JComboBox (r, q)
+selectButton(PAResourceEtoH.FindAndReplaceAllDialog_FIND, "Find"); // v (q)
+// k (cj): Text Changed: addNotify
+selectButton(RDIResource.ConfirmSaveTextEditsDialog_YES, "Yes"); // a (k)
+// TclEventType: DG_GRAPH_STALE
+// bs (cj):  Find in Files : addNotify
+// TclEventType: DG_GRAPH_STALE
+dismissDialog("Text Changed"); // k (cj)
+// TclEventType: FILE_SET_CHANGE
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 78 MB. Current time: 3/15/23 10:16:16 AM PDT
+// 'e' command handler elapsed time: 12 seconds
+// TclEventType: FILE_SET_CHANGE
+dismissDialog("Find in Files"); // bs (cj)
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 109 MB. Current time: 3/15/23 10:16:16 AM PDT
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [1419, 1424]]", 8, false); // W (O, cj)
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [4294, 4299]]", 9, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [4691, 4696]]", 11, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [8443, 8448]]", 13, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectButton(PAResourceEtoH.FindInFilesView_REPLACE_ALL_OCCURRENCES_IN_SELECTED, "Replace Selected"); // a (N, cj)
+selectCodeEditor("Write_Back_Stage.vhd", 101, 469); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 1); // k (j, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectCodeEditor("Top_Level_CPU.vhd", 125, 488); // cd (w, cj)
+// Elapsed time: 21 seconds
+selectCodeEditor("Top_Level_CPU.vhd", 114, 504); // cd (w, cj)
+// Replace in Files: addNotify
+// Elapsed time: 11 seconds
+selectComboBox("pa.FindAndReplaceAllDialog_FIND_COMBO_BOX", "v_en", -1); // JComboBox (r, q)
+selectComboBox("pa.FindAndReplaceAllDialog_REPLACE_COMBO_BOX", "wr_enable_WB_out", -1); // JComboBox (r, q)
+selectButton(PAResourceEtoH.FindAndReplaceAllDialog_FIND, "Find"); // v (q)
+// k (cj): Text Changed: addNotify
+selectButton(RDIResource.ConfirmSaveTextEditsDialog_YES, "Yes"); // a (k)
+// TclEventType: DG_GRAPH_STALE
+// bs (cj):  Find in Files : addNotify
+// TclEventType: DG_GRAPH_STALE
+dismissDialog("Text Changed"); // k (cj)
+// TclEventType: FILE_SET_CHANGE
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 78 MB. Current time: 3/15/23 10:17:14 AM PDT
+// 'e' command handler elapsed time: 11 seconds
+dismissDialog("Find in Files"); // bs (cj)
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 108 MB. Current time: 3/15/23 10:17:15 AM PDT
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [1465, 1469]]", 4, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [4217, 4221]]", 5, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [4738, 4742]]", 7, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [8487, 8491]]", 8, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [4738, 4742]]", 7, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [4738, 4742]]", 7, false, false, true, false, false, true); // W (O, cj) - Control Key - Double Click
+selectButton(PAResourceEtoH.FindInFilesView_REPLACE_ALL_OCCURRENCES_IN_SELECTED, "Replace Selected"); // a (N, cj)
+selectCodeEditor("Write_Back_Stage.vhd", 154, 543); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 1); // k (j, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 155, 479); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 133, 447); // cd (w, cj)
+// Replace in Files: addNotify
+// Elapsed time: 12 seconds
+selectComboBox("pa.FindAndReplaceAllDialog_FIND_COMBO_BOX", "loadIMM", -1); // JComboBox (r, q)
+selectComboBox("pa.FindAndReplaceAllDialog_REPLACE_COMBO_BOX", "ov_enable_ID_in", 7); // JComboBox (r, q)
+selectButton(PAResourceEtoH.FindAndReplaceAllDialog_FIND, "Find"); // v (q)
+// k (cj): Text Changed: addNotify
+selectButton(RDIResource.ConfirmSaveTextEditsDialog_YES, "Yes"); // a (k)
+// TclEventType: DG_GRAPH_STALE
+// bs (cj):  Find in Files : addNotify
+// TclEventType: DG_GRAPH_STALE
+dismissDialog("Text Changed"); // k (cj)
+// TclEventType: FILE_SET_CHANGE
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 79 MB. Current time: 3/15/23 10:17:54 AM PDT
+// 'e' command handler elapsed time: 12 seconds
+dismissDialog("Find in Files"); // bs (cj)
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 80 MB. Current time: 3/15/23 10:17:54 AM PDT
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [1507, 1514]]", 8, false); // W (O, cj)
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [4873, 4880]]", 9, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [5036, 5043]]", 10, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [4781, 4788]]", 12, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [8523, 8530]]", 13, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectButton(PAResourceEtoH.FindInFilesView_REPLACE_ALL_OCCURRENCES_IN_SELECTED, "Replace Selected"); // a (N, cj)
+selectCodeEditor("Write_Back_Stage.vhd", 140, 217); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 1); // k (j, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectCodeEditor("Top_Level_CPU.vhd", 156, 345); // cd (w, cj)
+// Replace in Files: addNotify
+selectComboBox("pa.FindAndReplaceAllDialog_FIND_COMBO_BOX", "load_align", -1); // JComboBox (r, q)
+selectComboBox("pa.FindAndReplaceAllDialog_REPLACE_COMBO_BOX", "loadIMM_WB_out", -1); // JComboBox (r, q)
+selectButton(PAResourceEtoH.FindAndReplaceAllDialog_FIND, "Find"); // v (q)
+// k (cj): Text Changed: addNotify
+selectButton(RDIResource.ConfirmSaveTextEditsDialog_YES, "Yes"); // a (k)
+// TclEventType: DG_GRAPH_STALE
+// bs (cj):  Find in Files : addNotify
+// TclEventType: DG_GRAPH_STALE
+dismissDialog("Text Changed"); // k (cj)
+// TclEventType: FILE_SET_CHANGE
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 80 MB. Current time: 3/15/23 10:18:16 AM PDT
+// 'e' command handler elapsed time: 6 seconds
+dismissDialog("Find in Files"); // bs (cj)
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 120 MB. Current time: 3/15/23 10:18:16 AM PDT
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [1550, 1560]]", 8, false); // W (O, cj)
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [5124, 5134]]", 9, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [4825, 4835]]", 11, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [8563, 8573]]", 12, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectButton(PAResourceEtoH.FindInFilesView_REPLACE_ALL_OCCURRENCES_IN_SELECTED, "Replace Selected"); // a (N, cj)
+selectCodeEditor("Write_Back_Stage.vhd", 128, 535); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 1); // k (j, cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectCodeEditor("Top_Level_CPU.vhd", 124, 402); // cd (w, cj)
+// Replace in Files: addNotify
+selectComboBox("pa.FindAndReplaceAllDialog_FIND_COMBO_BOX", "V_data", -1); // JComboBox (r, q)
+selectComboBox("pa.FindAndReplaceAllDialog_REPLACE_COMBO_BOX", "load_align_WB_out", -1); // JComboBox (r, q)
+selectButton(PAResourceEtoH.FindAndReplaceAllDialog_FIND, "Find"); // v (q)
+// bs (cj):  Find in Files : addNotify
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 81 MB. Current time: 3/15/23 10:18:38 AM PDT
+// 'e' command handler elapsed time: 6 seconds
+dismissDialog("Find in Files"); // bs (cj)
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 81 MB. Current time: 3/15/23 10:18:38 AM PDT
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [1596, 1602]]", 2, false); // W (O, cj)
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [2078, 2084]]", 3, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [5164, 5170]]", 4, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [4872, 4878]]", 6, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectTree(PAResourceEtoH.FindInFilesView_ROOT, "[ROOT, [8610, 8616]]", 7, false, false, true, false, false, false); // W (O, cj) - Control Key
+selectButton(PAResourceEtoH.FindInFilesView_REPLACE_ALL_OCCURRENCES_IN_SELECTED, "Replace Selected"); // a (N, cj)
+selectCodeEditor("Write_Back_Stage.vhd", 217, 489); // cd (w, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 1); // k (j, cj)
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 15 seconds
+selectCodeEditor("Top_Level_CPU.vhd", 182, 498); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 125, 514); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 380, 534); // cd (w, cj)
+typeControlKey((HResource) null, "Top_Level_CPU.vhd", 'c'); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 118, 523); // cd (w, cj)
+typeControlKey((HResource) null, "Top_Level_CPU.vhd", 'v'); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 179, 502); // cd (w, cj)
+typeControlKey((HResource) null, "Top_Level_CPU.vhd", 'v'); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 213, 535); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 110, 521); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 99, 521); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 110, 519); // cd (w, cj)
+// Replace in Files: addNotify
+selectComboBox("pa.FindAndReplaceAllDialog_FIND_COMBO_BOX", "A_in", -1); // JComboBox (r, q)
+selectComboBox("pa.FindAndReplaceAllDialog_REPLACE_COMBO_BOX", "ov_data_WB_out", -1); // JComboBox (r, q)
+selectButton(PAResourceEtoH.FindAndReplaceAllDialog_FIND, "Find"); // v (q)
+// k (cj): Text Changed: addNotify
+selectButton(RDIResource.ConfirmSaveTextEditsDialog_YES, "Yes"); // a (k)
+// TclEventType: DG_GRAPH_STALE
+// bs (cj):  Find in Files : addNotify
+// TclEventType: DG_GRAPH_STALE
+dismissDialog("Text Changed"); // k (cj)
+// TclEventType: FILE_SET_CHANGE
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 81 MB. Current time: 3/15/23 10:19:30 AM PDT
+// 'e' command handler elapsed time: 6 seconds
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 81 MB. Current time: 3/15/23 10:19:30 AM PDT
+dismissDialog("Find in Files"); // bs (cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectButton(PAResourceEtoH.FindInFilesView_REPLACE_ALL_OCCURRENCES_IN_ALL_FILES, "Replace All"); // a (N, cj)
+// TclEventType: DG_GRAPH_STALE
+selectCodeEditor("Top_Level_CPU.vhd", 112, 535); // cd (w, cj)
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// Replace in Files: addNotify
+// TclEventType: DG_GRAPH_GENERATED
+selectComboBox("pa.FindAndReplaceAllDialog_FIND_COMBO_BOX", "B_in", -1); // JComboBox (r, q)
+selectComboBox("pa.FindAndReplaceAllDialog_REPLACE_COMBO_BOX", "A_MEM_in", -1); // JComboBox (r, q)
+selectButton(PAResourceEtoH.FindAndReplaceAllDialog_FIND, "Find"); // v (q)
+// k (cj): Text Changed: addNotify
+selectButton(RDIResource.ConfirmSaveTextEditsDialog_YES, "Yes"); // a (k)
+// TclEventType: DG_GRAPH_STALE
+// bs (cj):  Find in Files : addNotify
+// TclEventType: DG_GRAPH_STALE
+dismissDialog("Text Changed"); // k (cj)
+// TclEventType: FILE_SET_CHANGE
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 81 MB. Current time: 3/15/23 10:19:44 AM PDT
+// 'e' command handler elapsed time: 6 seconds
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 81 MB. Current time: 3/15/23 10:19:45 AM PDT
+dismissDialog("Find in Files"); // bs (cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectButton(PAResourceEtoH.FindInFilesView_REPLACE_ALL_OCCURRENCES_IN_ALL_FILES, "Replace All"); // a (N, cj)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: FILE_SET_CHANGE
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u (O, cj)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation]", 2); // u (O, cj)
+// TclEventType: DG_GRAPH_GENERATED
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac (ai, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// TclEventType: WAVEFORM_CLOSE_WCFG
+// TclEventType: SIMULATION_CLOSE_SIMULATION
+// e (cj):  Run Simulation : addNotify
+selectButton("PAResourceQtoS.SimulationRun_SIMULATION_ALREADY_RUNNING_DO_YOU_Yes", "Yes"); // JButton (A, G)
+// Tcl Message: close_sim 
+// Tcl Message: INFO: [Simtcl 6-16] Simulation closed 
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: launch_simulation 
+// TclEventType: LAUNCH_SIM_LOG
+// Tcl Message: "xvhdl --incr --relax -prj Top_Level_CPU_TB_vhdl.prj" INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/Memory_Stage.vhd" into library xil_defaultlib INFO: [VRFC 10-307] analyzing entity Memory_Stage INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/Top_Level_CPU.vhd" into library xil_defaultlib INFO: [VRFC 10-307] analyzing entity Top_Level_CPU INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/Write_Back_Stage.vhd" into library xil_defaultlib INFO: [VRFC 10-307] analyzing entity Write_Back_Stage 
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-3] XSim::Elaborate design INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim' 
+// TclEventType: LAUNCH_SIM
+// Tcl Message: INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds INFO: [USF-XSim-4] XSim::Simulate design INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.sim/sim_1/behav/xsim' INFO: [USF-XSim-98] *** Running xsim 
+// Tcl Message:    with args "Top_Level_CPU_TB_behav -key {Behavioral:sim_1:Functional:Top_Level_CPU_TB} -tclbatch {Top_Level_CPU_TB.tcl} -view {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg} -log {simulate.log}" 
+// Tcl Message: INFO: [USF-XSim-8] Loading simulator feature 
+// Tcl Message: Vivado Simulator 2017.4 
+// TclEventType: SIMULATION_CREATE_SIMULATION_OBJECT
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: WAVEFORM_UPDATE_TITLE
+// TclEventType: WAVEFORM_OPEN_WCFG
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: WAVEFORM_OPEN_WCFG
+// Waveform: addNotify
+// Waveform: addNotify
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// TclEventType: SIMULATION_CLEAR_CURRENT_LINE
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 135 MB. Current time: 3/15/23 10:19:57 AM PDT
+// TclEventType: SIMULATION_CLEAR_CURRENT_LINE
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: SIMULATION_UPDATE_LATEST_TIME
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: SIMULATION_UPDATE_LATEST_TIME
+// TclEventType: SIMULATION_CURRENT_SCOPE_CHANGED
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// Tcl Message: Time resolution is 1 ps 
+// Tcl Message: open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg 
+// Tcl Message: source Top_Level_CPU_TB.tcl 
+// Tcl Message: # set curr_wave [current_wave_config] # if { [string length $curr_wave] == 0 } { #   if { [llength [get_objects]] > 0} { #     add_wave / #     set_property needs_save false [current_wave_config] #   } else { #      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console." #   } # } # run 1000ns 
+// Tcl Message: INFO: [USF-XSim-96] XSim completed. Design snapshot 'Top_Level_CPU_TB_behav' loaded. INFO: [USF-XSim-97] XSim simulation ran for 1000ns 
+// 'd' command handler elapsed time: 6 seconds
+dismissDialog("Run Simulation"); // e (cj)
+selectButton(PAResourceCommand.PACommandNames_SIMULATION_LIVE_RESTART, "simulation_live_restart"); // B (f, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_LIVE_RESTART
+// bs (cj):  Restart : addNotify
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// TclEventType: SIMULATION_CLEAR_CURRENT_LINE
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: SIMULATION_UPDATE_LATEST_TIME
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: SIMULATION_UPDATE_LATEST_TIME
+// TclEventType: SIMULATION_CURRENT_SCOPE_CHANGED
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// TclEventType: SIMULATION_UPDATE_SCOPE_TREE
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: SIMULATION_CURRENT_SCOPE_CHANGED
+// Tcl Message: restart 
+// Tcl Message: INFO: [Simtcl 6-17] Simulation restarted 
+dismissDialog("Restart"); // bs (cj)
+selectButton(PAResourceCommand.PACommandNames_SIMULATION_LIVE_RUN, "simulation_live_run_for_time"); // B (f, cj)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_LIVE_RUN
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// TclEventType: SIMULATION_CLEAR_CURRENT_LINE
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: SIMULATION_UPDATE_LATEST_TIME
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 115 MB. Current time: 3/15/23 10:19:59 AM PDT
+// TclEventType: SIMULATION_UPDATE_LATEST_TIME
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: SIMULATION_UPDATE_LATEST_TIME
+// TclEventType: SIMULATION_CURRENT_SCOPE_CHANGED
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// Tcl Message: run 120 us 
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 85 MB. Current time: 3/15/23 10:20:04 AM PDT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 84 MB. Current time: 3/15/23 10:20:05 AM PDT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 84 MB. Current time: 3/15/23 10:20:05 AM PDT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 84 MB. Current time: 3/15/23 10:20:05 AM PDT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 84 MB. Current time: 3/15/23 10:20:05 AM PDT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 1); // k (j, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 127, 371); // cd (w, cj)
+// Replace in Files: addNotify
+// Elapsed time: 43 seconds
+selectComboBox("pa.FindAndReplaceAllDialog_FIND_COMBO_BOX", "Mem_in", -1); // JComboBox (r, q)
+selectComboBox("pa.FindAndReplaceAllDialog_REPLACE_COMBO_BOX", "B_MEM_in", -1); // JComboBox (r, q)
+selectButton(PAResourceEtoH.FindAndReplaceAllDialog_FIND, "Find"); // v (q)
+// bs (cj):  Find in Files : addNotify
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 85 MB. Current time: 3/15/23 10:20:57 AM PDT
+// 'e' command handler elapsed time: 37 seconds
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 84 MB. Current time: 3/15/23 10:20:57 AM PDT
+dismissDialog("Find in Files"); // bs (cj)
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+selectButton(PAResourceEtoH.FindInFilesView_REPLACE_ALL_OCCURRENCES_IN_ALL_FILES, "Replace All"); // a (N, cj)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Top_Level_CPU.vhd", 1); // k (j, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 128, 434); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 130, 435); // cd (w, cj)
+// Replace in Files: addNotify
+// Elapsed time: 10 seconds
+selectComboBox("pa.FindAndReplaceAllDialog_FIND_COMBO_BOX", "Mem_out", -1); // JComboBox (r, q)
+selectComboBox("pa.FindAndReplaceAllDialog_REPLACE_COMBO_BOX", "memdata_WB_in", -1); // JComboBox (r, q)
+selectButton(PAResourceEtoH.FindAndReplaceAllDialog_FIND, "Find"); // v (q)
+// k (cj): Text Changed: addNotify
+selectButton(RDIResource.ConfirmSaveTextEditsDialog_YES, "Yes"); // a (k)
+// TclEventType: DG_GRAPH_STALE
+// bs (cj):  Find in Files : addNotify
+// TclEventType: DG_GRAPH_STALE
+dismissDialog("Text Changed"); // k (cj)
+// TclEventType: FILE_SET_CHANGE
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 85 MB. Current time: 3/15/23 10:21:20 AM PDT
+// 'e' command handler elapsed time: 9 seconds
+// TclEventType: FILE_SET_CHANGE
+// HMemoryUtils.trashcanNow. Engine heap size: 768 MB. GUI used memory: 85 MB. Current time: 3/15/23 10:21:20 AM PDT
+dismissDialog("Find in Files"); // bs (cj)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+selectButton(PAResourceEtoH.FindInFilesView_REPLACE_ALL_OCCURRENCES_IN_ALL_FILES, "Replace All"); // a (N, cj)
+selectButton(PAResourceEtoH.FindInFilesView_REPLACE_ALL_OCCURRENCES_IN_ALL_FILES, "Replace All"); // a (N, cj)
+// TclEventType: DG_GRAPH_STALE
+selectCodeEditor("Top_Level_CPU.vhd", 258, 453); // cd (w, cj)
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: DG_GRAPH_GENERATED
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 160 seconds
+selectCodeEditor("Top_Level_CPU.vhd", 244, 488); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 26, 345); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 188, 565); // cd (w, cj)
+selectCodeEditor("Top_Level_CPU.vhd", 56, 526); // cd (w, cj)

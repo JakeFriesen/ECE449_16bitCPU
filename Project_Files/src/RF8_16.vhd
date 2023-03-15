@@ -14,7 +14,7 @@ entity register_file is
         rd_data1: out std_logic_vector(15 downto 0); 
         rd_data2: out std_logic_vector(15 downto 0);
         --write signals
-        wr_index: in std_logic_vector(2 downto 0); 
+        wr_addr: in std_logic_vector(2 downto 0); 
         wr_data: in std_logic_vector(15 downto 0); 
         wr_enable: in std_logic;
         --overflow signals
@@ -53,7 +53,7 @@ begin
                 reg_file(7)(7 downto 0) <= wr_data(7 downto 0);
              end if;
       else   
-        case wr_index(2 downto 0) is
+        case wr_addr(2 downto 0) is
               when "000" => reg_file(0) <= wr_data;
               when "001" => reg_file(1) <= wr_data;
               when "010" => reg_file(2) <= wr_data;

@@ -2,10 +2,10 @@
 # Vivado v2017.4 (64-bit)
 # SW Build 2086221 on Fri Dec 15 20:55:39 MST 2017
 # IP Build 2085800 on Fri Dec 15 22:25:07 MST 2017
-# Start of session at: Mon Mar 13 15:57:05 2023
-# Process ID: 75124
+# Start of session at: Wed Mar 15 09:29:36 2023
+# Process ID: 58684
 # Current directory: F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent76528 F:\GitHub\ECE_449\ECE449_16bitCPU\Project_Files\Top_Level_CPU\Top_Level_CPU.xpr
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent61188 F:\GitHub\ECE_449\ECE449_16bitCPU\Project_Files\Top_Level_CPU\Top_Level_CPU.xpr
 # Log file: F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/vivado.log
 # Journal file: F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU\vivado.jou
 #-----------------------------------------------------------
@@ -16,4 +16,46 @@ update_compile_order -fileset sources_1
 update_compile_order -fileset sources_1
 update_compile_order -fileset sources_1
 update_compile_order -fileset sources_1
+imulation
+launch_simulation
+launch_simulation
+launch_simulation
+launch_simulation
+launch_simulation
+launch_simulation
+launch_simulation
+launch_simulation
+launch_simulation
+launch_simulation
+launch_simulation
+launch_simulation
+launch_simulation
 update_compile_order -fileset sources_1
+launch_simulation
+update_compile_order -fileset sources_1
+launch_simulation
+launch_simulation
+launch_simulation
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+source Top_Level_CPU_TB.tcl
+restart
+run 120 us
+close_sim
+launch_simulation
+launch_simulation
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+source Top_Level_CPU_TB.tcl
+close_sim
+launch_simulation
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+source Top_Level_CPU_TB.tcl
+close_sim
+launch_simulation
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+source Top_Level_CPU_TB.tcl
+close_sim
+launch_simulation
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+source Top_Level_CPU_TB.tcl
+restart
+run 120 us

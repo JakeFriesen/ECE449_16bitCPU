@@ -1,2 +1,6 @@
-INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project/src/RAM.vhd" into library xil_defaultlib
-INFO: [VRFC 10-307] analyzing entity RAM
+INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/Memory_Stage.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity Memory_Stage
+INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/Top_Level_CPU.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity Top_Level_CPU
+INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/Write_Back_Stage.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity Write_Back_Stage

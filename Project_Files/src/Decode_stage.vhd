@@ -37,15 +37,16 @@ entity Decode is
 			  A_ID_out : out std_logic_vector(15 downto 0); 
 			  B_ID_out : out std_logic_vector(15 downto 0);
 			  IR_ID_out : out std_logic_vector(15 downto 0);
-			  wr_index : in std_logic_vector(2 downto 0);
-			  wr_data : in std_logic_vector(15 downto 0);
-			  wr_enable : in std_logic;
+			  wr_addr_ID_in : in std_logic_vector(2 downto 0);
+			  wr_data_ID_in : in std_logic_vector(15 downto 0);
+			  wr_enable_ID_in : in std_logic;
 			  --Overflow signals
-			  ov_data : in std_logic_vector(15 downto 0);
-			  ov_enable : in std_logic;
-			  loadIMM: in std_logic;
-              load_align: in std_logic;
-			  halt : out std_logic
+			  ov_data_ID_in : in std_logic_vector(15 downto 0);
+			  ov_enable_ID_in : in std_logic;
+			  loadIMM_ID_in: in std_logic;
+              load_align_ID_in: in std_logic;
+			  halt : out std_logic;
+			  br_clear_in: in std_logic 
 	    );			  
 end Decode;
 
@@ -59,7 +60,7 @@ component register_file is
     rd_data1: out std_logic_vector(15 downto 0); 
     rd_data2: out std_logic_vector(15 downto 0);
     --write signals
-    wr_index: in std_logic_vector(2 downto 0); 
+    wr_addr: in std_logic_vector(2 downto 0); 
     wr_data: in std_logic_vector(15 downto 0); 
     wr_enable: in std_logic;
     --overflow signals
@@ -105,7 +106,7 @@ constant zero : std_logic_vector(15 downto 0) := X"0000";
 
 begin
 
---loadIMM <= (IR_intrn(7 downto 0) & "00000000") when IR(8) = '1' else ("00000000" & IR_intrn(7 downto 0));
+--loadIMM_ID_in <= (IR_intrn(7 downto 0) & "00000000") when IR(8) = '1' else ("00000000" & IR_intrn(7 downto 0));
 ra_index <= IR_intrn(8 downto 6);
     
 with IR_intrn(15 downto 9) select
@@ -129,8 +130,8 @@ with IR_intrn(15 downto 9) select
                  '0' when others;
 	                    
 -- Determine RAW
-raw_handler : RAW port map(rst=>rst, clk=>clk, wr_en=>wr_enable, IR_wb=>IR_wb, ra_index=>ra_index,
-              wr_addr=>wr_index, rd_index1=>rd_index1_intern, rd_index2=>rd_index2_intern, halt=>halt_intern, rd_enable=>rd_enable);
+raw_handler : RAW port map(rst=>rst, clk=>clk, wr_en=>wr_enable_ID_in, IR_wb=>IR_wb, ra_index=>ra_index,
+              wr_addr=>wr_addr_ID_in, rd_index1=>rd_index1_intern, rd_index2=>rd_index2_intern, halt=>halt_intern, rd_enable=>rd_enable);
 -- Configure output_en
 --load_en <= '1' when IR_intrn(15 downto 9) = loadIMM_op  else '0';
 --Why is this hardcoded?
@@ -139,12 +140,12 @@ load_en <= '0';
 
 --reg file
 reg_file : register_file port map(rst => rst, clk => clk, rd_index1 => rd_index1_intern, 
-	       rd_index2 => rd_index2_intern, rd_data1 => rd_data1_out, rd_data2 => B_internal, wr_index => wr_index,
-	       wr_data => wr_data, wr_enable => wr_enable, ov_data => ov_data,loadIMM=>loadIMM,load_align => load_align, ov_enable => ov_enable);
+	       rd_index2 => rd_index2_intern, rd_data1 => rd_data1_out, rd_data2 => B_internal, wr_addr => wr_addr_ID_in,
+	       wr_data => wr_data_ID_in, wr_enable => wr_enable_ID_in, ov_data => ov_data_ID_in,loadIMM=>loadIMM_ID_in,load_align => load_align_ID_in, ov_enable => ov_enable_ID_in);
 
 --MUX assignments--
 m1 : MUX2_1 port map(x => rd_data1_out, y => zero, s => output_en, z => A_internal);
---TODO: Forwarding from wr_data to A/B_internal when possible
+--TODO: Forwarding from wr_data_ID_in to A/B_internal when possible
 
 halt <= halt_intern;
 
@@ -153,7 +154,7 @@ halt <= halt_intern;
 	process(clk)
 	begin
 		if rising_edge(clk) then
-			if (rst = '1' or I_br_clear = '1') then
+			if (rst = '1' or br_clear_in = '1') then
 				IR_intrn <= zero;
 				npc <= (others=>'0');
 			else
@@ -170,13 +171,13 @@ halt <= halt_intern;
 		      NPC_ID_out <= (others=>'0');
 		      IR_ID_out <= (others=>'0');
 		  	elsif (halt_intern='0') then
-		      A_ID_out <= A_internal
+		      A_ID_out <= A_internal;
 		      B_ID_out <= B_internal;
 		      IR_ID_out <= IR_intrn;
 		      NPC_ID_out <= npc;
 			elsif (halt_intern='1') then
-		      A <= (others=>'0');
-		      B <= (others=>'0');
+		      A_ID_out <= (others=>'0');
+		      B_ID_out <= (others=>'0');
 		      IR_ID_out <= (others=>'0');
 			  NPC_ID_out <= npc;
 		  end if;
