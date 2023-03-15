@@ -1,1 +1,5 @@
 
+Project_Files/*
+!Project_Files/src/*
+!Project_Files/sim/*
+Project_Files/Top_Level_CPU/*
