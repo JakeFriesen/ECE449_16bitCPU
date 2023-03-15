@@ -43,26 +43,26 @@ component Top_Level_CPU is
            reset_execute : in STD_LOGIC
            );
 end component Top_Level_CPU;
-signal in_port, out_port : std_logic_vector(15 downto 0);
-signal clk, rst : std_logic;
+signal in_port, out_port : std_logic_vector(15 downto 0) := (others=>'0');
+signal clk, rst : std_logic := '0';
 
 begin
 CPU : Top_Level_CPU port map(clk_100MHz=>clk, reset_load=>rst, reset_execute=>rst, IN_PORT=>in_port, OUT_PORT=>out_port);
 
 --Clocking Process
 process begin
-    clk <= '0';
-    wait for 1us;
     clk <= '1';
+    wait for 1us;
+    clk <= '0';
     wait for 1us;
 end process;
 
+--Branch Test Code
 process begin
     rst <= '1';
-    wait until clk = '1';
     wait until clk = '0';
+    wait until clk = '1';
     rst <= '0';
-    
     for i in 0 to 3 loop
         wait until clk = '1';
         wait until clk = '0';
@@ -90,23 +90,37 @@ process begin
     wait until clk = '1';
     wait until clk = '0';
     in_port <= x"0000"; --INPUT R7 <= 0
-    
-    
-    
-    
---    for i in 1 to 7 loop
---        wait until clk = '1';
---        wait until clk = '0';
---    end loop;
---    in_port <= x"0005"; --INPUT 5
---    for i in 1 to 7 loop
---        wait until clk = '1';
---        wait until clk = '0';
---    end loop;
---    in_port <= x"0000"; --INPUT 0
     wait;
 end process;
 
+
+--Data Hazards Test Code
+--process begin
+--    rst <= '1';
+--    wait until clk = '0';
+--    wait until clk = '1';
+--    rst <= '0';
+--    for i in 0 to 3 loop
+--        wait until clk = '1';
+--        wait until clk = '0';
+--    end loop;
+--    in_port <= x"0002"; --INPUT 2
+--    wait until clk = '1';
+--    wait until clk = '0';
+--    in_port <= x"0003"; --INPUT 3
+--    wait until clk = '1';
+--    wait until clk = '0';
+--    in_port <= x"0001"; --INPUT 1
+--    wait until clk = '1';
+--    wait until clk = '0';
+--    in_port <= x"0005"; --INPUT 5
+--    wait until clk = '1';
+--    wait until clk = '0';
+--    in_port <= x"0000"; --INPUT 0
+--    wait until clk = '1';
+--    wait until clk = '0';
+--    wait;
+--end process;
 
 
 

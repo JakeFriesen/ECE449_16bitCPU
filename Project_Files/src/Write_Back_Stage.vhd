@@ -35,6 +35,7 @@ entity Write_Back_Stage is
            Mem_in : in STD_LOGIC_VECTOR (15 downto 0);
            IR_WB_in : in STD_LOGIC_VECTOR (15 downto 0);
            IN_PORT : in STD_LOGIC_VECTOR (15 downto 0);
+           OUT_PORT : out STD_LOGIC_VECTOR (15 downto 0);
            wr_data : out STD_LOGIC_VECTOR (15 downto 0);
            wr_addr : out STD_LOGIC_VECTOR (2 downto 0);
            wr_en : out std_logic;
@@ -45,7 +46,7 @@ entity Write_Back_Stage is
 end Write_Back_Stage;
 
 architecture Behavioral of Write_Back_Stage is
-    signal ALU, Overflow, IR, input_port, Mem : std_logic_vector (15 downto 0);
+    signal ALU, Overflow, IR, input_port, Mem, out_port_internal, out_port_previous : std_logic_vector (15 downto 0):= (others=>'0');
 
     
 begin
@@ -76,7 +77,13 @@ begin
             end if;
         end if;
         if(clk'event and clk = '0') then
-            --Nothing to Latch
+            if(rst = '1') then
+                OUT_PORT <= (others=>'0');
+                out_port_previous <= (others=>'0');
+            else
+                OUT_PORT <= out_port_internal;
+                out_port_previous <= out_port_internal;
+            end if;
         end if;
     end process;
 
@@ -115,6 +122,7 @@ begin
     loadIMM <=    '1' when IR(15 downto 9) = loadIMM_op else '0';
     load_align <= IR(8);
     V_data <= Overflow;
-
+    out_port_internal <= Mem when IR(15 downto 9) = out_op else
+                        out_port_previous;
 
 end Behavioral;

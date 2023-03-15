@@ -29,7 +29,9 @@ ARCHITECTURE Behavioral OF Decode_TB IS
 			  ov_data : in std_logic_vector(15 downto 0);
 			  ov_enable : in std_logic;
 			  --Outport
-			  outport : out std_logic_vector(15 downto 0)
+			  outport : out std_logic_vector(15 downto 0);
+			  --RAW
+			  halt : out std_logic
         );
     END COMPONENT;
     
@@ -50,6 +52,7 @@ ARCHITECTURE Behavioral OF Decode_TB IS
    signal B : std_logic_vector(15 downto 0);
    signal IR_out: std_logic_vector(15 downto 0);
    signal outport : std_logic_vector(15 downto 0);
+   signal halt : std_logic;
    
    	--Op Code Definitions
 	constant nop_op : std_logic_vector(6 downto 0)  := "0000000";
@@ -79,7 +82,8 @@ begin
           wr_enable => wr_enable,
           ov_data => ov_data,
           ov_enable => ov_enable,
-          outport => outport
+          outport => outport,
+          halt => halt
         );
 
 
@@ -94,35 +98,60 @@ begin
    -- Stimulus process
    process begin		
       -- insert stimulus here
-        rst <= '0';
+        rst <= '1';
         wr_index <= "000";
         wr_data <= X"0000";
         wr_enable <= '0';
-        ov_data <= "000000";
+        ov_data <= X"0000";
         ov_enable <= '0';
 		IR <= X"0000"; --NOP
 		wait until (clk = '1' and clk'event);
 		
 		wait until (clk = '0' and clk'event);
+		rst <= '0';
 		wr_enable <= '1';
 		wr_index <= "001";
-		wr_data <= X"0088"; --Write in 0x0088 to R1
+		wr_data <= X"0001"; --Write in 1 to R1
 		IR <= X"0000"; --NOP
 		
 		wait until (clk = '0' and clk'event);
 		wr_enable <= '1';
 		wr_index <= "010";
-		wr_data <= X"0044"; -- write 0x0044 to R2
+		wr_data <= X"0001"; -- write 1 to R2
+		IR <= X"0000"; --NOP
+		
+		wait until (clk = '0' and clk'event);
+		wr_enable <= '1';
+		wr_index <= "011";
+		wr_data <= X"0002"; -- write 2 to R3
 		IR <= X"0000"; --NOP
 		
 		wait until (clk = '0' and clk'event);
 		wr_enable <= '0';
 		wr_index <= "000";
 		wr_data <= X"0000";
-		IR <= out_op & "001" & "000000"; --output contents of R1
+		IR <= add_op & "001" & "010" & "011"; -- Add r1 r2 r3
 		
 		wait until (clk = '0' and clk'event);
-		IR <= out_op & "010" & "000000"; --output contents of R2		
+		wr_enable <= '0';
+		wr_index <= "000";
+		wr_data <= X"0000";
+		IR <= mul_op & "011" & "001" & "010"; -- Mul r3 r1 r2
+		
+		wait until (clk = '0' and clk'event);
+		wr_enable <= '1';
+		wr_index <= "001";
+		wr_data <= X"0003";
+		IR <= mul_op & "011" & "001" & "010"; -- Mul r3 r1 r2
+		
+		wait until (clk = '0' and clk'event);
+		wr_enable <= '0';
+		wr_index <= "000";
+		wr_data <= X"0000"; -- write 3 to R1
+		IR <= X"0000"; --NOP
+		
+		wait until (clk = '0' and clk'event);
+		IR <= out_op & "001" & "000000"; --output contents of R1	
 		
       wait;
    end process;

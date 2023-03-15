@@ -2,7 +2,9 @@
 2020.2
 Oct 14 2022
 05:20:55
-C:/Users/Sam/OneDrive/Programming/repos/ECE449_16bitCPU/Project_Files/decode/decode.sim/Decode_TB.vhd,1677280606,vhdl,,,,decode_tb,,,,,,,,
-C:/Users/Sam/OneDrive/Programming/repos/ECE449_16bitCPU/Project_Files/decode/decode.srcs/sources_1/new/Decode.vhd,1677281062,vhdl,,,,decode,,,,,,,,
-C:/Users/Sam/OneDrive/Programming/repos/ECE449_16bitCPU/Project_Files/decode/decode.srcs/sources_1/new/MUX2_1.vhd,1677270852,vhdl,,,,mux2_1,,,,,,,,
-C:/Users/Sam/OneDrive/Programming/repos/ECE449_16bitCPU/Project_Files/decode/decode.srcs/sources_1/new/RF8_16.vhd,1677183397,vhdl,,,,register_file,,,,,,,,
+C:/Users/Sam/OneDrive/Programming/repos/ECE449_16bitCPU/Project_Files/decode/decode.sim/Decode_TB.vhd,1678317186,vhdl,,,,decode_tb,,,,,,,,
+C:/Users/Sam/OneDrive/Programming/repos/ECE449_16bitCPU/Project_Files/decode/decode.srcs/sim_1/new/RAW_TB.vhd,1678139267,vhdl,,,,,,,,,,,,
+C:/Users/Sam/OneDrive/Programming/repos/ECE449_16bitCPU/Project_Files/decode/decode.srcs/sources_1/new/Decode.vhd,1678316356,vhdl,,,,decode,,,,,,,,
+C:/Users/Sam/OneDrive/Programming/repos/ECE449_16bitCPU/Project_Files/decode/decode.srcs/sources_1/new/MUX2_1.vhd,1678046882,vhdl,,,,mux2_1,,,,,,,,
+C:/Users/Sam/OneDrive/Programming/repos/ECE449_16bitCPU/Project_Files/decode/decode.srcs/sources_1/new/RAW.vhd,1678316787,vhdl,,,,raw,,,,,,,,
+C:/Users/Sam/OneDrive/Programming/repos/ECE449_16bitCPU/Project_Files/decode/decode.srcs/sources_1/new/RF8_16.vhd,1678316553,vhdl,,,,register_file,,,,,,,,
