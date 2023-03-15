@@ -1,5 +1,7 @@
-
-Project_Files/*
+*
+!*/
+#Whitelist can be removed if desired
 !Project_Files/src/*
 !Project_Files/sim/*
-Project_Files/Top_Level_CPU/*
+!Project_Files/Top_Level_CPU/Top_Level_CPU.xpr
+!Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg

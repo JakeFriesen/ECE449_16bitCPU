@@ -63,7 +63,7 @@ process begin
     wait until clk = '0';
     rst <= '0';
     
-    for i in 0 to 3 loop
+    for i in 0 to 4 loop
         wait until clk = '1';
         wait until clk = '0';
     end loop;
