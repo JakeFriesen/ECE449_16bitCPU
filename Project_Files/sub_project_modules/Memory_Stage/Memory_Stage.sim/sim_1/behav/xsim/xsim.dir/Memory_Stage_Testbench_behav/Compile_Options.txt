@@ -1,1 +1,0 @@
--wto "83d957c6cd904ae491cbabc3b979350a" --incr --debug "typical" --relax --mt "2" -L "xil_defaultlib" -L "secureip" -L "xpm" --snapshot "Memory_Stage_Testbench_behav" "xil_defaultlib.Memory_Stage_Testbench" -log "elaborate.log" 
