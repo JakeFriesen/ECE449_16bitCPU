@@ -149,11 +149,12 @@ reg_file : register_file port map(
     ov_enable => ov_enable_ID_in
 );
 
-ra_index <= IR_intrn(8 downto 6);
+ra_index <= "111" when IR_intrn(15 downto 9) = loadIMM_op else
+            IR_intrn(8 downto 6);
     
 with IR_intrn(15 downto 9) select
 	IR_wb <= 
-		'1' when add_op | sub_op | mul_op | nand_op | shl_op | shr_op | in_op,
+		'1' when add_op | sub_op | mul_op | nand_op | shl_op | shr_op | in_op | loadIMM_op | pop_op | mov_op,
 		'0' when others;
 
 --select read index 1 & 2 for regfile	
@@ -170,7 +171,7 @@ with IR_intrn(15 downto 9) select
 	                    IR_intrn(8 downto 6) when load_sp_op | push_op | pop_op,
 	                    "000" when others;
 with IR_intrn(15 downto 9) select	
-    rd_enable <= '1' when add_op | sub_op | mul_op | nand_op | shl_op | shr_op | test_op | out_op,
+    rd_enable <= '1' when add_op | sub_op | mul_op | nand_op | shl_op | shr_op | test_op | out_op | mov_op | store_op | push_op,
                  '0' when others;
 
 

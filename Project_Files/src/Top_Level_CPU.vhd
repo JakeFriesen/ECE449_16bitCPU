@@ -107,6 +107,7 @@ component Write_Back_Stage is
             memdata_WB_in : in STD_LOGIC_VECTOR (15 downto 0);
             IR_WB_in : in STD_LOGIC_VECTOR (15 downto 0);
             IN_PORT : in STD_LOGIC_VECTOR (15 downto 0);
+            OUT_PORT : out STD_LOGIC_VECTOR (15 downto 0);
             wr_data_WB_out : out STD_LOGIC_VECTOR (15 downto 0);
             wr_addr_WB_out : out STD_LOGIC_VECTOR (2 downto 0);
             wr_enable_WB_out : out std_logic;
@@ -151,109 +152,112 @@ signal halt : std_logic := '0';
 
 begin
 IF_inst : Intruction_Fetch_Stage port map(
-        clk=>clk, 
-        rst=>rst, 
-        halt=>halt,
-        IR_IF_out=>IF_ID_IR, 
-        NPC_IF_out=>IF_ID_NPC, 
-        PC_in=>MEM_IF_br_addr, 
-        ram_addr_B=>ram_addrb, 
-        ram_data_B=>ram_datab, 
-        BR_IF_in=>MEM_IF_br
-
+    clk=>clk, 
+    rst=>rst, 
+    halt=>halt,
+    IR_IF_out=>IF_ID_IR, 
+    NPC_IF_out=>IF_ID_NPC, 
+    PC_in=>MEM_IF_br_addr, 
+    ram_addr_B=>ram_addrb, 
+    ram_data_B=>ram_datab, 
+    BR_IF_in=>MEM_IF_br
 );
                                             
                                             
 ID_inst : Decode port map(
-clk=>clk, 
-rst=>rst,
-br_clear_in=>MEM_pipe_flush,
-halt => halt, 
-IR_ID_in=>IF_ID_IR, 
-wr_addr_ID_in=>WB_ID_wr_addr, 
-wr_data_ID_in=>WB_ID_wr_data, 
-wr_enable_ID_in=>WB_ID_wr_en, 
-ov_data_ID_in=>WB_ID_v_data, 
-ov_enable_ID_in=>WB_ID_v_en, 
-A_ID_out=>ID_EX_A, 
-B_ID_out=>ID_EX_B, 
-IR_ID_out=>ID_EX_IR,
-loadIMM_ID_in=>WB_ID_loadimm, 
-load_align_ID_in=> WB_ID_load_align, 
-NPC_ID_out=>ID_EX_NPC, 
-NPC_ID_in=>IF_ID_NPC
- 
+    clk=>clk, 
+    rst=>rst,
+    br_clear_in=>MEM_pipe_flush,
+    halt => halt, 
+    IR_ID_in=>IF_ID_IR, 
+    wr_addr_ID_in=>WB_ID_wr_addr, 
+    wr_data_ID_in=>WB_ID_wr_data, 
+    wr_enable_ID_in=>WB_ID_wr_en, 
+    ov_data_ID_in=>WB_ID_v_data, 
+    ov_enable_ID_in=>WB_ID_v_en, 
+    A_ID_out=>ID_EX_A, 
+    B_ID_out=>ID_EX_B, 
+    IR_ID_out=>ID_EX_IR,
+    loadIMM_ID_in=>WB_ID_loadimm, 
+    load_align_ID_in=> WB_ID_load_align, 
+    NPC_ID_out=>ID_EX_NPC, 
+    NPC_ID_in=>IF_ID_NPC
 );
 
 EX_inst : EX_stage port map(
-clk=>clk, 
-rst=>MEM_pipe_flush, 
-IR_EX_in=>ID_EX_IR, 
-A_EX_in=>ID_EX_A, 
-B_EX_in=>ID_EX_B, 
-Result_EX_out=>EX_MEM_alu_res, 
-vdata_EX_out=>EX_MEM_v_data,
-Z_EX_out=>EX_MEM_Z_flag, 
-N_EX_out=>EX_MEM_N_flag, 
-IR_EX_out=>EX_MEM_IR, 
-A_EX_out =>EX_MEM_A,
-B_EX_out =>EX_MEM_B, 
-NPC_EX_in=>ID_EX_NPC, 
-NPC_EX_out=>EX_MEM_NPC,
-br_clear_in=>MEM_pipe_flush);
+    clk=>clk, 
+    rst=>MEM_pipe_flush, 
+    IR_EX_in=>ID_EX_IR, 
+    A_EX_in=>ID_EX_A, 
+    B_EX_in=>ID_EX_B, 
+    Result_EX_out=>EX_MEM_alu_res, 
+    vdata_EX_out=>EX_MEM_v_data,
+    Z_EX_out=>EX_MEM_Z_flag, 
+    N_EX_out=>EX_MEM_N_flag, 
+    IR_EX_out=>EX_MEM_IR, 
+    A_EX_out =>EX_MEM_A,
+    B_EX_out =>EX_MEM_B, 
+    NPC_EX_in=>ID_EX_NPC, 
+    NPC_EX_out=>EX_MEM_NPC,
+    br_clear_in=>MEM_pipe_flush
+);
 
 
 MEM_inst : Memory_Stage port map(
-clk=>clk, 
-rst=>rst, 
-Result_MEM_in=>EX_MEM_alu_res, 
-IR_MEM_in=>EX_MEM_IR, 
-N_MEM_in=>EX_MEM_N_flag, 
-Z_MEM_in=>EX_MEM_Z_flag, 
-branch=>MEM_IF_br, 
-branch_addr=>MEM_IF_br_addr,  
-ram_wren_A=>ram_wr_en,
-ram_addr_A=>ram_addra, 
-NPC_MEM_in=>EX_MEM_NPC, 
-ram_data_A=>ram_dataa, 
-ram_wrdata_A=>ram_dina, 
-ram_en_A=>ram_ena, 
-memdata_MEM_out=>MEM_WB_mem_data, 
-Result_MEM_out=>MEM_WB_alu, 
-IR_MEM_out=>MEM_WB_IR, 
-vdata_MEM_in=>EX_MEM_v_data,
- A_MEM_in=>EX_MEM_A, B_MEM_in=>EX_MEM_B,
- vdata_MEM_out=>MEM_WB_v_data, 
- pipe_flush=>MEM_pipe_flush);
+    clk=>clk, 
+    rst=>rst, 
+    Result_MEM_in=>EX_MEM_alu_res, 
+    IR_MEM_in=>EX_MEM_IR, 
+    N_MEM_in=>EX_MEM_N_flag, 
+    Z_MEM_in=>EX_MEM_Z_flag, 
+    branch=>MEM_IF_br, 
+    branch_addr=>MEM_IF_br_addr,  
+    ram_wren_A=>ram_wr_en,
+    ram_addr_A=>ram_addra, 
+    NPC_MEM_in=>EX_MEM_NPC, 
+    ram_data_A=>ram_dataa, 
+    ram_wrdata_A=>ram_dina, 
+    ram_en_A=>ram_ena, 
+    memdata_MEM_out=>MEM_WB_mem_data, 
+    Result_MEM_out=>MEM_WB_alu, 
+    IR_MEM_out=>MEM_WB_IR, 
+    vdata_MEM_in=>EX_MEM_v_data,
+     A_MEM_in=>EX_MEM_A, B_MEM_in=>EX_MEM_B,
+     vdata_MEM_out=>MEM_WB_v_data, 
+     pipe_flush=>MEM_pipe_flush
+ );
 
 WB_inst : Write_Back_Stage port map(
-clk=>clk, 
-rst=>rst, 
-ALU_in=>MEM_WB_alu, 
-Overflow_in=>MEM_WB_v_data,
- memdata_WB_in=>MEM_WB_mem_data, 
-IR_WB_in=>MEM_WB_IR, 
-IN_PORT=>IN_PORT, 
-wr_data_WB_out=>WB_ID_wr_data,
- wr_addr_WB_out=>WB_ID_wr_addr, 
-wr_enable_WB_out=>WB_ID_wr_en, 
-ov_en_WB_out=>WB_ID_v_en, 
-loadIMM_WB_out=>WB_ID_loadimm, 
-load_align_WB_out=> WB_ID_load_align, 
-ov_data_WB_out=>WB_ID_v_data);
+    clk=>clk, 
+    rst=>rst, 
+    ALU_in=>MEM_WB_alu, 
+    Overflow_in=>MEM_WB_v_data,
+     memdata_WB_in=>MEM_WB_mem_data, 
+    IR_WB_in=>MEM_WB_IR, 
+    IN_PORT=>IN_PORT, 
+    OUT_PORT=>OUT_PORT,
+    wr_data_WB_out=>WB_ID_wr_data,
+     wr_addr_WB_out=>WB_ID_wr_addr, 
+    wr_enable_WB_out=>WB_ID_wr_en, 
+    ov_en_WB_out=>WB_ID_v_en, 
+    loadIMM_WB_out=>WB_ID_loadimm, 
+    load_align_WB_out=> WB_ID_load_align, 
+    ov_data_WB_out=>WB_ID_v_data
+);
 
 
 RAM_inst : RAM port map (
-douta=>ram_dataa, 
-doutb=>ram_datab, 
-addra=>ram_addra, 
-addrb=>ram_addrb, 
-dina=>ram_dina,
- wr_en=>ram_wr_en, 
-ena=>ram_ena, 
-enb=>ram_enb, 
-clk=>clk, 
-rst=>rst);
+    douta=>ram_dataa, 
+    doutb=>ram_datab, 
+    addra=>ram_addra, 
+    addrb=>ram_addrb, 
+    dina=>ram_dina,
+     wr_en=>ram_wr_en, 
+    ena=>ram_ena, 
+    enb=>ram_enb, 
+    clk=>clk, 
+    rst=>rst
+);
 
 
 
