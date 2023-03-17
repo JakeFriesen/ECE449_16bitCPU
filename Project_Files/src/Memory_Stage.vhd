@@ -31,10 +31,7 @@ entity Memory_Stage is
            clk, rst : in STD_LOGIC;
            branch : out STD_LOGIC;
            branch_addr : out STD_LOGIC_VECTOR (15 downto 0);
-        --    ram_wr : out STD_LOGIC;
            pipe_flush : out std_logic;
-        --    ram_addrb : out STD_LOGIC_VECTOR (15 downto 0);
-        --    ram_datab : in STD_LOGIC_VECTOR (15 downto 0);
            ram_wren_A: out std_logic;
            ram_en_A: out std_logic;
            ram_wrdata_A: out STD_LOGIC_VECTOR (15 downto 0);
@@ -130,12 +127,13 @@ begin
 
     --RAM Access
     with IR_MEM_in(15 downto 9) Select
-        ram_wren_A <=   '1' when store_op, 
-                    '0' when others;  --STR (17)
+        ram_wren_A <=   '1' when store_op | push_op, --STR (17), PUSH (96)
+                    '0' when others;  
                     
     with IR_MEM_in(15 downto 9) Select
-         ram_en_A <=  '1' when store_op | load_op,
-                     '0' when others;  --STR (17)
+         ram_en_A <=  '1' when store_op | load_op | push_op | pop_op,
+                     '0' when others;  
+    
     ram_addr_A <= A_MEM_in(15 downto 0);
     ram_wrdata_A <=  B_MEM_in;
     

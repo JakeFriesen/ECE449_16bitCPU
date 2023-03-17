@@ -94,6 +94,7 @@ begin
         input_port when IR(15 downto 9) = in_op else                    --IN (33)
         Mem when IR(15 downto 9) = load_op else 
         Mem when IR(15 downto 9) = mov_op else                           --MOV (16)
+        Mem when IR(15 downto 9) = pop_op else
         (others=>'0') when IR(15 downto 9) = nop_op else                 --NOP, set all 0
         ALU;-- when IR(15 downto 9) = "" else                               --ALU for the rest (TODO: May need to specify)
         --(others=>'0'); 
@@ -106,6 +107,7 @@ begin
         '1' when IR(15 downto 9) = mul_op else   --MUL (3)
         '0';
     wr_enable_WB_out <=
+        '1' when IR(15 downto 9) = pop_op else
         '1' when IR(15 downto 9) = add_op else   --ADD(1)
         '1' when IR(15 downto 9) = sub_op else   --SUB(2)
         '1' when IR(15 downto 9) = mul_op else   --MUL(3)

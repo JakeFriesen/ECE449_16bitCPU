@@ -93,20 +93,62 @@ component MUX2_1 is
            z : out STD_LOGIC_VECTOR (15 downto 0));
 end component MUX2_1;
 
+component Stack_Register is
+    Port ( SP_in : in STD_LOGIC_VECTOR (15 downto 0);
+           SP_out : out STD_LOGIC_VECTOR (15 downto 0);
+           clk : in STD_LOGIC;
+           rst : in STD_LOGIC;
+           IR_in : in STD_LOGIC_VECTOR (15 downto 0));
+end component;
+
 --Signals
-signal load_en : STD_LOGIC;
 signal npc : std_logic_vector (15 downto 0);
 signal ra_index, rd_index1_intern, rd_index2_intern : STD_LOGIC_VECTOR(2 downto 0) := (others=>'0');
 signal output_en, halt_intern, IR_wb, rd_enable : STD_LOGIC := '0';
-signal rd_data1_out, IR_intrn, A_internal, B_internal, B_data, outport_internal, outport_previous : std_logic_vector(15 downto 0) := (others=>'0');
-
+signal rd_data1_out, rd_data2_out, IR_intrn, A_internal, B_internal, B_data, outport_internal, outport_previous : std_logic_vector(15 downto 0) := (others=>'0');
+signal stack_pointer : std_logic_vector (15 downto 0);
 -- Constant X"0000"
 constant zero : std_logic_vector(15 downto 0) := X"0000";
 
 
 begin
+--Stack Register
+stack_reg : Stack_Register port map (
+    clk=>clk,
+    rst=>rst,
+    IR_in=>IR_intrn,
+    SP_in=>A_internal,
+    SP_out=>stack_pointer
+);                    
+-- RAW
+raw_handler : RAW port map(
+    rst=>rst, 
+    clk=>clk, 
+    wr_en=>wr_enable_ID_in, 
+    IR_wb=>IR_wb, 
+    ra_index=>ra_index,
+    wr_addr=>wr_addr_ID_in, 
+    rd_index1=>rd_index1_intern, 
+    rd_index2=>rd_index2_intern, 
+    halt=>halt_intern, 
+    rd_enable=>rd_enable);
+--reg file
+reg_file : register_file port map(
+    rst => rst, 
+    clk => clk, 
+    rd_index1 => rd_index1_intern, 
+    rd_index2 => rd_index2_intern, 
+    rd_data1 => rd_data1_out, 
+    rd_data2 => rd_data2_out, 
+    wr_addr => wr_addr_ID_in,
+    wr_data => wr_data_ID_in, 
+    wr_enable => wr_enable_ID_in, 
+    ov_data => ov_data_ID_in,
+    loadIMM=>loadIMM_ID_in,
+    load_align => load_align_ID_in, 
+    ov_enable => ov_enable_ID_in
+);
 
---loadIMM_ID_in <= (IR_intrn(7 downto 0) & "00000000") when IR(8) = '1' else ("00000000" & IR_intrn(7 downto 0));
 ra_index <= IR_intrn(8 downto 6);
     
 with IR_intrn(15 downto 9) select
@@ -117,35 +159,35 @@ with IR_intrn(15 downto 9) select
 --select read index 1 & 2 for regfile	
 with IR_intrn(15 downto 9) select
 	rd_index1_intern <= IR_intrn(5 downto 3) when add_op | sub_op | mul_op | mov_op | load_op,
-						IR_intrn(8 downto 6) when nand_op | shl_op | shr_op | test_op | out_op | br_op | br_n_op | br_z_op | br_sub_op | store_op,
+						IR_intrn(8 downto 6) when nand_op | shl_op | shr_op | test_op | out_op | br_op | 
+						                          br_n_op | br_z_op | br_sub_op | store_op,
 						"111" when return_op,
 						"000" when others;	
 						
 with IR_intrn(15 downto 9) select	
 	rd_index2_intern <= IR_intrn(2 downto 0) when add_op | sub_op | mul_op,
 	                    IR_intrn(5 downto 3) when nand_op | store_op,
+	                    IR_intrn(8 downto 6) when load_sp_op | push_op | pop_op,
 	                    "000" when others;
 with IR_intrn(15 downto 9) select	
     rd_enable <= '1' when add_op | sub_op | mul_op | nand_op | shl_op | shr_op | test_op | out_op,
                  '0' when others;
-	                    
--- Determine RAW
-raw_handler : RAW port map(rst=>rst, clk=>clk, wr_en=>wr_enable_ID_in, IR_wb=>IR_wb, ra_index=>ra_index,
-              wr_addr=>wr_addr_ID_in, rd_index1=>rd_index1_intern, rd_index2=>rd_index2_intern, halt=>halt_intern, rd_enable=>rd_enable);
--- Configure output_en
---load_en <= '1' when IR_intrn(15 downto 9) = loadIMM_op  else '0';
---Why is this hardcoded?
-load_en <= '0';
 
-
---reg file
-reg_file : register_file port map(rst => rst, clk => clk, rd_index1 => rd_index1_intern, 
-	       rd_index2 => rd_index2_intern, rd_data1 => rd_data1_out, rd_data2 => B_internal, wr_addr => wr_addr_ID_in,
-	       wr_data => wr_data_ID_in, wr_enable => wr_enable_ID_in, ov_data => ov_data_ID_in,loadIMM=>loadIMM_ID_in,load_align => load_align_ID_in, ov_enable => ov_enable_ID_in);
 
 --MUX assignments--
-m1 : MUX2_1 port map(x => rd_data1_out, y => zero, s => output_en, z => A_internal);
+--m1 : MUX2_1 port map(
+--    x => rd_data1_out, 
+--    y => zero, 
+--    s => output_en, 
+--    z => A_internal
+--);
 --TODO: Forwarding from wr_data_ID_in to A/B_internal when possible
+
+--Push the stack pointer into B when PUSH, POP, or RTI
+B_internal <= rd_data2_out;
+A_internal <= stack_pointer when IR_intrn(15 downto 9) = push_op else
+              stack_pointer when IR_intrn(15 downto 9) = rti_op else
+              rd_data1_out;
 
 halt <= halt_intern;
 

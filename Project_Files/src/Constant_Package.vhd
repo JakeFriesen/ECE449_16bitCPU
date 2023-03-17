@@ -58,6 +58,11 @@ package Constant_Package is
     constant loadIMM_op : std_logic_vector(6 downto 0) := "0010010";    --LD IMM (18)
     constant mov_op : std_logic_vector(6 downto 0) := "0010011";        --MOV (19)
     
+    constant push_op : std_logic_vector(6 downto 0) := "1100000";        --PUSH (96)
+    constant pop_op : std_logic_vector(6 downto 0) := "1100001";        --POP (97)
+    constant load_sp_op : std_logic_vector(6 downto 0) := "1100010";        --LOAD.SP (98)
+    constant rti_op : std_logic_vector(6 downto 0) := "1100011";        --RTI (99)    
+    
 end package Constant_Package;
 
 package body Constant_Package is
