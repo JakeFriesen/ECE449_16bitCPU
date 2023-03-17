@@ -5,3 +5,4 @@
 !Project_Files/sim/*
 !Project_Files/Top_Level_CPU/Top_Level_CPU.xpr
 !Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg
+!Project_Files/sub_project_modules/*
