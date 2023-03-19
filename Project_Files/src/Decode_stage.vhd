@@ -105,8 +105,9 @@ end component;
 signal npc : std_logic_vector (15 downto 0);
 signal ra_index, rd_index1_intern, rd_index2_intern : STD_LOGIC_VECTOR(2 downto 0) := (others=>'0');
 signal output_en, halt_intern, IR_wb, rd_enable : STD_LOGIC := '0';
-signal rd_data1_out, rd_data2_out, IR_intrn, A_internal, B_internal, B_data, outport_internal, outport_previous : std_logic_vector(15 downto 0) := (others=>'0');
+signal rd_data1_out, rd_data2_out, IR_intrn, IR_out_internal, A_internal, B_internal, B_data, outport_internal, outport_previous : std_logic_vector(15 downto 0) := (others=>'0');
 signal stack_pointer : std_logic_vector (15 downto 0);
+signal OPCODE : std_logic_vector (6 downto 0);
 -- Constant X"0000"
 constant zero : std_logic_vector(15 downto 0) := X"0000";
 
@@ -149,28 +150,28 @@ reg_file : register_file port map(
     ov_enable => ov_enable_ID_in
 );
 
-ra_index <= "111" when IR_intrn(15 downto 9) = loadIMM_op else
+ra_index <= "111" when OPCODE = loadIMM_op else
             IR_intrn(8 downto 6);
     
-with IR_intrn(15 downto 9) select
+with OPCODE select
 	IR_wb <= 
 		'1' when add_op | sub_op | mul_op | nand_op | shl_op | shr_op | in_op | loadIMM_op | pop_op | mov_op,
 		'0' when others;
 
 --select read index 1 & 2 for regfile	
-with IR_intrn(15 downto 9) select
+with OPCODE select
 	rd_index1_intern <= IR_intrn(5 downto 3) when add_op | sub_op | mul_op | mov_op | load_op,
 						IR_intrn(8 downto 6) when nand_op | shl_op | shr_op | test_op | out_op | br_op | 
 						                          br_n_op | br_z_op | br_sub_op | store_op,
 						"111" when return_op,
 						"000" when others;	
 						
-with IR_intrn(15 downto 9) select	
+with OPCODE select	
 	rd_index2_intern <= IR_intrn(2 downto 0) when add_op | sub_op | mul_op,
 	                    IR_intrn(5 downto 3) when nand_op | store_op,
 	                    IR_intrn(8 downto 6) when load_sp_op | push_op | pop_op,
 	                    "000" when others;
-with IR_intrn(15 downto 9) select	
+with OPCODE select	
     rd_enable <= '1' when add_op | sub_op | mul_op | nand_op | shl_op | shr_op | test_op | out_op | mov_op | store_op | push_op,
                  '0' when others;
 
@@ -185,10 +186,16 @@ with IR_intrn(15 downto 9) select
 --TODO: Forwarding from wr_data_ID_in to A/B_internal when possible
 
 --Push the stack pointer into B when PUSH, POP, or RTI
-B_internal <= rd_data2_out;
-A_internal <= stack_pointer when IR_intrn(15 downto 9) = push_op else
-              stack_pointer when IR_intrn(15 downto 9) = rti_op else
+B_internal <= 
+              (others=>'0') when halt_intern = '1' else
+              rd_data2_out;
+A_internal <= 
+              (others=>'0') when halt_intern = '1' else
+              stack_pointer when OPCODE = push_op else
+              stack_pointer when OPCODE = rti_op else
               rd_data1_out;
+IR_out_internal <= (others=>'0') when halt_intern = '1' else
+                   IR_intrn;
 
 halt <= halt_intern;
 
@@ -199,9 +206,11 @@ halt <= halt_intern;
 		if rising_edge(clk) then
 			if (rst = '1' or br_clear_in = '1') then
 				IR_intrn <= zero;
+				OPCODE <= (others=>'0');
 				npc <= (others=>'0');
 			else
 			    IR_intrn <= IR_ID_in;
+			    OPCODE <= IR_ID_in(15 downto 9);
 				npc <= NPC_ID_in;
                 outport_previous <= outport_internal;
 			end if;
@@ -213,16 +222,17 @@ halt <= halt_intern;
 		      B_ID_out <= (others=>'0');
 		      NPC_ID_out <= (others=>'0');
 		      IR_ID_out <= (others=>'0');
-		  	elsif (halt_intern='0') then
+          else
+--		  	elsif (halt_intern='0') then
 		      A_ID_out <= A_internal;
 		      B_ID_out <= B_internal;
-		      IR_ID_out <= IR_intrn;
+		      IR_ID_out <= IR_out_internal;
 		      NPC_ID_out <= npc;
-			elsif (halt_intern='1') then
-		      A_ID_out <= (others=>'0');
-		      B_ID_out <= (others=>'0');
-		      IR_ID_out <= (others=>'0');
-			  NPC_ID_out <= npc;
+--			elsif (halt_intern='1') then
+--		      A_ID_out <= (others=>'0');
+--		      B_ID_out <= (others=>'0');
+--		      IR_ID_out <= IR_intrn;
+--			  NPC_ID_out <= npc;
 		  end if;
 		end if;
 	end process;

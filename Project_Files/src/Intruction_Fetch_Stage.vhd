@@ -70,7 +70,14 @@ begin
                 PC_new <= (others=>'0');
             else
             --Latch Outgoing signals
-                IR_IF_out <= instr_data;   
+                
+                if(halt = '1') then
+                    instr_data <= instr_data;
+                    IR_IF_out <= instr_data;
+                else
+                    instr_data <= ram_data_B;
+                    IR_IF_out <= ram_data_B;
+                end if;  
                 NPC_IF_out <= program_counter;   
                 program_counter <= next_counter;
                 branch <= br_IF_in;
@@ -81,7 +88,7 @@ begin
         
     --RAM Access
     ram_addr_B <= program_counter;
-    instr_data <= instr_data when halt = '1' else ram_data_B;
+--    instr_data <= instr_data when halt = '1' else ram_data_B;
     
     
     --Program Counter Update
