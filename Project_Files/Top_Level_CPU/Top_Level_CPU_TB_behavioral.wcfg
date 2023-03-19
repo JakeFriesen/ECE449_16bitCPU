@@ -12,13 +12,13 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="5425000000fs"></ZoomStartTime>
-      <ZoomEndTime time="68875000001fs"></ZoomEndTime>
-      <Cursor1Time time="11000000000fs"></Cursor1Time>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="176400000001fs"></ZoomEndTime>
+      <Cursor1Time time="37000000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="280"></NameColumnWidth>
-      <ValueColumnWidth column_width="73"></ValueColumnWidth>
+      <ValueColumnWidth column_width="61"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="12" />
    <wvobject fp_name="/Top_Level_CPU_TB/rst" type="logic">
@@ -315,11 +315,77 @@
             <obj_property name="isExpanded"></obj_property>
          </wvobject>
       </wvobject>
+      <wvobject fp_name="group740" type="group">
+         <obj_property name="label">SP</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/stack_reg/SP_in" type="array">
+            <obj_property name="ElementShortName">SP_in[15:0]</obj_property>
+            <obj_property name="ObjectShortName">SP_in[15:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/stack_reg/SP_out" type="array">
+            <obj_property name="ElementShortName">SP_out[15:0]</obj_property>
+            <obj_property name="ObjectShortName">SP_out[15:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/stack_reg/clk" type="logic">
+            <obj_property name="ElementShortName">clk</obj_property>
+            <obj_property name="ObjectShortName">clk</obj_property>
+         </wvobject>
+         <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/stack_reg/rst" type="logic">
+            <obj_property name="ElementShortName">rst</obj_property>
+            <obj_property name="ObjectShortName">rst</obj_property>
+         </wvobject>
+         <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/stack_reg/IR_in" type="array">
+            <obj_property name="ElementShortName">IR_in[15:0]</obj_property>
+            <obj_property name="ObjectShortName">IR_in[15:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/stack_reg/stack_pointer_internal" type="array">
+            <obj_property name="ElementShortName">stack_pointer_internal[15:0]</obj_property>
+            <obj_property name="ObjectShortName">stack_pointer_internal[15:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/stack_reg/next_stack_pointer" type="array">
+            <obj_property name="ElementShortName">next_stack_pointer[15:0]</obj_property>
+            <obj_property name="ObjectShortName">next_stack_pointer[15:0]</obj_property>
+         </wvobject>
+      </wvobject>
    </wvobject>
    <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/reg_file/reg_file" type="array">
       <obj_property name="ElementShortName">reg_file[0:7][15:0]</obj_property>
       <obj_property name="ObjectShortName">reg_file[0:7][15:0]</obj_property>
-      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/reg_file/reg_file[0]" type="array">
+         <obj_property name="ElementShortName">[0][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[0][15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/reg_file/reg_file[1]" type="array">
+         <obj_property name="ElementShortName">[1][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[1][15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/reg_file/reg_file[2]" type="array">
+         <obj_property name="ElementShortName">[2][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[2][15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/reg_file/reg_file[3]" type="array">
+         <obj_property name="ElementShortName">[3][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[3][15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/reg_file/reg_file[4]" type="array">
+         <obj_property name="ElementShortName">[4][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[4][15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/reg_file/reg_file[5]" type="array">
+         <obj_property name="ElementShortName">[5][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[5][15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/reg_file/reg_file[6]" type="array">
+         <obj_property name="ElementShortName">[6][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[6][15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/reg_file/reg_file[7]" type="array">
+         <obj_property name="ElementShortName">[7][15:0]</obj_property>
+         <obj_property name="ObjectShortName">[7][15:0]</obj_property>
+         <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
    </wvobject>
    <wvobject fp_name="group253" type="group">
       <obj_property name="label">EX</obj_property>
@@ -425,13 +491,21 @@
       <obj_property name="label">MEM</obj_property>
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="isExpanded"></obj_property>
-      <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/IR" type="array">
-         <obj_property name="ElementShortName">IR[15:0]</obj_property>
-         <obj_property name="ObjectShortName">IR[15:0]</obj_property>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/Result_MEM_in" type="array">
+         <obj_property name="ElementShortName">Result_MEM_in[15:0]</obj_property>
+         <obj_property name="ObjectShortName">Result_MEM_in[15:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/ALU" type="array">
-         <obj_property name="ElementShortName">ALU[15:0]</obj_property>
-         <obj_property name="ObjectShortName">ALU[15:0]</obj_property>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/IR_MEM_in" type="array">
+         <obj_property name="ElementShortName">IR_MEM_in[15:0]</obj_property>
+         <obj_property name="ObjectShortName">IR_MEM_in[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/N_MEM_in" type="logic">
+         <obj_property name="ElementShortName">N_MEM_in</obj_property>
+         <obj_property name="ObjectShortName">N_MEM_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/Z_MEM_in" type="logic">
+         <obj_property name="ElementShortName">Z_MEM_in</obj_property>
+         <obj_property name="ObjectShortName">Z_MEM_in</obj_property>
       </wvobject>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/clk" type="logic">
          <obj_property name="ElementShortName">clk</obj_property>
@@ -452,6 +526,66 @@
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/pipe_flush" type="logic">
          <obj_property name="ElementShortName">pipe_flush</obj_property>
          <obj_property name="ObjectShortName">pipe_flush</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/ram_wren_A" type="logic">
+         <obj_property name="ElementShortName">ram_wren_A</obj_property>
+         <obj_property name="ObjectShortName">ram_wren_A</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/ram_en_A" type="logic">
+         <obj_property name="ElementShortName">ram_en_A</obj_property>
+         <obj_property name="ObjectShortName">ram_en_A</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/ram_wrdata_A" type="array">
+         <obj_property name="ElementShortName">ram_wrdata_A[15:0]</obj_property>
+         <obj_property name="ObjectShortName">ram_wrdata_A[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/ram_addr_A" type="array">
+         <obj_property name="ElementShortName">ram_addr_A[15:0]</obj_property>
+         <obj_property name="ObjectShortName">ram_addr_A[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/ram_data_A" type="array">
+         <obj_property name="ElementShortName">ram_data_A[15:0]</obj_property>
+         <obj_property name="ObjectShortName">ram_data_A[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/memdata_MEM_out" type="array">
+         <obj_property name="ElementShortName">memdata_MEM_out[15:0]</obj_property>
+         <obj_property name="ObjectShortName">memdata_MEM_out[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/Result_MEM_out" type="array">
+         <obj_property name="ElementShortName">Result_MEM_out[15:0]</obj_property>
+         <obj_property name="ObjectShortName">Result_MEM_out[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/IR_MEM_out" type="array">
+         <obj_property name="ElementShortName">IR_MEM_out[15:0]</obj_property>
+         <obj_property name="ObjectShortName">IR_MEM_out[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/NPC_MEM_in" type="array">
+         <obj_property name="ElementShortName">NPC_MEM_in[15:0]</obj_property>
+         <obj_property name="ObjectShortName">NPC_MEM_in[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/vdata_MEM_in" type="array">
+         <obj_property name="ElementShortName">vdata_MEM_in[15:0]</obj_property>
+         <obj_property name="ObjectShortName">vdata_MEM_in[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/A_MEM_in" type="array">
+         <obj_property name="ElementShortName">A_MEM_in[15:0]</obj_property>
+         <obj_property name="ObjectShortName">A_MEM_in[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/B_MEM_in" type="array">
+         <obj_property name="ElementShortName">B_MEM_in[15:0]</obj_property>
+         <obj_property name="ObjectShortName">B_MEM_in[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/vdata_MEM_out" type="array">
+         <obj_property name="ElementShortName">vdata_MEM_out[15:0]</obj_property>
+         <obj_property name="ObjectShortName">vdata_MEM_out[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/IR" type="array">
+         <obj_property name="ElementShortName">IR[15:0]</obj_property>
+         <obj_property name="ObjectShortName">IR[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/ALU" type="array">
+         <obj_property name="ElementShortName">ALU[15:0]</obj_property>
+         <obj_property name="ObjectShortName">ALU[15:0]</obj_property>
       </wvobject>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/Overflow" type="array">
          <obj_property name="ElementShortName">Overflow[15:0]</obj_property>

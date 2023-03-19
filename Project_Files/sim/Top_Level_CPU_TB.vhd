@@ -59,8 +59,10 @@ end process;
 
 process begin
     rst <= '1';
-    wait until clk = '1';
-    wait until clk = '0';
+    for i in 0 to 4 loop
+        wait until clk = '1';
+        wait until clk = '0';
+    end loop;
     rst <= '0';
   
 -- For factorial Test  

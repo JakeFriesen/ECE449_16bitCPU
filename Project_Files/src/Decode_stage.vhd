@@ -98,6 +98,7 @@ component Stack_Register is
            SP_out : out STD_LOGIC_VECTOR (15 downto 0);
            clk : in STD_LOGIC;
            rst : in STD_LOGIC;
+           halt : in STD_LOGIC;
            IR_in : in STD_LOGIC_VECTOR (15 downto 0));
 end component;
 
@@ -117,6 +118,7 @@ begin
 stack_reg : Stack_Register port map (
     clk=>clk,
     rst=>rst,
+    halt=>halt_intern,
     IR_in=>IR_intrn,
     SP_in=>A_internal,
     SP_out=>stack_pointer
@@ -191,6 +193,7 @@ B_internal <=
               rd_data2_out;
 A_internal <= 
               (others=>'0') when halt_intern = '1' else
+              stack_pointer when OPCODE = pop_op else
               stack_pointer when OPCODE = push_op else
               stack_pointer when OPCODE = rti_op else
               rd_data1_out;

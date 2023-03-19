@@ -38,12 +38,13 @@ entity Stack_Register is
            SP_out : out STD_LOGIC_VECTOR (15 downto 0);
            clk : in STD_LOGIC;
            rst : in STD_LOGIC;
+           halt : in STD_LOGIC;
            IR_in : in STD_LOGIC_VECTOR (15 downto 0));
 end Stack_Register;
 
 architecture Behavioral of Stack_Register is
-    signal stack_pointer_internal : std_logic_vector (15 downto 0);
-    signal next_stack_pointer : std_logic_vector (15 downto 0);
+    signal stack_pointer_internal, next_stack_pointer, stack_result, stack_out : std_logic_vector (15 downto 0) := x"0100";
+--    signal next_stack_pointer : std_logic_vector (15 downto 0) := x"0100";
     
 begin
     --Latching Process
@@ -51,24 +52,27 @@ begin
     begin
         if falling_edge(clk) then
             if(rst = '1') then
-                stack_pointer_internal <= (others=>'0');               
-            else
+                stack_pointer_internal <= (others=>'0');
+            else    
                 stack_pointer_internal <= next_stack_pointer;
             end if;                
         end if;
     end process;
-    
-    --Set the next stack pointer
-    with IR_in(15 downto 9) select
-    next_stack_pointer <= stack_pointer_internal + 1 when pop_op,
-                          stack_pointer_internal + 1 when rti_op,
-                          stack_pointer_internal - 1 when push_op,
-                          SP_in when load_sp_op,
-                          next_stack_pointer when others;
-    
-    --POP requires incremented pointer, PUSH required current pointer
-    SP_out <= next_stack_pointer when IR_in(15 downto 9) = pop_op else 
-              next_stack_pointer when IR_in(15 downto 9) = rti_op else 
-              stack_pointer_internal;
+
+
+-- Stack Pointer must be set to
+-- SP + 1 when pop or when rti
+-- SP - 1 when push
+-- SP_in when load_sp
+-- SP otherwise (no change)
+SP_out <= stack_pointer_internal when halt = '1' else
+          stack_pointer_internal when IR_in(15 downto 9) = push_op else
+          stack_pointer_internal + 1 when IR_in(15 downto 9) = pop_op else
+          stack_pointer_internal;
+
+next_stack_pointer <= stack_pointer_internal when halt = '1' else
+                      stack_pointer_internal - 1 when IR_in(15 downto 9) = push_op else
+                      stack_pointer_internal + 1 when IR_in(15 downto 9) = pop_op else
+                      stack_pointer_internal;
 
 end Behavioral;
