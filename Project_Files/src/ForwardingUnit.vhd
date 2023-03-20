@@ -45,10 +45,13 @@ signal opEX,opMEM, opWB : std_logic_vector(6 downto 0);
 signal raEX, rbEX, rcEX, raWB, rbWB, rcWB, raMEM, rbMEM, rcMEM: std_logic_vector(2 downto 0);
 signal A_forward_MEM, B_forward_MEM, A_forward_WB, B_forward_WB: std_logic_vector(15 downto 0);
 signal en_MEM, en_EX, en_WB, A_EX_sel, B_EX_sel : std_logic_vector(1 downto 0);
+
 begin
 
-opEX <= IR_EX_inF(15 downto 9);
 
+--------------------------EX DATA----------------------------
+opEX <= IR_EX_inF(15 downto 9);
+--check that data in buffer is valid for forwarding
 with opEX select
         en_EX <=   (others=>'0') when nop_op | in_op,
                    (others=>'1') when others;
@@ -58,9 +61,9 @@ raEX <= IR_EX_inF(8 downto 6);
 rbEX <= IR_EX_inF(5 downto 3); 
 rcEX <= IR_EX_inF(2 downto 0); 
 
-
+----------------------------MEM DATA----------------------------
 opMEM <= IR_MEM_inF(15 downto 9);
-
+--check that data in buffer is valid for forwarding
 with opMEM select
         en_MEM <=   (others=>'0') when nop_op,
                     (others=>'1') when others;
@@ -70,8 +73,10 @@ raMEM <= IR_MEM_inF(8 downto 6);
 rbMEM <= IR_MEM_inF(5 downto 3);
 rcMEM <= IR_MEM_inF(2 downto 0);
 
-opWB <= IR_WB_inF(15 downto 9);
 
+----------------------------WB DATA----------------------------
+opWB <= IR_WB_inF(15 downto 9);
+--check that data in buffer is valid for forwarding
 with opWB select
         en_WB <=   (others=>'0') when nop_op,
                    (others=>'1') when others;
@@ -82,22 +87,25 @@ rcWB <= IR_WB_inF(2 downto 0);
 
 
 
+----------------------------FORWARDING----------------------------
+--determine if forwarding is available for A
 with rbEX select
     A_EX_sel <=     ("10" and en_EX and en_WB) when raWB,
                     ("01" and en_EX  and en_MEM) when raMEM ,
                      "00" when others;
-                
+ --determine if forwarding is available for B               
 with rcEX select
     B_EX_sel <=     ("10" and en_EX and en_WB) when raWB,
                     ("01" and en_EX and en_MEM) when raMEM ,
                      "00" when others;
                 
-
+--Select which data to send to A
 with A_EX_sel select	
     A_EX_inF <=     Result_WB_inF when "10",
                     Result_MEM_inF when "01",
                     A_ID_outF when others;
-                
+                    
+--Select which data to send to B           
 with B_EX_sel select	
     B_EX_inF <=     Result_WB_inF when "10",
                     Result_MEM_inF when "01",

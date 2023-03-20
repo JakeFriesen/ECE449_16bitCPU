@@ -65,48 +65,44 @@ process begin
  
     wait until clk = '1';
     wait until clk = '0';
-    
---    for i in 0 to 4 loop
---        wait until clk = '1';
---        wait until clk = '0';
---    end loop;
-   
-    in_port <= x"0002"; --INPUT R0 <= 2
+
+    in_port <= x"0001"; --INPUT R0 <= 2
     wait until clk = '1';
     wait until clk = '0';
-    in_port <= x"0003"; --INPUT R1 <= 3
+    in_port <= x"0002"; --INPUT R1 <= 3
     wait until clk = '1';
     wait until clk = '0';
-    in_port <= x"0001"; --INPUT R2 <= 1
     wait until clk = '1';
     wait until clk = '0';
-    in_port <= x"0005"; --INPUT R3 <= 5
     wait until clk = '1';
     wait until clk = '0';
---    in_port <= x"0000"; --INPUT R4 <= 0
---    wait until clk = '1';
---    wait until clk = '0';
---    in_port <= x"0001"; --INPUT R5 <= 1
---    wait until clk = '1';
---    wait until clk = '0';
---    in_port <= x"0005"; --INPUT R6 <= 5
---    wait until clk = '1';
---    wait until clk = '0';
---    in_port <= x"0000"; --INPUT R7 <= 0
     
+    in_port <= x"0003"; --INPUT R0 <= 3
+    wait until clk = '1';
+    wait until clk = '0';
+    in_port <= x"0004"; --INPUT R1 <= 4
+    wait until clk = '1';
+    wait until clk = '0';
+    wait until clk = '1';
+    wait until clk = '0';
+    wait until clk = '1';
+    wait until clk = '0';
+    wait until clk = '1';
+    wait until clk = '0';
     
+    in_port <= x"0005"; --INPUT R0 <= 5
+    wait until clk = '1';
+    wait until clk = '0';
+    in_port <= x"0006"; --INPUT R1 <= 6
+    wait until clk = '1';
+    wait until clk = '0';
+    wait until clk = '1';
+    wait until clk = '0';
+    wait until clk = '1';
+    wait until clk = '0';
+
     
-    
---    for i in 1 to 7 loop
---        wait until clk = '1';
---        wait until clk = '0';
---    end loop;
---    in_port <= x"0005"; --INPUT 5
---    for i in 1 to 7 loop
---        wait until clk = '1';
---        wait until clk = '0';
---    end loop;
---    in_port <= x"0000"; --INPUT 0
+
     wait;
 end process;
 
