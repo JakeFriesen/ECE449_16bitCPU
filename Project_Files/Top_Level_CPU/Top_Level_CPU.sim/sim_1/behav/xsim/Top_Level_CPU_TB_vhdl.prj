@@ -4,6 +4,7 @@ vhdl xil_defaultlib  \
 "../../../../../src/Constant_Package.vhd" \
 "../../../../../src/Decode_stage.vhd" \
 "../../../../../src/EX_stage.vhd" \
+"../../../../../src/ForwardingUnit.vhd" \
 "../../../../../src/Intruction_Fetch_Stage.vhd" \
 "../../../../../src/Memory_Stage.vhd" \
 "../../../../../src/RAM.vhd" \

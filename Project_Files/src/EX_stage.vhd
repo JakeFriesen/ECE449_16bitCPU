@@ -105,11 +105,20 @@ begin
                 OPCODE<= IR_EX_in(15 downto 9);
                 NPC <= NPC_EX_in;
                 --Sign extend immediate
-                if(IR_EX_in(5) = '1') then
-                    imm_data <= "1111111111" & IR_EX_in(5 downto 0);
-                else
-                    imm_data <= "0000000000" & IR_EX_in(5 downto 0);
-                end if; 
+                case OPCODE is
+                    when brr_op | brr_n_op | brr_z_op =>
+                       if(IR(8) = '0') then
+                             imm_data <= "0000000" & IR(8 downto 0);
+                        else
+                             imm_data <= "1111111" & IR(8 downto 0);
+                        end if;
+                    when others =>
+                        if(IR_EX_in(5) = '1') then
+                            imm_data <= "1111111111" & IR_EX_in(5 downto 0);
+                        else
+                            imm_data <= "0000000000" & IR_EX_in(5 downto 0);
+                        end if; 
+                  end case;
             end if;
         end if;
         --Negative Latch
@@ -151,50 +160,24 @@ begin
     --Push the next program counter + 1 into the ALU result when branching to subroutine
     --Put R7 into the ALU result when returning from subroutine
     with OPCODE select
-    result <= A_data when return_op,
+    result <= A_data when return_op | in_op,
               ALU_result when others;
+              
     
-    --Switch Case for each opcode
-    --Defines ALU_A, ALU_B, ALU_OP
-    process(OPCODE) begin
-        case OPCODE is 
-            when add_op | sub_op | mul_op | nand_op | test_op =>
-            --Regular Arithmetic Operations
-                ALU_B <= B_data;
-                ALU_A <= A_data;
-                ALU_OP <= IR(11 downto 9);
-            when shl_op | shr_op =>
-            --Shift Operations
-                ALU_B <= imm_data;
-                ALU_A <= A_data;
-                ALU_OP <= IR(11 downto 9);
-            when brr_op | brr_n_op | brr_z_op =>
-            --PC Relative Branches
-                ALU_A <= NPC;
-                --Set op to add or subtract
-                ALU_OP <= "001";
-                --Sign Extend the Immediate value
-                if(IR(8) = '0') then
-                    ALU_B <= "0000000" & IR(8 downto 0);
-                else
-                    ALU_B <= "1111111" & IR(8 downto 0);
-                end if;
-            when br_op | br_n_op | br_z_op | br_sub_op =>
-            --Register Relative Branches
-                ALU_A <= A_data;
-                ALU_OP <= "001";
-                --Sign Extend the Immediate value
-                if(IR(5) = '0') then
-                    ALU_B <= "0000000000" & IR(5 downto 0);
-                else
-                    ALU_B <= "1111111111" & IR(5 downto 0);
-                end if;
-            when others =>
-            --Any other operations
-                ALU_B <= (others=>'0');
-                ALU_A <= (others=>'0');
-                ALU_OP <= (others=>'0');
-        end case;
-    end process;
+    
+    with OPCODE select
+        ALU_A <= A_data when add_op | sub_op | mul_op | nand_op | test_op | shl_op | shr_op,
+                 NPC when brr_op | brr_n_op | brr_z_op,
+                 (others=>'0') when others;
+                 
+    with OPCODE select
+        ALU_B <= B_data when add_op | sub_op | mul_op | nand_op | test_op ,
+                 imm_data when shl_op | shr_op | br_op | br_n_op | br_z_op | br_sub_op | brr_op | brr_n_op | brr_z_op,
+                 (others=>'0') when others;
+    with OPCODE select
+        ALU_OP <= IR(11 downto 9) when add_op | sub_op | mul_op | nand_op | test_op| shl_op | shr_op ,
+                 "001" when  br_op | br_n_op | br_z_op | br_sub_op| brr_op | brr_n_op | brr_z_op,
+                 (others=>'0') when others;
+  
      
 end Behavioral;

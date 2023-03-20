@@ -45,6 +45,7 @@ entity Decode is
 			  ov_enable_ID_in : in std_logic;
 			  loadIMM_ID_in: in std_logic;
               load_align_ID_in: in std_logic;
+              INPUT_ID_in: in std_logic_vector(15 downto 0);
 			  halt : out std_logic;
 			  br_clear_in: in std_logic 
 	    );			  
@@ -96,9 +97,9 @@ end component MUX2_1;
 --Signals
 signal load_en : STD_LOGIC;
 signal npc : std_logic_vector (15 downto 0);
-signal ra_index, rd_index1_intern, rd_index2_intern : STD_LOGIC_VECTOR(2 downto 0) := (others=>'0');
+signal ra_index,reg_write_addr, rd_index1_intern, rd_index2_intern : STD_LOGIC_VECTOR(2 downto 0) := (others=>'0');
 signal output_en, halt_intern, IR_wb, rd_enable : STD_LOGIC := '0';
-signal rd_data1_out, IR_intrn, A_internal, B_internal, B_data, outport_internal, outport_previous : std_logic_vector(15 downto 0) := (others=>'0');
+signal rd_data1_out, reg_write_data, IR_intrn, A_internal, B_internal, B_data, outport_internal, outport_previous : std_logic_vector(15 downto 0) := (others=>'0');
 
 -- Constant X"0000"
 constant zero : std_logic_vector(15 downto 0) := X"0000";
@@ -128,7 +129,10 @@ with IR_intrn(15 downto 9) select
 with IR_intrn(15 downto 9) select	
     rd_enable <= '1' when add_op | sub_op | mul_op | nand_op | shl_op | shr_op | test_op | out_op,
                  '0' when others;
-	                    
+
+
+
+   	                    
 -- Determine RAW
 raw_handler : RAW port map(rst=>rst, clk=>clk, wr_en=>wr_enable_ID_in, IR_wb=>IR_wb, ra_index=>ra_index,
               wr_addr=>wr_addr_ID_in, rd_index1=>rd_index1_intern, rd_index2=>rd_index2_intern, halt=>halt_intern, rd_enable=>rd_enable);
@@ -140,7 +144,7 @@ load_en <= '0';
 
 --reg file
 reg_file : register_file port map(rst => rst, clk => clk, rd_index1 => rd_index1_intern, 
-	       rd_index2 => rd_index2_intern, rd_data1 => rd_data1_out, rd_data2 => B_internal, wr_addr => wr_addr_ID_in,
+	       rd_index2 => rd_index2_intern, rd_data1 => rd_data1_out, rd_data2 => B_internal, wr_addr => wr_addr_ID_in ,
 	       wr_data => wr_data_ID_in, wr_enable => wr_enable_ID_in, ov_data => ov_data_ID_in,loadIMM=>loadIMM_ID_in,load_align => load_align_ID_in, ov_enable => ov_enable_ID_in);
 
 --MUX assignments--
@@ -171,10 +175,18 @@ halt <= halt_intern;
 		      NPC_ID_out <= (others=>'0');
 		      IR_ID_out <= (others=>'0');
 		  	elsif (halt_intern='0') then
-		      A_ID_out <= A_internal;
-		      B_ID_out <= B_internal;
-		      IR_ID_out <= IR_intrn;
-		      NPC_ID_out <= npc;
+		  	
+                if(IR_intrn(15 downto 9) = IN_op) then
+                   A_ID_out <= INPUT_ID_in;
+                else
+                   A_ID_out <= A_internal;
+                end if;
+                
+                B_ID_out <= B_internal;
+                
+                
+                IR_ID_out <= IR_intrn;
+                NPC_ID_out <= npc;
 			elsif (halt_intern='1') then
 		      A_ID_out <= (others=>'0');
 		      B_ID_out <= (others=>'0');

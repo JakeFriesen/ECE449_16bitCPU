@@ -34,7 +34,9 @@ entity Intruction_Fetch_Stage is
            ram_addr_B : out std_logic_vector (15 downto 0);
            ram_data_B : in std_logic_vector (15 downto 0);
            halt : in STD_LOGIC;
-           BR_IF_in : in STD_LOGIC);
+           BR_IF_in : in STD_LOGIC;
+           INPUT_IF_out: out std_logic_vector (15 downto 0);
+           INPORT_IF_in: in std_logic_vector (15 downto 0));
            
 end Intruction_Fetch_Stage;
 
@@ -83,10 +85,12 @@ begin
     ram_addr_B <= program_counter;
     instr_data <= instr_data when halt = '1' else ram_data_B;
     
-    
+
     --Program Counter Update
     next_counter <= PC_new when branch = '1' else
                     program_counter when halt = '1' else
                     program_counter + 1;
 
+    --INPUT
+    INPUT_IF_out <= INPORT_IF_in;
 end Behavioral;
