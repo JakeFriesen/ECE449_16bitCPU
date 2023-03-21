@@ -1,6 +1,4 @@
-INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/EX_stage.vhd" into library xil_defaultlib
-INFO: [VRFC 10-307] analyzing entity EX_stage
 INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/ForwardingUnit.vhd" into library xil_defaultlib
 INFO: [VRFC 10-307] analyzing entity ForwardingUnit
-INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/sim/Top_Level_CPU_TB.vhd" into library xil_defaultlib
-INFO: [VRFC 10-307] analyzing entity Top_Level_CPU_TB
+INFO: [VRFC 10-163] Analyzing VHDL file "F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/Top_Level_CPU.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity Top_Level_CPU

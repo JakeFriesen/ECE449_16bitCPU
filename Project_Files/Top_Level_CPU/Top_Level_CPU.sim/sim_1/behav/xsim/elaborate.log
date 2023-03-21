@@ -3,7 +3,6 @@ Copyright 1986-1999, 2001-2016 Xilinx, Inc. All Rights Reserved.
 Running: C:/Xilinx/Vivado/2017.4/bin/unwrapped/win64.o/xelab.exe -wto d60582c2051d45858523b6c51ed65df2 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip -L xpm --snapshot Top_Level_CPU_TB_behav xil_defaultlib.Top_Level_CPU_TB -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
-WARNING: [VRFC 10-122] raw remains a black-box since it has no binding entity [F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/Decode_stage.vhd:137]
 Completed static elaboration
 Starting simulation data flow analysis
 Completed simulation data flow analysis
@@ -18,8 +17,8 @@ Compiling package ieee.std_logic_unsigned
 Compiling package xpm.vcomponents
 Compiling package vl.vl_types
 Compiling architecture behavioral of entity xil_defaultlib.Intruction_Fetch_Stage [intruction_fetch_stage_default]
+Compiling architecture behavioral of entity xil_defaultlib.RAW [raw_default]
 Compiling architecture behavioural of entity xil_defaultlib.register_file [register_file_default]
-Compiling architecture behavioral of entity xil_defaultlib.MUX2_1 [mux2_1_default]
 Compiling architecture behavioral of entity xil_defaultlib.Decode [decode_default]
 Compiling architecture behavioral of entity xil_defaultlib.ALU [alu_default]
 Compiling architecture behavioral of entity xil_defaultlib.EX_stage [ex_stage_default]

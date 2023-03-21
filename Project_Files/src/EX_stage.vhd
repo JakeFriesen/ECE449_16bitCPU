@@ -24,6 +24,7 @@ entity EX_stage is
     Port ( 
            clk: in STD_LOGIC;
            rst: in STD_LOGIC;
+           halt: in STD_LOGIC;
            IR_EX_in: in std_logic_vector(15 downto 0);
            A_EX_in : in STD_LOGIC_VECTOR (15 downto 0);
            B_EX_in : in STD_LOGIC_VECTOR (15 downto 0);
@@ -97,6 +98,8 @@ begin
                 B_data <= (others=>'0');
                 OPCODE <= (others=>'0');
                 NPC <= (others=>'0');
+            elsif (halt = '1') then 
+                -- Do not update anything
             else
                 IR <= IR_EX_in;
                 --ALU_OP <= IR_EX_in(11 downto 9);
@@ -123,12 +126,12 @@ begin
         end if;
         --Negative Latch
         if (clk='0' and clk'event) then
-            if(rst = '1') then
+            if(rst = '1' or halt='1') then
                 Result_EX_out <=(others=>'0');
                 vdata_EX_out <= (others=>'0');
                 Z_EX_out <= '0';
                 N_EX_out <= '0';
-                IR_EX_out <= IR;
+                IR_EX_out <= (others=>'0');
                 NPC_EX_out <= (others=>'0');
             else
                 Result_EX_out <= result;
@@ -160,8 +163,8 @@ begin
     --Push the next program counter + 1 into the ALU result when branching to subroutine
     --Put R7 into the ALU result when returning from subroutine
     with OPCODE select
-    result <= A_data when return_op | in_op,
-              ALU_result when others;
+        result <=   A_data when return_op | in_op,
+                    ALU_result when others;
               
     
     

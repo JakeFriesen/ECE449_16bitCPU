@@ -66,40 +66,40 @@ process begin
     wait until clk = '1';
     wait until clk = '0';
 
-    in_port <= x"0001"; --INPUT R0 <= 2
+    in_port <= x"1001"; --INPUT R0 <= 2
     wait until clk = '1';
     wait until clk = '0';
-    in_port <= x"0002"; --INPUT R1 <= 3
+    in_port <= x"1002"; --INPUT R1 <= 3
     wait until clk = '1';
     wait until clk = '0';
-    wait until clk = '1';
-    wait until clk = '0';
-    wait until clk = '1';
-    wait until clk = '0';
+--    wait until clk = '1';
+--    wait until clk = '0';
+--    wait until clk = '1';
+--    wait until clk = '0';
     
-    in_port <= x"0003"; --INPUT R0 <= 3
-    wait until clk = '1';
-    wait until clk = '0';
-    in_port <= x"0004"; --INPUT R1 <= 4
-    wait until clk = '1';
-    wait until clk = '0';
-    wait until clk = '1';
-    wait until clk = '0';
-    wait until clk = '1';
-    wait until clk = '0';
-    wait until clk = '1';
-    wait until clk = '0';
+--    in_port <= x"1003"; --INPUT R0 <= 3
+--    wait until clk = '1';
+--    wait until clk = '0';
+--    in_port <= x"1004"; --INPUT R1 <= 4
+--    wait until clk = '1';
+--    wait until clk = '0';
+--    wait until clk = '1';
+--    wait until clk = '0';
+--    wait until clk = '1';
+--    wait until clk = '0';
+--    wait until clk = '1';
+--    wait until clk = '0';
     
-    in_port <= x"0005"; --INPUT R0 <= 5
-    wait until clk = '1';
-    wait until clk = '0';
-    in_port <= x"0006"; --INPUT R1 <= 6
-    wait until clk = '1';
-    wait until clk = '0';
-    wait until clk = '1';
-    wait until clk = '0';
-    wait until clk = '1';
-    wait until clk = '0';
+--    in_port <= x"1005"; --INPUT R0 <= 5
+--    wait until clk = '1';
+--    wait until clk = '0';
+--    in_port <= x"0006"; --INPUT R1 <= 6
+--    wait until clk = '1';
+--    wait until clk = '0';
+--    wait until clk = '1';
+--    wait until clk = '0';
+--    wait until clk = '1';
+--    wait until clk = '0';
 
     
 

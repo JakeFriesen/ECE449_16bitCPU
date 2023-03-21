@@ -50,6 +50,7 @@ component Decode is
     Port ( 
            rst : in STD_LOGIC;
            clk : in STD_LOGIC;
+           halt : in STD_LOGIC;
            IR_ID_in : in  STD_LOGIC_VECTOR (15 downto 0);
            NPC_ID_in : in  STD_LOGIC_VECTOR (15 downto 0);
            NPC_ID_out : out STD_LOGIC_VECTOR (15 downto 0);
@@ -65,13 +66,12 @@ component Decode is
            loadIMM_ID_in: in std_logic;
            load_align_ID_in: in std_logic;
            INPUT_ID_in: in std_logic_vector(15 downto 0);
-           halt : out std_logic;
            br_clear_in: in std_logic 
      );			  
 end component Decode;
 
 component EX_stage is
-    Port (clk, rst: in STD_LOGIC;
+    Port (clk, rst, halt: in STD_LOGIC;
            IR_EX_in: in std_logic_vector(15 downto 0);
            A_EX_in : in STD_LOGIC_VECTOR (15 downto 0);
            B_EX_in : in STD_LOGIC_VECTOR (15 downto 0);
@@ -156,7 +156,12 @@ component  ForwardingUnit is
             A_MEM_inF : in STD_LOGIC_VECTOR (15 downto 0);
             B_MEM_inF : in STD_LOGIC_VECTOR (15 downto 0);     
             Result_MEM_inF : in STD_LOGIC_VECTOR (15 downto 0);
-            Result_WB_inF: in STD_LOGIC_VECTOR (15 downto 0)
+            Result_WB_inF: in STD_LOGIC_VECTOR (15 downto 0);
+            Memdata_WB_inF: in STD_LOGIC_VECTOR (15 downto 0);
+            Write_data_inF: in STD_LOGIC_VECTOR (15 downto 0);
+            Write_addr_inF: in STD_LOGIC_VECTOR (2 downto 0);
+            Write_en_inF: in STD_LOGIC;
+            halt: out std_logic
        );
          
 end component ForwardingUnit;
@@ -227,6 +232,7 @@ INPUT_ID_in =>IF_ID_INPUT
 EX_inst : EX_stage port map(
 clk=>clk, 
 rst=>MEM_pipe_flush, 
+halt => halt,
 IR_EX_in=>ID_EX_IR, 
 A_EX_in=>FU_EX_A, 
 B_EX_in=>FU_EX_B, 
@@ -261,9 +267,9 @@ memdata_MEM_out=>MEM_WB_mem_data,
 Result_MEM_out=>MEM_WB_alu, 
 IR_MEM_out=>MEM_WB_IR, 
 vdata_MEM_in=>EX_MEM_v_data,
- A_MEM_in=>EX_MEM_A, B_MEM_in=>EX_MEM_B,
- vdata_MEM_out=>MEM_WB_v_data, 
- pipe_flush=>MEM_pipe_flush);
+A_MEM_in=>EX_MEM_A, B_MEM_in=>EX_MEM_B,
+vdata_MEM_out=>MEM_WB_v_data, 
+pipe_flush=>MEM_pipe_flush);
 
 WB_inst : Write_Back_Stage port map(
 clk=>clk, 
@@ -307,7 +313,12 @@ B_ID_outF => ID_EX_B,
 A_MEM_inF=> EX_MEM_A,
 B_MEM_inF=> EX_MEM_B,
 Result_MEM_inF => EX_MEM_alu_res,
-Result_WB_inF => MEM_WB_ALU
+Result_WB_inF => MEM_WB_ALU,
+Memdata_WB_inF =>MEM_WB_mem_data,
+Write_data_inF => WB_ID_wr_data,
+Write_addr_inF =>WB_ID_wr_addr,
+Write_en_inF => WB_ID_wr_en,
+halt => halt
 );
 
 

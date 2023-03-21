@@ -8,6 +8,7 @@ vhdl xil_defaultlib  \
 "../../../../../src/Intruction_Fetch_Stage.vhd" \
 "../../../../../src/Memory_Stage.vhd" \
 "../../../../../src/RAM.vhd" \
+"../../../../../src/RAW.vhd" \
 "../../../../../src/RF8_16.vhd" \
 "../../../../../src/Top_Level_CPU.vhd" \
 "../../../../../src/Write_Back_Stage.vhd" \

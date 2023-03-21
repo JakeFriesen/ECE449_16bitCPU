@@ -2,64 +2,157 @@
 # Vivado v2017.4 (64-bit)
 # SW Build 2086221 on Fri Dec 15 20:55:39 MST 2017
 # IP Build 2085800 on Fri Dec 15 22:25:07 MST 2017
-# Start of session at: Sun Mar 19 15:46:12 2023
-# Process ID: 41732
+# Start of session at: Tue Mar 21 10:07:46 2023
+# Process ID: 40624
 # Current directory: F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent23360 F:\GitHub\ECE_449\ECE449_16bitCPU\Project_Files\Top_Level_CPU\Top_Level_CPU.xpr
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent53664 F:\GitHub\ECE_449\ECE449_16bitCPU\Project_Files\Top_Level_CPU\Top_Level_CPU.xpr
 # Log file: F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/vivado.log
 # Journal file: F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU\vivado.jou
 #-----------------------------------------------------------
 start_gui
 open_project F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU.xpr
 update_compile_order -fileset sources_1
-launch_simulation
-open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
-source Top_Level_CPU_TB.tcl
-restart
-run 120 us
-save_wave_config {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg}
-close_sim
-launch_simulation
-open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
-source Top_Level_CPU_TB.tcl
-restart
-run 10 us
-run 10 us
-run 10 us
-run 10 us
-run 10 us
-run 10 us
-run 10 us
-restart
-run 10 us
-run 10 us
-save_wave_config {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg}
-close_sim
-launch_simulation
-open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
-source Top_Level_CPU_TB.tcl
-restart
-run 10 us
-run 10 us
-run 10 us
-run 10 us
 add_files -norecurse F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/ForwardingUnit.vhd
 update_compile_order -fileset sources_1
-add_files -norecurse F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/ForwardingUnit.vhd
+launch_simulation
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg
+source Top_Level_CPU_TB.tcl
+close_sim
+launch_simulation
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg
+source Top_Level_CPU_TB.tcl
+close_sim
+launch_simulation
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg
+source Top_Level_CPU_TB.tcl
+save_wave_config {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg}
+close_sim
+launch_simulation
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg
+source Top_Level_CPU_TB.tcl
+restart
+run 30 us
+save_wave_config {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg}
+close_sim
+launch_simulation
+launch_simulation
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg
+source Top_Level_CPU_TB.tcl
 update_compile_order -fileset sources_1
 update_compile_order -fileset sources_1
 update_compile_order -fileset sources_1
-update_compile_order -fileset sources_1
-update_compile_order -fileset sources_1
-update_compile_order -fileset sources_1
-update_compile_order -fileset sources_1
+save_wave_config {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg}
 update_compile_order -fileset sources_1
 update_compile_order -fileset sources_1
 update_compile_order -fileset sources_1
 close_sim
 launch_simulation
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg
+source Top_Level_CPU_TB.tcl
+restart
+run 10 us
+run 10 us
+save_wave_config {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg}
+close_sim
 launch_simulation
 open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg
+source Top_Level_CPU_TB.tcl
+restart
+run 10 us
+run 10 us
+save_wave_config {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg}
+close_sim
+launch_simulation
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg
+source Top_Level_CPU_TB.tcl
+restart
+run 10 us
+run 10 us
+save_wave_config {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg}
+close_sim
+launch_simulation
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg
+source Top_Level_CPU_TB.tcl
+restart
+run 10 us
+run 10 us
+save_wave_config {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg}
+close_sim
+launch_simulation
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg
+source Top_Level_CPU_TB.tcl
+restart
+run 10 us
+run 10 us
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+save_wave_config {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg}
+close_sim
+launch_simulation
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg
+source Top_Level_CPU_TB.tcl
+restart
+run 10 us
+run 10 us
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+add_bp {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/src/Decode_stage.vhd} 154
+update_compile_order -fileset sources_1
+close_sim
+launch_simulation
+launch_simulation
+launch_simulation
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg
+source Top_Level_CPU_TB.tcl
+close_sim
+launch_simulation
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg
+source Top_Level_CPU_TB.tcl
+restart
+run 10 us
+run 10 us
+run 10 us
+save_wave_config {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg}
+close_sim
+launch_simulation
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg
+source Top_Level_CPU_TB.tcl
+save_wave_config {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg}
+close_sim
+launch_simulation
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg
+source Top_Level_CPU_TB.tcl
+close_sim
+launch_simulation
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg
+source Top_Level_CPU_TB.tcl
+close_sim
+launch_simulation
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg
+source Top_Level_CPU_TB.tcl
+save_wave_config {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg}
+close_sim
+launch_simulation
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg
 source Top_Level_CPU_TB.tcl
 restart
 run 10 us
@@ -68,104 +161,42 @@ run 10 us
 close_sim
 launch_simulation
 open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
-source Top_Level_CPU_TB.tcl
-run 10 us
-run 10 us
-run 10 us
-run 10 us
-run 10 us
-run 10 us
-run 10 us
-save_wave_config {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg}
-close_sim
-launch_simulation
-open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
-source Top_Level_CPU_TB.tcl
-run 10 us
-run 10 us
-run 10 us
-close_sim
-launch_simulation
-open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg
 source Top_Level_CPU_TB.tcl
 restart
 run 10 us
 run 10 us
 run 10 us
 run 10 us
-close_sim
-launch_simulation
-open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
-source Top_Level_CPU_TB.tcl
+run 10 us
 restart
 run 10 us
 run 10 us
 run 10 us
-update_compile_order -fileset sources_1
-update_compile_order -fileset sources_1
+save_wave_config {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg}
 close_sim
 launch_simulation
 open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg
 source Top_Level_CPU_TB.tcl
 restart
+run 10 us
 run 10 us
 run 10 us
 run 10 us
 close_sim
 launch_simulation
 open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg
 source Top_Level_CPU_TB.tcl
-run 10 us
-run 10 us
-run 10 us
-run 10 us
 restart
-run 10 us
-run 10 us
-run 10 us
-restart
-run 10 us
-run 10 us
-run 10 us
-restart
-run 10 us
-run 10 us
-run 10 us
-save_wave_config {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg}
+run 30 us
+save_wave_config {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg}
 close_sim
 launch_simulation
 open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
-source Top_Level_CPU_TB.tcl
-run 10 us
-run 10 us
-run 10 us
-restart
-run 10 us
-run 10 us
-run 10 us
-save_wave_config {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg}
-close_sim
-launch_simulation
-open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
+open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behavioral.wcfg
 source Top_Level_CPU_TB.tcl
 restart
-run 10 us
-run 10 us
-run 10 us
-close_sim
-launch_simulation
-open_wave_config F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg
-source Top_Level_CPU_TB.tcl
-run 10 us
-run 10 us
-run 10 us
-restart
-run 10 us
-run 10 us
-run 10 us
-restart
-run 10 us
-run 10 us
-run 10 us
-save_wave_config {F:/GitHub/ECE_449/ECE449_16bitCPU/Project_Files/Top_Level_CPU/Top_Level_CPU_TB_behav.wcfg}
+run 30 us
 close_sim

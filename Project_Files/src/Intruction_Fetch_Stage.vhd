@@ -70,6 +70,8 @@ begin
                 program_counter <= (others=>'0');
                 branch <= '0';
                 PC_new <= (others=>'0');
+            elsif(halt = '1') then 
+                -- Do not update signals; repeat instruction
             else
             --Latch Outgoing signals
                 IR_IF_out <= instr_data;   

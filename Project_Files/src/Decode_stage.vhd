@@ -31,6 +31,7 @@ entity Decode is
     Port ( 
 			  rst : in STD_LOGIC;
 			  clk : in STD_LOGIC;
+			  halt : in STD_LOGIC;
 			  IR_ID_in : in  STD_LOGIC_VECTOR (15 downto 0);
 			  NPC_ID_in : in  STD_LOGIC_VECTOR (15 downto 0);
 			  NPC_ID_out : out STD_LOGIC_VECTOR (15 downto 0);
@@ -46,7 +47,6 @@ entity Decode is
 			  loadIMM_ID_in: in std_logic;
               load_align_ID_in: in std_logic;
               INPUT_ID_in: in std_logic_vector(15 downto 0);
-			  halt : out std_logic;
 			  br_clear_in: in std_logic 
 	    );			  
 end Decode;
@@ -148,11 +148,15 @@ reg_file : register_file port map(rst => rst, clk => clk, rd_index1 => rd_index1
 	       wr_data => wr_data_ID_in, wr_enable => wr_enable_ID_in, ov_data => ov_data_ID_in,loadIMM=>loadIMM_ID_in,load_align => load_align_ID_in, ov_enable => ov_enable_ID_in);
 
 --MUX assignments--
-m1 : MUX2_1 port map(x => rd_data1_out, y => zero, s => output_en, z => A_internal);
+--m1 : MUX2_1 port map(x => rd_data1_out, y => zero, s => output_en, z => A_internal);
 --TODO: Forwarding from wr_data_ID_in to A/B_internal when possible
 
-halt <= halt_intern;
+--halt <= halt_intern;
 
+
+with IR_intrn(15 downto 9) select 
+    A_internal <=   INPUT_ID_in when IN_op,
+                    rd_data1_out when others;
 
 	--latching		
 	process(clk)
@@ -161,6 +165,8 @@ halt <= halt_intern;
 			if (rst = '1' or br_clear_in = '1') then
 				IR_intrn <= zero;
 				npc <= (others=>'0');
+			elsif(halt = '1') then
+--			--Do not update signals
 			else
 			    IR_intrn <= IR_ID_in;
 				npc <= NPC_ID_in;
@@ -174,24 +180,32 @@ halt <= halt_intern;
 		      B_ID_out <= (others=>'0');
 		      NPC_ID_out <= (others=>'0');
 		      IR_ID_out <= (others=>'0');
-		  	elsif (halt_intern='0') then
+		      
+		    elsif(halt = '1') then 
+		    -- do nothing
+		  	else
 		  	
-                if(IR_intrn(15 downto 9) = IN_op) then
-                   A_ID_out <= INPUT_ID_in;
+		  	--Forwarding through register file
+                if ((wr_addr_ID_in = rd_index1_intern) and wr_enable_ID_in = '1') then
+                    A_ID_out <= wr_data_ID_in;
                 else
                    A_ID_out <= A_internal;
                 end if;
                 
-                B_ID_out <= B_internal;
+                if ((wr_addr_ID_in = rd_index2_intern) and wr_enable_ID_in = '1')then
+                   B_ID_out <= wr_data_ID_in;
+                else
+                    B_ID_out <= B_internal;
+                end if;
                 
                 
                 IR_ID_out <= IR_intrn;
                 NPC_ID_out <= npc;
-			elsif (halt_intern='1') then
-		      A_ID_out <= (others=>'0');
-		      B_ID_out <= (others=>'0');
-		      IR_ID_out <= (others=>'0');
-			  NPC_ID_out <= npc;
+--			elsif (halt_intern='1') then
+--		      A_ID_out <= (others=>'0');
+--		      B_ID_out <= (others=>'0');
+--		      IR_ID_out <= (others=>'0');
+--			  NPC_ID_out <= npc;
 		  end if;
 		end if;
 	end process;
