@@ -63,6 +63,7 @@ component Decode is
            --Overflow signals
            ov_data_ID_in : in std_logic_vector(15 downto 0);
            ov_enable_ID_in : in std_logic;
+           R7_data_ID_out: out std_logic_vector(15 downto 0); 
            loadIMM_ID_in: in std_logic;
            load_align_ID_in: in std_logic;
            INPUT_ID_in: in std_logic_vector(15 downto 0);
@@ -161,6 +162,8 @@ component  ForwardingUnit is
             Write_data_inF: in STD_LOGIC_VECTOR (15 downto 0);
             Write_addr_inF: in STD_LOGIC_VECTOR (2 downto 0);
             Write_en_inF: in STD_LOGIC;
+            loadIMM_inF: in std_logic;
+            R7_data_inF: in std_logic_vector(15 downto 0); 
             halt: out std_logic
        );
          
@@ -171,7 +174,7 @@ signal clk, rst : std_logic := '0';
 --Intermediate Signals
 signal IF_ID_IR, ID_EX_IR, EX_MEM_IR,  MEM_WB_IR: std_logic_vector(15 downto 0);
 signal WB_ID_wr_data, WB_ID_v_data, ID_EX_A, ID_EX_B: std_logic_vector(15 downto 0);
-signal EX_MEM_alu_res, EX_MEM_v_data, MEM_WB_mem_data, MEM_WB_alu, MEM_WB_v_data, EX_MEM_A, EX_MEM_B : std_logic_vector(15 downto 0);
+signal EX_MEM_alu_res, EX_MEM_v_data, MEM_WB_mem_data, MEM_WB_alu, MEM_WB_v_data, EX_MEM_A, EX_MEM_B, R7_data : std_logic_vector(15 downto 0);
 signal IF_ID_NPC, IF_ID_INPUT, WB_IF_PC, ID_EX_NPC, MEM_IF_br_addr, EX_MEM_NPC : std_logic_vector(15 downto 0);
 signal MEM_IF_br, WB_ID_wr_en, WB_ID_v_en, EX_MEM_N_flag, EX_MEM_Z_flag, MEM_pipe_flush : std_logic;
 signal WB_ID_wr_addr : std_logic_vector(2 downto 0);
@@ -225,7 +228,8 @@ loadIMM_ID_in=>WB_ID_loadimm,
 load_align_ID_in=> WB_ID_load_align, 
 NPC_ID_out=>ID_EX_NPC, 
 NPC_ID_in=>IF_ID_NPC,
-INPUT_ID_in =>IF_ID_INPUT
+INPUT_ID_in =>IF_ID_INPUT,
+R7_data_ID_out => R7_data
  
 );
 
@@ -318,6 +322,8 @@ Memdata_WB_inF =>MEM_WB_mem_data,
 Write_data_inF => WB_ID_wr_data,
 Write_addr_inF =>WB_ID_wr_addr,
 Write_en_inF => WB_ID_wr_en,
+loadIMM_inF=>WB_ID_loadimm,
+R7_data_inF => R7_data,
 halt => halt
 );
 

@@ -98,7 +98,7 @@ begin
                 B_data <= (others=>'0');
                 OPCODE <= (others=>'0');
                 NPC <= (others=>'0');
-            elsif (halt = '1') then 
+  --          elsif (halt = '1') then 
                 -- Do not update anything
             else
                 IR <= IR_EX_in;

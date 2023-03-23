@@ -47,6 +47,7 @@ entity Decode is
 			  loadIMM_ID_in: in std_logic;
               load_align_ID_in: in std_logic;
               INPUT_ID_in: in std_logic_vector(15 downto 0);
+              R7_data_ID_out: out std_logic_vector(15 downto 0); 
 			  br_clear_in: in std_logic 
 	    );			  
 end Decode;
@@ -66,6 +67,7 @@ component register_file is
     wr_enable: in std_logic;
     --overflow signals
     ov_data: in std_logic_vector(15 downto 0);
+    R7_data: out std_logic_vector(15 downto 0);
     loadIMM: in std_logic;
     load_align: in std_logic;
     ov_enable: in std_logic
@@ -97,9 +99,9 @@ end component MUX2_1;
 --Signals
 signal load_en : STD_LOGIC;
 signal npc : std_logic_vector (15 downto 0);
-signal ra_index,reg_write_addr, rd_index1_intern, rd_index2_intern : STD_LOGIC_VECTOR(2 downto 0) := (others=>'0');
+signal ra_index,reg_write_addr, rd_index1_intern, rd_index2_intern, A_sel, B_sel : STD_LOGIC_VECTOR(2 downto 0) := (others=>'0');
 signal output_en, halt_intern, IR_wb, rd_enable : STD_LOGIC := '0';
-signal rd_data1_out, reg_write_data, IR_intrn, A_internal, B_internal, B_data, outport_internal, outport_previous : std_logic_vector(15 downto 0) := (others=>'0');
+signal rd_data1_out, reg_write_data, IR_intrn, A_internal, B_internal, A_data, B_data, outport_internal, outport_previous, r7_data: std_logic_vector(15 downto 0) := (others=>'0');
 
 -- Constant X"0000"
 constant zero : std_logic_vector(15 downto 0) := X"0000";
@@ -117,14 +119,14 @@ with IR_intrn(15 downto 9) select
 
 --select read index 1 & 2 for regfile	
 with IR_intrn(15 downto 9) select
-	rd_index1_intern <= IR_intrn(5 downto 3) when add_op | sub_op | mul_op | mov_op | load_op,
-						IR_intrn(8 downto 6) when nand_op | shl_op | shr_op | test_op | out_op | br_op | br_n_op | br_z_op | br_sub_op | store_op,
+	rd_index1_intern <= IR_intrn(5 downto 3) when add_op | sub_op | mul_op  | load_op,
+						IR_intrn(8 downto 6) when nand_op | shl_op | shr_op | test_op | out_op | br_op | br_n_op | br_z_op | br_sub_op | store_op| mov_op,
 						"111" when return_op,
 						"000" when others;	
 						
 with IR_intrn(15 downto 9) select	
 	rd_index2_intern <= IR_intrn(2 downto 0) when add_op | sub_op | mul_op,
-	                    IR_intrn(5 downto 3) when nand_op | store_op,
+	                    IR_intrn(5 downto 3) when nand_op | store_op | mov_op,
 	                    "000" when others;
 with IR_intrn(15 downto 9) select	
     rd_enable <= '1' when add_op | sub_op | mul_op | nand_op | shl_op | shr_op | test_op | out_op,
@@ -145,18 +147,51 @@ load_en <= '0';
 --reg file
 reg_file : register_file port map(rst => rst, clk => clk, rd_index1 => rd_index1_intern, 
 	       rd_index2 => rd_index2_intern, rd_data1 => rd_data1_out, rd_data2 => B_internal, wr_addr => wr_addr_ID_in ,
-	       wr_data => wr_data_ID_in, wr_enable => wr_enable_ID_in, ov_data => ov_data_ID_in,loadIMM=>loadIMM_ID_in,load_align => load_align_ID_in, ov_enable => ov_enable_ID_in);
+	       wr_data => wr_data_ID_in, wr_enable => wr_enable_ID_in, ov_data => ov_data_ID_in, R7_data =>r7_data , loadIMM=>loadIMM_ID_in, load_align => load_align_ID_in, ov_enable => ov_enable_ID_in);
 
+
+r7_data_ID_out<= r7_data;
 --MUX assignments--
 --m1 : MUX2_1 port map(x => rd_data1_out, y => zero, s => output_en, z => A_internal);
 --TODO: Forwarding from wr_data_ID_in to A/B_internal when possible
 
 --halt <= halt_intern;
 
-
 with IR_intrn(15 downto 9) select 
-    A_internal <=   INPUT_ID_in when IN_op,
-                    rd_data1_out when others;
+     A_internal <=   INPUT_ID_in when IN_op,
+                     rd_data1_out when others;
+
+
+
+A_sel <=    "011" when ((rd_index1_intern = "111") and (loadIMM_ID_in = '1') and load_align_ID_in = '0')
+            else "010" when ((rd_index1_intern = "111") and (loadIMM_ID_in = '1') and load_align_ID_in = '1')
+            else "001" when ((wr_enable_ID_in = '1') and (wr_addr_ID_in = rd_index1_intern))
+            else "000";
+            
+with A_sel select
+        A_data <=       wr_data_ID_in (15 downto 8) &  R7_data(7 downto 0)  when "011",
+                        R7_data(15 downto 8) & wr_data_ID_in (7 downto 0) when "010",
+                        wr_data_ID_in when "001",
+                        A_internal when others;
+
+
+B_sel <=    "011" when ((rd_index2_intern = "111") and (loadIMM_ID_in = '1') and load_align_ID_in = '0')
+            else "010" when ((rd_index2_intern = "111") and (loadIMM_ID_in = '1') and load_align_ID_in = '1')
+            else "001" when ((wr_enable_ID_in = '1') and (wr_addr_ID_in = rd_index2_intern))
+            else "000";
+            
+with B_sel select
+        B_data <=       wr_data_ID_in (15 downto 8) &  R7_data(7 downto 0)  when "011",
+                        R7_data(15 downto 8) & wr_data_ID_in (7 downto 0) when "010",
+                        wr_data_ID_in when "001",
+                        B_internal when others;                        
+ 
+                       
+--B_sel <= wr_addr_ID_in when wr_enable_ID_in = '1' else "000";                    
+--with B_sel select
+--        B_data <=       wr_data_ID_in when rd_index2_intern,
+--                        B_internal when others;
+
 
 	--latching		
 	process(clk)
@@ -184,28 +219,11 @@ with IR_intrn(15 downto 9) select
 		    elsif(halt = '1') then 
 		    -- do nothing
 		  	else
-		  	
-		  	--Forwarding through register file
-                if ((wr_addr_ID_in = rd_index1_intern) and wr_enable_ID_in = '1') then
-                    A_ID_out <= wr_data_ID_in;
-                else
-                   A_ID_out <= A_internal;
-                end if;
-                
-                if ((wr_addr_ID_in = rd_index2_intern) and wr_enable_ID_in = '1')then
-                   B_ID_out <= wr_data_ID_in;
-                else
-                    B_ID_out <= B_internal;
-                end if;
-                
-                
+                A_ID_out <= A_data;
+                B_ID_out <=B_data;                
                 IR_ID_out <= IR_intrn;
                 NPC_ID_out <= npc;
---			elsif (halt_intern='1') then
---		      A_ID_out <= (others=>'0');
---		      B_ID_out <= (others=>'0');
---		      IR_ID_out <= (others=>'0');
---			  NPC_ID_out <= npc;
+
 		  end if;
 		end if;
 	end process;

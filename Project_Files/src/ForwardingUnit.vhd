@@ -39,6 +39,8 @@ entity ForwardingUnit is
             Write_data_inF: in STD_LOGIC_VECTOR (15 downto 0);
             Write_addr_inF: in STD_LOGIC_VECTOR (2 downto 0);
             Write_en_inF: in STD_LOGIC;
+            loadIMM_inF: in std_logic;
+            R7_data_inF: in std_logic_vector(15 downto 0); 
             halt: out std_logic
            );
          
@@ -47,9 +49,9 @@ end ForwardingUnit;
 architecture Behavioral of ForwardingUnit is
 
 signal opEX,opMEM, opWB : std_logic_vector(6 downto 0);
-signal r1EX,r2EX, raEX, rbEX, rcEX, raWB, rbWB, rcWB, raMEM, rbMEM, rcMEM: std_logic_vector(2 downto 0);
-signal A_forward_MEM, B_forward_MEM, A_forward_WB, B_forward_WB: std_logic_vector(15 downto 0);
-signal sw_WB, en_REG, en_MEM, en_EX, en_WB, A_EX_sel, B_EX_sel : std_logic_vector(1 downto 0);
+signal r1EX,r2EX, raEX, rbEX, rcEX, raWB, rbWB, rcWB, raMEM, rbMEM, rcMEM, loadIMM_sw: std_logic_vector(2 downto 0);
+signal A_forward_MEM, B_forward_MEM, A_forward_WB, B_forward_WB, loadIMM_data, loadIMM_data_intr: std_logic_vector(15 downto 0);
+signal sw_WB, en_REG, en_MEM, en_EX, en_WB, A_EX_sel, B_EX_sel : std_logic_vector(2 downto 0);
 
 begin
 
@@ -66,13 +68,16 @@ rbEX <= IR_EX_inF(5 downto 3);
 rcEX <= IR_EX_inF(2 downto 0); 
 
 with opEX select
-    r1EX <=    raEX when store_op,
+    r1EX <=     raEX when store_op | mov_op | load_op,
                 rbEX when others;
 with opEX select
-    r2EX <=    rbEX when store_op,
+    r2EX <=    rbEX when store_op | mov_op | load_op,
                 rcEX when others;
 ----------------------------MEM DATA----------------------------
 opMEM <= IR_MEM_inF(15 downto 9);
+
+
+    
 --check that data in buffer is valid for forwarding
 with opMEM select
         en_MEM <=   (others=>'0') when nop_op | store_op,
@@ -87,8 +92,8 @@ rcMEM <= IR_MEM_inF(2 downto 0);
 opWB <= IR_WB_inF(15 downto 9);
 --check that data in buffer is valid for forwarding
 with opWB select
-        sw_WB <=    "01" when load_op,
-                    "00" when others;
+        sw_WB <=    "001" when load_op,
+                    "000" when others;
 
 with opWB select
         en_WB <=   (others=>'0') when nop_op | store_op,
@@ -106,40 +111,55 @@ with Write_en_inF select
                     (others=>'1') when others;
 
 
+--get load IMM_data
 
+with IR_WB_inF(15 downto 8) select
+    loadIMM_data_intr <=        IR_WB_inF(7 downto 0) & R7_data_inF(7 downto 0) when (loadIMM_op & '1'),
+                                R7_data_inF(15 downto 8) & IR_WB_inF(7 downto 0) when (loadIMM_op & '0'),
+                                R7_data_inF when others;
+
+with IR_MEM_inF(15 downto 8) select
+    loadIMM_data <=     IR_MEM_inF(7 downto 0) & loadIMM_data_intr(7 downto 0) when (loadIMM_op & '1'),
+                        loadIMM_data_intr(15 downto 8) & IR_MEM_inF(7 downto 0) when (loadIMM_op & '0'),
+                        (others=>'0') when others;
+
+
+loadIMM_sw <= "111" when ((loadIMM_inF = '1') or (opMEM = loadIMM_op) or (opWB = loadIMM_op)) else "000";
 
 
 ----------------------------FORWARDING----------------------------
 --determine if forwarding is available for A
 with r1EX select
-    A_EX_sel <=  
-                    (("10" and en_EX and en_WB) or sw_WB) when raWB, --this produces "11" or "10"
-                    ("01" and en_EX  and en_MEM) when raMEM ,
-                     "00" when others;
+    A_EX_sel <=     ("100" and loadIMM_sw) when ("111"),
+                    (("010" and en_EX and en_WB) or sw_WB) when raWB, --this produces "11" or "10"
+                    ("001" and en_EX  and en_MEM) when raMEM ,
+                     "000" when others;
  --determine if forwarding is available for B               
 with r2EX select
-    B_EX_sel <=   
-                    (("10" and en_EX and en_WB) or sw_WB) when raWB, --this produces "11" or "10"
-                    ("01" and en_EX and en_MEM) when raMEM ,
-                     "00" when others;
+    B_EX_sel <=     ("100" and loadIMM_sw) when ("111"),
+                    (("010" and en_EX and en_WB) or sw_WB) when raWB, --this produces "11" or "10"
+                    ("001" and en_EX and en_MEM) when raMEM ,
+                     "000" when others;
                 
 --Select which data to send to A
 with A_EX_sel select	
-    A_EX_inF <=     Memdata_WB_inF when "11",
-                    Result_WB_inF when "10",
-                    Result_MEM_inF when "01",
+    A_EX_inF <=     loadIMM_data when "100",
+                    Memdata_WB_inF when "011",
+                    Result_WB_inF when "010",
+                    Result_MEM_inF when "001",
                     A_ID_outF when others;
                     
 --Select which data to send to B           
 with B_EX_sel select	
-    B_EX_inF <=     Memdata_WB_inF when "11",
-                    Result_WB_inF when "10",
-                    Result_MEM_inF when "01",
+    B_EX_inF <=     loadIMM_data when "100",
+                    Memdata_WB_inF when "011",
+                    Result_WB_inF when "010",
+                    Result_MEM_inF when "001",
                     B_ID_outF when others;
 
 
-
-halt <= '1' when (opMEM = load_op) and ((B_EX_sel = "01") or (A_EX_sel = "01")) else '0';
-
+                    --A type after L-type                                               --loadIMM stall
+halt <= '1' when ((opMEM = load_op) and ((B_EX_sel = "01") or (A_EX_sel = "01"))) else '0';-- or ((loadImm_inF = '1') and (r1EX = "111" or r2EX = "111") ) else '0';
+--or loadIMM_inF='1'
      
 end Behavioral;
