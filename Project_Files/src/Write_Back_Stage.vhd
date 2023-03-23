@@ -53,12 +53,6 @@ begin
     --Latch Process
     process(clk)
     begin
---        if(rst = '1') then
---        --Reset
---            wr_data_WB_out <= (others=>'0');
---            wr_addr_WB_out <= (others=>'0');
---            ov_data_WB_out <= (others=>'0');
---        end if;    
         if(clk'event and clk = '1') then
             if(rst = '1') then
             --Reset
@@ -88,38 +82,31 @@ begin
     end process;
 
     --Output Signals - Combinational, Latched at Register File
-    --TODO: Clean this up, add some constants for the opcodes
-    wr_data_WB_out <=
-        "00000000" & IR(7 downto 0) when (IR(15 downto 9) = loadIMM_op) else  --Load lower (18) (TODO: Need to fix the zeros)
-       -- input_port when IR(15 downto 9) = in_op else                    --IN (33)
-        Mem when IR(15 downto 9) = load_op else 
-        Mem when IR(15 downto 9) = mov_op else  
-        Result when IR(15 downto 9) = in_op else                           --MOV (16)
-        (others=>'0') when IR(15 downto 9) = nop_op else                 --NOP, set all 0
-        Result;-- when IR(15 downto 9) = "" else                               --Result for the rest (TODO: May need to specify)
-        --(others=>'0'); 
-    wr_addr_WB_out <=
-        "111" when IR(15 downto 9) = loadIMM_op else                         --Load Imm (18) Load into R7
-        "111" when IR(15 downto 9) = "1000110" else                         --Branch Sub (R7 <= PC+1)
-        "000" when IR(15 downto 9) = nop_op else                         --NOP, set all 0
-        IR(8 downto 6);                                                     --LOAD, ALU ops (TODO: May need to specify)
+    with IR(15 downto 9) select
+        wr_addr_WB_out <=
+            "111" when loadIMM_op | br_sub_op,  --Load Imm (18) Load into R7
+            "000" when nop_op,                  --NOP, set all 0
+            IR(8 downto 6) when others;         --LOAD, ALU ops 
+                
+    with IR(15 downto 9) select
+        wr_enable_WB_out <=
+            '1' when pop_op | add_op | sub_op | mul_op | nand_op | 
+                     shl_op | shr_op | in_op | load_op | loadIMM_op | 
+                     mov_op | br_sub_op,            
+            '0' when others;
+            
+    with IR(15 downto 9) select
+        wr_data_WB_out <=
+            (others=>'0') when nop_op,                      --NOP, set all 0
+            "00000000" & IR(7 downto 0) when loadIMM_op,                    --Load lower (18)
+            input_port when in_op,                                          --IN (33)
+            Mem when load_op | mov_op | pop_op,                             --Mem accessed
+            ALU when others;                                      --ALU otherwise
+    
     ov_en_WB_out <= 
         '1' when IR(15 downto 9) = mul_op else   --MUL (3)
         '0';
-    wr_enable_WB_out <=
-        '1' when IR(15 downto 9) = add_op else   --ADD(1)
-        '1' when IR(15 downto 9) = sub_op else   --SUB(2)
-        '1' when IR(15 downto 9) = mul_op else   --MUL(3)
-        '1' when IR(15 downto 9) = nand_op else   --NAND(4)
-        '1' when IR(15 downto 9) = shl_op else   --SHL(5)
-        '1' when IR(15 downto 9) = shr_op else   --SHR(6)
-        '1' when IR(15 downto 9) = in_op else   --IN(33)
-        '1' when IR(15 downto 9) = load_op else   --LOAD(16)
-        '1' when IR(15 downto 9) = loadIMM_op else   --loadIMM_WB_out(18)
-        '1' when IR(15 downto 9) = MOV_op else   --MOV
-        '1' when IR(15 downto 9) = "1000110" else   --BR.SUB(70)
-        '0';
-        
+    
     loadIMM_WB_out <=    '1' when IR(15 downto 9) = loadIMM_op else '0';
     load_align_WB_out <= IR(8);
     ov_data_WB_out <= Overflow;

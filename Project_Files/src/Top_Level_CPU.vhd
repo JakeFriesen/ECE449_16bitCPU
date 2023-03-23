@@ -32,6 +32,11 @@ end Top_Level_CPU;
 
 architecture Behavioral of Top_Level_CPU is
 --Component declaration
+component my_D_FF is
+    Port ( clock_100MHz : in  STD_LOGIC;
+           reset        : in  STD_LOGIC;
+           Q            : out STD_LOGIC);
+end component my_D_FF;
 component Intruction_Fetch_Stage is
     Port ( 
           IR_IF_out : out STD_LOGIC_VECTOR (15 downto 0);
@@ -119,6 +124,7 @@ component Write_Back_Stage is
             memdata_WB_in : in STD_LOGIC_VECTOR (15 downto 0);
             IR_WB_in : in STD_LOGIC_VECTOR (15 downto 0);
             IN_PORT : in STD_LOGIC_VECTOR (15 downto 0);
+            OUT_PORT : out STD_LOGIC_VECTOR (15 downto 0);
             wr_data_WB_out : out STD_LOGIC_VECTOR (15 downto 0);
             wr_addr_WB_out : out STD_LOGIC_VECTOR (2 downto 0);
             wr_enable_WB_out : out std_logic;
@@ -176,6 +182,9 @@ signal IF_ID_IR, ID_EX_IR, EX_MEM_IR,  MEM_WB_IR: std_logic_vector(15 downto 0);
 signal WB_ID_wr_data, WB_ID_v_data, ID_EX_A, ID_EX_B: std_logic_vector(15 downto 0);
 signal EX_MEM_alu_res, EX_MEM_v_data, MEM_WB_mem_data, MEM_WB_alu, MEM_WB_v_data, EX_MEM_A, EX_MEM_B, R7_data : std_logic_vector(15 downto 0);
 signal IF_ID_NPC, IF_ID_INPUT, WB_IF_PC, ID_EX_NPC, MEM_IF_br_addr, EX_MEM_NPC : std_logic_vector(15 downto 0);
+signal WB_ID_wr_data, WB_ID_v_data, ID_EX_A, ID_EX_B: std_logic_vector(15 downto 0) := (others=>'0');
+signal EX_MEM_alu_res, EX_MEM_v_data, MEM_WB_mem_data, MEM_WB_alu, MEM_WB_v_data, EX_MEM_A, EX_MEM_B : std_logic_vector(15 downto 0);
+signal IF_ID_NPC, WB_IF_PC, ID_EX_NPC, MEM_IF_br_addr, EX_MEM_NPC : std_logic_vector(15 downto 0);
 signal MEM_IF_br, WB_ID_wr_en, WB_ID_v_en, EX_MEM_N_flag, EX_MEM_Z_flag, MEM_pipe_flush : std_logic;
 signal WB_ID_wr_addr : std_logic_vector(2 downto 0);
 signal WB_ID_loadimm, WB_ID_load_align: std_logic;
@@ -194,6 +203,11 @@ signal ram_wr_en, ram_ena, ram_enb, out_en : std_logic;
 signal halt : std_logic := '0';
 
 begin
+clk_divider : my_D_FF port map(
+    clock_100Mhz => clk_100MHz,
+    reset => rst,
+    Q => clk
+);
 IF_inst : Intruction_Fetch_Stage port map(
         clk=>clk, 
         rst=>rst, 
@@ -293,16 +307,17 @@ ov_data_WB_out=>WB_ID_v_data);
 
 
 RAM_inst : RAM port map (
-douta=>ram_dataa, 
-doutb=>ram_datab, 
-addra=>ram_addra, 
-addrb=>ram_addrb, 
-dina=>ram_dina,
- wr_en=>ram_wr_en, 
-ena=>ram_ena, 
-enb=>ram_enb, 
-clk=>clk, 
-rst=>rst);
+    douta=>ram_dataa, 
+    doutb=>ram_datab, 
+    addra=>ram_addra, 
+    addrb=>ram_addrb, 
+    dina=>ram_dina,
+     wr_en=>ram_wr_en, 
+    ena=>ram_ena, 
+    enb=>ram_enb, 
+    clk=>clk, 
+    rst=>rst
+);
 
 ForwardUnit_inst : ForwardingUnit port map(
 clk=>clk, 
@@ -333,8 +348,6 @@ ram_enb <= '1';
 --TODO: Need to Update the reset sequence
 rst <= reset_load or reset_execute;
 
---Grab Clock from Board
-clk <= clk_100MHz;
 
 
 

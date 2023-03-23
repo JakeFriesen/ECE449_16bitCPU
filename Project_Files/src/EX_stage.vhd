@@ -136,8 +136,8 @@ begin
             else
                 Result_EX_out <= result;
                 vdata_EX_out <= ALU_V_RESULT;
-                A_EX_out <= A_EX_in;
-                B_EX_out <= B_EX_in;
+                A_EX_out <= A_data;
+                B_EX_out <= B_data;
                 Z_EX_out <= z_output;
                 N_EX_out <= n_output;
                 IR_EX_out <= IR;

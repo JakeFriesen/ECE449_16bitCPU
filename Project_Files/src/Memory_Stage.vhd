@@ -31,10 +31,7 @@ entity Memory_Stage is
            clk, rst : in STD_LOGIC;
            branch : out STD_LOGIC;
            branch_addr : out STD_LOGIC_VECTOR (15 downto 0);
-        --    ram_wr : out STD_LOGIC;
            pipe_flush : out std_logic;
-        --    ram_addrb : out STD_LOGIC_VECTOR (15 downto 0);
-        --    ram_datab : in STD_LOGIC_VECTOR (15 downto 0);
            ram_wren_A: out std_logic;
            ram_en_A: out std_logic;
            ram_wrdata_A: out STD_LOGIC_VECTOR (15 downto 0);
@@ -102,42 +99,47 @@ begin
         end if;
     end process;
 
-    --Branch Choice - Combinational, not latched output
-    --This is very redundant, and could always output an address, but this will help to debug branching issues
-    branch_internal <=
-        '1' when IR(15 downto 9) = brr_op else                          --BRR (64)
-        '1' when (IR(15 downto 9) = brr_n_op and flags(1) = '1') else   --BRR.N (65)
-        '1' when (IR(15 downto 9) = brr_z_op and flags (0) = '1') else  --BRR.Z (66)
-        '1' when (IR(15 downto 9) = br_op) else                         --BR (67)
-        '1' when (IR(15 downto 9) = br_n_op and flags (1) = '1') else   --BR.N (68)
-        '1' when (IR(15 downto 9) = br_z_op and flags (0) = '1') else   --BR.Z (69)
-        '1' when (IR(15 downto 9) = br_sub_op) else                     --BR.SUB (70)
-        '1' when (IR(15 downto 9) = return_op) else                     --RETURN (71)
-        '0';                                                            --Don't branch any other time
-    --Branch Address Choice - Combinational, not banched output.
-    --This is very redundant, and could always output an address, but this will help to debug branching issues
-    branch_addr <=
-        Result when (IR(15 downto 9) = brr_op) else                     --BRR (64)
-        Result when (IR(15 downto 9) = "1000001" and flags(1) = '1') else  --BRR.N (65)
-        Result when (IR(15 downto 9) = "1000010" and flags (0) = '1') else --BRR.Z (66)
-        Result when (IR(15 downto 9) = "1000011") else                     --BR (67)
-        Result when (IR(15 downto 9) = "1000100" and flags (1) = '1') else --BR.N (68)
-        Result when (IR(15 downto 9) = "1000101" and flags (0) = '1') else --BR.Z (69)
-        Result when (IR(15 downto 9) = "1000110") else                     --BR.SUB (70)
-        Result when (IR(15 downto 9) = "1000111") else                     --RETURN (71)
-        (others => '0');                                                --Keep at 0 any other time
+    --Branch Choice
+    process(IR(15 downto 9))
+    begin
+        case(IR(15 downto 9)) is
+            when brr_op | br_op | br_sub_op | return_op =>
+                branch_internal <= '1';
+                branch_addr <= ALU;
+            when brr_n_op | br_n_op =>
+                if(flags(1) = '1') then
+                    branch_internal <= '1';
+                    branch_addr <= ALU;
+                else
+                    branch_internal <= '0';
+                    branch_addr <= (others => '0'); 
+                end if;
+            when brr_z_op | br_z_op =>
+                if(flags(0) = '1') then
+                    branch_internal <= '1';
+                    branch_addr <= ALU;
+                else
+                    branch_internal <= '0';
+                    branch_addr <= (others => '0'); 
+                end if;
+            when others =>
+                branch_internal <= '0';
+                branch_addr <= (others => '0');            
+        end case;    
+    end process;
     
     pipe_flush <= branch_internal;
     branch <= branch_internal;
 
     --RAM Access
     with IR_MEM_in(15 downto 9) Select
-        ram_wren_A <=   '1' when store_op, 
-                    '0' when others;  --STR (17)
+        ram_wren_A <=   '1' when store_op | push_op, --STR (17), PUSH (96)
+                    '0' when others;  
                     
     with IR_MEM_in(15 downto 9) Select
-         ram_en_A <=  '1' when store_op | load_op,
-                     '0' when others;  --STR (17)
+         ram_en_A <=  '1' when store_op | load_op | push_op | pop_op,
+                     '0' when others;  
+    
     ram_addr_A <= A_MEM_in(15 downto 0);
     ram_wrdata_A <=  B_MEM_in;
     
