@@ -13,14 +13,14 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="34411160238fs"></ZoomEndTime>
-      <Cursor1Time time="11131406000fs"></Cursor1Time>
+      <ZoomEndTime time="33713273993fs"></ZoomEndTime>
+      <Cursor1Time time="12293535000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="189"></NameColumnWidth>
-      <ValueColumnWidth column_width="156"></ValueColumnWidth>
+      <ValueColumnWidth column_width="152"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="14" />
+   <WVObjectSize size="13" />
    <wvobject fp_name="/Top_Level_CPU_TB/rst" type="logic">
       <obj_property name="ElementShortName">rst</obj_property>
       <obj_property name="ObjectShortName">rst</obj_property>
@@ -29,13 +29,10 @@
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
    </wvobject>
-   <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/R7_data_ID_out" type="array">
-      <obj_property name="ElementShortName">R7_data_ID_out[15:0]</obj_property>
-      <obj_property name="ObjectShortName">R7_data_ID_out[15:0]</obj_property>
-   </wvobject>
    <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/reg_file/reg_file" type="array">
       <obj_property name="ElementShortName">reg_file[0:7][15:0]</obj_property>
       <obj_property name="ObjectShortName">reg_file[0:7][15:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
    </wvobject>
    <wvobject fp_name="/Top_Level_CPU_TB/in_port" type="array">
       <obj_property name="ElementShortName">in_port[15:0]</obj_property>
@@ -160,17 +157,10 @@
    <wvobject fp_name="group1107" type="group">
       <obj_property name="label">IF</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/IF_inst/halt" type="logic">
          <obj_property name="ElementShortName">halt</obj_property>
          <obj_property name="ObjectShortName">halt</obj_property>
-      </wvobject>
-      <wvobject fp_name="/Top_Level_CPU_TB/CPU/IF_inst/IR_IF_out" type="array">
-         <obj_property name="ElementShortName">IR_IF_out[15:0]</obj_property>
-         <obj_property name="ObjectShortName">IR_IF_out[15:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/Top_Level_CPU_TB/CPU/IF_inst/ram_data_B" type="array">
-         <obj_property name="ElementShortName">ram_data_B[15:0]</obj_property>
-         <obj_property name="ObjectShortName">ram_data_B[15:0]</obj_property>
       </wvobject>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/IF_inst/instr_data" type="array">
          <obj_property name="ElementShortName">instr_data[15:0]</obj_property>
@@ -188,6 +178,7 @@
    <wvobject fp_name="group1109" type="group">
       <obj_property name="label">ID</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/IR_ID_in" type="array">
          <obj_property name="ElementShortName">IR_ID_in[15:0]</obj_property>
          <obj_property name="ObjectShortName">IR_ID_in[15:0]</obj_property>
@@ -199,6 +190,14 @@
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/B_ID_out" type="array">
          <obj_property name="ElementShortName">B_ID_out[15:0]</obj_property>
          <obj_property name="ObjectShortName">B_ID_out[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/A_sel" type="array">
+         <obj_property name="ElementShortName">A_sel[2:0]</obj_property>
+         <obj_property name="ObjectShortName">A_sel[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/B_sel" type="array">
+         <obj_property name="ElementShortName">B_sel[2:0]</obj_property>
+         <obj_property name="ObjectShortName">B_sel[2:0]</obj_property>
       </wvobject>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/wr_data_ID_in" type="array">
          <obj_property name="ElementShortName">wr_data_ID_in[15:0]</obj_property>
@@ -216,7 +215,6 @@
    <wvobject fp_name="group971" type="group">
       <obj_property name="label">EX</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/IR_EX_in" type="array">
          <obj_property name="ElementShortName">IR_EX_in[15:0]</obj_property>
          <obj_property name="ObjectShortName">IR_EX_in[15:0]</obj_property>
@@ -261,7 +259,6 @@
    <wvobject fp_name="group970" type="group">
       <obj_property name="label">MEM</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/MEM_inst/IR_MEM_in" type="array">
          <obj_property name="ElementShortName">IR_MEM_in[15:0]</obj_property>
          <obj_property name="ObjectShortName">IR_MEM_in[15:0]</obj_property>
@@ -290,7 +287,6 @@
    <wvobject fp_name="group967" type="group">
       <obj_property name="label">WB</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/WB_inst/wr_data_WB_out" type="array">
          <obj_property name="ElementShortName">wr_data_WB_out[15:0]</obj_property>
          <obj_property name="ObjectShortName">wr_data_WB_out[15:0]</obj_property>
@@ -327,7 +323,6 @@
    <wvobject fp_name="group1117" type="group">
       <obj_property name="label">FU</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/IR_EX_inF" type="array">
          <obj_property name="ElementShortName">IR_EX_inF[15:0]</obj_property>
          <obj_property name="ObjectShortName">IR_EX_inF[15:0]</obj_property>

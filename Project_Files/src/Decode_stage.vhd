@@ -165,7 +165,7 @@ with IR_intrn(15 downto 9) select
 
 A_sel <=    "011" when ((rd_index1_intern = "111") and (loadIMM_ID_in = '1') and load_align_ID_in = '0')
             else "010" when ((rd_index1_intern = "111") and (loadIMM_ID_in = '1') and load_align_ID_in = '1')
-            else "001" when ((wr_enable_ID_in = '1') and (wr_addr_ID_in = rd_index1_intern))
+            else "001" when ((wr_enable_ID_in = '1') and (wr_addr_ID_in = rd_index1_intern) and not(IR_intrn(15 downto 9) = IN_op))
             else "000";
             
 with A_sel select
