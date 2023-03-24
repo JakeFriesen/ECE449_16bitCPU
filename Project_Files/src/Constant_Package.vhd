@@ -63,6 +63,9 @@ package Constant_Package is
     constant load_sp_op : std_logic_vector(6 downto 0) := "1100010";        --LOAD.SP (98)
     constant rti_op : std_logic_vector(6 downto 0) := "1100011";        --RTI (99)    
     
+    constant reset_load_vector : std_logic_vector (15 downto 0) := x"0002";
+    constant reset_execute_vector : std_logic_vector (15 downto 0) := x"0000";
+    constant stack_address : std_logic_vector (15 downto 0) := x"07FF";
 end package Constant_Package;
 
 package body Constant_Package is

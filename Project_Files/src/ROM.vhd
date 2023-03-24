@@ -28,7 +28,7 @@ use xpm.vcomponents.all;
 --use UNISIM.VComponents.all;
 
 entity ROM is
-    Port ( addr : in STD_LOGIC_VECTOR (5 downto 0);
+    Port ( addr : in STD_LOGIC_VECTOR (15 downto 0);
            clk : in std_logic;
            rst : in std_logic;
            en : in std_logic;
@@ -41,16 +41,16 @@ architecture Behavioral of ROM is
         injectdbiterra, injectsbiterra, 
         regcea, rsta, sleep : std_logic;
     signal douta : std_logic_vector(15 downto 0);
-    signal addra : std_logic_vector(5 downto 0);
+    signal addra : std_logic_vector(15 downto 0);
 begin
 -- xpm_memory_sprom: Single Port ROM
 -- Xilinx Parameterized Macro, version 2018.3
 xpm_memory_sprom_inst : xpm_memory_sprom
 generic map (
- ADDR_WIDTH_A => 6,             -- DECIMAL
+ ADDR_WIDTH_A => 16,             -- DECIMAL
  AUTO_SLEEP_TIME => 0,          -- DECIMAL
  ECC_MODE => "no_ecc",          -- String
- MEMORY_INIT_FILE => "ROM_Test.mem",    -- String
+ MEMORY_INIT_FILE => "ROM.mem",    -- String
  MEMORY_INIT_PARAM => "",      -- String
  MEMORY_OPTIMIZATION => "true", -- String
  MEMORY_PRIMITIVE => "auto",    -- String

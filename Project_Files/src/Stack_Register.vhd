@@ -43,7 +43,7 @@ entity Stack_Register is
 end Stack_Register;
 
 architecture Behavioral of Stack_Register is
-    signal stack_pointer_internal, next_stack_pointer, stack_result, stack_out : std_logic_vector (15 downto 0) := x"0100";
+    signal stack_pointer_internal, next_stack_pointer, stack_result, stack_out : std_logic_vector (15 downto 0) := stack_address;
 --    signal next_stack_pointer : std_logic_vector (15 downto 0) := x"0100";
     
 begin

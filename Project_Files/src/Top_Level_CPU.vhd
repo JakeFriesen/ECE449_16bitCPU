@@ -38,7 +38,9 @@ component my_D_FF is
            Q            : out STD_LOGIC);
 end component my_D_FF;
 component Intruction_Fetch_Stage is
-    Port ( clk,rst, halt : in STD_LOGIC;
+    Port ( clk, halt : in STD_LOGIC;
+           reset_load : in STD_LOGIC;
+           reset_execute : in STD_LOGIC;
            IR_IF_out : out STD_LOGIC_VECTOR (15 downto 0);
            NPC_IF_out : out STD_LOGIC_VECTOR (15 downto 0);
            PC_in : in STD_LOGIC_VECTOR (15 downto 0);
@@ -134,7 +136,13 @@ component RAM is
             ena : in std_logic;
             enb : in std_logic);
 end component RAM;
-
+component ROM is
+    Port ( addr : in STD_LOGIC_VECTOR (15 downto 0);
+           clk : in std_logic;
+           rst : in std_logic;
+           en : in std_logic;
+           data : out STD_LOGIC_VECTOR (15 downto 0));
+end component ROM;
 --clk rst
 signal clk, rst : std_logic := '0';
 
@@ -148,10 +156,10 @@ signal WB_ID_wr_addr : std_logic_vector(2 downto 0);
 signal WB_ID_loadimm, WB_ID_load_align: std_logic;
 
 
---RAM intermediate Signals
-signal ram_addra, ram_addrb : std_logic_vector(15 downto 0);
-signal ram_dataa, ram_datab, ram_dina : std_logic_vector(15 downto 0);
-signal ram_wr_en, ram_ena, ram_enb, out_en : std_logic;
+--RAM, ROM intermediate Signals
+signal ram_addra, ram_addrb, mem_addrb: std_logic_vector(15 downto 0);
+signal ram_dataa, ram_datab, mem_datab, ram_dina, rom_addr, rom_data : std_logic_vector(15 downto 0);
+signal ram_wr_en, ram_ena, ram_enb, out_en, rom_en : std_logic;
 
 -- Halt for RAW
 signal halt : std_logic := '0';
@@ -164,13 +172,14 @@ clk_divider : my_D_FF port map(
 );
 IF_inst : Intruction_Fetch_Stage port map(
     clk=>clk, 
-    rst=>rst, 
+    reset_load => reset_load,
+    reset_execute => reset_execute,
     halt=>halt,
     IR_IF_out=>IF_ID_IR, 
     NPC_IF_out=>IF_ID_NPC, 
     PC_in=>MEM_IF_br_addr, 
-    ram_addr_B=>ram_addrb, 
-    ram_data_B=>ram_datab, 
+    ram_addr_B=>mem_addrb, 
+    ram_data_B=>mem_datab, 
     BR_IF_in=>MEM_IF_br
 );
                                             
@@ -269,14 +278,27 @@ RAM_inst : RAM port map (
     clk=>clk, 
     rst=>rst
 );
+ROM_inst : ROM port map (
+    addr => rom_addr,
+    clk => clk,
+    rst => rst,
+    en => rom_en,
+    data => rom_data
+);
 
 
 
---TODO: Control RAM enable signal somewhere else
-ram_enb <= '1';
 --TODO: Need to Update the reset sequence
 rst <= reset_load or reset_execute;
-
+-- RAM(0x0400-0x07FF) and ROM(0x0000-0x03FF) addressing
+rom_addr <= "000000" & mem_addrb(9 downto 0);
+ram_addrb <= "000000" & mem_addrb(9 downto 0);
+-- Switch on 10th bit 
+ram_enb <= mem_addrb(10);
+rom_en <= not mem_addrb(10);
+-- RAM and ROM data
+mem_datab <= ram_datab when mem_addrb(10) = '1' else
+             rom_data;
 
 
 

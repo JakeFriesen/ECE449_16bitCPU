@@ -29,7 +29,8 @@ entity Intruction_Fetch_Stage is
            IR_IF_out : out STD_LOGIC_VECTOR (15 downto 0);
            NPC_IF_out : out STD_LOGIC_VECTOR (15 downto 0);
            clk : in STD_LOGIC;
-           rst : in STD_LOGIC;
+           reset_load : in STD_LOGIC;
+           reset_execute : in STD_LOGIC;
            PC_in : in STD_LOGIC_VECTOR (15 downto 0);
            ram_addr_B : out std_logic_vector (15 downto 0);
            ram_data_B : in std_logic_vector (15 downto 0);
@@ -52,7 +53,7 @@ begin
     begin
        
         if(rising_edge(clk)) then
-            if(rst = '1') then
+            if(reset_load = '1') then
 --                branch <= '0';
 --                PC_new <= (others=>'0');
             else
@@ -62,10 +63,16 @@ begin
             end if;
         end if;
         if(falling_edge(clk)) then
-            if (rst='1') then
+            if (reset_load='1') then
                 IR_IF_out <= (others=>'0');
                 NPC_IF_out <= (others=>'0');
-                program_counter <= (others=>'0');
+                program_counter <= reset_load_vector;
+                branch <= '0';
+                PC_new <= (others=>'0');
+            elsif (reset_execute = '1') then
+                IR_IF_out <= (others=>'0');
+                NPC_IF_out <= (others=>'0');
+                program_counter <= reset_execute_vector;
                 branch <= '0';
                 PC_new <= (others=>'0');
             else
