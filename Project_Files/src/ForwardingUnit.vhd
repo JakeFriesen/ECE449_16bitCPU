@@ -51,7 +51,7 @@ architecture Behavioral of ForwardingUnit is
 signal opEX,opMEM, opWB : std_logic_vector(6 downto 0);
 signal r1EX,r2EX, raEX, rbEX, rcEX, raWB, rbWB, rcWB, raMEM, rbMEM, rcMEM, loadIMM_sw: std_logic_vector(2 downto 0);
 signal A_forward_MEM, B_forward_MEM, A_forward_WB, B_forward_WB, loadIMM_data, loadIMM_data_intr: std_logic_vector(15 downto 0);
-signal sw_WB, en_REG, en_MEM, en_EX, en_WB, A_EX_sel, B_EX_sel : std_logic_vector(2 downto 0);
+signal sw_WB, en_REG, en_MEM, en_EX, en_WB, A_EX_sel, B_EX_sel, case2 : std_logic_vector(2 downto 0);
 
 begin
 
@@ -129,17 +129,17 @@ loadIMM_sw <= "111" when ((loadIMM_inF = '1') or (opMEM = loadIMM_op) or (opWB =
 
 ----------------------------FORWARDING----------------------------
 --determine if forwarding is available for A
-with r1EX select
-    A_EX_sel <=     ("100" and loadIMM_sw) when ("111"),
-                    (("010" and en_EX and en_WB) or sw_WB) when raWB, --this produces "11" or "10"
-                    ("001" and en_EX  and en_MEM) when raMEM ,
-                     "000" when others;
- --determine if forwarding is available for B               
-with r2EX select
-    B_EX_sel <=     ("100" and loadIMM_sw) when ("111"),
-                    (("010" and en_EX and en_WB) or sw_WB) when raWB, --this produces "11" or "10"
-                    ("001" and en_EX and en_MEM) when raMEM ,
-                     "000" when others;
+
+
+A_EX_sel <= ("100" and loadIMM_sw) when r1EX = "111" else
+            (("010" and en_EX and en_WB) or sw_WB) when r1EX = raWB else
+            ("001" and en_EX  and en_MEM) when r1EX = raMEM else
+            "000"; 
+            
+B_EX_sel <= ("100" and loadIMM_sw) when r2EX = "111" else
+            (("010" and en_EX and en_WB) or sw_WB) when r2EX = raWB else
+            ("001" and en_EX  and en_MEM) when r2EX = raMEM else
+            "000"; 
                 
 --Select which data to send to A
 with A_EX_sel select	
