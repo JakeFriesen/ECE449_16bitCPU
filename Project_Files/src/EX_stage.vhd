@@ -33,9 +33,7 @@ entity EX_stage is
            vdata_EX_out : out STD_LOGIC_VECTOR (15 downto 0);
            A_EX_out : out STD_LOGIC_VECTOR (15 downto 0);
            B_EX_out : out STD_LOGIC_VECTOR (15 downto 0);
-         --  O_Z : out STD_LOGIC;
-          -- O_N : out STD_LOGIC;
-         --  O_V : out STD_LOGIC;
+
            Z_EX_out : out std_logic;
            N_EX_out: out std_logic;
            IR_EX_out: out std_logic_vector(15 downto 0);
@@ -70,7 +68,7 @@ signal A_data: std_logic_vector(15 downto 0);
 signal NPC : std_logic_vector (15 downto 0);
 signal disp_l, disp_s : std_logic_vector (15 downto 0);
 signal data_sel: std_logic := '0';    
-signal B_data, imm_data: std_logic_vector(15 downto 0) := (others=>'0');
+signal B_data, imm_data, sign_ext : std_logic_vector(15 downto 0) := (others=>'0');
 signal OPCODE: std_logic_vector(6 downto 0) := (others=>'0');
 signal result_sel,  output_sel: std_logic := '0';
 
@@ -98,30 +96,14 @@ begin
                 B_data <= (others=>'0');
                 OPCODE <= (others=>'0');
                 NPC <= (others=>'0');
-  --          elsif (halt = '1') then 
+            elsif (halt = '1') then 
                 -- Do not update anything
             else
                 IR <= IR_EX_in;
-                --ALU_OP <= IR_EX_in(11 downto 9);
                 A_data <= A_EX_in;          
                 B_data <= B_EX_in;
                 OPCODE<= IR_EX_in(15 downto 9);
                 NPC <= NPC_EX_in;
-                --Sign extend immediate
-                case OPCODE is
-                    when brr_op | brr_n_op | brr_z_op =>
-                       if(IR(8) = '0') then
-                             imm_data <= "0000000" & IR(8 downto 0);
-                        else
-                             imm_data <= "1111111" & IR(8 downto 0);
-                        end if;
-                    when others =>
-                        if(IR_EX_in(5) = '1') then
-                            imm_data <= "1111111111" & IR_EX_in(5 downto 0);
-                        else
-                            imm_data <= "0000000000" & IR_EX_in(5 downto 0);
-                        end if; 
-                  end case;
             end if;
         end if;
         --Negative Latch
@@ -162,6 +144,13 @@ begin
     
     --Push the next program counter + 1 into the ALU result when branching to subroutine
     --Put R7 into the ALU result when returning from subroutine
+    sign_ext <= (others=>IR(8)) when (OPCODE =brr_op) or (OPCODE =brr_n_op) or (OPCODE =brr_z_op) 
+                else (others=>IR(5));
+    
+    with OPCODE select
+            imm_data <=     sign_ext(15 downto 9) & IR(8 downto 0) when brr_op | brr_n_op | brr_z_op,
+                            sign_ext(15 downto 6) & IR(5 downto 0) when others;
+    
     with OPCODE select
         result <=   A_data when return_op | in_op,
                     ALU_result when others;

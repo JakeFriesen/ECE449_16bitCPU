@@ -62,28 +62,42 @@ process begin
     wait until clk = '1';
     wait until clk = '0';
     rst <= '0';
- 
+    wait for 6us;
     wait until clk = '1';
     wait until clk = '0';
-
+    wait for 6us;
     in_port <= x"0002"; --INPUT R0 <= 2
+    wait for 5us; 
     wait until clk = '1';
     wait until clk = '0';
     in_port <= x"0003"; --INPUT R1 <= 3
+    wait for 6us;
     wait until clk = '1';
     wait until clk = '0';
     
     in_port <= x"0001"; --INPUT R0 <= 3
+    wait for 6us;
     wait until clk = '1';
     wait until clk = '0';
     in_port <= x"0005"; --INPUT R1 <= 4
+    wait for 6us;
     wait until clk = '1';
     wait until clk = '0';
     
-    in_port <= x"1000"; --INPUT R0 <= 5
+    in_port <= x"0000"; --INPUT R0 <= 5
+    wait for 6us;
     wait until clk = '1';
     wait until clk = '0';
-    in_port <= x"1000"; --INPUT R1 <= 6
+    in_port <= x"0001"; --INPUT R1 <= 6
+    wait for 6us;
+    wait until clk = '1';
+    wait until clk = '0';
+    in_port <= x"0005"; --INPUT R1 <= 6
+    wait for 6us;
+    wait until clk = '1';
+    wait until clk = '0';
+    in_port <= x"0000"; --INPUT R1 <= 6
+    wait for 6us;
     wait until clk = '1';
     wait until clk = '0';
     

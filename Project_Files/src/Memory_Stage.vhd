@@ -49,7 +49,7 @@ architecture Behavioral of Memory_Stage is
     signal IR, Result, Overflow, ram_output, NPC : std_logic_vector (15 downto 0);
     signal flags : std_logic_vector (1 downto 0);
     signal branch_internal : std_logic;
-
+    signal OPCODE: std_logic_vector(6 downto 0);
 begin
     --Latch Process
     process(clk)
@@ -99,17 +99,19 @@ begin
         end if;
     end process;
 
+
+OPCODE<= IR(15 downto 9);
     --Branch Choice
-    process(IR(15 downto 9))
+    process(IR(15 downto 9), clk)
     begin
         case(IR(15 downto 9)) is
             when brr_op | br_op | br_sub_op | return_op =>
                 branch_internal <= '1';
-                branch_addr <= ALU;
+                branch_addr <= Result;
             when brr_n_op | br_n_op =>
                 if(flags(1) = '1') then
                     branch_internal <= '1';
-                    branch_addr <= ALU;
+                    branch_addr <= Result;
                 else
                     branch_internal <= '0';
                     branch_addr <= (others => '0'); 
@@ -117,7 +119,7 @@ begin
             when brr_z_op | br_z_op =>
                 if(flags(0) = '1') then
                     branch_internal <= '1';
-                    branch_addr <= ALU;
+                    branch_addr <= Result;
                 else
                     branch_internal <= '0';
                     branch_addr <= (others => '0'); 
@@ -127,6 +129,8 @@ begin
                 branch_addr <= (others => '0');            
         end case;    
     end process;
+    
+    
     
     pipe_flush <= branch_internal;
     branch <= branch_internal;

@@ -158,8 +158,7 @@ with B_EX_sel select
                     B_ID_outF when others;
 
 
-                    --A type after L-type                                               --loadIMM stall
-halt <= '1' when ((opMEM = load_op) and ((B_EX_sel = "01") or (A_EX_sel = "01"))) else '0';-- or ((loadImm_inF = '1') and (r1EX = "111" or r2EX = "111") ) else '0';
---or loadIMM_inF='1'
+                    --A type after L-type                                   
+halt <= '1' when ((opMEM = load_op) and ((B_EX_sel = "01") or (A_EX_sel = "01"))) else '0';
      
 end Behavioral;
