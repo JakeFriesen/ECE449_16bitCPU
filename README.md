@@ -34,7 +34,7 @@
     - [X] Merge Matt's cleaned branch (issues with file tracking? git mv?)
     - [ ] Documentation (header comments, general comments, README description)
     - [ ] Timing considerations - Look into timing warnings, clock results when possible.
-- [ ] Bootloader
+- [ ] Bootloader (Jake)
     - Reset_load and reset_execute signals
     - ROM integration
     - Connect to other board to load programs

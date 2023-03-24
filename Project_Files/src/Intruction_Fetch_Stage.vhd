@@ -63,6 +63,7 @@ begin
         end if;
         if(falling_edge(clk)) then
             if (rst='1') then
+                --put reset_load and reset_execute here
                 IR_IF_out <= (others=>'0');
                 NPC_IF_out <= (others=>'0');
                 program_counter <= (others=>'0');
