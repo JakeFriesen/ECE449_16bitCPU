@@ -34,7 +34,9 @@ entity Intruction_Fetch_Stage is
            ram_addr_B : out std_logic_vector (15 downto 0);
            ram_data_B : in std_logic_vector (15 downto 0);
            halt : in STD_LOGIC;
-           BR_IF_in : in STD_LOGIC);
+           BR_IF_in : in STD_LOGIC;
+           INPUT_IF_out: out std_logic_vector (15 downto 0);
+           INPORT_IF_in: in std_logic_vector (15 downto 0));
            
 end Intruction_Fetch_Stage;
 
@@ -53,12 +55,7 @@ begin
        
         if(rising_edge(clk)) then
             if(rst = '1') then
---                branch <= '0';
---                PC_new <= (others=>'0');
-            else
-                --Latch Incoming signals
---                branch <= br_in;
---                PC_new <= PC_in;
+            -- do nothing???
             end if;
         end if;
         if(falling_edge(clk)) then
@@ -68,20 +65,21 @@ begin
                 program_counter <= (others=>'0');
                 branch <= '0';
                 PC_new <= (others=>'0');
+            elsif(halt = '1') then 
+                -- Do not update signals; repeat instruction
+                      instr_data <= instr_data;
+                      IR_IF_out <= instr_data;
             else
             --Latch Outgoing signals
-                
-                if(halt = '1') then
-                    instr_data <= instr_data;
-                    IR_IF_out <= instr_data;
-                else
-                    instr_data <= ram_data_B;
-                    IR_IF_out <= ram_data_B;
-                end if;  
+            
+                instr_data <= ram_data_B;
+                IR_IF_out <= ram_data_B;
+                INPUT_IF_out <= INPORT_IF_in;  
                 NPC_IF_out <= program_counter;   
                 program_counter <= next_counter;
                 branch <= br_IF_in;
-                PC_new <= PC_in;                
+                PC_new <= PC_in; 
+                               
             end if;
         end if;
     end process;
@@ -90,10 +88,12 @@ begin
     ram_addr_B <= program_counter;
 --    instr_data <= instr_data when halt = '1' else ram_data_B;
     
-    
+
     --Program Counter Update
     next_counter <= PC_new when branch = '1' else
                     program_counter when halt = '1' else
                     program_counter + 1;
 
+    --INPUT
+    
 end Behavioral;

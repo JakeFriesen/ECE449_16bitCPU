@@ -81,7 +81,7 @@ raw2 <= '1' when wb_tracker(to_integer(unsigned(rd_index2))) > 0 else
 --    '0';
 
 halt_intern <= (raw1 or raw2) and rd_enable;    
-
-halt <= halt_intern;
+halt<='0';
+--halt <= halt_intern;
     
 end Behavioral;

@@ -19,6 +19,7 @@ entity register_file is
         wr_enable: in std_logic;
         --overflow signals
         ov_data: in std_logic_vector(15 downto 0);
+        R7_data: out std_logic_vector(15 downto 0);
         loadIMM: in std_logic;
         load_align: in std_logic;
         ov_enable: in std_logic);
@@ -89,5 +90,6 @@ reg_file(4) when(rd_index2="100") else
 reg_file(5) when(rd_index2="101") else
 reg_file(6) when(rd_index2="110") else reg_file(7);
 
+ R7_data <= reg_file(7);
 
 end behavioural;
