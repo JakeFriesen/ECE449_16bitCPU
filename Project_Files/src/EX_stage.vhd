@@ -174,10 +174,13 @@ begin
                 --Set op to add or subtract
                 ALU_OP <= "001";
                 --Sign Extend the Immediate value
+                -- shifted left by 1 for x2
                 if(IR(8) = '0') then
-                    ALU_B <= "0000000" & IR(8 downto 0);
+                    ALU_B <= "000000" & IR(8 downto 0) & '0';
+--                    ALU_B <= "0000000" & IR(8 downto 0);
                 else
-                    ALU_B <= "1111111" & IR(8 downto 0);
+                    ALU_B <= "111111" & IR(8 downto 0) & '0';
+--                    ALU_B <= "1111111" & IR(8 downto 0);
                 end if;
             when br_op | br_n_op | br_z_op | br_sub_op =>
             --Register Relative Branches
@@ -185,9 +188,11 @@ begin
                 ALU_OP <= "001";
                 --Sign Extend the Immediate value
                 if(IR(5) = '0') then
-                    ALU_B <= "0000000000" & IR(5 downto 0);
+                    ALU_B <= "000000000" & IR(5 downto 0)  & '0';
+--                    ALU_B <= "0000000000" & IR(5 downto 0);
                 else
-                    ALU_B <= "1111111111" & IR(5 downto 0);
+                    ALU_B <= "111111111" & IR(5 downto 0) & '0';
+--                    ALU_B <= "1111111111" & IR(5 downto 0);
                 end if;
             when others =>
             --Any other operations

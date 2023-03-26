@@ -67,12 +67,12 @@ begin
 -- SP otherwise (no change)
 SP_out <= stack_pointer_internal when halt = '1' else
           stack_pointer_internal when IR_in(15 downto 9) = push_op else
-          stack_pointer_internal + 1 when IR_in(15 downto 9) = pop_op else
+          stack_pointer_internal + instr_increment when IR_in(15 downto 9) = pop_op else
           stack_pointer_internal;
 
 next_stack_pointer <= stack_pointer_internal when halt = '1' else
-                      stack_pointer_internal - 1 when IR_in(15 downto 9) = push_op else
-                      stack_pointer_internal + 1 when IR_in(15 downto 9) = pop_op else
+                      stack_pointer_internal - instr_increment when IR_in(15 downto 9) = push_op else
+                      stack_pointer_internal + instr_increment when IR_in(15 downto 9) = pop_op else
                       stack_pointer_internal;
 
 end Behavioral;

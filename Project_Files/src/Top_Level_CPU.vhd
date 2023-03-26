@@ -291,8 +291,9 @@ ROM_inst : ROM port map (
 --TODO: Need to Update the reset sequence
 rst <= reset_load or reset_execute;
 -- RAM(0x0400-0x07FF) and ROM(0x0000-0x03FF) addressing
-rom_addr <= "000000" & mem_addrb(9 downto 0);
-ram_addrb <= "000000" & mem_addrb(9 downto 0);
+-- downto 1 because ROM/RAM are word addressed
+rom_addr <= "0000000" & mem_addrb(9 downto 1);
+ram_addrb <= "0000000" & mem_addrb(9 downto 1);
 -- Switch on 10th bit 
 ram_enb <= mem_addrb(10);
 rom_en <= not mem_addrb(10);

@@ -66,6 +66,9 @@ package Constant_Package is
     constant reset_load_vector : std_logic_vector (15 downto 0) := x"0002";
     constant reset_execute_vector : std_logic_vector (15 downto 0) := x"0000";
     constant stack_address : std_logic_vector (15 downto 0) := x"07FF";
+    
+    constant instr_increment : std_logic_vector (15 downto 0) := x"0002";   --Counter increment
+    
 end package Constant_Package;
 
 package body Constant_Package is

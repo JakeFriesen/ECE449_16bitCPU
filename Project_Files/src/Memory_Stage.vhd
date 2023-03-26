@@ -83,7 +83,7 @@ begin
             vdata_MEM_out <= Overflow;
             IR_MEM_out <= IR;
             if( IR(15 downto 9) = br_sub_op) then
-                Result_MEM_out <= NPC + 1;
+                Result_MEM_out <= NPC + instr_increment;
             else
                 Result_MEM_out <= ALU;
             end if;

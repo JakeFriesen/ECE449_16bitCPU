@@ -125,7 +125,7 @@ stack_reg : Stack_Register port map (
 );                    
 -- RAW
 raw_handler : RAW port map(
-    rst=>rst, 
+    rst=>br_clear_in, 
     clk=>clk, 
     wr_en=>wr_enable_ID_in, 
     IR_wb=>IR_wb, 

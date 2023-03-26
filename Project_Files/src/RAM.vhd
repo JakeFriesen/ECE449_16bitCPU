@@ -20,8 +20,8 @@ library IEEE;
 Library xpm;
 use xpm.vcomponents.all;
 use IEEE.STD_LOGIC_1164.ALL;
-library work;
-use work.Constant_Package.all;
+--library work;
+--use work.Constant_Package.all;
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
 --use IEEE.NUMERIC_STD.ALL;

@@ -101,6 +101,6 @@ begin
     --Program Counter Update
     next_counter <= PC_new when branch = '1' else
                     program_counter when halt = '1' else
-                    program_counter + 1;
+                    program_counter + instr_increment;
 
 end Behavioral;
