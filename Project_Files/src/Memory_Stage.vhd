@@ -36,13 +36,12 @@ entity Memory_Stage is
            memdata_MEM_out : out STD_LOGIC_VECTOR (15 downto 0);
            Result_MEM_out : out STD_LOGIC_VECTOR (15 downto 0);
            IR_MEM_out : out STD_LOGIC_VECTOR (15 downto 0);
-           NPC_MEM_in : in STD_LOGIC_VECTOR (15 downto 0);
            vdata_MEM_in, A_MEM_in, B_MEM_in : in STD_LOGIC_VECTOR (15 downto 0);
            vdata_MEM_out : out STD_LOGIC_VECTOR (15 downto 0));
 end Memory_Stage;
 
 architecture Behavioral of Memory_Stage is
-    signal IR, ALU, Overflow, ram_output, NPC : std_logic_vector (15 downto 0);
+    signal IR, ALU, Overflow, ram_output : std_logic_vector (15 downto 0);
 
 begin
     --Latch Process
@@ -62,12 +61,10 @@ begin
                 IR <= (others=>'0');
                 ALU <= (others=>'0');
                 Overflow <= (others=>'0');
-                NPC <= (others=>'0');
             else
                 IR <= IR_MEM_in;
                 ALU <= Result_MEM_in;
                 Overflow <= vdata_MEM_in;
-                NPC <= NPC_MEM_in;
             end if;
         end if;
         if(clk'event and clk = '0') then

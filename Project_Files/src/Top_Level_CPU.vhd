@@ -5,7 +5,7 @@
 -- 
 -- Create Date: 2023-Mar-09
 
--- Module Name: Write_Back_Stage - Behavioral
+-- Module Name: Top_Level_CPU - Behavioral
 -- Project Name: 16bitCPU
 -- Target Devices: Artix7
 -- Description: 
@@ -46,30 +46,40 @@ component Intruction_Fetch_Stage is
            ram_data_B : in std_logic_vector (15 downto 0);
            BR_IF_in : in STD_LOGIC);
 end component Intruction_Fetch_Stage;
+
 component Decode is
-    Port (clk, rst, br_clear_in : in STD_LOGIC;
-          IR_ID_in : in  STD_LOGIC_VECTOR (15 downto 0);
-          NPC_ID_in : in  STD_LOGIC_VECTOR (15 downto 0);
-          NPC_ID_out : out STD_LOGIC_VECTOR (15 downto 0);
-          A_ID_out : out std_logic_vector(15 downto 0); 
-          B_ID_out : out std_logic_vector(15 downto 0);
-          IR_ID_out : out std_logic_vector(15 downto 0);
-          wr_addr_ID_in : in std_logic_vector(2 downto 0);
-          wr_data_ID_in : in std_logic_vector(15 downto 0);
-          wr_enable_ID_in : in std_logic;
-          ov_data_ID_in : in std_logic_vector(15 downto 0);
-          ov_enable_ID_in : in std_logic;
-          loadIMM_ID_in: in std_logic;
-          load_align_ID_in: in std_logic;
-          halt : out std_logic);			  
+    Port ( 
+			  rst : in STD_LOGIC;
+			  clk : in STD_LOGIC;
+			  Z_ID_in : in STD_LOGIC;
+			  N_ID_in : in STD_LOGIC;
+			  IR_ID_in : in  STD_LOGIC_VECTOR (15 downto 0);
+			  NPC_ID_in : in  STD_LOGIC_VECTOR (15 downto 0);
+			  A_ID_out : out std_logic_vector(15 downto 0); 
+			  B_ID_out : out std_logic_vector(15 downto 0);
+			  IR_ID_out : out std_logic_vector(15 downto 0);
+			  wr_addr_ID_in : in std_logic_vector(2 downto 0);
+			  wr_data_ID_in : in std_logic_vector(15 downto 0);
+			  wr_enable_ID_in : in std_logic;
+			  --Overflow signals
+			  ov_data_ID_in : in std_logic_vector(15 downto 0);
+			  ov_enable_ID_in : in std_logic;
+			  loadIMM_ID_in: in std_logic;
+              load_align_ID_in: in std_logic;
+			  halt : out std_logic;
+			  branch_ID_out : out std_logic;
+			  branch_addr_ID_out : out std_logic_vector(15 downto 0);
+			  pipe_flush_ID_out : out std_logic
+	    );			  
 end component Decode;
 
 component EX_stage is
-    Port (clk, rst: in STD_LOGIC;
+    Port ( 
+           clk: in STD_LOGIC;
+           rst: in STD_LOGIC;
            IR_EX_in: in std_logic_vector(15 downto 0);
            A_EX_in : in STD_LOGIC_VECTOR (15 downto 0);
            B_EX_in : in STD_LOGIC_VECTOR (15 downto 0);
-           NPC_EX_in : in STD_LOGIC_VECTOR (15 downto 0);        
            Result_EX_out : out STD_LOGIC_VECTOR (15 downto 0);
            vdata_EX_out : out STD_LOGIC_VECTOR (15 downto 0);
            A_EX_out : out STD_LOGIC_VECTOR (15 downto 0);
@@ -77,32 +87,25 @@ component EX_stage is
            Z_EX_out : out std_logic;
            N_EX_out: out std_logic;
            IR_EX_out: out std_logic_vector(15 downto 0);
-           NPC_EX_out : out std_logic_vector(15 downto 0);
-           br_clear_in : in STD_LOGIC);
+           br_clear_in: in std_logic
+           );
 end component EX_stage;
 
 component Memory_Stage is
-    Port (clk, rst : in STD_LOGIC; 
-            Result_MEM_in : in STD_LOGIC_VECTOR (15 downto 0);
-            IR_MEM_in : in STD_LOGIC_VECTOR (15 downto 0);
-            N_MEM_in : in STD_LOGIC;
-            Z_MEM_in : in STD_LOGIC;
-            branch : out STD_LOGIC;
-            branch_addr : out STD_LOGIC_VECTOR (15 downto 0);
-            pipe_flush : out std_logic;
-            ram_wren_A: out std_logic;
-            ram_en_A: out std_logic;
-            ram_wrdata_A: out STD_LOGIC_VECTOR (15 downto 0);
-            ram_addr_A: out std_logic_vector (15 downto 0);
-            ram_data_A: in std_logic_vector (15 downto 0);
-            memdata_MEM_out : out STD_LOGIC_VECTOR (15 downto 0);
-            Result_MEM_out : out STD_LOGIC_VECTOR (15 downto 0);
-            NPC_MEM_in : in STD_LOGIC_VECTOR (15 downto 0);
-            IR_MEM_out : out STD_LOGIC_VECTOR (15 downto 0);
-            vdata_MEM_in: in STD_LOGIC_VECTOR (15 downto 0); 
-            A_MEM_in: in STD_LOGIC_VECTOR (15 downto 0); 
-            B_MEM_in : in STD_LOGIC_VECTOR (15 downto 0);
-            vdata_MEM_out : out STD_LOGIC_VECTOR (15 downto 0));
+    Port ( Result_MEM_in : in STD_LOGIC_VECTOR (15 downto 0);
+           IR_MEM_in : in STD_LOGIC_VECTOR (15 downto 0);
+           clk, rst : in STD_LOGIC;
+           branch_flush : in std_logic;
+           ram_wren_A: out std_logic;
+           ram_en_A: out std_logic;
+           ram_wrdata_A: out STD_LOGIC_VECTOR (15 downto 0);
+           ram_addr_A: out std_logic_vector (15 downto 0);
+           ram_data_A: in std_logic_vector (15 downto 0);
+           memdata_MEM_out : out STD_LOGIC_VECTOR (15 downto 0);
+           Result_MEM_out : out STD_LOGIC_VECTOR (15 downto 0);
+           IR_MEM_out : out STD_LOGIC_VECTOR (15 downto 0);
+           vdata_MEM_in, A_MEM_in, B_MEM_in : in STD_LOGIC_VECTOR (15 downto 0);
+           vdata_MEM_out : out STD_LOGIC_VECTOR (15 downto 0));
 end component Memory_Stage;
 
 component Write_Back_Stage is

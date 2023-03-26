@@ -36,7 +36,6 @@ entity Decode is
 			  N_ID_in : in STD_LOGIC;
 			  IR_ID_in : in  STD_LOGIC_VECTOR (15 downto 0);
 			  NPC_ID_in : in  STD_LOGIC_VECTOR (15 downto 0);
-			  NPC_ID_out : out STD_LOGIC_VECTOR (15 downto 0);
 			  A_ID_out : out std_logic_vector(15 downto 0); 
 			  B_ID_out : out std_logic_vector(15 downto 0);
 			  IR_ID_out : out std_logic_vector(15 downto 0);
@@ -51,7 +50,7 @@ entity Decode is
 			  halt : out std_logic;
 			  branch_ID_out : out std_logic;
 			  branch_addr_ID_out : out std_logic_vector(15 downto 0);
-			  pipe_flush_ID_out : out std_logic -- TODO: pipe-flush out
+			  pipe_flush_ID_out : out std_logic
 	    );			  
 end Decode;
 
@@ -184,18 +183,21 @@ A_internal <=
               stack_pointer when OPCODE = push_op else
               stack_pointer when OPCODE = rti_op else
               rd_data1_out;
+              
 IR_out_internal <= (others=>'0') when halt_intern = '1' else
                    IR_intrn;
 
 halt <= halt_intern;
 
---Branching
+with OPCODE select
+    ADDER_A <= NPC when brr_op | brr_n_op | brr_z_op,
+               A_internal when br_op | br_n_op | br_z_op | br_sub_op,
+               X"0000" when others;
+-- Choose ADDER_B
 process(OPCODE)
 begin
 case OPCODE is
     when brr_op | brr_n_op | brr_z_op =>
-        --PC Relative Branches
-        ADDER_A <= NPC;
         --Sign Extend the Immediate value
         if(IR_intrn(8) = '0') then
             ADDER_B <= "0000000" & IR_intrn(8 downto 0);
@@ -203,14 +205,14 @@ case OPCODE is
             ADDER_B <= "1111111" & IR_intrn(8 downto 0);
         end if;
     when br_op | br_n_op | br_z_op | br_sub_op =>
-        --Register Relative Branches
-        ADDER_A <= A_internal;
         --Sign Extend the Immediate value
         if(IR_intrn(5) = '0') then
             ADDER_B <= "0000000000" & IR_intrn(5 downto 0);
         else
             ADDER_B <= "1111111111" & IR_intrn(5 downto 0);
         end if;
+    when others =>
+        ADDER_B <= (others=>'0');
     end case;
 end process;
 
@@ -218,7 +220,7 @@ end process;
     process(OPCODE)
     begin
         case(OPCODE) is
-            when brr_op | br_op | br_sub_op | return_op =>
+            when brr_op | br_op | br_sub_op | return_op => --TODO: return_op
                 branch_intrn <= '1';
                 branch_addr <= ADDER_A + ADDER_B;
             when brr_n_op | br_n_op =>
@@ -270,13 +272,11 @@ end process;
 		  if(rst = '1') then
 		      A_ID_out <= (others=>'0');
 		      B_ID_out <= (others=>'0');
-		      NPC_ID_out <= (others=>'0');
 		      IR_ID_out <= (others=>'0');
           else
 		      A_ID_out <= A_internal;
 		      B_ID_out <= B_internal;
 		      IR_ID_out <= IR_out_internal;
-		      NPC_ID_out <= npc;
 		  end if;
 		end if;
 	end process;

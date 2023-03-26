@@ -27,21 +27,15 @@ entity EX_stage is
            IR_EX_in: in std_logic_vector(15 downto 0);
            A_EX_in : in STD_LOGIC_VECTOR (15 downto 0);
            B_EX_in : in STD_LOGIC_VECTOR (15 downto 0);
-           NPC_EX_in : in STD_LOGIC_VECTOR (15 downto 0);
            Result_EX_out : out STD_LOGIC_VECTOR (15 downto 0);
            vdata_EX_out : out STD_LOGIC_VECTOR (15 downto 0);
            A_EX_out : out STD_LOGIC_VECTOR (15 downto 0);
            B_EX_out : out STD_LOGIC_VECTOR (15 downto 0);
-         --  O_Z : out STD_LOGIC;
-          -- O_N : out STD_LOGIC;
-         --  O_V : out STD_LOGIC;
            Z_EX_out : out std_logic;
            N_EX_out: out std_logic;
            IR_EX_out: out std_logic_vector(15 downto 0);
-           NPC_EX_out : out std_logic_vector (15 downto 0);
            br_clear_in: in std_logic
            );
-         
 end EX_stage;
 
 architecture Behavioral of EX_stage is
@@ -66,7 +60,6 @@ signal ALU_result, Vdata, ALU_v_result, result: std_logic_vector(15 downto 0) :=
 signal z, n, v, v_en: std_logic := '0';
 signal z_output, n_output: std_logic := '0'; 
 signal A_data: std_logic_vector(15 downto 0);
-signal NPC : std_logic_vector (15 downto 0);
 signal disp_l, disp_s : std_logic_vector (15 downto 0);
 signal data_sel: std_logic := '0';    
 signal B_data, imm_data: std_logic_vector(15 downto 0) := (others=>'0');
@@ -96,14 +89,12 @@ begin
                 A_data <= (others=>'0');
                 B_data <= (others=>'0');
                 OPCODE <= (others=>'0');
-                NPC <= (others=>'0');
             else
                 IR <= IR_EX_in;
                 --ALU_OP <= IR_EX_in(11 downto 9);
                 A_data <= A_EX_in;          
                 B_data <= B_EX_in;
                 OPCODE<= IR_EX_in(15 downto 9);
-                NPC <= NPC_EX_in;
                 --Sign extend immediate
                 if(IR_EX_in(5) = '1') then
                     imm_data <= "1111111111" & IR_EX_in(5 downto 0);
@@ -120,7 +111,6 @@ begin
                 Z_EX_out <= '0';
                 N_EX_out <= '0';
                 IR_EX_out <= IR;
-                NPC_EX_out <= (others=>'0');
             else
                 Result_EX_out <= result;
                 vdata_EX_out <= ALU_V_RESULT;
@@ -129,13 +119,10 @@ begin
                 Z_EX_out <= z_output;
                 N_EX_out <= n_output;
                 IR_EX_out <= IR;
-                NPC_EX_out <= NPC;
             end if;
         end if;
     end process;
-    
-    
-             
+     
     process(ALU_OP, ALU_result)
     begin
         if(ALU_OP = "111") then       
@@ -147,12 +134,7 @@ begin
         end if;
     end process;
     
-    
-    --Push the next program counter + 1 into the ALU result when branching to subroutine
-    --Put R7 into the ALU result when returning from subroutine
-    with OPCODE select
-    result <= A_data when return_op,
-              ALU_result when others;
+    result <= ALU_result;
     
     --Switch Case for each opcode
     --Defines ALU_A, ALU_B, ALU_OP
