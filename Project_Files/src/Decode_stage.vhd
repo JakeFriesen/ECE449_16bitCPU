@@ -5,7 +5,7 @@
 -- 
 -- Create Date: 2023-Mar-09
 
--- Module Name: Write_Back_Stage - Behavioral
+-- Module Name: Decode_Stage - Behavioral
 -- Project Name: 16bitCPU
 -- Target Devices: Artix7
 -- Description: 
@@ -20,6 +20,7 @@ use work.Constant_Package.all;
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
+use ieee.std_logic_unsigned.all;
 
 
 -- Uncomment the following library declaration if instantiating
@@ -31,6 +32,8 @@ entity Decode is
     Port ( 
 			  rst : in STD_LOGIC;
 			  clk : in STD_LOGIC;
+			  Z_ID_in : in STD_LOGIC;
+			  N_ID_in : in STD_LOGIC;
 			  IR_ID_in : in  STD_LOGIC_VECTOR (15 downto 0);
 			  NPC_ID_in : in  STD_LOGIC_VECTOR (15 downto 0);
 			  NPC_ID_out : out STD_LOGIC_VECTOR (15 downto 0);
@@ -46,7 +49,9 @@ entity Decode is
 			  loadIMM_ID_in: in std_logic;
               load_align_ID_in: in std_logic;
 			  halt : out std_logic;
-			  br_clear_in: in std_logic 
+			  branch_ID_out : out std_logic;
+			  branch_addr_ID_out : out std_logic_vector(15 downto 0);
+			  pipe_flush_ID_out : out std_logic -- TODO: pipe-flush out
 	    );			  
 end Decode;
 
@@ -86,13 +91,6 @@ component RAW is
          );
 end component RAW;
 
-component MUX2_1 is
-    Port ( x : in STD_LOGIC_VECTOR (15 downto 0);
-           y : in STD_LOGIC_VECTOR (15 downto 0);
-           s : in STD_LOGIC;
-           z : out STD_LOGIC_VECTOR (15 downto 0));
-end component MUX2_1;
-
 component Stack_Register is
     Port ( SP_in : in STD_LOGIC_VECTOR (15 downto 0);
            SP_out : out STD_LOGIC_VECTOR (15 downto 0);
@@ -103,15 +101,12 @@ component Stack_Register is
 end component;
 
 --Signals
-signal npc : std_logic_vector (15 downto 0);
+signal branch_addr, ADDER_A, ADDER_B, NPC : std_logic_vector(15 downto 0);
 signal ra_index, rd_index1_intern, rd_index2_intern : STD_LOGIC_VECTOR(2 downto 0) := (others=>'0');
-signal output_en, halt_intern, IR_wb, rd_enable : STD_LOGIC := '0';
-signal rd_data1_out, rd_data2_out, IR_intrn, IR_out_internal, A_internal, B_internal, B_data, outport_internal, outport_previous : std_logic_vector(15 downto 0) := (others=>'0');
+signal output_en, halt_intern, IR_wb, rd_enable, N_intrn, Z_intrn, branch_intrn : STD_LOGIC := '0';
+signal rd_data1_out, rd_data2_out, IR_intrn, IR_out_internal, A_internal, B_internal, B_data : std_logic_vector(15 downto 0) := (others=>'0');
 signal stack_pointer : std_logic_vector (15 downto 0);
 signal OPCODE : std_logic_vector (6 downto 0);
--- Constant X"0000"
-constant zero : std_logic_vector(15 downto 0) := X"0000";
-
 
 begin
 --Stack Register
@@ -177,14 +172,6 @@ with OPCODE select
     rd_enable <= '1' when add_op | sub_op | mul_op | nand_op | shl_op | shr_op | test_op | out_op | mov_op | store_op | push_op,
                  '0' when others;
 
-
---MUX assignments--
---m1 : MUX2_1 port map(
---    x => rd_data1_out, 
---    y => zero, 
---    s => output_en, 
---    z => A_internal
---);
 --TODO: Forwarding from wr_data_ID_in to A/B_internal when possible
 
 --Push the stack pointer into B when PUSH, POP, or RTI
@@ -202,20 +189,80 @@ IR_out_internal <= (others=>'0') when halt_intern = '1' else
 
 halt <= halt_intern;
 
+--Branching
+process(OPCODE)
+begin
+case OPCODE is
+    when brr_op | brr_n_op | brr_z_op =>
+        --PC Relative Branches
+        ADDER_A <= NPC;
+        --Sign Extend the Immediate value
+        if(IR_intrn(8) = '0') then
+            ADDER_B <= "0000000" & IR_intrn(8 downto 0);
+        else
+            ADDER_B <= "1111111" & IR_intrn(8 downto 0);
+        end if;
+    when br_op | br_n_op | br_z_op | br_sub_op =>
+        --Register Relative Branches
+        ADDER_A <= A_internal;
+        --Sign Extend the Immediate value
+        if(IR_intrn(5) = '0') then
+            ADDER_B <= "0000000000" & IR_intrn(5 downto 0);
+        else
+            ADDER_B <= "1111111111" & IR_intrn(5 downto 0);
+        end if;
+    end case;
+end process;
 
-	--latching		
+--Branch Choice
+    process(OPCODE)
+    begin
+        case(OPCODE) is
+            when brr_op | br_op | br_sub_op | return_op =>
+                branch_intrn <= '1';
+                branch_addr <= ADDER_A + ADDER_B;
+            when brr_n_op | br_n_op =>
+                if(N_intrn = '1') then
+                    branch_intrn <= '1';
+                    branch_addr <= ADDER_A + ADDER_B;
+                else
+                    branch_intrn <= '0';
+                    branch_addr <= (others => '0'); 
+                end if;
+            when brr_z_op | br_z_op =>
+                if(Z_intrn = '1') then
+                    branch_intrn <= '1';
+                    branch_addr <= ADDER_A + ADDER_B;
+                else
+                    branch_intrn <= '0';
+                    branch_addr <= (others => '0'); 
+                end if;
+            when others =>
+                branch_intrn <= '0';
+                branch_addr <= (others => '0');            
+        end case;    
+    end process;
+    
+    pipe_flush_ID_out <= branch_intrn;
+    branch_ID_out <= branch_intrn;
+
+
+    -- Latching		
 	process(clk)
 	begin
 		if rising_edge(clk) then
-			if (rst = '1' or br_clear_in = '1') then
-				IR_intrn <= zero;
+			if (rst = '1' or branch_intrn = '1') then
+				IR_intrn <= (others=>'0');
 				OPCODE <= (others=>'0');
 				npc <= (others=>'0');
+				N_intrn <= '0';
+				Z_intrn <= '0';
 			else
 			    IR_intrn <= IR_ID_in;
 			    OPCODE <= IR_ID_in(15 downto 9);
 				npc <= NPC_ID_in;
-                outport_previous <= outport_internal;
+                N_intrn <= N_ID_in;
+				Z_intrn <= Z_ID_in;
 			end if;
 		end if;
 		--Latch Output Signals
@@ -226,16 +273,10 @@ halt <= halt_intern;
 		      NPC_ID_out <= (others=>'0');
 		      IR_ID_out <= (others=>'0');
           else
---		  	elsif (halt_intern='0') then
 		      A_ID_out <= A_internal;
 		      B_ID_out <= B_internal;
 		      IR_ID_out <= IR_out_internal;
 		      NPC_ID_out <= npc;
---			elsif (halt_intern='1') then
---		      A_ID_out <= (others=>'0');
---		      B_ID_out <= (others=>'0');
---		      IR_ID_out <= IR_intrn;
---			  NPC_ID_out <= npc;
 		  end if;
 		end if;
 	end process;

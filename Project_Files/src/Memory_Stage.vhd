@@ -26,12 +26,8 @@ use ieee.std_logic_unsigned.all;
 entity Memory_Stage is
     Port ( Result_MEM_in : in STD_LOGIC_VECTOR (15 downto 0);
            IR_MEM_in : in STD_LOGIC_VECTOR (15 downto 0);
-           N_MEM_in : in STD_LOGIC;
-           Z_MEM_in : in STD_LOGIC;
            clk, rst : in STD_LOGIC;
-           branch : out STD_LOGIC;
-           branch_addr : out STD_LOGIC_VECTOR (15 downto 0);
-           pipe_flush : out std_logic;
+           branch_flush : in std_logic;
            ram_wren_A: out std_logic;
            ram_en_A: out std_logic;
            ram_wrdata_A: out STD_LOGIC_VECTOR (15 downto 0);
@@ -47,8 +43,6 @@ end Memory_Stage;
 
 architecture Behavioral of Memory_Stage is
     signal IR, ALU, Overflow, ram_output, NPC : std_logic_vector (15 downto 0);
-    signal flags : std_logic_vector (1 downto 0);
-    signal branch_internal : std_logic;
 
 begin
     --Latch Process
@@ -63,15 +57,13 @@ begin
         end if;    
         if(clk'event and clk = '1') then
         --Latch Incoming signals
-            if(branch_internal = '1') then
+            if(branch_flush = '1') then
             --Internal Branch set, clear the incoming buffer
-                flags <= "00";
                 IR <= (others=>'0');
                 ALU <= (others=>'0');
                 Overflow <= (others=>'0');
                 NPC <= (others=>'0');
             else
-                flags <= N_MEM_in & Z_MEM_in;
                 IR <= IR_MEM_in;
                 ALU <= Result_MEM_in;
                 Overflow <= vdata_MEM_in;
@@ -97,38 +89,6 @@ begin
         end if;
     end process;
 
-    --Branch Choice
-    process(IR(15 downto 9))
-    begin
-        case(IR(15 downto 9)) is
-            when brr_op | br_op | br_sub_op | return_op =>
-                branch_internal <= '1';
-                branch_addr <= ALU;
-            when brr_n_op | br_n_op =>
-                if(flags(1) = '1') then
-                    branch_internal <= '1';
-                    branch_addr <= ALU;
-                else
-                    branch_internal <= '0';
-                    branch_addr <= (others => '0'); 
-                end if;
-            when brr_z_op | br_z_op =>
-                if(flags(0) = '1') then
-                    branch_internal <= '1';
-                    branch_addr <= ALU;
-                else
-                    branch_internal <= '0';
-                    branch_addr <= (others => '0'); 
-                end if;
-            when others =>
-                branch_internal <= '0';
-                branch_addr <= (others => '0');            
-        end case;    
-    end process;
-    
-    pipe_flush <= branch_internal;
-    branch <= branch_internal;
-
     --RAM Access
     with IR_MEM_in(15 downto 9) Select
         ram_wren_A <=   '1' when store_op | push_op, --STR (17), PUSH (96)
@@ -141,7 +101,4 @@ begin
     ram_addr_A <= A_MEM_in(15 downto 0);
     ram_wrdata_A <=  B_MEM_in;
     
-        
-
-
 end Behavioral;

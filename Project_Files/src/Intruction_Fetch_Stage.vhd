@@ -5,7 +5,7 @@
 -- 
 -- Create Date: 2023-Mar-09
 
--- Module Name: Write_Back_Stage - Behavioral
+-- Module Name: Intruction_Fetch_Stage - Behavioral
 -- Project Name: 16bitCPU
 -- Target Devices: Artix7
 -- Description: 
@@ -87,9 +87,7 @@ begin
     end process;
         
     --RAM Access
-    ram_addr_B <= program_counter;
---    instr_data <= instr_data when halt = '1' else ram_data_B;
-    
+    ram_addr_B <= program_counter;  
     
     --Program Counter Update
     next_counter <= PC_new when branch = '1' else

@@ -1,3 +1,19 @@
+---------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+-- Course: University of Victoria
+-- Engineer: Jake Friesen, Matthew Ebert, Samuel Pacheo 
+-- 
+-- Create Date: 2023-Mar-09
+
+-- Module Name: Read after Write Handler - Behavioral
+-- Project Name: 16bitCPU
+-- Target Devices: Artix7
+-- Description: 
+-- 
+-- Dependencies: 
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
@@ -43,14 +59,12 @@ begin
 		else
             if (IR_wb='1' and halt_intern = '0') then
                 wb_tracker(to_integer(unsigned(ra_index))) <= wb_tracker(to_integer(unsigned(ra_index))) + 1;
---                in_use(to_integer(unsigned(ra_index))) <= '1';
             end if;
             if (wr_en='1') then
                 if(wb_tracker(to_integer(unsigned(wr_addr))) = 0) then
                     wb_tracker(to_integer(unsigned(wr_addr))) <= x"0";
                 else
                     wb_tracker(to_integer(unsigned(wr_addr))) <= wb_tracker(to_integer(unsigned(wr_addr))) - 1;
---                    in_use(to_integer(unsigned(wr_addr))) <= '0';
                 end if;
             end if;
         end if;
@@ -59,27 +73,10 @@ end process;
 
 raw1 <= '1' when wb_tracker(to_integer(unsigned(rd_index1))) > 0 else
         '0';
---    in_use(0) when rd_index1 = "000" else
---    in_use(1) when rd_index1 = "001" else
---    in_use(2) when rd_index1 = "010" else
---    in_use(3) when rd_index1 = "011" else
---    in_use(4) when rd_index1 = "100" else
---    in_use(5) when rd_index1 = "101" else
---    in_use(6) when rd_index1 = "110" else
---    in_use(7) when rd_index1 = "111" else
---    '0';
+
 raw2 <= '1' when wb_tracker(to_integer(unsigned(rd_index2))) > 0 else
         '0';
---    in_use(0) when rd_index2 = "000" else
---    in_use(1) when rd_index2 = "001" else
---    in_use(2) when rd_index2 = "010" else
---    in_use(3) when rd_index2 = "011" else
---    in_use(4) when rd_index2 = "100" else
---    in_use(5) when rd_index2 = "101" else
---    in_use(6) when rd_index2 = "110" else
---    in_use(7) when rd_index2 = "111" else
---    '0';
-
+        
 halt_intern <= (raw1 or raw2) and rd_enable;    
 
 halt <= halt_intern;

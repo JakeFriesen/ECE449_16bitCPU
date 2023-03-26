@@ -168,27 +168,6 @@ begin
                 ALU_B <= imm_data;
                 ALU_A <= A_data;
                 ALU_OP <= IR(11 downto 9);
-            when brr_op | brr_n_op | brr_z_op =>
-            --PC Relative Branches
-                ALU_A <= NPC;
-                --Set op to add or subtract
-                ALU_OP <= "001";
-                --Sign Extend the Immediate value
-                if(IR(8) = '0') then
-                    ALU_B <= "0000000" & IR(8 downto 0);
-                else
-                    ALU_B <= "1111111" & IR(8 downto 0);
-                end if;
-            when br_op | br_n_op | br_z_op | br_sub_op =>
-            --Register Relative Branches
-                ALU_A <= A_data;
-                ALU_OP <= "001";
-                --Sign Extend the Immediate value
-                if(IR(5) = '0') then
-                    ALU_B <= "0000000000" & IR(5 downto 0);
-                else
-                    ALU_B <= "1111111111" & IR(5 downto 0);
-                end if;
             when others =>
             --Any other operations
                 ALU_B <= (others=>'0');
