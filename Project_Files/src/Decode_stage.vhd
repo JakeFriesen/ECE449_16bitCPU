@@ -100,12 +100,10 @@ component Stack_Register is
 end component;
 
 --Signals
-signal branch_addr, ADDER_A, ADDER_B, NPC : std_logic_vector(15 downto 0);
 signal ra_index, rd_index1_intern, rd_index2_intern : STD_LOGIC_VECTOR(2 downto 0) := (others=>'0');
 signal output_en, halt_intern, IR_wb, rd_enable, N_intrn, Z_intrn, branch_intrn : STD_LOGIC := '0';
-signal rd_data1_out, rd_data2_out, IR_intrn, IR_out_internal, A_internal, B_internal, B_data : std_logic_vector(15 downto 0) := (others=>'0');
-signal stack_pointer : std_logic_vector (15 downto 0);
-signal OPCODE : std_logic_vector (6 downto 0);
+signal stack_pointer, rd_data1_out, rd_data2_out, IR_intrn, IR_out_internal, A_internal, B_internal, B_data, ADDER_A, ADDER_B, NPC : std_logic_vector(15 downto 0) := (others=>'0');
+signal OPCODE : std_logic_vector (6 downto 0) := (others=>'0');
 
 begin
 --Stack Register
@@ -189,10 +187,12 @@ IR_out_internal <= (others=>'0') when halt_intern = '1' else
 
 halt <= halt_intern;
 
+-- Choose ADDER_B
 with OPCODE select
     ADDER_A <= NPC when brr_op | brr_n_op | brr_z_op,
-               A_internal when br_op | br_n_op | br_z_op | br_sub_op,
+               A_internal when br_op | br_n_op | br_z_op | br_sub_op | return_op,
                X"0000" when others;
+               
 -- Choose ADDER_B
 process(OPCODE)
 begin
@@ -222,32 +222,28 @@ end process;
         case(OPCODE) is
             when brr_op | br_op | br_sub_op | return_op => --TODO: return_op
                 branch_intrn <= '1';
-                branch_addr <= ADDER_A + ADDER_B;
+                branch_addr_ID_out <= ADDER_A + ADDER_B;
             when brr_n_op | br_n_op =>
                 if(N_intrn = '1') then
                     branch_intrn <= '1';
-                    branch_addr <= ADDER_A + ADDER_B;
+                    branch_addr_ID_out <= ADDER_A + ADDER_B;
                 else
                     branch_intrn <= '0';
-                    branch_addr <= (others => '0'); 
+                    branch_addr_ID_out <= (others => '0'); 
                 end if;
             when brr_z_op | br_z_op =>
                 if(Z_intrn = '1') then
                     branch_intrn <= '1';
-                    branch_addr <= ADDER_A + ADDER_B;
+                    branch_addr_ID_out <= ADDER_A + ADDER_B;
                 else
                     branch_intrn <= '0';
-                    branch_addr <= (others => '0'); 
+                    branch_addr_ID_out <= (others => '0'); 
                 end if;
             when others =>
                 branch_intrn <= '0';
-                branch_addr <= (others => '0');            
+                branch_addr_ID_out <= (others => '0');            
         end case;    
     end process;
-    
-    pipe_flush_ID_out <= branch_intrn;
-    branch_ID_out <= branch_intrn;
-
 
     -- Latching		
 	process(clk)
@@ -273,10 +269,14 @@ end process;
 		      A_ID_out <= (others=>'0');
 		      B_ID_out <= (others=>'0');
 		      IR_ID_out <= (others=>'0');
+		      pipe_flush_ID_out <= '0';
+              branch_ID_out <= '0';
           else
 		      A_ID_out <= A_internal;
 		      B_ID_out <= B_internal;
 		      IR_ID_out <= IR_out_internal;
+		      pipe_flush_ID_out <= branch_intrn;
+              branch_ID_out <= branch_intrn;
 		  end if;
 		end if;
 	end process;

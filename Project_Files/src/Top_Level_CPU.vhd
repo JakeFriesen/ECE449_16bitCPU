@@ -145,8 +145,8 @@ signal clk, rst : std_logic := '0';
 signal IF_ID_IR, ID_EX_IR, EX_MEM_IR,  MEM_WB_IR: std_logic_vector(15 downto 0);
 signal WB_ID_wr_data, WB_ID_v_data, ID_EX_A, ID_EX_B: std_logic_vector(15 downto 0) := (others=>'0');
 signal EX_MEM_alu_res, EX_MEM_v_data, MEM_WB_mem_data, MEM_WB_alu, MEM_WB_v_data, EX_MEM_A, EX_MEM_B : std_logic_vector(15 downto 0);
-signal IF_ID_NPC, WB_IF_PC, ID_EX_NPC, MEM_IF_br_addr, EX_MEM_NPC : std_logic_vector(15 downto 0);
-signal MEM_IF_br, WB_ID_wr_en, WB_ID_v_en, EX_MEM_N_flag, EX_MEM_Z_flag, MEM_pipe_flush : std_logic;
+signal IF_ID_NPC, WB_IF_PC, ID_IF_br_addr : std_logic_vector(15 downto 0);
+signal ID_IF_br, WB_ID_wr_en, WB_ID_v_en, EX_ID_N_flag, EX_ID_Z_flag, ID_pipe_flush : std_logic;
 signal WB_ID_wr_addr : std_logic_vector(2 downto 0);
 signal WB_ID_loadimm, WB_ID_load_align: std_logic;
 
@@ -165,23 +165,25 @@ clk_divider : my_D_FF port map(
     reset => rst,
     Q => clk
 );
+
 IF_inst : Intruction_Fetch_Stage port map(
     clk=>clk, 
     rst=>rst, 
     halt=>halt,
     IR_IF_out=>IF_ID_IR, 
     NPC_IF_out=>IF_ID_NPC, 
-    PC_in=>MEM_IF_br_addr, 
+    PC_in=>ID_IF_br_addr, 
     ram_addr_B=>ram_addrb, 
     ram_data_B=>ram_datab, 
-    BR_IF_in=>MEM_IF_br
+    BR_IF_in=>ID_IF_br
 );
-                                            
-                                            
+                                                                                       
 ID_inst : Decode port map(
     clk=>clk, 
     rst=>rst,
-    br_clear_in=>MEM_pipe_flush,
+    Z_ID_in=>EX_ID_Z_flag,
+    N_ID_in=>EX_ID_N_flag,
+    pipe_flush_ID_out=>ID_pipe_flush,
     halt => halt, 
     IR_ID_in=>IF_ID_IR, 
     wr_addr_ID_in=>WB_ID_wr_addr, 
@@ -194,8 +196,9 @@ ID_inst : Decode port map(
     IR_ID_out=>ID_EX_IR,
     loadIMM_ID_in=>WB_ID_loadimm, 
     load_align_ID_in=> WB_ID_load_align, 
-    NPC_ID_out=>ID_EX_NPC, 
-    NPC_ID_in=>IF_ID_NPC
+    NPC_ID_in=>IF_ID_NPC,
+    branch_addr_ID_out=>ID_IF_br_addr,
+    branch_ID_out=>ID_IF_br
 );
 
 EX_inst : EX_stage port map(
@@ -206,29 +209,22 @@ EX_inst : EX_stage port map(
     B_EX_in=>ID_EX_B, 
     Result_EX_out=>EX_MEM_alu_res, 
     vdata_EX_out=>EX_MEM_v_data,
-    Z_EX_out=>EX_MEM_Z_flag, 
-    N_EX_out=>EX_MEM_N_flag, 
+    Z_EX_out=>EX_ID_Z_flag, 
+    N_EX_out=>EX_ID_N_flag, 
     IR_EX_out=>EX_MEM_IR, 
     A_EX_out =>EX_MEM_A,
-    B_EX_out =>EX_MEM_B, 
-    NPC_EX_in=>ID_EX_NPC, 
-    NPC_EX_out=>EX_MEM_NPC,
-    br_clear_in=>MEM_pipe_flush
+    B_EX_out =>EX_MEM_B,
+    br_clear_in=>ID_pipe_flush
 );
-
 
 MEM_inst : Memory_Stage port map(
     clk=>clk, 
     rst=>rst, 
     Result_MEM_in=>EX_MEM_alu_res, 
     IR_MEM_in=>EX_MEM_IR, 
-    N_MEM_in=>EX_MEM_N_flag, 
-    Z_MEM_in=>EX_MEM_Z_flag, 
-    branch=>MEM_IF_br, 
-    branch_addr=>MEM_IF_br_addr,  
+    branch_flush=>ID_pipe_flush,  
     ram_wren_A=>ram_wr_en,
     ram_addr_A=>ram_addra, 
-    NPC_MEM_in=>EX_MEM_NPC, 
     ram_data_A=>ram_dataa, 
     ram_wrdata_A=>ram_dina, 
     ram_en_A=>ram_ena, 
@@ -236,9 +232,9 @@ MEM_inst : Memory_Stage port map(
     Result_MEM_out=>MEM_WB_alu, 
     IR_MEM_out=>MEM_WB_IR, 
     vdata_MEM_in=>EX_MEM_v_data,
-     A_MEM_in=>EX_MEM_A, B_MEM_in=>EX_MEM_B,
-     vdata_MEM_out=>MEM_WB_v_data, 
-     pipe_flush=>MEM_pipe_flush
+    A_MEM_in=>EX_MEM_A,
+    B_MEM_in=>EX_MEM_B,
+    vdata_MEM_out=>MEM_WB_v_data
  );
 
 WB_inst : Write_Back_Stage port map(
@@ -246,19 +242,18 @@ WB_inst : Write_Back_Stage port map(
     rst=>rst, 
     ALU_in=>MEM_WB_alu, 
     Overflow_in=>MEM_WB_v_data,
-     memdata_WB_in=>MEM_WB_mem_data, 
+    memdata_WB_in=>MEM_WB_mem_data, 
     IR_WB_in=>MEM_WB_IR, 
     IN_PORT=>IN_PORT, 
     OUT_PORT=>OUT_PORT,
     wr_data_WB_out=>WB_ID_wr_data,
-     wr_addr_WB_out=>WB_ID_wr_addr, 
+    wr_addr_WB_out=>WB_ID_wr_addr, 
     wr_enable_WB_out=>WB_ID_wr_en, 
     ov_en_WB_out=>WB_ID_v_en, 
     loadIMM_WB_out=>WB_ID_loadimm, 
     load_align_WB_out=> WB_ID_load_align, 
     ov_data_WB_out=>WB_ID_v_data
 );
-
 
 RAM_inst : RAM port map (
     douta=>ram_dataa, 
@@ -273,14 +268,9 @@ RAM_inst : RAM port map (
     rst=>rst
 );
 
-
-
 --TODO: Control RAM enable signal somewhere else
 ram_enb <= '1';
 --TODO: Need to Update the reset sequence
 rst <= reset_load or reset_execute;
-
-
-
 
 end Behavioral;

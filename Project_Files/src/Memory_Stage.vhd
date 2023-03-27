@@ -71,11 +71,7 @@ begin
         --Latch Outgoing signals
             vdata_MEM_out <= Overflow;
             IR_MEM_out <= IR;
-            if( IR(15 downto 9) = br_sub_op) then
-                Result_MEM_out <= NPC + 1;
-            else
-                Result_MEM_out <= ALU;
-            end if;
+            Result_MEM_out <= ALU;
             
             if(IR(15 downto 9) = mov_op or IR(15 downto 9) = out_op) then
                 memdata_MEM_out <= A_MEM_in;

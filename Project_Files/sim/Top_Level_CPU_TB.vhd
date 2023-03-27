@@ -66,7 +66,7 @@ process begin
     rst <= '0';
   
 -- For factorial Test  
-    in_port <= x"0005";
+--    in_port <= x"0005";
 -- For factorial Test
   
 --    for i in 0 to 4 loop
@@ -74,28 +74,28 @@ process begin
 --        wait until clk = '0';
 --    end loop;
     
---    in_port <= x"0002"; --INPUT R0 <= 2
---    wait until clk = '1';
---    wait until clk = '0';
---    in_port <= x"0003"; --INPUT R1 <= 3
---    wait until clk = '1';
---    wait until clk = '0';
---    in_port <= x"0001"; --INPUT R2 <= 1
---    wait until clk = '1';
---    wait until clk = '0';
---    in_port <= x"0005"; --INPUT R3 <= 5
---    wait until clk = '1';
---    wait until clk = '0';
---    in_port <= x"0000"; --INPUT R4 <= 0
---    wait until clk = '1';
---    wait until clk = '0';
---    in_port <= x"0001"; --INPUT R5 <= 1
---    wait until clk = '1';
---    wait until clk = '0';
---    in_port <= x"0005"; --INPUT R6 <= 5
---    wait until clk = '1';
---    wait until clk = '0';
---    in_port <= x"0000"; --INPUT R7 <= 0
+    in_port <= x"0002"; --INPUT R0 <= 2
+    wait until clk = '1';
+    wait until clk = '0';
+    in_port <= x"0003"; --INPUT R1 <= 3
+    wait until clk = '1';
+    wait until clk = '0';
+    in_port <= x"0001"; --INPUT R2 <= 1
+    wait until clk = '1';
+    wait until clk = '0';
+    in_port <= x"0005"; --INPUT R3 <= 5
+    wait until clk = '1';
+    wait until clk = '0';
+    in_port <= x"0000"; --INPUT R4 <= 0
+    wait until clk = '1';
+    wait until clk = '0';
+    in_port <= x"0001"; --INPUT R5 <= 1
+    wait until clk = '1';
+    wait until clk = '0';
+    in_port <= x"0005"; --INPUT R6 <= 5
+    wait until clk = '1';
+    wait until clk = '0';
+    in_port <= x"0000"; --INPUT R7 <= 0
     
     
     
