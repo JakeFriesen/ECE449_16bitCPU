@@ -65,6 +65,13 @@
     - Would be good to have instead of going into infinite loop
 - [ ] Change Multiply (Optional, Only if better alternative)
     - Prof mentioned he didn't like our current method
-
+## Project Items To be Completed
+- [ ] Demo
+    - [ ] Get Bootloader working
+    - [ ] Finish integration of forwarding and branching in Decode
+- [ ] Presentation
+    - What is required for this?
+- [ ] Report
+    - Due April 14th?
 
 

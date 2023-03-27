@@ -32,6 +32,14 @@ end Top_Level_CPU;
 
 architecture Behavioral of Top_Level_CPU is
 --Component declaration
+component display_controller is
+	port(
+		clk, reset: in std_logic;
+		hex3, hex2, hex1, hex0: in std_logic_vector(3 downto 0);
+		an: out std_logic_vector(3 downto 0);
+		sseg: out std_logic_vector(6 downto 0)
+	);
+end component display_controller;
 component my_D_FF is
     Port ( clock_100MHz : in  STD_LOGIC;
            reset        : in  STD_LOGIC;
@@ -155,6 +163,10 @@ signal MEM_IF_br, WB_ID_wr_en, WB_ID_v_en, EX_MEM_N_flag, EX_MEM_Z_flag, MEM_pip
 signal WB_ID_wr_addr : std_logic_vector(2 downto 0);
 signal WB_ID_loadimm, WB_ID_load_align: std_logic;
 
+--7seg signals
+signal an : std_logic_vector (3 downto 0);
+signal sseg : std_logic_vector (6 downto 0);
+
 
 --RAM, ROM intermediate Signals
 signal ram_addra, ram_addrb, mem_addrb: std_logic_vector(15 downto 0);
@@ -171,6 +183,18 @@ begin
 --    Q => clk
 --);
 clk <= clk_100MHz;
+
+disp_cont : display_controller port map(
+    clk => clk,
+    reset => rst,
+    hex3 => IF_ID_IR(15 downto 12),
+    hex2 => IF_ID_IR(11 downto 8),
+    hex1 =>IF_ID_IR(7 downto 4),
+    hex0 =>IF_ID_IR(3 downto 0),
+    an => an,
+    sseg => sseg
+);
+
 IF_inst : Intruction_Fetch_Stage port map(
     clk=>clk, 
     reset_load => reset_load,
