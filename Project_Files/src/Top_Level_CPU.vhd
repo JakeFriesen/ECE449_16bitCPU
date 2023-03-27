@@ -54,6 +54,7 @@ component Intruction_Fetch_Stage is
            PC_in : in STD_LOGIC_VECTOR (15 downto 0);
            ram_addr_B : out std_logic_vector (15 downto 0);
            ram_data_B : in std_logic_vector (15 downto 0);
+           new_counter : out std_logic_vector(15 downto 0);
            BR_IF_in : in STD_LOGIC);
 end component Intruction_Fetch_Stage;
 component Decode is
@@ -172,6 +173,7 @@ signal sseg : std_logic_vector (6 downto 0);
 signal ram_addra, ram_addrb, mem_addrb: std_logic_vector(15 downto 0);
 signal ram_dataa, ram_datab, mem_datab, ram_dina, rom_addr, rom_data : std_logic_vector(15 downto 0);
 signal ram_wr_en, ram_ena, ram_enb, out_en, rom_en : std_logic;
+signal program_out : std_logic_vector (15 downto 0);
 
 -- Halt for RAW
 signal halt : std_logic := '0';
@@ -187,15 +189,16 @@ clk <= clk_100MHz;
 disp_cont : display_controller port map(
     clk => clk,
     reset => rst,
-    hex3 => IF_ID_IR(15 downto 12),
-    hex2 => IF_ID_IR(11 downto 8),
-    hex1 =>IF_ID_IR(7 downto 4),
-    hex0 =>IF_ID_IR(3 downto 0),
+    hex3 => program_out(15 downto 12),
+    hex2 => program_out(11 downto 8),
+    hex1 =>program_out(7 downto 4),
+    hex0 =>program_out(3 downto 0),
     an => an,
     sseg => sseg
 );
 
 IF_inst : Intruction_Fetch_Stage port map(
+    new_counter => program_out,
     clk=>clk, 
     reset_load => reset_load,
     reset_execute => reset_execute,

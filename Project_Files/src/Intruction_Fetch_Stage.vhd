@@ -34,6 +34,7 @@ entity Intruction_Fetch_Stage is
            PC_in : in STD_LOGIC_VECTOR (15 downto 0);
            ram_addr_B : out std_logic_vector (15 downto 0);
            ram_data_B : in std_logic_vector (15 downto 0);
+           new_counter : out std_logic_vector(15 downto 0);
            halt : in STD_LOGIC;
            BR_IF_in : in STD_LOGIC);
            
@@ -45,7 +46,7 @@ architecture Behavioral of Intruction_Fetch_Stage is
     signal instr_data : std_logic_vector(15 downto 0) := (others=>'0');
     signal PC_new : std_logic_vector (15 downto 0) := (others=>'0');
     signal program_counter, next_counter : std_logic_vector (15 downto 0) := (others=>'0');
-    
+
 begin
 
     --Latch Process
@@ -95,6 +96,7 @@ begin
         
     --RAM Access
     ram_addr_B <= program_counter;
+    new_counter <= program_counter;
 --    instr_data <= instr_data when halt = '1' else ram_data_B;
     
     
