@@ -165,11 +165,12 @@ signal ram_wr_en, ram_ena, ram_enb, out_en, rom_en : std_logic;
 signal halt : std_logic := '0';
 
 begin
-clk_divider : my_D_FF port map(
-    clock_100Mhz => clk_100MHz,
-    reset => rst,
-    Q => clk
-);
+--clk_divider : my_D_FF port map(
+--    clock_100Mhz => clk_100MHz,
+--    reset => rst,
+--    Q => clk
+--);
+clk <= clk_100MHz;
 IF_inst : Intruction_Fetch_Stage port map(
     clk=>clk, 
     reset_load => reset_load,
