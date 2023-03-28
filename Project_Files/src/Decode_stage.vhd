@@ -157,7 +157,7 @@ ra_index <= "111" when OPCODE = loadIMM_op else
     
 with OPCODE select
 	IR_wb <= 
-		'1' when add_op | sub_op | mul_op | nand_op | shl_op | shr_op | in_op | loadIMM_op | pop_op | mov_op,
+		'1' when add_op | sub_op | mul_op | nand_op | shl_op | shr_op | in_op | loadIMM_op | pop_op | mov_op | load_op,
 		'0' when others;
 
 --select read index 1 & 2 for regfile	
@@ -174,7 +174,7 @@ with OPCODE select
 	                    IR_intrn(8 downto 6) when load_sp_op | push_op | pop_op,
 	                    "000" when others;
 with OPCODE select	
-    rd_enable <= '1' when add_op | sub_op | mul_op | nand_op | shl_op | shr_op | test_op | out_op | mov_op | store_op | push_op,
+    rd_enable <= '1' when add_op | sub_op | mul_op | nand_op | shl_op | shr_op | test_op | out_op | mov_op | store_op | push_op | load_op,
                  '0' when others;
 
 

@@ -38,16 +38,30 @@ architecture tb of Top_Level_CPU_TB is
 component Top_Level_CPU is
     Port ( IN_PORT : in STD_LOGIC_VECTOR (15 downto 0);
            OUT_PORT : out STD_LOGIC_VECTOR (15 downto 0);
+           sseg : out STD_LOGIC_VECTOR (6 downto 0);
+           an : out STD_LOGIC_VECTOR (3 downto 0);
            clk_100MHz : in STD_LOGIC;
            reset_load : in STD_LOGIC;
-           reset_execute : in STD_LOGIC
+           reset_execute : in STD_LOGIC;
+           sys_rst : in STD_LOGIC
            );
 end component Top_Level_CPU;
 signal in_port, out_port : std_logic_vector(15 downto 0);
-signal clk, rst : std_logic;
+signal clk, rst, reset_load, reset_execute, sys_rst : std_logic := '0';
+signal sseg : std_logic_vector(6 downto 0);
+signal an : std_logic_vector(3 downto 0);
 
 begin
-CPU : Top_Level_CPU port map(clk_100MHz=>clk, reset_load=>rst, reset_execute=>rst, IN_PORT=>in_port, OUT_PORT=>out_port);
+CPU : Top_Level_CPU port map(
+    clk_100MHz=>clk, 
+    reset_load=>reset_load, 
+    sseg => sseg,
+    an => an,
+    sys_rst => sys_rst,
+    reset_execute=>reset_execute, 
+    IN_PORT=>in_port, 
+    OUT_PORT=>out_port
+);
 
 --Clocking Process
 process begin
@@ -58,16 +72,26 @@ process begin
 end process;
 
 process begin
-    rst <= '1';
+    sys_rst <= '0';
+    reset_execute <= '0';
+    reset_load <= '0';
+    -- For factorial Test  
+    in_port <= x"0005";
+    -- For factorial Test
+    
+    wait until clk = '1';
+    wait until clk = '0';
+    wait until clk = '1';
+    wait until clk = '0';
+    
+    reset_execute <= '1';
     for i in 0 to 4 loop
         wait until clk = '1';
         wait until clk = '0';
     end loop;
-    rst <= '0';
+    reset_execute <= '0';
   
--- For factorial Test  
-    in_port <= x"0005";
--- For factorial Test
+
   
 --    for i in 0 to 20 loop
 --        wait until clk = '1';

@@ -55,6 +55,15 @@ begin
        
         if(rising_edge(clk)) then
             if(reset_load = '1') then
+----                IR_IF_out <= (others=>'0');
+--                NPC_IF_out <= (others=>'0');
+--                program_counter <= reset_load_vector;
+--                branch <= '0';
+--                PC_new <= (others=>'0');
+--            elsif (reset_execute = '1') then
+----                IR_IF_out <= (others=>'0');
+--                NPC_IF_out <= (others=>'0');
+--                program_counter <= reset_execute_vector;
 --                branch <= '0';
 --                PC_new <= (others=>'0');
             else
@@ -82,12 +91,20 @@ begin
                 if(halt = '1') then
                     instr_data <= instr_data;
                     IR_IF_out <= instr_data;
+                    program_counter <= program_counter;
                 else
                     instr_data <= ram_data_B;
-                    IR_IF_out <= ram_data_B;
-                end if;  
-                NPC_IF_out <= program_counter;   
-                program_counter <= next_counter;
+                    if(branch = '1') then
+                        program_counter <= PC_new;
+                        NPC_IF_out <= (others=>'0');
+                        IR_IF_out <= (others=>'0');
+                    else
+                        NPC_IF_out <= program_counter;
+                        program_counter <= program_counter + instr_increment;
+                        IR_IF_out <= ram_data_B;
+                    end if;
+                end if;   
+--                program_counter <= next_counter;
                 branch <= br_IF_in;
                 PC_new <= PC_in;                
             end if;

@@ -28,10 +28,11 @@ entity Top_Level_CPU is
            an : out STD_LOGIC_VECTOR (3 downto 0);
            clk_100MHz : in STD_LOGIC;
            reset_load : in STD_LOGIC;
-           reset_execute : in STD_LOGIC
+           reset_execute : in STD_LOGIC;
+           sys_rst : in STD_LOGIC
            );
 end Top_Level_CPU;
---
+
 architecture Behavioral of Top_Level_CPU is
 --Component declaration
 component display_controller is
@@ -167,6 +168,7 @@ signal WB_ID_wr_addr : std_logic_vector(2 downto 0);
 signal WB_ID_loadimm, WB_ID_load_align: std_logic;
 
 
+
 --RAM, ROM intermediate Signals
 signal ram_addra, ram_addrb, mem_addrb: std_logic_vector(15 downto 0);
 signal ram_dataa, ram_datab, mem_datab, ram_dina, rom_addr, rom_data : std_logic_vector(15 downto 0);
@@ -186,7 +188,7 @@ clk <= clk_100MHz;
 
 disp_cont : display_controller port map(
     clk => clk,
-    reset => '0',
+    reset => sys_rst,
     hex3 => program_out(15 downto 12),
     hex2 => program_out(11 downto 8),
     hex1 =>program_out(7 downto 4),
@@ -302,12 +304,12 @@ RAM_inst : RAM port map (
     ena=>ram_ena, 
     enb=>ram_enb, 
     clk=>clk, 
-    rst=>rst
+    rst=>sys_rst
 );
 ROM_inst : ROM port map (
     addr => rom_addr,
     clk => clk,
-    rst => rst,
+    rst => sys_rst,
     en => rom_en,
     data => rom_data
 );
