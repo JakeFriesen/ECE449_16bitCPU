@@ -146,6 +146,30 @@ begin
     --Put R7 into the ALU result when returning from subroutine
     sign_ext <= (others=>IR(8)) when (OPCODE =brr_op) or (OPCODE =brr_n_op) or (OPCODE =brr_z_op) 
                 else (others=>IR(5));
+--    with OPCODE select
+--            imm_data <=     sign_ext(15 downto 8) & IR(8 downto 0) when brr_op | brr_n_op | brr_z_op,
+--                            sign_ext(15 downto 6) & IR(5 downto 0) when others;
+    
+--    with OPCODE select
+--        result <=   A_data when return_op | in_op,
+--                    B_data when mov_op,
+--                    ALU_result when others;
+              
+    
+    
+--    with OPCODE select
+--        ALU_A <= A_data when add_op | sub_op | mul_op | nand_op | test_op | shl_op | shr_op,
+--                 NPC when brr_op | brr_n_op | brr_z_op,
+--                 (others=>'0') when others;
+                 
+--    with OPCODE select
+--        ALU_B <= B_data when add_op | sub_op | mul_op | nand_op | test_op ,
+--                 imm_data when shl_op | shr_op | br_op | br_n_op | br_z_op | br_sub_op | brr_op | brr_n_op | brr_z_op,
+--                 (others=>'0') when others;
+--    with OPCODE select
+--        ALU_OP <= IR(11 downto 9) when add_op | sub_op | mul_op | nand_op | test_op| shl_op | shr_op ,
+--                 "001" when  br_op | br_n_op | br_z_op | br_sub_op| brr_op | brr_n_op | brr_z_op,
+--                 (others=>'0') when others;
     
     --Switch Case for each opcode
     --Defines ALU_A, ALU_B, ALU_OP

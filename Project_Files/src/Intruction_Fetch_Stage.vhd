@@ -87,10 +87,6 @@ begin
                 program_counter <= reset_execute_vector;
                 branch <= '0';
                 PC_new <= (others=>'0');
-            elsif(halt = '1') then 
-                -- Do not update signals; repeat instruction
-                      instr_data <= instr_data;
-                      IR_IF_out <= instr_data;
             else
             --Latch Outgoing signals
                 
