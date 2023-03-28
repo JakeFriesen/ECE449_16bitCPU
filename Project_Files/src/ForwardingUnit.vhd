@@ -69,7 +69,7 @@ rbEX <= IR_EX_inF(5 downto 3);
 rcEX <= IR_EX_inF(2 downto 0); 
 
 with opEX select
-    r1EX <=     raEX when store_op | mov_op | load_op | SHL_op | SHR_op |test_op,
+    r1EX <=     raEX when store_op | mov_op | load_op | SHL_op | SHR_op | test_op | brr_op | brr_n_op | brr_z_op | br_op |out_op | br_z_op | br_sub_op | push_op,
                 rbEX when others;
 with opEX select
     r2EX <=    rbEX when store_op  | load_op | mov_op,

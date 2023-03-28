@@ -12,13 +12,13 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="360332628743fs"></ZoomStartTime>
-      <ZoomEndTime time="538733474252fs"></ZoomEndTime>
-      <Cursor1Time time="455159655000fs"></Cursor1Time>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="184270310557fs"></ZoomEndTime>
+      <Cursor1Time time="37379225000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="189"></NameColumnWidth>
-      <ValueColumnWidth column_width="92"></ValueColumnWidth>
+      <ValueColumnWidth column_width="88"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="12" />
    <wvobject fp_name="/Top_Level_CPU_TB/rst" type="logic">
@@ -149,6 +149,7 @@
    <wvobject fp_name="group1109" type="group">
       <obj_property name="label">ID</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/A_data" type="array">
          <obj_property name="ElementShortName">A_data[15:0]</obj_property>
          <obj_property name="ObjectShortName">A_data[15:0]</obj_property>
@@ -288,6 +289,22 @@
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/B_MEM_inF" type="array">
          <obj_property name="ElementShortName">B_MEM_inF[15:0]</obj_property>
          <obj_property name="ObjectShortName">B_MEM_inF[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/loadIMM_data" type="array">
+         <obj_property name="ElementShortName">loadIMM_data[15:0]</obj_property>
+         <obj_property name="ObjectShortName">loadIMM_data[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/r1EX" type="array">
+         <obj_property name="ElementShortName">r1EX[2:0]</obj_property>
+         <obj_property name="ObjectShortName">r1EX[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/IR_EX_inF" type="array">
+         <obj_property name="ElementShortName">IR_EX_inF[15:0]</obj_property>
+         <obj_property name="ObjectShortName">IR_EX_inF[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/raEX" type="array">
+         <obj_property name="ElementShortName">raEX[2:0]</obj_property>
+         <obj_property name="ObjectShortName">raEX[2:0]</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="group3145" type="group">
