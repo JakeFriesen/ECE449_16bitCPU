@@ -168,6 +168,7 @@ component  ForwardingUnit is
     Port ( 
             clk: in STD_LOGIC;
             rst: in STD_LOGIC;
+            IR_ID_inF: in   std_logic_vector(15 downto 0);
             IR_EX_inF: in   std_logic_vector(15 downto 0);
             IR_MEM_inF: in   std_logic_vector(15 downto 0);
             IR_WB_inF: in   std_logic_vector(15 downto 0);
@@ -204,7 +205,7 @@ signal WB_ID_loadimm, WB_ID_load_align: std_logic;
 
 
 --RAM, ROM intermediate Signals
-signal ram_addra, ram_addrb, mem_addrb: std_logic_vector(15 downto 0);
+signal ram_addra, ram_addrb, mem_addrb, mem_addra: std_logic_vector(15 downto 0);
 signal ram_dataa, ram_datab, mem_datab, ram_dina, rom_addr, rom_data : std_logic_vector(15 downto 0);
 signal ram_wr_en, ram_ena, ram_enb, out_en, rom_en : std_logic;
 signal program_out : std_logic_vector (15 downto 0);
@@ -304,7 +305,7 @@ Z_MEM_in=>EX_MEM_Z_flag,
 branch=>MEM_IF_br, 
 branch_addr=>MEM_IF_br_addr,  
 ram_wren_A=>ram_wr_en,
-ram_addr_A=>ram_addra, 
+ram_addr_A=>mem_addra, 
 NPC_MEM_in=>EX_MEM_NPC, 
 ram_data_A=>ram_dataa, 
 ram_wrdata_A=>ram_dina, 
@@ -331,6 +332,7 @@ wr_enable_WB_out=>WB_ID_wr_en,
 ov_en_WB_out=>WB_ID_v_en, 
 loadIMM_WB_out=>WB_ID_loadimm, 
 load_align_WB_out=> WB_ID_load_align, 
+OUT_PORT => OUT_PORT,
 ov_data_WB_out=>WB_ID_v_data);
 
 
@@ -340,7 +342,7 @@ RAM_inst : RAM port map (
     addra=>ram_addra, 
     addrb=>ram_addrb, 
     dina=>ram_dina,
-     wr_en=>ram_wr_en, 
+    wr_en=>ram_wr_en, 
     ena=>ram_ena, 
     enb=>ram_enb, 
     clk=>clk, 
@@ -357,6 +359,7 @@ ROM_inst : ROM port map (
 ForwardUnit_inst : ForwardingUnit port map(
 clk=>clk, 
 rst=>rst,
+IR_ID_inF => IF_ID_IR,
 IR_EX_inF =>ID_EX_IR,
 IR_MEM_inF =>EX_MEM_IR,
 IR_WB_inF => MEM_WB_IR,
@@ -391,6 +394,6 @@ rom_en <= not mem_addrb(10);
 mem_datab <= ram_datab when mem_addrb(10) = '1' else
              rom_data;
 
-
+ram_addra <= "0000000" & mem_addra(9 downto 1);
 
 end Behavioral;

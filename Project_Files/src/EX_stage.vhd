@@ -108,7 +108,8 @@ begin
         end if;
         --Negative Latch
         if (clk='0' and clk'event) then
-            if(rst = '1' or halt='1') then
+--            if(rst = '1' or halt='1') then
+            if(rst = '1') then
                 Result_EX_out <=(others=>'0');
                 vdata_EX_out <= (others=>'0');
                 Z_EX_out <= '0';
@@ -150,10 +151,10 @@ begin
 --            imm_data <=     sign_ext(15 downto 8) & IR(8 downto 0) when brr_op | brr_n_op | brr_z_op,
 --                            sign_ext(15 downto 6) & IR(5 downto 0) when others;
     
---    with OPCODE select
---        result <=   A_data when return_op | in_op,
---                    B_data when mov_op,
---                    ALU_result when others;
+    with OPCODE select
+        result <=   A_data when return_op | in_op,
+                    B_data when mov_op,
+                    ALU_result when others;
               
     
     
