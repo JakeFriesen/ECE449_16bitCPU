@@ -1,0 +1,164 @@
+----------------------------------------------------------------------------------
+-- Company: University of Victoria ECE 449
+-- Engineer: Matthew Ebert
+-- 
+-- Create Date: 2023-FEB-16 
+-- Module Name: EX Stage - Behavioral
+-- Project Name: 16-bit CPU
+-- Target Devices: Basys3 FPGA
+-- 
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+library work;
+use work.Constant_Package.all;
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+use ieee.std_logic_unsigned.all;
+
+
+entity ForwardingUnit is
+    Port ( 
+            clk: in STD_LOGIC;
+            rst: in STD_LOGIC;
+            IR_EX_inF: in   std_logic_vector(15 downto 0);
+            IR_MEM_inF: in   std_logic_vector(15 downto 0);
+            IR_WB_inF: in   std_logic_vector(15 downto 0);
+            A_EX_inF : out STD_LOGIC_VECTOR (15 downto 0);
+            B_EX_inF : out  STD_LOGIC_VECTOR (15 downto 0);   
+            A_ID_outF : in STD_LOGIC_VECTOR (15 downto 0);
+            B_ID_outF : in STD_LOGIC_VECTOR (15 downto 0);
+            A_MEM_inF : in STD_LOGIC_VECTOR (15 downto 0);
+            B_MEM_inF : in STD_LOGIC_VECTOR (15 downto 0);     
+            Result_MEM_inF : in STD_LOGIC_VECTOR (15 downto 0);
+            Result_WB_inF: in STD_LOGIC_VECTOR (15 downto 0);
+            Memdata_WB_inF: in STD_LOGIC_VECTOR (15 downto 0);
+            Write_data_inF: in STD_LOGIC_VECTOR (15 downto 0);
+            Write_addr_inF: in STD_LOGIC_VECTOR (2 downto 0);
+            Write_en_inF: in STD_LOGIC;
+            loadIMM_inF: in std_logic;
+            R7_data_inF: in std_logic_vector(15 downto 0); 
+            halt: out std_logic
+           );
+         
+end ForwardingUnit;
+
+architecture Behavioral of ForwardingUnit is
+
+signal opEX,opMEM, opWB : std_logic_vector(6 downto 0);
+signal r1EX,r2EX, raEX, rbEX, rcEX, raWB, rbWB, rcWB, raMEM, rbMEM, rcMEM, loadIMM_sw: std_logic_vector(2 downto 0);
+signal A_forward_MEM, B_forward_MEM, A_forward_WB, B_forward_WB, loadIMM_data, loadIMM_data_intr: std_logic_vector(15 downto 0);
+signal sw_WB, en_REG, en_MEM, en_EX, en_WB, A_EX_sel, B_EX_sel, case2 : std_logic_vector(2 downto 0);
+
+begin
+
+--------------------------EX DATA----------------------------
+opEX <= IR_EX_inF(15 downto 9);
+--check that data in buffer is valid for forwarding
+with opEX select
+        en_EX <=   (others=>'0') when nop_op | in_op,
+                   (others=>'1') when others;
+
+ 
+raEX <= IR_EX_inF(8 downto 6); 
+rbEX <= IR_EX_inF(5 downto 3); 
+rcEX <= IR_EX_inF(2 downto 0); 
+
+with opEX select
+    r1EX <=     raEX when store_op | mov_op | load_op,
+                rbEX when others;
+with opEX select
+    r2EX <=    rbEX when store_op | mov_op | load_op,
+                rcEX when others;
+----------------------------MEM DATA----------------------------
+opMEM <= IR_MEM_inF(15 downto 9);
+
+
+    
+--check that data in buffer is valid for forwarding
+with opMEM select
+        en_MEM <=   (others=>'0') when nop_op | store_op,
+                    (others=>'1') when others;
+
+
+raMEM <= IR_MEM_inF(8 downto 6);
+rbMEM <= IR_MEM_inF(5 downto 3);
+rcMEM <= IR_MEM_inF(2 downto 0);
+						
+----------------------------WB DATA----------------------------
+opWB <= IR_WB_inF(15 downto 9);
+--check that data in buffer is valid for forwarding
+with opWB select
+        sw_WB <=    "001" when load_op,
+                    "000" when others;
+
+with opWB select
+        en_WB <=   (others=>'0') when nop_op | store_op,
+                   (others=>'1') when others;
+
+raWB <= IR_WB_inF(8 downto 6);
+rbWB <= IR_WB_inF(5 downto 3);
+rcWB <= IR_WB_inF(2 downto 0); 
+
+----------------------------REGDATA----------------------------
+opWB <= IR_WB_inF(15 downto 9);
+--check that data in buffer is valid for forwarding
+with Write_en_inF select
+        en_REG <=   (others=>'0') when '0',
+                    (others=>'1') when others;
+
+
+--get load IMM_data
+
+with IR_WB_inF(15 downto 8) select
+    loadIMM_data_intr <=        IR_WB_inF(7 downto 0) & R7_data_inF(7 downto 0) when (loadIMM_op & '1'),
+                                R7_data_inF(15 downto 8) & IR_WB_inF(7 downto 0) when (loadIMM_op & '0'),
+                                R7_data_inF when others;
+
+with IR_MEM_inF(15 downto 8) select
+    loadIMM_data <=     IR_MEM_inF(7 downto 0) & loadIMM_data_intr(7 downto 0) when (loadIMM_op & '1'),
+                        loadIMM_data_intr(15 downto 8) & IR_MEM_inF(7 downto 0) when (loadIMM_op & '0'),
+                        (others=>'0') when others;
+
+
+loadIMM_sw <= "111" when ((loadIMM_inF = '1') or (opMEM = loadIMM_op) or (opWB = loadIMM_op)) else "000";
+
+
+----------------------------FORWARDING----------------------------
+--determine if forwarding is available for A
+
+
+A_EX_sel <= ("100" and loadIMM_sw) when r1EX = "111" else
+            (("010" and en_EX and en_WB) or sw_WB) when r1EX = raWB else
+            ("001" and en_EX  and en_MEM) when r1EX = raMEM else
+            "000"; 
+            
+B_EX_sel <= ("100" and loadIMM_sw) when r2EX = "111" else
+            (("010" and en_EX and en_WB) or sw_WB) when r2EX = raWB else
+            ("001" and en_EX  and en_MEM) when r2EX = raMEM else
+            "000"; 
+                
+--Select which data to send to A
+with A_EX_sel select	
+    A_EX_inF <=     loadIMM_data when "100",
+                    Memdata_WB_inF when "011",
+                    Result_WB_inF when "010",
+                    Result_MEM_inF when "001",
+                    A_ID_outF when others;
+                    
+--Select which data to send to B           
+with B_EX_sel select	
+    B_EX_inF <=     loadIMM_data when "100",
+                    Memdata_WB_inF when "011",
+                    Result_WB_inF when "010",
+                    Result_MEM_inF when "001",
+                    B_ID_outF when others;
+
+
+                    --A type after L-type                                   
+halt <= '1' when ((opMEM = load_op) and ((B_EX_sel = "01") or (A_EX_sel = "01"))) else '0';
+     
+end Behavioral;

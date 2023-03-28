@@ -24,6 +24,7 @@ entity EX_stage is
     Port ( 
            clk: in STD_LOGIC;
            rst: in STD_LOGIC;
+           halt: in STD_LOGIC;
            IR_EX_in: in std_logic_vector(15 downto 0);
            A_EX_in : in STD_LOGIC_VECTOR (15 downto 0);
            B_EX_in : in STD_LOGIC_VECTOR (15 downto 0);
@@ -32,9 +33,7 @@ entity EX_stage is
            vdata_EX_out : out STD_LOGIC_VECTOR (15 downto 0);
            A_EX_out : out STD_LOGIC_VECTOR (15 downto 0);
            B_EX_out : out STD_LOGIC_VECTOR (15 downto 0);
-         --  O_Z : out STD_LOGIC;
-          -- O_N : out STD_LOGIC;
-         --  O_V : out STD_LOGIC;
+
            Z_EX_out : out std_logic;
            N_EX_out: out std_logic;
            IR_EX_out: out std_logic_vector(15 downto 0);
@@ -69,7 +68,7 @@ signal A_data: std_logic_vector(15 downto 0);
 signal NPC : std_logic_vector (15 downto 0);
 signal disp_l, disp_s : std_logic_vector (15 downto 0);
 signal data_sel: std_logic := '0';    
-signal B_data, imm_data: std_logic_vector(15 downto 0) := (others=>'0');
+signal B_data, imm_data, sign_ext : std_logic_vector(15 downto 0) := (others=>'0');
 signal OPCODE: std_logic_vector(6 downto 0) := (others=>'0');
 signal result_sel,  output_sel: std_logic := '0';
 
@@ -97,29 +96,24 @@ begin
                 B_data <= (others=>'0');
                 OPCODE <= (others=>'0');
                 NPC <= (others=>'0');
+            elsif (halt = '1') then 
+                -- Do not update anything
             else
                 IR <= IR_EX_in;
-                --ALU_OP <= IR_EX_in(11 downto 9);
                 A_data <= A_EX_in;          
                 B_data <= B_EX_in;
                 OPCODE<= IR_EX_in(15 downto 9);
                 NPC <= NPC_EX_in;
-                --Sign extend immediate
-                if(IR_EX_in(5) = '1') then
-                    imm_data <= "1111111111" & IR_EX_in(5 downto 0);
-                else
-                    imm_data <= "0000000000" & IR_EX_in(5 downto 0);
-                end if; 
             end if;
         end if;
         --Negative Latch
         if (clk='0' and clk'event) then
-            if(rst = '1') then
+            if(rst = '1' or halt='1') then
                 Result_EX_out <=(others=>'0');
                 vdata_EX_out <= (others=>'0');
                 Z_EX_out <= '0';
                 N_EX_out <= '0';
-                IR_EX_out <= IR;
+                IR_EX_out <= (others=>'0');
                 NPC_EX_out <= (others=>'0');
             else
                 Result_EX_out <= result;
@@ -150,9 +144,8 @@ begin
     
     --Push the next program counter + 1 into the ALU result when branching to subroutine
     --Put R7 into the ALU result when returning from subroutine
-    with OPCODE select
-    result <= A_data when return_op,
-              ALU_result when others;
+    sign_ext <= (others=>IR(8)) when (OPCODE =brr_op) or (OPCODE =brr_n_op) or (OPCODE =brr_z_op) 
+                else (others=>IR(5));
     
     --Switch Case for each opcode
     --Defines ALU_A, ALU_B, ALU_OP

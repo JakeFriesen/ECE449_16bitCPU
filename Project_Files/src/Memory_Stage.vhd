@@ -46,10 +46,10 @@ entity Memory_Stage is
 end Memory_Stage;
 
 architecture Behavioral of Memory_Stage is
-    signal IR, ALU, Overflow, ram_output, NPC : std_logic_vector (15 downto 0);
+    signal IR, Result, Overflow, ram_output, NPC : std_logic_vector (15 downto 0);
     signal flags : std_logic_vector (1 downto 0);
     signal branch_internal : std_logic;
-
+    signal OPCODE: std_logic_vector(6 downto 0);
 begin
     --Latch Process
     process(clk)
@@ -67,13 +67,13 @@ begin
             --Internal Branch set, clear the incoming buffer
                 flags <= "00";
                 IR <= (others=>'0');
-                ALU <= (others=>'0');
+                Result <= (others=>'0');
                 Overflow <= (others=>'0');
                 NPC <= (others=>'0');
             else
                 flags <= N_MEM_in & Z_MEM_in;
                 IR <= IR_MEM_in;
-                ALU <= Result_MEM_in;
+                Result <= Result_MEM_in;
                 Overflow <= vdata_MEM_in;
                 NPC <= NPC_MEM_in;
             end if;
@@ -85,11 +85,13 @@ begin
             if( IR(15 downto 9) = br_sub_op) then
                 Result_MEM_out <= NPC + instr_increment;
             else
-                Result_MEM_out <= ALU;
+                Result_MEM_out <= Result;
             end if;
             
-            if(IR(15 downto 9) = mov_op or IR(15 downto 9) = out_op) then
+            if(IR(15 downto 9) = out_op) then
                 memdata_MEM_out <= A_MEM_in;
+            elsif(IR(15 downto 9) = mov_op) then 
+                memdata_MEM_out <= B_MEM_in;
             else
                 memdata_MEM_out <= ram_data_A;
             end if;  
@@ -97,17 +99,19 @@ begin
         end if;
     end process;
 
+
+OPCODE<= IR(15 downto 9);
     --Branch Choice
-    process(IR(15 downto 9))
+    process(IR(15 downto 9), clk)
     begin
         case(IR(15 downto 9)) is
             when brr_op | br_op | br_sub_op | return_op =>
                 branch_internal <= '1';
-                branch_addr <= ALU;
+                branch_addr <= Result;
             when brr_n_op | br_n_op =>
                 if(flags(1) = '1') then
                     branch_internal <= '1';
-                    branch_addr <= ALU;
+                    branch_addr <= Result;
                 else
                     branch_internal <= '0';
                     branch_addr <= (others => '0'); 
@@ -115,7 +119,7 @@ begin
             when brr_z_op | br_z_op =>
                 if(flags(0) = '1') then
                     branch_internal <= '1';
-                    branch_addr <= ALU;
+                    branch_addr <= Result;
                 else
                     branch_internal <= '0';
                     branch_addr <= (others => '0'); 
@@ -125,6 +129,8 @@ begin
                 branch_addr <= (others => '0');            
         end case;    
     end process;
+    
+    
     
     pipe_flush <= branch_internal;
     branch <= branch_internal;

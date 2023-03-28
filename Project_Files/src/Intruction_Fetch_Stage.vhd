@@ -36,7 +36,9 @@ entity Intruction_Fetch_Stage is
            ram_data_B : in std_logic_vector (15 downto 0);
            new_counter : out std_logic_vector(15 downto 0);
            halt : in STD_LOGIC;
-           BR_IF_in : in STD_LOGIC);
+           BR_IF_in : in STD_LOGIC;
+           INPUT_IF_out: out std_logic_vector (15 downto 0);
+           INPORT_IF_in: in std_logic_vector (15 downto 0));
            
 end Intruction_Fetch_Stage;
 
@@ -85,6 +87,10 @@ begin
                 program_counter <= reset_execute_vector;
                 branch <= '0';
                 PC_new <= (others=>'0');
+            elsif(halt = '1') then 
+                -- Do not update signals; repeat instruction
+                      instr_data <= instr_data;
+                      IR_IF_out <= instr_data;
             else
             --Latch Outgoing signals
                 
@@ -106,7 +112,8 @@ begin
                 end if;   
 --                program_counter <= next_counter;
                 branch <= br_IF_in;
-                PC_new <= PC_in;                
+                PC_new <= PC_in; 
+                               
             end if;
         end if;
     end process;
@@ -116,10 +123,12 @@ begin
     new_counter <= program_counter;
 --    instr_data <= instr_data when halt = '1' else ram_data_B;
     
-    
+
     --Program Counter Update
     next_counter <= PC_new when branch = '1' else
                     program_counter when halt = '1' else
                     program_counter + instr_increment;
 
+    --INPUT
+    
 end Behavioral;
