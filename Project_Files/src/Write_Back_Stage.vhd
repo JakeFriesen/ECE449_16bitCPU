@@ -34,7 +34,6 @@ entity Write_Back_Stage is
            Overflow_in : in STD_LOGIC_VECTOR (15 downto 0);
            memdata_WB_in : in STD_LOGIC_VECTOR (15 downto 0);
            IR_WB_in : in STD_LOGIC_VECTOR (15 downto 0);
-           IN_PORT : in STD_LOGIC_VECTOR (15 downto 0);
            OUT_PORT : out STD_LOGIC_VECTOR (15 downto 0);
            wr_data_WB_out : out STD_LOGIC_VECTOR (15 downto 0);
            wr_addr_WB_out : out STD_LOGIC_VECTOR (2 downto 0);

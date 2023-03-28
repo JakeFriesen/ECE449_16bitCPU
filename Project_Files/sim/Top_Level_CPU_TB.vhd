@@ -135,22 +135,22 @@ process begin
 --    end loop;
 --    in_port <= x"0000"; --INPUT R7 <= 0
     
-    in_port <= x"0000"; --INPUT R0 <= 5
-    wait for 6us;
-    wait until clk = '1';
-    wait until clk = '0';
-    in_port <= x"0001"; --INPUT R1 <= 6
-    wait for 6us;
-    wait until clk = '1';
-    wait until clk = '0';
-    in_port <= x"0005"; --INPUT R1 <= 6
-    wait for 6us;
-    wait until clk = '1';
-    wait until clk = '0';
-    in_port <= x"0000"; --INPUT R1 <= 6
-    wait for 6us;
-    wait until clk = '1';
-    wait until clk = '0';
+--    in_port <= x"0000"; --INPUT R0 <= 5
+--    wait for 6us;
+--    wait until clk = '1';
+--    wait until clk = '0';
+--    in_port <= x"0001"; --INPUT R1 <= 6
+--    wait for 6us;
+--    wait until clk = '1';
+--    wait until clk = '0';
+--    in_port <= x"0005"; --INPUT R1 <= 6
+--    wait for 6us;
+--    wait until clk = '1';
+--    wait until clk = '0';
+--    in_port <= x"0000"; --INPUT R1 <= 6
+--    wait for 6us;
+--    wait until clk = '1';
+--    wait until clk = '0';
     
 
     wait;

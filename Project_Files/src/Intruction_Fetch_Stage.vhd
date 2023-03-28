@@ -95,6 +95,7 @@ begin
                     IR_IF_out <= instr_data;
                     program_counter <= program_counter;
                 else
+                    INPUT_IF_out <= INPORT_IF_in; 
                     instr_data <= ram_data_B;
                     if(branch = '1') then
                         program_counter <= PC_new;

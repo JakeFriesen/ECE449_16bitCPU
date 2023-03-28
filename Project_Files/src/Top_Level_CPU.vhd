@@ -134,7 +134,6 @@ component Write_Back_Stage is
             Overflow_in : in STD_LOGIC_VECTOR (15 downto 0);
             memdata_WB_in : in STD_LOGIC_VECTOR (15 downto 0);
             IR_WB_in : in STD_LOGIC_VECTOR (15 downto 0);
-            IN_PORT : in STD_LOGIC_VECTOR (15 downto 0);
             OUT_PORT : out STD_LOGIC_VECTOR (15 downto 0);
             wr_data_WB_out : out STD_LOGIC_VECTOR (15 downto 0);
             wr_addr_WB_out : out STD_LOGIC_VECTOR (2 downto 0);
@@ -168,7 +167,6 @@ component  ForwardingUnit is
     Port ( 
             clk: in STD_LOGIC;
             rst: in STD_LOGIC;
-            IR_ID_inF: in   std_logic_vector(15 downto 0);
             IR_EX_inF: in   std_logic_vector(15 downto 0);
             IR_MEM_inF: in   std_logic_vector(15 downto 0);
             IR_WB_inF: in   std_logic_vector(15 downto 0);
@@ -325,7 +323,6 @@ Result_WB_in=>MEM_WB_alu,
 Overflow_in=>MEM_WB_v_data,
  memdata_WB_in=>MEM_WB_mem_data, 
 IR_WB_in=>MEM_WB_IR, 
-IN_PORT=>IN_PORT, 
 wr_data_WB_out=>WB_ID_wr_data,
  wr_addr_WB_out=>WB_ID_wr_addr, 
 wr_enable_WB_out=>WB_ID_wr_en, 
@@ -359,7 +356,6 @@ ROM_inst : ROM port map (
 ForwardUnit_inst : ForwardingUnit port map(
 clk=>clk, 
 rst=>rst,
-IR_ID_inF => IF_ID_IR,
 IR_EX_inF =>ID_EX_IR,
 IR_MEM_inF =>EX_MEM_IR,
 IR_WB_inF => MEM_WB_IR,
