@@ -157,7 +157,7 @@ component  ForwardingUnit is
             IR_MEM_inF: in   std_logic_vector(15 downto 0);
             IR_WB_inF: in   std_logic_vector(15 downto 0);
             A_EX_inF : out STD_LOGIC_VECTOR (15 downto 0);
-            B_EX_inF : out  STD_LOGIC_VECTOR (15 downto 0);   
+            B_EX_inF : out  STD_LOGIC_VECTOR (15 downto 0);
             A_ID_outF : in STD_LOGIC_VECTOR (15 downto 0);
             B_ID_outF : in STD_LOGIC_VECTOR (15 downto 0);
             A_MEM_inF : in STD_LOGIC_VECTOR (15 downto 0);

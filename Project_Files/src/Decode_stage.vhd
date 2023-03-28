@@ -131,9 +131,9 @@ reg_file : register_file port map(
 ra_index <= "111" when OPCODE = loadIMM_op else
             IR_intrn(8 downto 6);
     
-with OPCODE select
-	IR_wb <=  '1' when add_op | sub_op | mul_op | nand_op | shl_op | shr_op | in_op | loadIMM_op | pop_op | mov_op,
-		      '0' when others;
+--with OPCODE select
+--	IR_wb <=  '1' when add_op | sub_op | mul_op | nand_op | shl_op | shr_op | in_op | loadIMM_op | pop_op | mov_op,
+--		      '0' when others;
 
 --select read index 1 & 2 for regfile	
 with OPCODE select
@@ -147,9 +147,9 @@ with OPCODE select
 	                    IR_intrn(5 downto 3) when nand_op | store_op | mov_op,
 	                    IR_intrn(8 downto 6) when load_sp_op | push_op | pop_op,
 	                    "000" when others;
-with OPCODE select	
-    rd_enable <= '1' when add_op | sub_op | mul_op | nand_op | shl_op | shr_op | test_op | out_op | mov_op | store_op | push_op,
-                 '0' when others;
+--with OPCODE select	
+--    rd_enable <= '1' when add_op | sub_op | mul_op | nand_op | shl_op | shr_op | test_op | out_op | mov_op | store_op | push_op,
+--                 '0' when others;
 
 
 r7_data_ID_out<= r7_data;
@@ -190,19 +190,19 @@ with B_sel select
 
 
 OPCODE<= IR_intrn(15 downto 9);
+
+
 	--latching		
 	process(clk)
 	begin
 		if rising_edge(clk) then
 			if (rst = '1' or br_clear_in = '1') then
 				IR_intrn <= zero;
-				--OPCODE <= (others=>'0');
 				npc <= (others=>'0');
 			elsif(halt = '1') then
 --			--Do not update signals
 			else
 			    IR_intrn <= IR_ID_in;
-			   -- OPCODE<= IR_ID_in(15 downto 9);
 				npc <= NPC_ID_in;
                 outport_previous <= outport_internal;
 			end if;

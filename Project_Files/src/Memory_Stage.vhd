@@ -88,10 +88,8 @@ begin
                 Result_MEM_out <= Result;
             end if;
             
-            if(IR(15 downto 9) = out_op) then
+            if(IR(15 downto 9) = out_op or IR(15 downto 9) = mov_op) then
                 memdata_MEM_out <= A_MEM_in;
-            elsif(IR(15 downto 9) = mov_op) then 
-                memdata_MEM_out <= B_MEM_in;
             else
                 memdata_MEM_out <= ram_data_A;
             end if;  

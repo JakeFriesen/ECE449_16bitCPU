@@ -102,7 +102,7 @@ begin
         wr_data_WB_out <=
             (others=>'0') when nop_op,                      --NOP, set all 0
             "00000000" & IR(7 downto 0) when loadIMM_op,                    --Load lower (18)
-            Mem when load_op | mov_op | pop_op,                             --Mem accessed
+            Mem when load_op | pop_op,                             --Mem accessed
             Result when others;                                      --ALU otherwise
     
     ov_en_WB_out <= 

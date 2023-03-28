@@ -52,6 +52,7 @@ signal opEX,opMEM, opWB : std_logic_vector(6 downto 0);
 signal r1EX,r2EX, raEX, rbEX, rcEX, raWB, rbWB, rcWB, raMEM, rbMEM, rcMEM, loadIMM_sw: std_logic_vector(2 downto 0);
 signal A_forward_MEM, B_forward_MEM, A_forward_WB, B_forward_WB, loadIMM_data, loadIMM_data_intr: std_logic_vector(15 downto 0);
 signal sw_WB, en_REG, en_MEM, en_EX, en_WB, A_EX_sel, B_EX_sel, case2 : std_logic_vector(2 downto 0);
+signal en_Mov: std_logic ;
 
 begin
 
@@ -68,10 +69,10 @@ rbEX <= IR_EX_inF(5 downto 3);
 rcEX <= IR_EX_inF(2 downto 0); 
 
 with opEX select
-    r1EX <=     raEX when store_op | mov_op | load_op,
+    r1EX <=     raEX when store_op | mov_op | load_op | SHL_op | SHR_op |test_op,
                 rbEX when others;
 with opEX select
-    r2EX <=    rbEX when store_op | mov_op | load_op,
+    r2EX <=    rbEX when store_op  | load_op | mov_op,
                 rcEX when others;
 ----------------------------MEM DATA----------------------------
 opMEM <= IR_MEM_inF(15 downto 9);
@@ -126,13 +127,14 @@ with IR_MEM_inF(15 downto 8) select
 
 loadIMM_sw <= "111" when ((loadIMM_inF = '1') or (opMEM = loadIMM_op) or (opWB = loadIMM_op)) else "000";
 
-
+en_Mov <= '1' when (opEX = mov_op and opMEM = mov_op) else '0';
 ----------------------------FORWARDING----------------------------
 --determine if forwarding is available for A
 
 
-A_EX_sel <= ("100" and loadIMM_sw) when r1EX = "111" else
-            (("010" and en_EX and en_WB) or sw_WB) when r1EX = raWB else
+A_EX_sel <= ("101"and en_EX  and en_MEM) when r2EX = raMEM and en_Mov = '1' else
+            ("100" and loadIMM_sw) when r1EX = "111" else
+            (("010" and en_EX and en_WB) or sw_WB) when r1EX = raWB  else
             ("001" and en_EX  and en_MEM) when r1EX = raMEM else
             "000"; 
             
@@ -143,7 +145,8 @@ B_EX_sel <= ("100" and loadIMM_sw) when r2EX = "111" else
                 
 --Select which data to send to A
 with A_EX_sel select	
-    A_EX_inF <=     loadIMM_data when "100",
+    A_EX_inF <=     A_MEM_inf when "101",
+                    loadIMM_data when "100",
                     Memdata_WB_inF when "011",
                     Result_WB_inF when "010",
                     Result_MEM_inF when "001",
