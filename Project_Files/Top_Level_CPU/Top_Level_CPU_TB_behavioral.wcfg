@@ -33,13 +33,14 @@
       <obj_property name="ElementShortName">reset_execute</obj_property>
       <obj_property name="ObjectShortName">reset_execute</obj_property>
    </wvobject>
-   <wvobject fp_name="/Top_Level_CPU_TB/in_port" type="array">
-      <obj_property name="ElementShortName">in_port[15:0]</obj_property>
-      <obj_property name="ObjectShortName">in_port[15:0]</obj_property>
+   <wvobject fp_name="/Top_Level_CPU_TB/CPU/WB_inst/IR_WB_in" type="array">
+      <obj_property name="ElementShortName">IR_WB_in[15:0]</obj_property>
+      <obj_property name="ObjectShortName">IR_WB_in[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/Top_Level_CPU_TB/out_port" type="array">
-      <obj_property name="ElementShortName">out_port[15:0]</obj_property>
-      <obj_property name="ObjectShortName">out_port[15:0]</obj_property>
+   <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/reg_file/reg_file" type="array">
+      <obj_property name="ElementShortName">reg_file[0:7][15:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_file[0:7][15:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
    </wvobject>
    <wvobject fp_name="group157" type="group">
       <obj_property name="label">CPU</obj_property>
@@ -729,6 +730,14 @@
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/WB_inst/Result" type="array">
          <obj_property name="ElementShortName">Result[15:0]</obj_property>
          <obj_property name="ObjectShortName">Result[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/WB_inst/Result" type="array">
+         <obj_property name="ElementShortName">Result[15:0]</obj_property>
+         <obj_property name="ObjectShortName">Result[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/WB_inst/wr_data_WB_out" type="array">
+         <obj_property name="ElementShortName">wr_data_WB_out[15:0]</obj_property>
+         <obj_property name="ObjectShortName">wr_data_WB_out[15:0]</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="group1117" type="group">

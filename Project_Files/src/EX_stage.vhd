@@ -94,7 +94,6 @@ begin
                 IR <= (others=>'0');
                 A_data <= (others=>'0');
                 B_data <= (others=>'0');
-                OPCODE <= (others=>'0');
                 NPC <= (others=>'0');
             elsif (halt = '1') then 
                 -- Do not update anything
@@ -102,7 +101,6 @@ begin
                 IR <= IR_EX_in;
                 A_data <= A_EX_in;          
                 B_data <= B_EX_in;
-                OPCODE<= IR_EX_in(15 downto 9);
                 NPC <= NPC_EX_in;
             end if;
         end if;
@@ -129,7 +127,7 @@ begin
         end if;
     end process;
     
-    
+ OPCODE<= IR(15 downto 9);   
              
     process(ALU_OP, ALU_result)
     begin
