@@ -98,6 +98,12 @@ begin
             elsif (halt = '1') then 
                 -- Do not update anything
             else
+            --Sign extend immediate
+                if(IR_EX_in(5) = '1') then
+                    imm_data <= "1111111111" & IR_EX_in(5 downto 0);
+                else
+                    imm_data <= "0000000000" & IR_EX_in(5 downto 0);
+                end if; 
                 IR <= IR_EX_in;
                 A_data <= A_EX_in;          
                 B_data <= B_EX_in;
@@ -143,8 +149,8 @@ begin
     
     --Push the next program counter + 1 into the ALU result when branching to subroutine
     --Put R7 into the ALU result when returning from subroutine
-    sign_ext <= (others=>IR(8)) when (OPCODE =brr_op) or (OPCODE =brr_n_op) or (OPCODE =brr_z_op) 
-                else (others=>IR(5));
+--    sign_ext <= (others=>IR(8)) when (OPCODE =brr_op) or (OPCODE =brr_n_op) or (OPCODE =brr_z_op) 
+--                else (others=>IR(5));
 --    with OPCODE select
 --            imm_data <=     sign_ext(15 downto 8) & IR(8 downto 0) when brr_op | brr_n_op | brr_z_op,
 --                            sign_ext(15 downto 6) & IR(5 downto 0) when others;
@@ -172,7 +178,7 @@ begin
     
     --Switch Case for each opcode
     --Defines ALU_A, ALU_B, ALU_OP
-    process(OPCODE) begin
+    process(OPCODE, IR(8 downto 0) ) begin
         case OPCODE is 
             when add_op | sub_op | mul_op | nand_op | test_op =>
             --Regular Arithmetic Operations

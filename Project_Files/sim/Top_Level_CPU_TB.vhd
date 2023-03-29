@@ -84,13 +84,14 @@ process begin
     wait until clk = '1';
     wait until clk = '0';
     
-    reset_execute <= '1';
+    reset_load <= '1';
+--    reset_execute <= '1';
     for i in 0 to 4 loop
         wait until clk = '1';
         wait until clk = '0';
     end loop;
-    reset_execute <= '0';
-  
+--    reset_execute <= '0';
+      reset_load <= '0';
 
   
 --    for i in 0 to 20 loop
