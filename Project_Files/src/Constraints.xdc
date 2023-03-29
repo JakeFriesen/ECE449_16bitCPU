@@ -39,8 +39,8 @@ set_property PACKAGE_PIN V15 [get_ports {IN_PORT[5]}]
 #	set_property IOSTANDARD LVCMOS33 [get_ports {IN_PORT[13]}]
 #set_property PACKAGE_PIN T1 [get_ports {IN_PORT[14]}]					
 #	set_property IOSTANDARD LVCMOS33 [get_ports {IN_PORT[14]}]
-#set_property PACKAGE_PIN R2 [get_ports {IN_PORT[15]}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {IN_PORT[15]}]
+set_property PACKAGE_PIN R2 [get_ports {sys_rst}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {sys_rst}]
  
 
 # LEDs

@@ -216,15 +216,15 @@ signal FU_EX_A, FU_EX_B,  MEM_alu_res: std_logic_vector(15 downto 0);
 signal halt : std_logic := '0';
 
 begin
---clk_divider : my_D_FF port map(
---    clock_100Mhz => clk_100MHz,
---    reset => rst,
---    Q => clk
---);
-clk <= clk_100MHz;
+clk_divider : my_D_FF port map(
+    clock_100Mhz => clk_100MHz,
+    reset => rst,
+    Q => clk
+);
+--clk <= clk_100MHz;
 
 disp_cont : display_controller port map(
-    clk => clk,
+    clk => clk_100MHz,
     reset => sys_rst,
     hex3 => program_out(15 downto 12),
     hex2 => program_out(11 downto 8),
