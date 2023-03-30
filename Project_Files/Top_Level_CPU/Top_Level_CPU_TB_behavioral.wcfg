@@ -12,15 +12,27 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="88426000000fs"></ZoomStartTime>
-      <ZoomEndTime time="360426000001fs"></ZoomEndTime>
-      <Cursor1Time time="142000000000fs"></Cursor1Time>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="274400000001fs"></ZoomEndTime>
+      <Cursor1Time time="14000000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="215"></NameColumnWidth>
+      <NameColumnWidth column_width="203"></NameColumnWidth>
       <ValueColumnWidth column_width="58"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="17" />
+   <WVObjectSize size="22" />
+   <wvobject fp_name="/Top_Level_CPU_TB/CPU/clk_divider/Q_int" type="logic">
+      <obj_property name="ElementShortName">Q_int</obj_property>
+      <obj_property name="ObjectShortName">Q_int</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top_Level_CPU_TB/CPU/clk_divider/clock_tick_counter" type="array">
+      <obj_property name="ElementShortName">clock_tick_counter[27:0]</obj_property>
+      <obj_property name="ObjectShortName">clock_tick_counter[27:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top_Level_CPU_TB/CPU/clk_divider/clock_count" type="array">
+      <obj_property name="ElementShortName">clock_count[27:0]</obj_property>
+      <obj_property name="ObjectShortName">clock_count[27:0]</obj_property>
+   </wvobject>
    <wvobject fp_name="/Top_Level_CPU_TB/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -32,6 +44,14 @@
    <wvobject fp_name="/Top_Level_CPU_TB/reset_execute" type="logic">
       <obj_property name="ElementShortName">reset_execute</obj_property>
       <obj_property name="ObjectShortName">reset_execute</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top_Level_CPU_TB/rst" type="logic">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top_Level_CPU_TB/sys_rst" type="logic">
+      <obj_property name="ElementShortName">sys_rst</obj_property>
+      <obj_property name="ObjectShortName">sys_rst</obj_property>
    </wvobject>
    <wvobject fp_name="/Top_Level_CPU_TB/in_port" type="array">
       <obj_property name="ElementShortName">in_port[15:0]</obj_property>

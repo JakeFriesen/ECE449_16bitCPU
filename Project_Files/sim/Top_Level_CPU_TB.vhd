@@ -38,18 +38,24 @@ architecture tb of Top_Level_CPU_TB is
 component Top_Level_CPU is
     Port ( IN_PORT : in STD_LOGIC_VECTOR (15 downto 0);
            OUT_PORT : out STD_LOGIC_VECTOR (15 downto 0);
+           OUT_BOOT : out STD_LOGIC;
            sseg : out STD_LOGIC_VECTOR (6 downto 0);
            an : out STD_LOGIC_VECTOR (3 downto 0);
            clk_100MHz : in STD_LOGIC;
            reset_load : in STD_LOGIC;
            reset_execute : in STD_LOGIC;
+           mode_sel : in STD_LOGIC;
+           seg_sel : in STD_LOGIC_VECTOR (1 downto 0);
            sys_rst : in STD_LOGIC
-           );
+       );
 end component Top_Level_CPU;
 signal in_port, out_port : std_logic_vector(15 downto 0);
 signal clk, rst, reset_load, reset_execute, sys_rst : std_logic := '0';
 signal sseg : std_logic_vector(6 downto 0);
 signal an : std_logic_vector(3 downto 0);
+signal mode_sel : std_logic := '0';
+signal seg_sel : std_logic_vector (1 downto 0) := "00";
+signal boot_input : std_logic_vector (9 downto 0) := (others=>'0');
 
 begin
 CPU : Top_Level_CPU port map(
@@ -59,6 +65,8 @@ CPU : Top_Level_CPU port map(
     an => an,
     sys_rst => sys_rst,
     reset_execute=>reset_execute, 
+    mode_sel => mode_sel,
+    seg_sel => seg_sel,
     IN_PORT=>in_port, 
     OUT_PORT=>out_port
 );
@@ -72,6 +80,8 @@ process begin
 end process;
 
 process begin
+    sys_rst <= '1';
+    wait for 2us;
     sys_rst <= '0';
     reset_execute <= '0';
     reset_load <= '0';
