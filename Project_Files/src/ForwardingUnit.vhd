@@ -72,7 +72,7 @@ with opEX select
     r1EX <=     raEX when store_op | mov_op | load_op | SHL_op | SHR_op | test_op | brr_op | brr_n_op | brr_z_op | br_op |out_op | br_z_op | br_sub_op | push_op,
                 rbEX when others;
 with opEX select
-    r2EX <=    rbEX when store_op  | load_op | mov_op,
+    r2EX <=    rbEX when store_op  | load_op | mov_op | SHL_op | SHR_op | test_op | brr_op | brr_n_op | brr_z_op | br_op |out_op | br_z_op | br_sub_op | push_op,
                 rcEX when others;
 ----------------------------MEM DATA----------------------------
 opMEM <= IR_MEM_inF(15 downto 9);
@@ -122,7 +122,8 @@ with IR_WB_inF(15 downto 8) select
 with IR_MEM_inF(15 downto 8) select
     loadIMM_data <=     IR_MEM_inF(7 downto 0) & loadIMM_data_intr(7 downto 0) when (loadIMM_op & '1'),
                         loadIMM_data_intr(15 downto 8) & IR_MEM_inF(7 downto 0) when (loadIMM_op & '0'),
-                        (others=>'0') when others;
+                        loadIMM_data when others;
+--                        (others=>'0') when others;
 
 
 loadIMM_sw <= "111" when ((loadIMM_inF = '1') or (opMEM = loadIMM_op) or (opWB = loadIMM_op)) else "000";
@@ -134,13 +135,13 @@ en_Mov <= '1' when (opEX = mov_op and opMEM = mov_op) else '0';
 
 A_EX_sel <= ("101"and en_EX  and en_MEM) when r2EX = raMEM and en_Mov = '1' else
             ("100" and loadIMM_sw) when r1EX = "111" else
-            (("010" and en_EX and en_WB) or sw_WB) when r1EX = raWB  else
             ("001" and en_EX  and en_MEM) when r1EX = raMEM else
+            (("010" and en_EX and en_WB) or sw_WB) when r1EX = raWB  else
             "000"; 
             
 B_EX_sel <= ("100" and loadIMM_sw) when r2EX = "111" else
-            (("010" and en_EX and en_WB) or sw_WB) when r2EX = raWB else
             ("001" and en_EX  and en_MEM) when r2EX = raMEM else
+            (("010" and en_EX and en_WB) or sw_WB) when r2EX = raWB else
             "000"; 
                 
 --Select which data to send to A

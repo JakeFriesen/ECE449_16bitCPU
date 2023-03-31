@@ -86,7 +86,8 @@ process begin
     reset_execute <= '0';
     reset_load <= '0';
     -- For factorial Test  
-    in_port <= x"0005";
+    in_port <= x"AA80";
+    mode_sel <= '1'; --Bootloader
     -- For factorial Test
     
     wait until clk = '1';
