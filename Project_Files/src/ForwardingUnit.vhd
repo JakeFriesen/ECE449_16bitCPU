@@ -49,9 +49,10 @@ end ForwardingUnit;
 architecture Behavioral of ForwardingUnit is
 
 signal opEX,opMEM, opWB : std_logic_vector(6 downto 0);
-signal r1EX,r2EX, raEX, rbEX, rcEX, raWB, rbWB, rcWB, raMEM, rbMEM, rcMEM, loadIMM_sw: std_logic_vector(2 downto 0);
+signal r1EX,r2EX, raEX, rbEX, rcEX, raWB, rbWB, rcWB, raMEM, rbMEM, rcMEM: std_logic_vector(2 downto 0);
 signal A_forward_MEM, B_forward_MEM, A_forward_WB, B_forward_WB, loadIMM_data, loadIMM_data_intr: std_logic_vector(15 downto 0);
-signal sw_WB, en_REG, en_MEM, en_EX, en_WB, A_EX_sel, B_EX_sel, case2 : std_logic_vector(2 downto 0);
+signal en_REG, en_MEM, en_EX, en_WB, loadIMM_en: std_logic;
+signal sw_WB, A_EX_sel, B_EX_sel, case2 : std_logic_vector( 2 downto 0);
 signal en_Mov: std_logic ;
 
 begin
@@ -60,8 +61,8 @@ begin
 opEX <= IR_EX_inF(15 downto 9);
 --check that data in buffer is valid for forwarding
 with opEX select
-        en_EX <=   (others=>'0') when nop_op | in_op,
-                   (others=>'1') when others;
+        en_EX <=   '0' when nop_op | in_op,
+                   '1' when others;
 
  
 raEX <= IR_EX_inF(8 downto 6); 
@@ -81,8 +82,8 @@ opMEM <= IR_MEM_inF(15 downto 9);
     
 --check that data in buffer is valid for forwarding
 with opMEM select
-        en_MEM <=   (others=>'0') when nop_op | store_op,
-                    (others=>'1') when others;
+        en_MEM <=   '0' when nop_op | store_op,
+                    '1' when others;
 
 
 raMEM <= IR_MEM_inF(8 downto 6);
@@ -96,9 +97,10 @@ with opWB select
         sw_WB <=    "001" when load_op,
                     "000" when others;
 
-with opWB select
-        en_WB <=   (others=>'0') when nop_op | store_op,
-                   (others=>'1') when others;
+
+en_WB <=   '0' when OPWB = nop_op or OPWB = store_op else
+           '0' when raWB = raMEM else
+           '1';
 
 raWB <= IR_WB_inF(8 downto 6);
 rbWB <= IR_WB_inF(5 downto 3);
@@ -106,10 +108,13 @@ rcWB <= IR_WB_inF(2 downto 0);
 
 ----------------------------REGDATA----------------------------
 opWB <= IR_WB_inF(15 downto 9);
+
+
+
 --check that data in buffer is valid for forwarding
 with Write_en_inF select
-        en_REG <=   (others=>'0') when '0',
-                    (others=>'1') when others;
+        en_REG <=   '0' when '0',
+                    '1' when others;
 
 
 --get load IMM_data
@@ -125,22 +130,22 @@ with IR_MEM_inF(15 downto 8) select
                         (others=>'0') when others;
 
 
-loadIMM_sw <= "111" when ((loadIMM_inF = '1') or (opMEM = loadIMM_op) or (opWB = loadIMM_op)) else "000";
+loadIMM_en <= '1' when ((loadIMM_inF = '1') or (opMEM = loadIMM_op) or (opWB = loadIMM_op)) else '0';
 
 en_Mov <= '1' when (opEX = mov_op and opMEM = mov_op) else '0';
 ----------------------------FORWARDING----------------------------
 --determine if forwarding is available for A
 
 
-A_EX_sel <= ("101"and en_EX  and en_MEM) when r2EX = raMEM and en_Mov = '1' else
-            ("100" and loadIMM_sw) when r1EX = "111" else
-            (("010" and en_EX and en_WB) or sw_WB) when r1EX = raWB  else
-            ("001" and en_EX  and en_MEM) when r1EX = raMEM else
+A_EX_sel <= ("101") when r2EX = raMEM and en_Mov = '1' and en_EX = '1' and en_MEM = '1' else
+            ("100" ) when r1EX = "111" and loadIMM_en= '1' else
+            (("010") or sw_WB) when r1EX = raWB and en_WB = '1' and en_EX = '1' else
+            ("001") when r1EX = raMEM and en_EX = '1' and en_MEM = '1' else
             "000"; 
             
-B_EX_sel <= ("100" and loadIMM_sw) when r2EX = "111" else
-            (("010" and en_EX and en_WB) or sw_WB) when r2EX = raWB else
-            ("001" and en_EX  and en_MEM) when r2EX = raMEM else
+B_EX_sel <= ("100") when r2EX = "111" and loadIMM_en = '1' else
+            (("010") or sw_WB) when r2EX = raWB and en_WB = '1' and en_EX = '1'  else
+            ("001") when r2EX = raMEM and en_MEM = '1' and en_EX = '1'  else
             "000"; 
                 
 --Select which data to send to A
