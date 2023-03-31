@@ -19,7 +19,8 @@ use work.Constant_Package.all;
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
+use ieee.std_logic_unsigned.all;
+use ieee.numeric_std.all;
 
 entity Top_Level_CPU is
     Port ( IN_PORT : in STD_LOGIC_VECTOR (15 downto 0);
@@ -31,7 +32,7 @@ entity Top_Level_CPU is
            reset_load : in STD_LOGIC;
            reset_execute : in STD_LOGIC;
            mode_sel : in STD_LOGIC;
-           seg_sel : in STD_LOGIC_VECTOR (1 downto 0);
+           seg_sel : in STD_LOGIC_VECTOR (4 downto 0);
            sys_rst : in STD_LOGIC
            );
 end Top_Level_CPU;
@@ -85,7 +86,9 @@ component Decode is
            R7_data_ID_out: out std_logic_vector(15 downto 0); 
            loadIMM_ID_in: in std_logic;
            load_align_ID_in: in std_logic;
-           INPUT_ID_in: in std_logic_vector(15 downto 0);
+           INPUT_ID_in: in std_logic_vector(15 downto 0); 
+           --debug
+           reg_file_out_debug: out reg_array;
            br_clear_in: in std_logic 
      );			  
 end component Decode;
@@ -213,7 +216,7 @@ signal program_out : std_logic_vector (15 downto 0);
 --Forwarding Unit
 --ID_A_outF, ID_B_out,  EX_alu_res: std_logic_vector(15 downto 0);
 signal FU_EX_A, FU_EX_B,  MEM_alu_res: std_logic_vector(15 downto 0);
-
+signal reg_file_out_debug_internal : reg_array;
 
 -- Halt for RAW
 signal halt : std_logic := '0';
@@ -273,6 +276,7 @@ load_align_ID_in=> WB_ID_load_align,
 NPC_ID_out=>ID_EX_NPC, 
 NPC_ID_in=>IF_ID_NPC,
 INPUT_ID_in =>IF_ID_INPUT,
+reg_file_out_debug => reg_file_out_debug_internal,
 R7_data_ID_out => R7_data
  
 );
@@ -401,9 +405,11 @@ input_internal <= "0000000000" & IN_PORT(5 downto 0) when mode_sel = '0' else
 OUT_BOOT <= out_internal(0);
 OUT_PORT <= out_internal;
 
-seven_seg_binary <= IF_ID_NPC when seg_sel = "00" else
-                    IF_ID_IR when seg_sel = "01" else
-                    out_internal when seg_sel = "10" else
+seven_seg_binary <= IF_ID_NPC when seg_sel = "0000" else
+                    IF_ID_IR when seg_sel = "0001" else
+                    out_internal when seg_sel = "0010" else
+                    input_internal when seg_sel = "0011" else
+                    reg_file_out_debug_internal(to_integer(unsigned(seg_sel(2 downto 0)))) when seg_sel(3) = '1' else
                     (others=>'0');
 
 end Behavioral;

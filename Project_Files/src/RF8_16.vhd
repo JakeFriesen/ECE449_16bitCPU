@@ -1,7 +1,19 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+
+--package pkg is
+--    type reg_array is array (integer range 0 to 7) of std_logic_vector(15 downto 0);
+--end package;
+--package body pkg is
+--end package body;
 
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
+use work.Constant_Package.all;
+--use work.pkg.all;
+
 
 entity register_file is
     port(
@@ -22,12 +34,14 @@ entity register_file is
         R7_data: out std_logic_vector(15 downto 0);
         loadIMM: in std_logic;
         load_align: in std_logic;
+        --debug
+        reg_file_out_debug: out reg_array;
         ov_enable: in std_logic);
 end register_file;
 
 architecture behavioural of register_file is
 
-type reg_array is array (integer range 0 to 7) of std_logic_vector(15 downto 0);
+--type reg_array is array (integer range 0 to 7) of std_logic_vector(15 downto 0);
 --internals signals
 signal reg_file : reg_array := (others=>(others=>'0'));
 begin
@@ -91,5 +105,7 @@ reg_file(5) when(rd_index2="101") else
 reg_file(6) when(rd_index2="110") else reg_file(7);
 
  R7_data <= reg_file(7);
+ 
+ reg_file_out_debug <= reg_file;
 
 end behavioural;

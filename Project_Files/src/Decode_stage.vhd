@@ -48,6 +48,8 @@ entity Decode is
               load_align_ID_in: in std_logic;
               INPUT_ID_in: in std_logic_vector(15 downto 0);
               R7_data_ID_out: out std_logic_vector(15 downto 0); 
+              --debug
+              reg_file_out_debug: out reg_array;
 			  br_clear_in: in std_logic 
 	    );			  
 end Decode;
@@ -70,6 +72,8 @@ component register_file is
     R7_data: out std_logic_vector(15 downto 0);
     loadIMM: in std_logic;
     load_align: in std_logic;
+    --debug
+    reg_file_out_debug: out reg_array;
     ov_enable: in std_logic
     );
 end component register_file;
@@ -95,7 +99,7 @@ signal stack_pointer : std_logic_vector (15 downto 0);
 signal OPCODE, test : std_logic_vector (6 downto 0):= (others=>'0');
 -- Constant X"0000"
 constant zero : std_logic_vector(15 downto 0) := X"0000";
-
+signal reg_file_out_debug_internal : reg_array;
 
 begin
 --Stack Register
@@ -123,6 +127,7 @@ reg_file : register_file port map(
     loadIMM=>loadIMM_ID_in,
     load_align => load_align_ID_in,
     R7_data =>r7_data, 
+    reg_file_out_debug => reg_file_out_debug_internal,
     ov_enable => ov_enable_ID_in
 );
 
@@ -227,6 +232,6 @@ OPCODE<= IR_intrn(15 downto 9);
 		end if;
 	end process;
 
-
+reg_file_out_debug <= reg_file_out_debug_internal;
 
 end Behavioral;

@@ -4,9 +4,9 @@
 ## - rename the used ports (in each line, after get_ports) according to the top level signal names in the project
 
 # Clock signal
-#set_property PACKAGE_PIN W5 [get_ports clk_100MHz]							
-#	set_property IOSTANDARD LVCMOS33 [get_ports clk_100MHz]
-#	create_clock -add -name sys_clk_pin -period 10.00 -waveform {0 5} [get_ports clk_100MHz]
+set_property PACKAGE_PIN W5 [get_ports clk_100MHz]							
+	set_property IOSTANDARD LVCMOS33 [get_ports clk_100MHz]
+	create_clock -add -name sys_clk_pin -period 10.00 -waveform {0 5} [get_ports clk_100MHz]
  
 # Switches
 set_property PACKAGE_PIN V17 [get_ports {IN_PORT[0]}]					
@@ -29,16 +29,16 @@ set_property PACKAGE_PIN V15 [get_ports {IN_PORT[5]}]
 #	set_property IOSTANDARD LVCMOS33 [get_ports {IN_PORT[8]}]
 #set_property PACKAGE_PIN T3 [get_ports {IN_PORT[9]}]					
 #	set_property IOSTANDARD LVCMOS33 [get_ports {IN_PORT[9]}]
-#set_property PACKAGE_PIN T2 [get_ports {IN_PORT[10]}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {IN_PORT[10]}]
-#set_property PACKAGE_PIN R3 [get_ports {IN_PORT[11]}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {IN_PORT[11]}]
-#set_property PACKAGE_PIN W2 [get_ports {IN_PORT[12]}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {IN_PORT[12]}]
-set_property PACKAGE_PIN U1 [get_ports {seg_sel[0]}]					
+set_property PACKAGE_PIN T2 [get_ports {seg_sel[0]}]					
 	set_property IOSTANDARD LVCMOS33 [get_ports {seg_sel[0]}]
-set_property PACKAGE_PIN T1 [get_ports {seg_sel[1]}]					
+set_property PACKAGE_PIN R3 [get_ports {seg_sel[1]}]					
 	set_property IOSTANDARD LVCMOS33 [get_ports {seg_sel[1]}]
+set_property PACKAGE_PIN W2 [get_ports {seg_sel[2]}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {seg_sel[2]}]
+set_property PACKAGE_PIN U1 [get_ports {seg_sel[3]}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {seg_sel[3]}]
+set_property PACKAGE_PIN T1 [get_ports {seg_sel[4]}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {seg_sel[4]}]
 set_property PACKAGE_PIN R2 [get_ports {mode_sel}]					
 	set_property IOSTANDARD LVCMOS33 [get_ports {mode_sel}]
  

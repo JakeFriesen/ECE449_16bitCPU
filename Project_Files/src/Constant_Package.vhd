@@ -69,6 +69,7 @@ package Constant_Package is
     
     constant instr_increment : std_logic_vector (15 downto 0) := x"0002";   --Counter increment
     
+    type reg_array is array (integer range 0 to 7) of std_logic_vector(15 downto 0);
 end package Constant_Package;
 
 package body Constant_Package is
