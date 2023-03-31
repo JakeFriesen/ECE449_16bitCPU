@@ -30,6 +30,7 @@ architecture behavioural of register_file is
 type reg_array is array (integer range 0 to 7) of std_logic_vector(15 downto 0);
 --internals signals
 signal reg_file : reg_array := (others=>(others=>'0'));
+signal multiply_overflow_data : std_logic_vector(15 downto 0) :=(others=>'0');
 begin
 --write operation 
 process(clk)
@@ -42,7 +43,7 @@ begin
    elsif(wr_enable='1') then
       
       if (ov_enable='1') then
-          reg_file(7) <= ov_data;
+          multiply_overflow_data  <= ov_data;
       end if;
       
       
