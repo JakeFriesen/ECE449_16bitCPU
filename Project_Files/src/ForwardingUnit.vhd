@@ -127,7 +127,7 @@ with IR_WB_inF(15 downto 8) select
 with IR_MEM_inF(15 downto 8) select
     loadIMM_data <=     IR_MEM_inF(7 downto 0) & loadIMM_data_intr(7 downto 0) when (loadIMM_op & '1'),
                         loadIMM_data_intr(15 downto 8) & IR_MEM_inF(7 downto 0) when (loadIMM_op & '0'),
-                        (others=>'0') when others;
+                        loadIMM_data_intr when others;
 
 
 loadIMM_en <= '1' when ((loadIMM_inF = '1') or (opMEM = loadIMM_op) or (opWB = loadIMM_op)) else '0';
