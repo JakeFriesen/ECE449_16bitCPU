@@ -147,8 +147,8 @@ with OPCODE select
 						"000" when others;	
 						
 with OPCODE select	
-	rd_index2_intern <= IR_intrn(2 downto 0) when add_op | sub_op | mul_op,
-	                    IR_intrn(5 downto 3) when nand_op | store_op | mov_op,
+	rd_index2_intern <= IR_intrn(2 downto 0) when add_op | sub_op | mul_op | nand_op,
+	                    IR_intrn(5 downto 3) when store_op | mov_op,
 	                    IR_intrn(8 downto 6) when load_sp_op | push_op | pop_op,
 	                    "000" when others;
 --with OPCODE select	

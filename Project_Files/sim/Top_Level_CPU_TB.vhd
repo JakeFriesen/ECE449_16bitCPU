@@ -45,7 +45,7 @@ component Top_Level_CPU is
            reset_load : in STD_LOGIC;
            reset_execute : in STD_LOGIC;
            mode_sel : in STD_LOGIC;
-           seg_sel : in STD_LOGIC_VECTOR (1 downto 0);
+           seg_sel : in STD_LOGIC_VECTOR (4 downto 0);
            sys_rst : in STD_LOGIC
        );
 end component Top_Level_CPU;
@@ -54,7 +54,7 @@ signal clk, rst, reset_load, reset_execute, sys_rst : std_logic := '0';
 signal sseg : std_logic_vector(6 downto 0);
 signal an : std_logic_vector(3 downto 0);
 signal mode_sel : std_logic := '0';
-signal seg_sel : std_logic_vector (1 downto 0) := "00";
+signal seg_sel : std_logic_vector (4 downto 0) := "00000";
 signal boot_input : std_logic_vector (9 downto 0) := (others=>'0');
 
 begin
@@ -103,68 +103,36 @@ process begin
     end loop;
 --    reset_execute <= '0';
       reset_load <= '0';
-
-  
---    for i in 0 to 20 loop
---        wait until clk = '1';
---        wait until clk = '0';
---    end loop;
     
---    in_port <= x"0002"; --INPUT R0 <= 2
---    for i in 0 to 3 loop
---        wait until clk = '1';
---        wait until clk = '0';
---    end loop;
---    in_port <= x"0003"; --INPUT R1 <= 3
---    for i in 0 to 3 loop
---        wait until clk = '1';
---        wait until clk = '0';
---    end loop;
---    in_port <= x"0001"; --INPUT R2 <= 1
---    for i in 0 to 3 loop
---        wait until clk = '1';
---        wait until clk = '0';
---    end loop;
---    in_port <= x"0005"; --INPUT R3 <= 5
---    for i in 0 to 3 loop
---        wait until clk = '1';
---        wait until clk = '0';
---    end loop;
---    in_port <= x"0000"; --INPUT R4 <= 0
---    for i in 0 to 3 loop
---        wait until clk = '1';
---        wait until clk = '0';
---    end loop;
---    in_port <= x"0001"; --INPUT R5 <= 1
---    for i in 0 to 3 loop
---        wait until clk = '1';
---        wait until clk = '0';
---    end loop;
---    in_port <= x"0005"; --INPUT R6 <= 5
---    for i in 0 to 3 loop
---        wait until clk = '1';
---        wait until clk = '0';
---    end loop;
---    in_port <= x"0000"; --INPUT R7 <= 0
+    while out_port(0) = '0' loop
+        wait until clk = '1';
+        wait until clk = '0';
+    end loop;
     
---    in_port <= x"0000"; --INPUT R0 <= 5
---    wait for 6us;
---    wait until clk = '1';
---    wait until clk = '0';
---    in_port <= x"0001"; --INPUT R1 <= 6
---    wait for 6us;
---    wait until clk = '1';
---    wait until clk = '0';
---    in_port <= x"0005"; --INPUT R1 <= 6
---    wait for 6us;
---    wait until clk = '1';
---    wait until clk = '0';
---    in_port <= x"0000"; --INPUT R1 <= 6
---    wait for 6us;
---    wait until clk = '1';
---    wait until clk = '0';
+    in_port <= x"0000";
+    while out_port(0) = '1' loop
+         wait until clk = '1';
+         wait until clk = '0';
+    end loop;
+     
+    in_port <= x"5580";
+    while out_port(0) = '0' loop
+        wait until clk = '1';
+        wait until clk = '0';
+    end loop;
     
-
+    in_port <= x"0000";
+    while out_port(0) = '1' loop
+        wait until clk = '1';
+        wait until clk = '0';
+    end loop;
+    
+    in_port <= x"1080";
+    while out_port(0) = '0' loop
+        wait until clk = '1';
+        wait until clk = '0';
+    end loop;
+    
     wait;
 end process;
 
