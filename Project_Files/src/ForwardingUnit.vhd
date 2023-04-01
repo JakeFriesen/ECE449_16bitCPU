@@ -118,8 +118,8 @@ with Write_en_inF select
 
 
 --get load IMM_data
-r7_data_intr <= Result_MEM_inF when r1EX = raMEM or r2EX = raMEM else 
-                Result_WB_inF when  r1EX = raWB or r2EX = raWB else
+r7_data_intr <= Result_MEM_inF when raMEM = "111" else 
+                Result_WB_inF when  raWB = "111"  else
                 R7_data_inf;
 
 with IR_WB_inF(15 downto 8) select
