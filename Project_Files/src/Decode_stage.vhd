@@ -127,6 +127,47 @@ reg_file : register_file port map(
 );
 
 
+
+
+
+	--latching		
+	process(clk)
+	begin
+		if rising_edge(clk) then
+			if (rst = '1' or br_clear_in = '1') then
+				IR_intrn <= zero;
+				npc <= (others=>'0');
+			elsif(halt = '1') then
+--			--Do not update signals
+			else
+			    IR_intrn <= IR_ID_in;
+				npc <= NPC_ID_in;
+                outport_previous <= outport_internal;
+			end if;
+		end if;
+		--Latch Output Signals
+		if falling_edge(clk) then
+		  if(rst = '1') then
+		      A_ID_out <= (others=>'0');
+		      B_ID_out <= (others=>'0');
+		      NPC_ID_out <= (others=>'0');
+		      IR_ID_out <= (others=>'0');
+		      
+		    elsif(halt = '1') then 
+		    -- do nothing
+		  	else
+                A_ID_out <= A_data;
+                B_ID_out <=B_data;                
+                IR_ID_out <= IR_intrn;
+                NPC_ID_out <= npc;
+
+		  end if;
+		end if;
+	end process;
+
+
+
+
 ra_index <= "111" when OPCODE = loadIMM_op else
             IR_intrn(8 downto 6);
     
@@ -192,40 +233,6 @@ with B_sel select
 OPCODE<= IR_intrn(15 downto 9);
 
 
-	--latching		
-	process(clk)
-	begin
-		if rising_edge(clk) then
-			if (rst = '1' or br_clear_in = '1') then
-				IR_intrn <= zero;
-				npc <= (others=>'0');
-			elsif(halt = '1') then
---			--Do not update signals
-			else
-			    IR_intrn <= IR_ID_in;
-				npc <= NPC_ID_in;
-                outport_previous <= outport_internal;
-			end if;
-		end if;
-		--Latch Output Signals
-		if falling_edge(clk) then
-		  if(rst = '1') then
-		      A_ID_out <= (others=>'0');
-		      B_ID_out <= (others=>'0');
-		      NPC_ID_out <= (others=>'0');
-		      IR_ID_out <= (others=>'0');
-		      
-		    elsif(halt = '1') then 
-		    -- do nothing
-		  	else
-                A_ID_out <= A_data;
-                B_ID_out <=B_data;                
-                IR_ID_out <= IR_intrn;
-                NPC_ID_out <= npc;
-
-		  end if;
-		end if;
-	end process;
 
 
 

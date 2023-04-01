@@ -12,12 +12,12 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="88426000000fs"></ZoomStartTime>
-      <ZoomEndTime time="360426000001fs"></ZoomEndTime>
-      <Cursor1Time time="142000000000fs"></Cursor1Time>
+      <ZoomStartTime time="13686000000fs"></ZoomStartTime>
+      <ZoomEndTime time="57658699164fs"></ZoomEndTime>
+      <Cursor1Time time="31630341000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="215"></NameColumnWidth>
+      <NameColumnWidth column_width="199"></NameColumnWidth>
       <ValueColumnWidth column_width="58"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="17" />
@@ -173,7 +173,6 @@
    <wvobject fp_name="group197" type="group">
       <obj_property name="label">IF</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/IF_inst/IR_IF_out" type="array">
          <obj_property name="ElementShortName">IR_IF_out[15:0]</obj_property>
          <obj_property name="ObjectShortName">IR_IF_out[15:0]</obj_property>
@@ -242,7 +241,6 @@
    <wvobject fp_name="group1109" type="group">
       <obj_property name="label">ID</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="group740" type="group">
          <obj_property name="label">SP</obj_property>
          <obj_property name="DisplayName">label</obj_property>
@@ -608,6 +606,14 @@
          <obj_property name="ElementShortName">output_sel</obj_property>
          <obj_property name="ObjectShortName">output_sel</obj_property>
       </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/disp_s" type="array">
+         <obj_property name="ElementShortName">disp_s[15:0]</obj_property>
+         <obj_property name="ObjectShortName">disp_s[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/disp_L" type="array">
+         <obj_property name="ElementShortName">disp_L[15:0]</obj_property>
+         <obj_property name="ObjectShortName">disp_L[15:0]</obj_property>
+      </wvobject>
    </wvobject>
    <wvobject fp_name="group970" type="group">
       <obj_property name="label">MEM</obj_property>
@@ -732,7 +738,6 @@
    <wvobject fp_name="group967" type="group">
       <obj_property name="label">WB</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/WB_inst/Result_WB_in" type="array">
          <obj_property name="ElementShortName">Result_WB_in[15:0]</obj_property>
          <obj_property name="ObjectShortName">Result_WB_in[15:0]</obj_property>
@@ -817,6 +822,7 @@
    <wvobject fp_name="group1117" type="group">
       <obj_property name="label">FU</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/IR_EX_inF" type="array">
          <obj_property name="ElementShortName">IR_EX_inF[15:0]</obj_property>
          <obj_property name="ObjectShortName">IR_EX_inF[15:0]</obj_property>
@@ -840,10 +846,14 @@
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/A_EX_sel" type="array">
          <obj_property name="ElementShortName">A_EX_sel[2:0]</obj_property>
          <obj_property name="ObjectShortName">A_EX_sel[2:0]</obj_property>
+         <obj_property name="CustomSignalColor">#FFFF00</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/B_EX_sel" type="array">
          <obj_property name="ElementShortName">B_EX_sel[2:0]</obj_property>
          <obj_property name="ObjectShortName">B_EX_sel[2:0]</obj_property>
+         <obj_property name="CustomSignalColor">#FFFF00</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/A_ID_outF" type="array">
          <obj_property name="ElementShortName">A_ID_outF[15:0]</obj_property>
@@ -961,10 +971,6 @@
          <obj_property name="ElementShortName">rcMEM[2:0]</obj_property>
          <obj_property name="ObjectShortName">rcMEM[2:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/loadIMM_sw" type="array">
-         <obj_property name="ElementShortName">loadIMM_sw[2:0]</obj_property>
-         <obj_property name="ObjectShortName">loadIMM_sw[2:0]</obj_property>
-      </wvobject>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/A_forward_MEM" type="array">
          <obj_property name="ElementShortName">A_forward_MEM[15:0]</obj_property>
          <obj_property name="ObjectShortName">A_forward_MEM[15:0]</obj_property>
@@ -993,21 +999,21 @@
          <obj_property name="ElementShortName">sw_WB[2:0]</obj_property>
          <obj_property name="ObjectShortName">sw_WB[2:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/en_REG" type="array">
-         <obj_property name="ElementShortName">en_REG[2:0]</obj_property>
-         <obj_property name="ObjectShortName">en_REG[2:0]</obj_property>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/en_REG" type="logic">
+         <obj_property name="ElementShortName">en_REG</obj_property>
+         <obj_property name="ObjectShortName">en_REG</obj_property>
       </wvobject>
-      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/en_MEM" type="array">
-         <obj_property name="ElementShortName">en_MEM[2:0]</obj_property>
-         <obj_property name="ObjectShortName">en_MEM[2:0]</obj_property>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/en_MEM" type="logic">
+         <obj_property name="ElementShortName">en_MEM</obj_property>
+         <obj_property name="ObjectShortName">en_MEM</obj_property>
       </wvobject>
-      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/en_EX" type="array">
-         <obj_property name="ElementShortName">en_EX[2:0]</obj_property>
-         <obj_property name="ObjectShortName">en_EX[2:0]</obj_property>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/en_EX" type="logic">
+         <obj_property name="ElementShortName">en_EX</obj_property>
+         <obj_property name="ObjectShortName">en_EX</obj_property>
       </wvobject>
-      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/en_WB" type="array">
-         <obj_property name="ElementShortName">en_WB[2:0]</obj_property>
-         <obj_property name="ObjectShortName">en_WB[2:0]</obj_property>
+      <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/en_WB" type="logic">
+         <obj_property name="ElementShortName">en_WB</obj_property>
+         <obj_property name="ObjectShortName">en_WB</obj_property>
       </wvobject>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/A_EX_sel" type="array">
          <obj_property name="ElementShortName">A_EX_sel[2:0]</obj_property>
@@ -1073,7 +1079,6 @@
    <wvobject fp_name="group185" type="group">
       <obj_property name="label">ROM</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/ROM_inst/addr" type="array">
          <obj_property name="ElementShortName">addr[15:0]</obj_property>
          <obj_property name="ObjectShortName">addr[15:0]</obj_property>

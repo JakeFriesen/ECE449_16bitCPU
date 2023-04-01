@@ -384,11 +384,12 @@ rst <= reset_load or reset_execute;
 rom_addr <= "0000000" & mem_addrb(9 downto 1);
 ram_addrb <= "0000000" & mem_addrb(9 downto 1);
 -- Switch on 10th bit 
-ram_enb <= mem_addrb(10);
+ram_enb <='1';-- mem_addrb(10);
 rom_en <= not mem_addrb(10);
 -- RAM and ROM data
-mem_datab <= ram_datab when mem_addrb(10) = '1' else
-             rom_data;
+--UNCOMMENT WHEN NOT TESTING
+mem_datab <= ram_datab;-- when mem_addrb(10) = '1' else
+           --  rom_data;
 
 ram_addra <= "0000000" & mem_addra(9 downto 1);
 

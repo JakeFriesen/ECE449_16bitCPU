@@ -84,14 +84,14 @@ process begin
     wait until clk = '1';
     wait until clk = '0';
     
-    reset_load <= '1';
+  --  reset_load <= '1';
 --    reset_execute <= '1';
-    for i in 0 to 4 loop
-        wait until clk = '1';
-        wait until clk = '0';
-    end loop;
+--    for i in 0 to 4 loop
+--        wait until clk = '1';
+--        wait until clk = '0';
+--    end loop;
 --    reset_execute <= '0';
-      reset_load <= '0';
+ --     reset_load <= '0';
 
   
 --    for i in 0 to 20 loop
@@ -99,7 +99,9 @@ process begin
 --        wait until clk = '0';
 --    end loop;
     
---    in_port <= x"0002"; --INPUT R0 <= 2
+--    in_port <= x"AA80"; --INPUT R0 <= 2
+--     wait until clk = '1';
+--     wait until clk = '0';
 --    for i in 0 to 3 loop
 --        wait until clk = '1';
 --        wait until clk = '0';

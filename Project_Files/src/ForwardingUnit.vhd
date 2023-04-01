@@ -61,7 +61,7 @@ begin
 opEX <= IR_EX_inF(15 downto 9);
 --check that data in buffer is valid for forwarding
 with opEX select
-        en_EX <=   '0' when nop_op | in_op,
+        en_EX <=   '0' when nop_op | in_op | loadIMM_op | pop_op | BRR_op | brr_n_op | brr_z_op,
                    '1' when others;
 
  
@@ -82,7 +82,7 @@ opMEM <= IR_MEM_inF(15 downto 9);
     
 --check that data in buffer is valid for forwarding
 with opMEM select
-        en_MEM <=   '0' when nop_op | store_op,
+        en_MEM <=   '0' when nop_op | store_op | loadIMM_op | BRR_op | brr_n_op | brr_z_op,
                     '1' when others;
 
 
@@ -98,7 +98,7 @@ with opWB select
                     "000" when others;
 
 
-en_WB <=   '0' when OPWB = nop_op or OPWB = store_op else
+en_WB <=   '0' when OPWB = nop_op or OPWB = store_op  or OPWB = loadIMM_OP or OPWB = BRR_OP or OPWB = BRR_N_OP or OPWB = BRR_Z_OP else
            '0' when raWB = raMEM else
            '1';
 
@@ -138,12 +138,12 @@ en_Mov <= '1' when (opEX = mov_op and opMEM = mov_op) else '0';
 
 
 A_EX_sel <= ("101") when r2EX = raMEM and en_Mov = '1' and en_EX = '1' and en_MEM = '1' else
-            ("100" ) when r1EX = "111" and loadIMM_en= '1' else
+            ("100" ) when r1EX = "111" and loadIMM_en= '1' and en_EX = '1' else
             (("010") or sw_WB) when r1EX = raWB and en_WB = '1' and en_EX = '1' else
             ("001") when r1EX = raMEM and en_EX = '1' and en_MEM = '1' else
             "000"; 
             
-B_EX_sel <= ("100") when r2EX = "111" and loadIMM_en = '1' else
+B_EX_sel <= ("100") when r2EX = "111" and loadIMM_en = '1' and en_EX = '1' else
             (("010") or sw_WB) when r2EX = raWB and en_WB = '1' and en_EX = '1'  else
             ("001") when r2EX = raMEM and en_MEM = '1' and en_EX = '1'  else
             "000"; 
