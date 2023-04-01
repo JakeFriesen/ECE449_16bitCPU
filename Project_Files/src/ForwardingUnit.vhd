@@ -50,7 +50,7 @@ architecture Behavioral of ForwardingUnit is
 
 signal opEX,opMEM, opWB : std_logic_vector(6 downto 0);
 signal r1EX,r2EX, raEX, rbEX, rcEX, raWB, rbWB, rcWB, raMEM, rbMEM, rcMEM: std_logic_vector(2 downto 0);
-signal A_forward_MEM, B_forward_MEM, A_forward_WB, B_forward_WB, loadIMM_data, loadIMM_data_intr: std_logic_vector(15 downto 0);
+signal A_forward_MEM, B_forward_MEM, A_forward_WB, B_forward_WB, loadIMM_data, loadIMM_data_intr, r7_data_intr: std_logic_vector(15 downto 0);
 signal en_REG, en_MEM, en_EX, en_WB, loadIMM_en: std_logic;
 signal sw_WB, A_EX_sel, B_EX_sel, case2 : std_logic_vector( 2 downto 0);
 signal en_Mov: std_logic ;
@@ -118,11 +118,14 @@ with Write_en_inF select
 
 
 --get load IMM_data
+r7_data_intr <= Result_MEM_inF when r1EX = raMEM or r2EX = raMEM else 
+                Result_WB_inF when  r1EX = raWB or r2EX = raWB else
+                R7_data_inf;
 
 with IR_WB_inF(15 downto 8) select
-    loadIMM_data_intr <=        IR_WB_inF(7 downto 0) & R7_data_inF(7 downto 0) when (loadIMM_op & '1'),
-                                R7_data_inF(15 downto 8) & IR_WB_inF(7 downto 0) when (loadIMM_op & '0'),
-                                R7_data_inF when others;
+    loadIMM_data_intr <=        IR_WB_inF(7 downto 0) & r7_data_intr(7 downto 0) when (loadIMM_op & '1'),
+                                r7_data_intr(15 downto 8) & IR_WB_inF(7 downto 0) when (loadIMM_op & '0'),
+                                r7_data_intr when others;
 
 with IR_MEM_inF(15 downto 8) select
     loadIMM_data <=     IR_MEM_inF(7 downto 0) & loadIMM_data_intr(7 downto 0) when (loadIMM_op & '1'),

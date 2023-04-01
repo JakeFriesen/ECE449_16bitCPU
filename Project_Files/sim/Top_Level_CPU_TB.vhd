@@ -86,8 +86,10 @@ process begin
     reset_execute <= '0';
     reset_load <= '0';
     -- For factorial Test  
-    in_port <= x"AA80";
-    mode_sel <= '1'; --Bootloader
+--    in_port <= x"AA80";
+    in_port <= x"0055";
+--    mode_sel <= '1'; --Bootloader
+    mode_sel <= '0'; --Program
     -- For factorial Test
     
     wait until clk = '1';
@@ -95,43 +97,93 @@ process begin
     wait until clk = '1';
     wait until clk = '0';
     
-    reset_load <= '1';
---    reset_execute <= '1';
-    for i in 0 to 4 loop
-        wait until clk = '1';
-        wait until clk = '0';
-    end loop;
---    reset_execute <= '0';
-      reset_load <= '0';
+--    reset_load <= '1';
+----    reset_execute <= '1';
+--    for i in 0 to 4 loop
+--        wait until clk = '1';
+--        wait until clk = '0';
+--    end loop;
+----    reset_execute <= '0';
+--      reset_load <= '0';
     
-    while out_port(0) = '0' loop
-        wait until clk = '1';
-        wait until clk = '0';
-    end loop;
+--    while out_port(0) = '0' loop
+--        wait until clk = '1';
+--        wait until clk = '0';
+--    end loop;
     
-    in_port <= x"0000";
-    while out_port(0) = '1' loop
-         wait until clk = '1';
-         wait until clk = '0';
-    end loop;
+--    in_port <= x"0000";
+--    while out_port(0) = '1' loop
+--         wait until clk = '1';
+--         wait until clk = '0';
+--    end loop;
      
-    in_port <= x"5580";
-    while out_port(0) = '0' loop
-        wait until clk = '1';
-        wait until clk = '0';
-    end loop;
+--    in_port <= x"5580";
+--    while out_port(0) = '0' loop
+--        wait until clk = '1';
+--        wait until clk = '0';
+--    end loop;
     
-    in_port <= x"0000";
-    while out_port(0) = '1' loop
-        wait until clk = '1';
-        wait until clk = '0';
-    end loop;
+--    in_port <= x"0000";
+--    while out_port(0) = '1' loop
+--        wait until clk = '1';
+--        wait until clk = '0';
+--    end loop;
     
-    in_port <= x"1080";
-    while out_port(0) = '0' loop
-        wait until clk = '1';
-        wait until clk = '0';
-    end loop;
+--    in_port <= x"1080";
+--    while out_port(0) = '0' loop
+--        wait until clk = '1';
+--        wait until clk = '0';
+--    end loop;
+    
+--    in_port <= x"0000";
+--    while out_port(0) = '1' loop
+--        wait until clk = '1';
+--        wait until clk = '0';
+--    end loop;
+    
+--    in_port <= x"04C0";
+--    while out_port(0) = '0' loop
+--        wait until clk = '1';
+--        wait until clk = '0';
+--    end loop;
+--    in_port <= x"0000";
+--    while out_port(0) = '1' loop
+--        wait until clk = '1';
+--        wait until clk = '0';
+--    end loop;
+--    in_port <= x"10C0";
+--    while out_port(0) = '0' loop
+--        wait until clk = '1';
+--        wait until clk = '0';
+--    end loop;
+--    in_port <= x"0000";
+--    while out_port(0) = '1' loop
+--       wait until clk = '1';
+--       wait until clk = '0';
+--    end loop;
+--    in_port <= x"2500";
+--    while out_port(0) = '0' loop
+--        wait until clk = '1';
+--        wait until clk = '0';
+--    end loop;
+--    in_port <= x"0000";
+--    while out_port(0) = '1' loop
+--       wait until clk = '1';
+--       wait until clk = '0';
+--    end loop;
+--    in_port <= x"2401";
+--    while out_port(0) = '0' loop
+--        wait until clk = '1';
+--        wait until clk = '0';
+--    end loop;
+--    in_port <= x"0000";
+--    while out_port(0) = '1' loop
+--       wait until clk = '1';
+--       wait until clk = '0';
+--    end loop;
+    
+    
+    
     
     wait;
 end process;
