@@ -4,9 +4,9 @@
 ## - rename the used ports (in each line, after get_ports) according to the top level signal names in the project
 
 # Clock signal
-#set_property PACKAGE_PIN W5 [get_ports clk_100MHz]							
-#	set_property IOSTANDARD LVCMOS33 [get_ports clk_100MHz]
-#	create_clock -add -name sys_clk_pin -period 10.00 -waveform {0 5} [get_ports clk_100MHz]
+set_property PACKAGE_PIN W5 [get_ports clk_100MHz]							
+	set_property IOSTANDARD LVCMOS33 [get_ports clk_100MHz]
+	create_clock -add -name sys_clk_pin -period 10.00 -waveform {0 5} [get_ports clk_100MHz]
  
 # Switches
 set_property PACKAGE_PIN V17 [get_ports {IN_PORT[0]}]					
@@ -29,18 +29,18 @@ set_property PACKAGE_PIN V15 [get_ports {IN_PORT[5]}]
 #	set_property IOSTANDARD LVCMOS33 [get_ports {IN_PORT[8]}]
 #set_property PACKAGE_PIN T3 [get_ports {IN_PORT[9]}]					
 #	set_property IOSTANDARD LVCMOS33 [get_ports {IN_PORT[9]}]
-#set_property PACKAGE_PIN T2 [get_ports {IN_PORT[10]}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {IN_PORT[10]}]
-#set_property PACKAGE_PIN R3 [get_ports {IN_PORT[11]}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {IN_PORT[11]}]
-#set_property PACKAGE_PIN W2 [get_ports {IN_PORT[12]}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {IN_PORT[12]}]
-#set_property PACKAGE_PIN U1 [get_ports {IN_PORT[13]}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {IN_PORT[13]}]
-#set_property PACKAGE_PIN T1 [get_ports {IN_PORT[14]}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {IN_PORT[14]}]
-#set_property PACKAGE_PIN R2 [get_ports {IN_PORT[15]}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {IN_PORT[15]}]
+set_property PACKAGE_PIN T2 [get_ports {seg_sel[0]}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {seg_sel[0]}]
+set_property PACKAGE_PIN R3 [get_ports {seg_sel[1]}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {seg_sel[1]}]
+set_property PACKAGE_PIN W2 [get_ports {seg_sel[2]}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {seg_sel[2]}]
+set_property PACKAGE_PIN U1 [get_ports {seg_sel[3]}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {seg_sel[3]}]
+set_property PACKAGE_PIN T1 [get_ports {seg_sel[4]}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {seg_sel[4]}]
+set_property PACKAGE_PIN R2 [get_ports {mode_sel}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {mode_sel}]
  
 
 # LEDs
@@ -112,12 +112,12 @@ set_property PACKAGE_PIN U18 [get_ports reset_load]
 	set_property IOSTANDARD LVCMOS33 [get_ports reset_load]
 set_property PACKAGE_PIN T18 [get_ports reset_execute]						
 	set_property IOSTANDARD LVCMOS33 [get_ports reset_execute]
-#set_property PACKAGE_PIN W19 [get_ports btnL]						
-	#set_property IOSTANDARD LVCMOS33 [get_ports btnL]
+#set_property PACKAGE_PIN W19 [get_ports sys_rst ]						
+#	set_property IOSTANDARD LVCMOS33 [get_ports sys_rst]
 #set_property PACKAGE_PIN T17 [get_ports btnR]						
 	#set_property IOSTANDARD LVCMOS33 [get_ports btnR]
-#set_property PACKAGE_PIN U17 [get_ports btnD]						
-	#set_property IOSTANDARD LVCMOS33 [get_ports btnD]
+set_property PACKAGE_PIN U17 [get_ports sys_rst]						
+	set_property IOSTANDARD LVCMOS33 [get_ports sys_rst]
  
 
 
@@ -179,13 +179,13 @@ set_property PACKAGE_PIN C16 [get_ports {IN_PORT[15]}]
 
 #Pmod Header JC
 #Sch name = JC1
-set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets {clk_100MHz_IBUF}]
-set_property PACKAGE_PIN K17 [get_ports {clk_100MHz}]					
-	set_property IOSTANDARD LVCMOS33 [get_ports {clk_100MHz}]
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets {clk_in_IBUF}]
+set_property PACKAGE_PIN K17 [get_ports {clk_in}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {clk_in}]
 	
 #Sch name = JC2
-set_property PACKAGE_PIN M18 [get_ports {OUT_PORT[0]}]					
-	set_property IOSTANDARD LVCMOS33 [get_ports {OUT_PORT[0]}]
+set_property PACKAGE_PIN M18 [get_ports {OUT_BOOT}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {OUT_BOOT}]
 ##Sch name = JC3
 #set_property PACKAGE_PIN N17 [get_ports {JC[2]}]					
 #	set_property IOSTANDARD LVCMOS33 [get_ports {JC[2]}]

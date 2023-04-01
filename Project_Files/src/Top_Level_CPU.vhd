@@ -19,17 +19,22 @@ use work.Constant_Package.all;
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
+use ieee.std_logic_unsigned.all;
+use ieee.numeric_std.all;
 
 entity Top_Level_CPU is
     Port ( IN_PORT : in STD_LOGIC_VECTOR (15 downto 0);
            OUT_PORT : out STD_LOGIC_VECTOR (15 downto 0);
+           OUT_BOOT : out STD_LOGIC;
            sseg : out STD_LOGIC_VECTOR (6 downto 0);
            an : out STD_LOGIC_VECTOR (3 downto 0);
            clk_100MHz : in STD_LOGIC;
            reset_load : in STD_LOGIC;
            reset_execute : in STD_LOGIC;
-           sys_rst : in STD_LOGIC
+           mode_sel : in STD_LOGIC;
+           seg_sel : in STD_LOGIC_VECTOR (4 downto 0);
+           sys_rst : in STD_LOGIC;
+           clk_in : in STD_LOGIC
            );
 end Top_Level_CPU;
 
@@ -82,7 +87,9 @@ component Decode is
            R7_data_ID_out: out std_logic_vector(15 downto 0); 
            loadIMM_ID_in: in std_logic;
            load_align_ID_in: in std_logic;
-           INPUT_ID_in: in std_logic_vector(15 downto 0);
+           INPUT_ID_in: in std_logic_vector(15 downto 0); 
+           --debug
+           reg_file_out_debug: out reg_array;
            br_clear_in: in std_logic 
      );			  
 end component Decode;
@@ -199,8 +206,7 @@ signal IF_ID_NPC, IF_ID_INPUT, WB_IF_PC, ID_EX_NPC, MEM_IF_br_addr, EX_MEM_NPC :
 signal MEM_IF_br, WB_ID_wr_en, WB_ID_v_en, EX_MEM_N_flag, EX_MEM_Z_flag, MEM_pipe_flush : std_logic;
 signal WB_ID_wr_addr : std_logic_vector(2 downto 0);
 signal WB_ID_loadimm, WB_ID_load_align: std_logic;
-
-
+signal input_internal, out_internal, seven_seg_binary : std_logic_vector(15 downto 0);
 
 --RAM, ROM intermediate Signals
 signal ram_addra, ram_addrb, mem_addrb, mem_addra: std_logic_vector(15 downto 0);
@@ -210,26 +216,26 @@ signal program_out : std_logic_vector (15 downto 0);
 --Forwarding Unit
 --ID_A_outF, ID_B_out,  EX_alu_res: std_logic_vector(15 downto 0);
 signal FU_EX_A, FU_EX_B,  MEM_alu_res: std_logic_vector(15 downto 0);
-
-
+signal reg_file_out_debug_internal : reg_array;
+signal clk_sseg : std_logic;
 -- Halt for RAW
 signal halt : std_logic := '0';
 
 begin
---clk_divider : my_D_FF port map(
---    clock_100Mhz => clk_100MHz,
---    reset => rst,
---    Q => clk
---);
-clk <= clk_100MHz;
+clk_divider : my_D_FF port map(
+    clock_100Mhz => clk_100MHz,
+    reset => sys_rst,
+    Q => clk_sseg
+);
+clk <= clk_in;
 
 disp_cont : display_controller port map(
-    clk => clk,
-    reset => sys_rst,
-    hex3 => program_out(15 downto 12),
-    hex2 => program_out(11 downto 8),
-    hex1 =>program_out(7 downto 4),
-    hex0 =>program_out(3 downto 0),
+    clk => clk_sseg,
+    reset => rst,
+    hex3 => seven_seg_binary(15 downto 12),
+    hex2 => seven_seg_binary(11 downto 8),
+    hex1 =>seven_seg_binary(7 downto 4),
+    hex0 =>seven_seg_binary(3 downto 0),
     an => an,
     sseg => sseg
 );
@@ -245,7 +251,7 @@ IF_inst : Intruction_Fetch_Stage port map(
     PC_in=>MEM_IF_br_addr, 
     ram_addr_B=>mem_addrb, 
     ram_data_B=>mem_datab, 
-    INPORT_IF_in =>IN_PORT,
+    INPORT_IF_in =>input_internal,
     INPUT_IF_out => IF_ID_INPUT,
     BR_IF_in=>MEM_IF_br
 );
@@ -270,6 +276,7 @@ load_align_ID_in=> WB_ID_load_align,
 NPC_ID_out=>ID_EX_NPC, 
 NPC_ID_in=>IF_ID_NPC,
 INPUT_ID_in =>IF_ID_INPUT,
+reg_file_out_debug => reg_file_out_debug_internal,
 R7_data_ID_out => R7_data
  
 );
@@ -329,7 +336,7 @@ wr_enable_WB_out=>WB_ID_wr_en,
 ov_en_WB_out=>WB_ID_v_en, 
 loadIMM_WB_out=>WB_ID_loadimm, 
 load_align_WB_out=> WB_ID_load_align, 
-OUT_PORT => OUT_PORT,
+OUT_PORT => out_internal,
 ov_data_WB_out=>WB_ID_v_data);
 
 
@@ -377,8 +384,8 @@ halt => halt
 );
 
 
---TODO: Need to Update the reset sequence
-rst <= reset_load or reset_execute;
+
+rst <= reset_load or reset_execute or sys_rst;
 -- RAM(0x0400-0x07FF) and ROM(0x0000-0x03FF) addressing
 -- downto 1 because ROM/RAM are word addressed
 rom_addr <= "0000000" & mem_addrb(9 downto 1);
@@ -392,5 +399,20 @@ mem_datab <= ram_datab;-- when mem_addrb(10) = '1' else
            --  rom_data;
 
 ram_addra <= "0000000" & mem_addra(9 downto 1);
+
+--Input Output Routing
+input_internal <= "0000000000" & IN_PORT(5 downto 0) when mode_sel = '0' else
+                  IN_PORT(15 downto 6) & "000000";
+OUT_BOOT <= out_internal(0);
+OUT_PORT <= out_internal ;
+
+--seven_seg_binary  <= IF_ID_NPC;
+
+seven_seg_binary <= IF_ID_NPC when seg_sel = "0000" else
+            IF_ID_IR when seg_sel = "0001" else
+            out_internal when seg_sel = "0010" else
+            input_internal when seg_sel = "0011" else
+            reg_file_out_debug_internal(to_integer(unsigned(seg_sel(2 downto 0)))) when seg_sel(3) = '1' else
+            (others=>'0');
 
 end Behavioral;

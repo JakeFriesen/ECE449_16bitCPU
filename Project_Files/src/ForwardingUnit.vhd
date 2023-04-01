@@ -50,7 +50,7 @@ architecture Behavioral of ForwardingUnit is
 
 signal opEX,opMEM, opWB : std_logic_vector(6 downto 0);
 signal r1EX,r2EX, raEX, rbEX, rcEX, raWB, rbWB, rcWB, raMEM, rbMEM, rcMEM: std_logic_vector(2 downto 0);
-signal A_forward_MEM, B_forward_MEM, A_forward_WB, B_forward_WB, loadIMM_data, loadIMM_data_intr: std_logic_vector(15 downto 0);
+signal A_forward_MEM, B_forward_MEM, A_forward_WB, B_forward_WB, loadIMM_data, loadIMM_data_intr, r7_data_intr: std_logic_vector(15 downto 0);
 signal en_REG, en_MEM, en_EX, en_WB, loadIMM_en: std_logic;
 signal sw_WB, A_EX_sel, B_EX_sel, case2 : std_logic_vector( 2 downto 0);
 signal en_Mov: std_logic ;
@@ -73,7 +73,7 @@ with opEX select
     r1EX <=     raEX when store_op | mov_op | load_op | SHL_op | SHR_op | test_op | brr_op | brr_n_op | brr_z_op | br_op |out_op | br_z_op | br_sub_op | push_op,
                 rbEX when others;
 with opEX select
-    r2EX <=    rbEX when store_op  | load_op | mov_op,
+    r2EX <=    rbEX when store_op  | load_op | mov_op | SHL_op | SHR_op | test_op | brr_op | brr_n_op | brr_z_op | br_op |out_op | br_z_op | br_sub_op | push_op,
                 rcEX when others;
 ----------------------------MEM DATA----------------------------
 opMEM <= IR_MEM_inF(15 downto 9);
@@ -118,11 +118,14 @@ with Write_en_inF select
 
 
 --get load IMM_data
+r7_data_intr <= Result_MEM_inF when raMEM = "111" else 
+                Result_WB_inF when  raWB = "111"  else
+                R7_data_inf;
 
 with IR_WB_inF(15 downto 8) select
-    loadIMM_data_intr <=        IR_WB_inF(7 downto 0) & R7_data_inF(7 downto 0) when (loadIMM_op & '1'),
-                                R7_data_inF(15 downto 8) & IR_WB_inF(7 downto 0) when (loadIMM_op & '0'),
-                                R7_data_inF when others;
+    loadIMM_data_intr <=        IR_WB_inF(7 downto 0) & r7_data_intr(7 downto 0) when (loadIMM_op & '1'),
+                                r7_data_intr(15 downto 8) & IR_WB_inF(7 downto 0) when (loadIMM_op & '0'),
+                                r7_data_intr when others;
 
 with IR_MEM_inF(15 downto 8) select
     loadIMM_data <=     IR_MEM_inF(7 downto 0) & loadIMM_data_intr(7 downto 0) when (loadIMM_op & '1'),

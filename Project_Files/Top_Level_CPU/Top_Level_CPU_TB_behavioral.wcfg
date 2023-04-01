@@ -12,15 +12,27 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="13686000000fs"></ZoomStartTime>
-      <ZoomEndTime time="57658699164fs"></ZoomEndTime>
-      <Cursor1Time time="31630341000fs"></Cursor1Time>
+      <ZoomStartTime time="27800000000fs"></ZoomStartTime>
+      <ZoomEndTime time="225000000001fs"></ZoomEndTime>
+      <Cursor1Time time="65000000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="199"></NameColumnWidth>
+      <NameColumnWidth column_width="191"></NameColumnWidth>
       <ValueColumnWidth column_width="58"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="17" />
+   <WVObjectSize size="23" />
+   <wvobject fp_name="/Top_Level_CPU_TB/CPU/clk_divider/Q_int" type="logic">
+      <obj_property name="ElementShortName">Q_int</obj_property>
+      <obj_property name="ObjectShortName">Q_int</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top_Level_CPU_TB/CPU/clk_divider/clock_tick_counter" type="array">
+      <obj_property name="ElementShortName">clock_tick_counter[27:0]</obj_property>
+      <obj_property name="ObjectShortName">clock_tick_counter[27:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top_Level_CPU_TB/CPU/clk_divider/clock_count" type="array">
+      <obj_property name="ElementShortName">clock_count[27:0]</obj_property>
+      <obj_property name="ObjectShortName">clock_count[27:0]</obj_property>
+   </wvobject>
    <wvobject fp_name="/Top_Level_CPU_TB/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -33,6 +45,14 @@
       <obj_property name="ElementShortName">reset_execute</obj_property>
       <obj_property name="ObjectShortName">reset_execute</obj_property>
    </wvobject>
+   <wvobject fp_name="/Top_Level_CPU_TB/rst" type="logic">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top_Level_CPU_TB/sys_rst" type="logic">
+      <obj_property name="ElementShortName">sys_rst</obj_property>
+      <obj_property name="ObjectShortName">sys_rst</obj_property>
+   </wvobject>
    <wvobject fp_name="/Top_Level_CPU_TB/in_port" type="array">
       <obj_property name="ElementShortName">in_port[15:0]</obj_property>
       <obj_property name="ObjectShortName">in_port[15:0]</obj_property>
@@ -44,6 +64,10 @@
    <wvobject fp_name="/Top_Level_CPU_TB/CPU/WB_inst/IR_WB_in" type="array">
       <obj_property name="ElementShortName">IR_WB_in[15:0]</obj_property>
       <obj_property name="ObjectShortName">IR_WB_in[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top_Level_CPU_TB/CPU/IF_ID_NPC" type="array">
+      <obj_property name="ElementShortName">IF_ID_NPC[15:0]</obj_property>
+      <obj_property name="ObjectShortName">IF_ID_NPC[15:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/Top_Level_CPU_TB/CPU/ID_inst/reg_file/reg_file" type="array">
       <obj_property name="ElementShortName">reg_file[0:7][15:0]</obj_property>
@@ -60,10 +84,6 @@
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/rst" type="logic">
          <obj_property name="ElementShortName">rst</obj_property>
          <obj_property name="ObjectShortName">rst</obj_property>
-      </wvobject>
-      <wvobject fp_name="/Top_Level_CPU_TB/CPU/IF_ID_NPC" type="array">
-         <obj_property name="ElementShortName">IF_ID_NPC[15:0]</obj_property>
-         <obj_property name="ObjectShortName">IF_ID_NPC[15:0]</obj_property>
       </wvobject>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/IF_ID_IR" type="array">
          <obj_property name="ElementShortName">IF_ID_IR[15:0]</obj_property>
@@ -449,7 +469,6 @@
    <wvobject fp_name="group253" type="group">
       <obj_property name="label">EX</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/clk" type="logic">
          <obj_property name="ElementShortName">clk</obj_property>
          <obj_property name="ObjectShortName">clk</obj_property>
@@ -605,14 +624,6 @@
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/output_sel" type="logic">
          <obj_property name="ElementShortName">output_sel</obj_property>
          <obj_property name="ObjectShortName">output_sel</obj_property>
-      </wvobject>
-      <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/disp_s" type="array">
-         <obj_property name="ElementShortName">disp_s[15:0]</obj_property>
-         <obj_property name="ObjectShortName">disp_s[15:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/Top_Level_CPU_TB/CPU/EX_inst/disp_L" type="array">
-         <obj_property name="ElementShortName">disp_L[15:0]</obj_property>
-         <obj_property name="ObjectShortName">disp_L[15:0]</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="group970" type="group">
@@ -846,14 +857,10 @@
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/A_EX_sel" type="array">
          <obj_property name="ElementShortName">A_EX_sel[2:0]</obj_property>
          <obj_property name="ObjectShortName">A_EX_sel[2:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FFFF00</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/B_EX_sel" type="array">
          <obj_property name="ElementShortName">B_EX_sel[2:0]</obj_property>
          <obj_property name="ObjectShortName">B_EX_sel[2:0]</obj_property>
-         <obj_property name="CustomSignalColor">#FFFF00</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/A_ID_outF" type="array">
          <obj_property name="ElementShortName">A_ID_outF[15:0]</obj_property>
@@ -926,6 +933,7 @@
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/opWB" type="array">
          <obj_property name="ElementShortName">opWB[6:0]</obj_property>
          <obj_property name="ObjectShortName">opWB[6:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/ForwardUnit_inst/r1EX" type="array">
          <obj_property name="ElementShortName">r1EX[2:0]</obj_property>
@@ -1079,6 +1087,7 @@
    <wvobject fp_name="group185" type="group">
       <obj_property name="label">ROM</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/Top_Level_CPU_TB/CPU/ROM_inst/addr" type="array">
          <obj_property name="ElementShortName">addr[15:0]</obj_property>
          <obj_property name="ObjectShortName">addr[15:0]</obj_property>
