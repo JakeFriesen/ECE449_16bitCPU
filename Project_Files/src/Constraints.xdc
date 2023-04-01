@@ -179,9 +179,9 @@ set_property PACKAGE_PIN C16 [get_ports {IN_PORT[15]}]
 
 #Pmod Header JC
 #Sch name = JC1
-set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets {clk_100MHz_IBUF}]
-set_property PACKAGE_PIN K17 [get_ports {clk_100MHz}]					
-	set_property IOSTANDARD LVCMOS33 [get_ports {clk_100MHz}]
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets {clk_in_IBUF}]
+set_property PACKAGE_PIN K17 [get_ports {clk_in}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {clk_in}]
 	
 #Sch name = JC2
 set_property PACKAGE_PIN M18 [get_ports {OUT_BOOT}]					

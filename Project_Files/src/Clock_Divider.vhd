@@ -20,7 +20,7 @@ architecture behavioural of my_D_FF is
 signal clock_tick_counter: STD_LOGIC_VECTOR (27 downto 0) := (others=>'0');  -- a counter for counting the number of clock ticks (27 bits required for 100,000,000 ticks !
 signal max_number_of_clock_ticks_reached: std_logic;        -- a signal to indicate when we reach the maximum number of clock ticks 
 signal Q_int: std_logic;   -- an intermediate signal to hold the value of Q to be output to PMOD JC
-constant clock_count : std_logic_vector (27 downto 0) := x"0000001";
+constant clock_count : std_logic_vector (27 downto 0) := x"00186A0";
 
 begin
 

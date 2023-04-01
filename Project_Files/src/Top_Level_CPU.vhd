@@ -33,7 +33,8 @@ entity Top_Level_CPU is
            reset_execute : in STD_LOGIC;
            mode_sel : in STD_LOGIC;
            seg_sel : in STD_LOGIC_VECTOR (4 downto 0);
-           sys_rst : in STD_LOGIC
+           sys_rst : in STD_LOGIC;
+           clk_in : in STD_LOGIC
            );
 end Top_Level_CPU;
 
@@ -207,7 +208,6 @@ signal WB_ID_wr_addr : std_logic_vector(2 downto 0);
 signal WB_ID_loadimm, WB_ID_load_align: std_logic;
 signal input_internal, out_internal, seven_seg_binary : std_logic_vector(15 downto 0);
 
-
 --RAM, ROM intermediate Signals
 signal ram_addra, ram_addrb, mem_addrb, mem_addra: std_logic_vector(15 downto 0);
 signal ram_dataa, ram_datab, mem_datab, ram_dina, rom_addr, rom_data : std_logic_vector(15 downto 0);
@@ -217,7 +217,7 @@ signal program_out : std_logic_vector (15 downto 0);
 --ID_A_outF, ID_B_out,  EX_alu_res: std_logic_vector(15 downto 0);
 signal FU_EX_A, FU_EX_B,  MEM_alu_res: std_logic_vector(15 downto 0);
 signal reg_file_out_debug_internal : reg_array;
-
+signal clk_sseg : std_logic;
 -- Halt for RAW
 signal halt : std_logic := '0';
 
@@ -225,12 +225,12 @@ begin
 clk_divider : my_D_FF port map(
     clock_100Mhz => clk_100MHz,
     reset => sys_rst,
-    Q => clk
+    Q => clk_sseg
 );
---clk <= clk_100MHz;
+clk <= clk_in;
 
 disp_cont : display_controller port map(
-    clk => clk_100MHz,
+    clk => clk_sseg,
     reset => rst,
     hex3 => seven_seg_binary(15 downto 12),
     hex2 => seven_seg_binary(11 downto 8),
@@ -403,13 +403,15 @@ ram_addra <= "0000000" & mem_addra(9 downto 1);
 input_internal <= "0000000000" & IN_PORT(5 downto 0) when mode_sel = '0' else
                   IN_PORT(15 downto 6) & "000000";
 OUT_BOOT <= out_internal(0);
-OUT_PORT <= out_internal;
+OUT_PORT <= out_internal ;
+
+--seven_seg_binary  <= IF_ID_NPC;
 
 seven_seg_binary <= IF_ID_NPC when seg_sel = "0000" else
-                    IF_ID_IR when seg_sel = "0001" else
-                    out_internal when seg_sel = "0010" else
-                    input_internal when seg_sel = "0011" else
-                    reg_file_out_debug_internal(to_integer(unsigned(seg_sel(2 downto 0)))) when seg_sel(3) = '1' else
-                    (others=>'0');
+            IF_ID_IR when seg_sel = "0001" else
+            out_internal when seg_sel = "0010" else
+            input_internal when seg_sel = "0011" else
+            reg_file_out_debug_internal(to_integer(unsigned(seg_sel(2 downto 0)))) when seg_sel(3) = '1' else
+            (others=>'0');
 
 end Behavioral;
