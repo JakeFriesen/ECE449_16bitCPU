@@ -54,6 +54,7 @@ signal A_forward_MEM, B_forward_MEM, A_forward_WB, B_forward_WB, loadIMM_data, l
 signal en_REG, en_MEM, en_EX, en_WB, loadIMM_en: std_logic;
 signal sw_WB, A_EX_sel, B_EX_sel, case2 : std_logic_vector( 2 downto 0);
 signal en_Mov: std_logic ;
+--signal raWB_valid : std_logic;
 
 begin
 
@@ -105,6 +106,8 @@ en_WB <=   '0' when OPWB = nop_op or OPWB = store_op  or OPWB = loadIMM_OP or OP
 raWB <= IR_WB_inF(8 downto 6);
 rbWB <= IR_WB_inF(5 downto 3);
 rcWB <= IR_WB_inF(2 downto 0); 
+--raWB_valid <= '0' when IR_WB_inF(15 downto 9) = loadIMM_op else
+--               '1';
 
 ----------------------------REGDATA----------------------------
 opWB <= IR_WB_inF(15 downto 9);
