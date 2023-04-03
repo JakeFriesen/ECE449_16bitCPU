@@ -41,6 +41,8 @@ entity ForwardingUnit is
             Write_en_inF: in STD_LOGIC;
             loadIMM_inF: in std_logic;
             R7_data_inF: in std_logic_vector(15 downto 0); 
+            vdata_MEM_inF: in STD_LOGIC_VECTOR (15 downto 0); 
+            vdata_WB_inF : in STD_LOGIC_VECTOR (15 downto 0);
             halt: out std_logic
            );
          
@@ -50,7 +52,7 @@ architecture Behavioral of ForwardingUnit is
 
 signal opEX,opMEM, opWB : std_logic_vector(6 downto 0);
 signal r1EX,r2EX, raEX, rbEX, rcEX, raWB, rbWB, rcWB, raMEM, rbMEM, rcMEM: std_logic_vector(2 downto 0);
-signal A_forward_MEM, B_forward_MEM, A_forward_WB, B_forward_WB, loadIMM_data, loadIMM_data_intr, r7_data_intr: std_logic_vector(15 downto 0);
+signal A_forward_MEM, B_forward_MEM, A_forward_WB, B_forward_WB, loadIMM_data, loadIMM_data_intr, r7_data_intr, r7_MEM, r7_WB: std_logic_vector(15 downto 0);
 signal en_REG, en_MEM, en_EX, en_WB, loadIMM_en: std_logic;
 signal sw_WB, A_EX_sel, B_EX_sel, case2 : std_logic_vector( 2 downto 0);
 signal en_Mov,en_push: std_logic ;
@@ -123,6 +125,9 @@ with Write_en_inF select
 
 
 --get load IMM_data
+r7_MEM <= vdata_MEM_inf when OPMEM = MUL_OP else Result_MEM_inF;
+r7_WB <= vdata_WB_inf when OPWB = MUL_OP else Result_WB_inF;
+
 r7_data_intr <= Result_MEM_inF when raMEM = "111" and en_MEM = '1' else 
                 Result_WB_inF when  raWB = "111" and en_WB = '1' else
                 R7_data_inf;

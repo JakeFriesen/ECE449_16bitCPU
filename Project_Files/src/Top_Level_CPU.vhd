@@ -172,26 +172,28 @@ end component ROM;
 
 component  ForwardingUnit is
     Port ( 
-            clk: in STD_LOGIC;
-            rst: in STD_LOGIC;
-            IR_EX_inF: in   std_logic_vector(15 downto 0);
-            IR_MEM_inF: in   std_logic_vector(15 downto 0);
-            IR_WB_inF: in   std_logic_vector(15 downto 0);
-            A_EX_inF : out STD_LOGIC_VECTOR (15 downto 0);
-            B_EX_inF : out  STD_LOGIC_VECTOR (15 downto 0);
-            A_ID_outF : in STD_LOGIC_VECTOR (15 downto 0);
-            B_ID_outF : in STD_LOGIC_VECTOR (15 downto 0);
-            A_MEM_inF : in STD_LOGIC_VECTOR (15 downto 0);
-            B_MEM_inF : in STD_LOGIC_VECTOR (15 downto 0);     
-            Result_MEM_inF : in STD_LOGIC_VECTOR (15 downto 0);
-            Result_WB_inF: in STD_LOGIC_VECTOR (15 downto 0);
-            Memdata_WB_inF: in STD_LOGIC_VECTOR (15 downto 0);
-            Write_data_inF: in STD_LOGIC_VECTOR (15 downto 0);
-            Write_addr_inF: in STD_LOGIC_VECTOR (2 downto 0);
-            Write_en_inF: in STD_LOGIC;
-            loadIMM_inF: in std_logic;
-            R7_data_inF: in std_logic_vector(15 downto 0); 
-            halt: out std_logic
+        clk: in STD_LOGIC;
+        rst: in STD_LOGIC;
+        IR_EX_inF: in   std_logic_vector(15 downto 0);
+        IR_MEM_inF: in   std_logic_vector(15 downto 0);
+        IR_WB_inF: in   std_logic_vector(15 downto 0);
+        A_EX_inF : out STD_LOGIC_VECTOR (15 downto 0);
+        B_EX_inF : out  STD_LOGIC_VECTOR (15 downto 0);   
+        A_ID_outF : in STD_LOGIC_VECTOR (15 downto 0);
+        B_ID_outF : in STD_LOGIC_VECTOR (15 downto 0);
+        A_MEM_inF : in STD_LOGIC_VECTOR (15 downto 0);
+        B_MEM_inF : in STD_LOGIC_VECTOR (15 downto 0);     
+        Result_MEM_inF : in STD_LOGIC_VECTOR (15 downto 0);
+        Result_WB_inF: in STD_LOGIC_VECTOR (15 downto 0);
+        Memdata_WB_inF: in STD_LOGIC_VECTOR (15 downto 0);
+        Write_data_inF: in STD_LOGIC_VECTOR (15 downto 0);
+        Write_addr_inF: in STD_LOGIC_VECTOR (2 downto 0);
+        Write_en_inF: in STD_LOGIC;
+        loadIMM_inF: in std_logic;
+        R7_data_inF: in std_logic_vector(15 downto 0); 
+        vdata_MEM_inF: in STD_LOGIC_VECTOR (15 downto 0); 
+        vdata_WB_inF : in STD_LOGIC_VECTOR (15 downto 0);
+        halt: out std_logic
        );
          
 end component ForwardingUnit;
@@ -380,6 +382,8 @@ Write_addr_inF =>WB_ID_wr_addr,
 Write_en_inF => WB_ID_wr_en,
 loadIMM_inF=>WB_ID_loadimm,
 R7_data_inF => R7_data,
+vdata_MEM_inF=>EX_MEM_v_data,
+vdata_WB_inF =>MEM_WB_v_data,
 halt => halt
 );
 
