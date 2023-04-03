@@ -395,8 +395,8 @@ ram_enb <='1';-- mem_addrb(10);
 rom_en <= not mem_addrb(10);
 -- RAM and ROM data
 --UNCOMMENT WHEN NOT TESTING
-mem_datab <= ram_datab;-- when mem_addrb(10) = '1' else
-           --  rom_data;
+mem_datab <= ram_datab when mem_addrb(10) = '1' else
+            rom_data;
 
 ram_addra <= "0000000" & mem_addra(9 downto 1);
 
