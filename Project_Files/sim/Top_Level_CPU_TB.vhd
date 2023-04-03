@@ -112,113 +112,113 @@ process begin
     reset_execute <= '0';
     reset_load <= '0';
     in_port <= x"AA80";
-    mode_sel <= '1'; --Bootloader = 1, Program = 0
+    mode_sel <= '0'; --Bootloader = 1, Program = 0
     
-    wait until clk = '1';
-    wait until clk = '0';
-    wait until clk = '1';
-    wait until clk = '0';
+--    wait until clk = '1';
+--    wait until clk = '0';
+--    wait until clk = '1';
+--    wait until clk = '0';
     
---Reset Sequence to get into load vector
-    reset_load <= '1';
---    reset_execute <= '1';
-    for i in 0 to 4 loop
-        wait until clk = '1';
-        wait until clk = '0';
-    end loop;
---    reset_execute <= '0';
-      reset_load <= '0';
---Reset Sequence to get into load vector
+----Reset Sequence to get into load vector
+--    reset_load <= '1';
+----    reset_execute <= '1';
+--    for i in 0 to 4 loop
+--        wait until clk = '1';
+--        wait until clk = '0';
+--    end loop;
+----    reset_execute <= '0';
+--      reset_load <= '0';
+----Reset Sequence to get into load vector
 
---Wait until AA is recieved    
-    while out_port(0) = '0' loop
-      wait until clk = '1';
-      wait until clk = '0';
-    end loop;
-    in_port <= x"0000";
-    while out_port(0) = '1' loop
-       wait until clk = '1';
-       wait until clk = '0';
-    end loop;
+----Wait until AA is recieved    
+--    while out_port(0) = '0' loop
+--      wait until clk = '1';
+--      wait until clk = '0';
+--    end loop;
+--    in_port <= x"0000";
+--    while out_port(0) = '1' loop
+--       wait until clk = '1';
+--       wait until clk = '0';
+--    end loop;
     
---Wait until 55 is recieved   
-    in_port <= x"5580";
-    while out_port(0) = '0' loop
-      wait until clk = '1';
-      wait until clk = '0';
-    end loop;    
-    in_port <= x"0000";
-    while out_port(0) = '1' loop
-      wait until clk = '1';
-      wait until clk = '0';
-    end loop;
+----Wait until 55 is recieved   
+--    in_port <= x"5580";
+--    while out_port(0) = '0' loop
+--      wait until clk = '1';
+--      wait until clk = '0';
+--    end loop;    
+--    in_port <= x"0000";
+--    while out_port(0) = '1' loop
+--      wait until clk = '1';
+--      wait until clk = '0';
+--    end loop;
     
---Wait until package count is recieved    
-    in_port <= x"1080";
-    while out_port(0) = '0' loop
-      wait until clk = '1';
-      wait until clk = '0';
-    end loop;    
-    in_port <= x"0000";
-    while out_port(0) = '1' loop
-      wait until clk = '1';
-      wait until clk = '0';
-    end loop;
+----Wait until package count is recieved    
+--    in_port <= x"1080";
+--    while out_port(0) = '0' loop
+--      wait until clk = '1';
+--      wait until clk = '0';
+--    end loop;    
+--    in_port <= x"0000";
+--    while out_port(0) = '1' loop
+--      wait until clk = '1';
+--      wait until clk = '0';
+--    end loop;
     
---Wait until address to store is recieved
-    in_port <= x"04C0";--04
-    while out_port(0) = '0' loop
-      wait until clk = '1';
-      wait until clk = '0';
-    end loop;    
-    in_port <= x"0000";
-    while out_port(0) = '1' loop
-      wait until clk = '1';
-      wait until clk = '0';
-    end loop;
-    in_port <= x"10C0";--10
-    while out_port(0) = '0' loop
-      wait until clk = '1';
-      wait until clk = '0';
-    end loop;    
-    in_port <= x"0040";
-    while out_port(0) = '1' loop
-      wait until clk = '1';
-      wait until clk = '0';
-    end loop;    
+----Wait until address to store is recieved
+--    in_port <= x"04C0";--04
+--    while out_port(0) = '0' loop
+--      wait until clk = '1';
+--      wait until clk = '0';
+--    end loop;    
+--    in_port <= x"0000";
+--    while out_port(0) = '1' loop
+--      wait until clk = '1';
+--      wait until clk = '0';
+--    end loop;
+--    in_port <= x"10C0";--10
+--    while out_port(0) = '0' loop
+--      wait until clk = '1';
+--      wait until clk = '0';
+--    end loop;    
+--    in_port <= x"0040";
+--    while out_port(0) = '1' loop
+--      wait until clk = '1';
+--      wait until clk = '0';
+--    end loop;    
     
---Iterate through all the data to be sent
-    for i in test_array'range loop
-        in_port <= test_array(i).in_port_upper;
-        while out_port(0) = '0' loop
-          wait until clk = '1';
-          wait until clk = '0';
-        end loop;  
-        in_port <= x"0000";
-        while out_port(0) = '1' loop
-          wait until clk = '1';
-          wait until clk = '0';
-        end loop;  
-        in_port <= test_array(i).in_port_lower;
-        while out_port(0) = '0' loop
-          wait until clk = '1';
-          wait until clk = '0';
-        end loop;  
-        in_port <= x"0000";
-        while out_port(0) = '1' loop
-          wait until clk = '1';
-          wait until clk = '0';
-        end loop;  
-    end loop;
+----Iterate through all the data to be sent
+--    for i in test_array'range loop
+--        in_port <= test_array(i).in_port_upper;
+--        while out_port(0) = '0' loop
+--          wait until clk = '1';
+--          wait until clk = '0';
+--        end loop;  
+--        in_port <= x"0000";
+--        while out_port(0) = '1' loop
+--          wait until clk = '1';
+--          wait until clk = '0';
+--        end loop;  
+--        in_port <= test_array(i).in_port_lower;
+--        while out_port(0) = '0' loop
+--          wait until clk = '1';
+--          wait until clk = '0';
+--        end loop;  
+--        in_port <= x"0000";
+--        while out_port(0) = '1' loop
+--          wait until clk = '1';
+--          wait until clk = '0';
+--        end loop;  
+--    end loop;
     
---Program is Loaded! Now to execute the code
-    wait for 100us;
-    reset_execute <= '1';
-    wait for 10us;
-    in_port <= x"0005";
-    mode_sel <= '0'; --Program
-    wait for 10 us;
-    reset_execute <= '0';
+----Program is Loaded! Now to execute the code
+--    wait for 100us;
+--    reset_execute <= '1';
+--    wait for 10us;
+--    in_port <= x"0005";
+--    mode_sel <= '0'; --Program
+--    wait for 10 us;
+--    reset_execute <= '0';
     
     
     

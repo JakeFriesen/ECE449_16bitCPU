@@ -126,7 +126,7 @@ begin
         --Negative Latch
         if (clk='0' and clk'event) then
 --            if(rst = '1' or halt='1') then
-            if(rst = '1') then
+            if(rst = '1' or halt = '1') then
                 Result_EX_out <=(others=>'0');
                 vdata_EX_out <= (others=>'0');
                 Z_EX_out <= '0';

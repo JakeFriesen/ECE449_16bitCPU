@@ -53,7 +53,7 @@ signal r1EX,r2EX, raEX, rbEX, rcEX, raWB, rbWB, rcWB, raMEM, rbMEM, rcMEM: std_l
 signal A_forward_MEM, B_forward_MEM, A_forward_WB, B_forward_WB, loadIMM_data, loadIMM_data_intr, r7_data_intr: std_logic_vector(15 downto 0);
 signal en_REG, en_MEM, en_EX, en_WB, loadIMM_en: std_logic;
 signal sw_WB, A_EX_sel, B_EX_sel, case2 : std_logic_vector( 2 downto 0);
-signal en_Mov: std_logic ;
+signal en_Mov,en_push: std_logic ;
 --signal raWB_valid : std_logic;
 
 begin
@@ -71,10 +71,12 @@ rbEX <= IR_EX_inF(5 downto 3);
 rcEX <= IR_EX_inF(2 downto 0); 
 
 with opEX select
-    r1EX <=     raEX when store_op | mov_op | load_op | SHL_op | SHR_op | test_op | brr_op | brr_n_op | brr_z_op | br_op |out_op | br_z_op | br_sub_op | push_op,
+    r1EX <=     raEX when store_op | mov_op | load_op | SHL_op | SHR_op | test_op | brr_op | brr_n_op | brr_z_op | br_op |out_op | br_z_op | br_sub_op,
+                "000" when push_op,
                 rbEX when others;
 with opEX select
-    r2EX <=    rbEX when store_op  | load_op | mov_op | SHL_op | SHR_op | test_op | brr_op | brr_n_op | brr_z_op | br_op |out_op | br_z_op | br_sub_op | push_op,
+    r2EX <=     raEX when push_op,
+                rbEX when store_op  | load_op | mov_op | SHL_op | SHR_op | test_op | brr_op | brr_n_op | brr_z_op | br_op |out_op | br_z_op | br_sub_op,
                 rcEX when others;
 ----------------------------MEM DATA----------------------------
 opMEM <= IR_MEM_inF(15 downto 9);
@@ -83,7 +85,7 @@ opMEM <= IR_MEM_inF(15 downto 9);
     
 --check that data in buffer is valid for forwarding
 with opMEM select
-        en_MEM <=   '0' when nop_op | store_op | loadIMM_op | BRR_op | brr_n_op | brr_z_op,
+        en_MEM <=   '0' when nop_op | store_op | loadIMM_op | BRR_op | brr_n_op | brr_z_op | push_op,
                     '1' when others;
 
 
@@ -95,12 +97,12 @@ rcMEM <= IR_MEM_inF(2 downto 0);
 opWB <= IR_WB_inF(15 downto 9);
 --check that data in buffer is valid for forwarding
 with opWB select
-        sw_WB <=    "001" when load_op,
+        sw_WB <=    "001" when load_op | pop_op,
                     "000" when others;
 
 
-en_WB <=   '0' when OPWB = nop_op or OPWB = store_op  or OPWB = loadIMM_OP or OPWB = BRR_OP or OPWB = BRR_N_OP or OPWB = BRR_Z_OP else
-           '0' when raWB = raMEM else
+en_WB <=   '0' when OPWB = nop_op or OPWB = store_op  or OPWB = loadIMM_OP or OPWB = BRR_OP or OPWB = BRR_N_OP or OPWB = BRR_Z_OP or OPWB = PUSH_OP else
+           '0' when raWB = raMEM and en_MEM = '1' else
            '1';
 
 raWB <= IR_WB_inF(8 downto 6);
@@ -121,8 +123,8 @@ with Write_en_inF select
 
 
 --get load IMM_data
-r7_data_intr <= Result_MEM_inF when raMEM = "111" else 
-                Result_WB_inF when  raWB = "111"  else
+r7_data_intr <= Result_MEM_inF when raMEM = "111" and en_MEM = '1' else 
+                Result_WB_inF when  raWB = "111" and en_WB = '1' else
                 R7_data_inf;
 
 with IR_WB_inF(15 downto 8) select
@@ -139,20 +141,21 @@ with IR_MEM_inF(15 downto 8) select
 loadIMM_en <= '1' when ((loadIMM_inF = '1') or (opMEM = loadIMM_op) or (opWB = loadIMM_op)) else '0';
 
 en_Mov <= '1' when (opEX = mov_op and opMEM = mov_op) else '0';
+en_push <= '1' when (opEX = push_op) else '0';
 ----------------------------FORWARDING----------------------------
 --determine if forwarding is available for A
 
 
-A_EX_sel <= ("101") when r2EX = raMEM and en_Mov = '1' and en_EX = '1' and en_MEM = '1' else
-            ("100" ) when r1EX = "111" and loadIMM_en= '1' and en_EX = '1' else
-            (("010") or sw_WB) when r1EX = raWB and en_WB = '1' and en_EX = '1' else
-            ("001") when r1EX = raMEM and en_EX = '1' and en_MEM = '1' else
+A_EX_sel <= ("101") when r2EX = raMEM and en_Mov = '1' and en_EX = '1' and en_MEM = '1'  and en_push = '0' else
+            ("100" ) when r1EX = "111" and loadIMM_en= '1' and en_EX = '1' and en_push = '0'  else
+            (("010") or sw_WB) when r1EX = raWB and en_WB = '1' and en_EX = '1'  and en_push = '0' else
+            ("001") when r1EX = raMEM and en_EX = '1' and en_MEM = '1' and en_push = '0' else
             "000"; 
             
 B_EX_sel <= ("100") when r2EX = "111" and loadIMM_en = '1' and en_EX = '1' else
             (("010") or sw_WB) when r2EX = raWB and en_WB = '1' and en_EX = '1'  else
             ("001") when r2EX = raMEM and en_MEM = '1' and en_EX = '1'  else
-            "000"; 
+             "000"; 
                 
 --Select which data to send to A
 with A_EX_sel select	
@@ -173,6 +176,6 @@ with B_EX_sel select
 
 
                     --A type after L-type                                   
-halt <= '1' when ((opMEM = load_op) and ((B_EX_sel = "01") or (A_EX_sel = "01"))) else '0';
+halt <= '1' when ((opMEM = load_op or opMEM = pop_op) and ((B_EX_sel = "01") or (A_EX_sel = "01"))) else '0';
      
 end Behavioral;
